@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">WellPlayed</string>
+    <string name="hello_blank_fragment" />
+    <string name="usuario">Usuario</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="has_olvidado_la_contrase_a">¿Has olvidado la contraseña?</string>
+    <string name="iniciar_sesi_n_con_google">Iniciar sesión con google</string>
+    <string name="iniciar_sesi_n_con_facebook">Iniciar sesión con Facebook</string>
+    <string name="iniciar_sesi_n">Iniciar sesión</string>
+    <string name="no_tienes_cuenta_registrate_aqui">¿No tienes cuenta? Registrate aqui</string>
+    <string name="registrate_para_jugar_a_los_mejores_torneos_competitivos_de_tus_juegos_favoritos">Registrate para jugar a los mejores torneos competitivos de tus juegos favoritos!</string>
+    <string name="email">Email</string>
+    <string name="usuario">Usuario</string>
+    <string name="contrasenia">Contrasenia</string>
+    <string name="confirmar_contrase_a">Confirmar contraseña</string>
+    <string name="fecha_nacimiento">Fecha nacimiento</string>
+    <string name="crear_cuenta">Crear cuenta</string>
+    <string name="tienes_cuenta_entra_aqui">¿Tienes cuenta? entra aqui</string>
 </resources>
