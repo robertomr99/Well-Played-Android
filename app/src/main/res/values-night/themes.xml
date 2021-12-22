@@ -6,4 +6,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Navigation">
+        <item name="android:textColorPrimary">@color/purple_200</item>
+    </style>
 </resources>
