@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.wellplayed">
 
     <application
@@ -10,9 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WellPlayed">
         <activity
-<<<<<<< Updated upstream
+
             android:name=".perfilFragment"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".Registro"
             android:exported="true" />
@@ -20,11 +22,11 @@
             android:name=".Login"
             android:exported="true" />
         <activity
-=======
+
             android:name=".EquipoDetalle"
             android:exported="false" />
         <activity
->>>>>>> Stashed changes
+
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
