@@ -3,7 +3,6 @@ package com.example.wellplayed;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-<<<<<<< Updated upstream
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -16,23 +15,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Button;
-=======
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
->>>>>>> Stashed changes
 
 import com.google.android.material.navigation.NavigationView;
 
-<<<<<<< Updated upstream
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     DrawerLayout drawerLayout;
 
 
-=======
->>>>>>> Stashed changes
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
-<<<<<<< Updated upstream
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         drawerLayout.closeDrawer(GravityCompat.START);
 
@@ -89,23 +77,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-=======
-
-    private void mostrarData(){
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewEquipos);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        EquiposAdapter adaptador = new EquiposAdapter(this);
-
-        recyclerView.setAdapter(adaptador);
-
-        adaptador.setOnClickListener ( v ->{
-            ListadoEquipos.iEquipoSelected = recyclerView.getChildAdapterPosition(v);
-
-            Intent intentDetalle = new Intent(this, EquipoDetalle.class);
-            startActivity(intentDetalle);
-        });
-
-    }
->>>>>>> Stashed changes
 }

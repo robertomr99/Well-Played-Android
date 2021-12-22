@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WellPlayed">
         <activity
-<<<<<<< Updated upstream
             android:name=".perfilFragment"
             android:exported="false" />
         <activity
@@ -20,11 +19,6 @@
             android:name=".Login"
             android:exported="true" />
         <activity
-=======
-            android:name=".EquipoDetalle"
-            android:exported="false" />
-        <activity
->>>>>>> Stashed changes
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -33,10 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

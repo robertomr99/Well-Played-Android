@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< Updated upstream
 <<<<<<< HEAD
         <entry key="..\:/Users/migue/OneDrive/Escritorio/prueba/Well-Played-Android/app/src/main/res/layout/activity_main.xml" value="0.371875" />
         <entry key="..\:/Users/migue/OneDrive/Escritorio/prueba/Well-Played-Android/app/src/main/res/layout/activity_perfil.xml" value="0.371875" />
@@ -21,12 +20,6 @@
 =======
         <entry key="..\:/Users/alaci/OneDrive/Documentos/Well-Played-Android/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
 >>>>>>> Test
-=======
-        <entry key="..\:/Well-Played-Android/app/src/main/res/layout/activity_equipo_detalle.xml" value="0.36666666666666664" />
-        <entry key="..\:/Well-Played-Android/app/src/main/res/layout/activity_equipos_adapter.xml" value="0.36666666666666664" />
-        <entry key="..\:/Well-Played-Android/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Well-Played-Android/app/src/main/res/layout/misequipos.xml" value="0.36666666666666664" />
->>>>>>> Stashed changes
       </map>
     </option>
   </component>
@@ -35,12 +28,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.36666666666666664" />
-      </ProjectState>
-    </option>
   </component>
 </project>
