@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/Users/migue/OneDrive/Escritorio/prueba/Well-Played-Android/app/src/main/res/layout/activity_main.xml" value="0.371875" />
+=======
+        <entry key="..\:/Users/alaci/OneDrive/Documentos/Well-Played-Android/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+>>>>>>> Test
       </map>
     </option>
   </component>
