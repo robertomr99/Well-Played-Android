@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="">
+        <menu>
+            <item android:title="Perfil"
+                android:id="@+id/mnuPerfil">
+
+            </item>
+
+            <item android:title="Mis Juegos"
+                android:id="@+id/mnuMisJuegos">
+
+            </item>
+
+            <item android:title="Mis Equipos"
+                android:id="@+id/mnuMisEquipos">
+
+            </item>
+
+            <item android:title="Mis Partidos"
+                android:id="@+id/mnuMisPartidos">
+
+            </item>
+
+            <item android:title="Soporte"
+                android:id="@+id/mnuSoporte">
+
+            </item>
+
+        </menu>
+
+    </item>
+
+
+    <item android:title="Ajustes"
+        android:id="@+id/mnuAjustes">
+    </item>
+</menu>
