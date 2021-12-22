@@ -16,23 +16,18 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Button;
-=======
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
->>>>>>> Stashed changes
+
 
 import com.google.android.material.navigation.NavigationView;
 
-<<<<<<< Updated upstream
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     DrawerLayout drawerLayout;
 
-
-=======
->>>>>>> Stashed changes
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
         openFragment(new initFragment());
-
-        findViewById(R.id.btnLogin).setOnClickListener(view -> {
-
-            Intent i = new Intent(this,Login.class);
-            startActivity(i);
-
-        });
+        
     }
     private void openFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -66,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
-<<<<<<< Updated upstream
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         drawerLayout.closeDrawer(GravityCompat.START);
 
@@ -89,8 +77,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-=======
-
     private void mostrarData(){
         RecyclerView recyclerView = findViewById(R.id.recyclerViewEquipos);
 
@@ -107,5 +93,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
     }
->>>>>>> Stashed changes
 }
