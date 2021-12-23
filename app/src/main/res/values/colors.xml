@@ -5,4 +5,7 @@
     <color name="menuHamburguesa">#01587a</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF </color>
+    <color name="lblClickables">#0090FF</color>
+    <color name="Google">#E5462B</color>
+    <color name="Facebook">#3b5998</color>
 </resources>

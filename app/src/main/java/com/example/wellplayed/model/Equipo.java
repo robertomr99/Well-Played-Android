@@ -15,6 +15,10 @@ public class Equipo {
         this.iFoto = iFoto;
     }
 
+    public Equipo(Integer iIdEquipo) {
+        this.iIdEquipo = iIdEquipo;
+    }
+
     public Equipo() {
 
     }
