@@ -15,117 +15,156 @@
             android:id="@+id/lblWinRatio"
             android:layout_width="51dp"
             android:layout_height="19dp"
+            android:layout_marginTop="520dp"
             android:text="WinRatio"
             android:textSize="12sp"
-            tools:layout_editor_absoluteX="344dp"
-            tools:layout_editor_absoluteY="542dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.955"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/lblVictorias"
             android:layout_width="51dp"
             android:layout_height="19dp"
+            android:layout_marginTop="520dp"
             android:text="Victorias"
             android:textSize="12sp"
-            tools:layout_editor_absoluteX="15dp"
-            tools:layout_editor_absoluteY="542dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.044"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/lblNºVictorias"
             android:layout_width="41dp"
             android:layout_height="20dp"
-            tools:layout_editor_absoluteX="15dp"
-            tools:layout_editor_absoluteY="583dp" />
+            android:layout_marginTop="548dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.04"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/lblDerrotas"
             android:layout_width="51dp"
             android:layout_height="19dp"
+            android:layout_marginTop="520dp"
             android:text="Derrotas"
             android:textSize="12sp"
-            tools:layout_editor_absoluteX="180dp"
-            tools:layout_editor_absoluteY="542dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.533"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/lblNºDerrotas"
             android:layout_width="41dp"
             android:layout_height="20dp"
-            tools:layout_editor_absoluteX="180dp"
-            tools:layout_editor_absoluteY="583dp" />
+            android:layout_marginTop="548dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.518"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/lblWinRatioUsuario"
             android:layout_width="41dp"
             android:layout_height="20dp"
-            tools:layout_editor_absoluteX="344dp"
-            tools:layout_editor_absoluteY="583dp" />
+            android:layout_marginTop="548dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.929"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/lblPais"
             android:layout_width="51dp"
             android:layout_height="19dp"
+            android:layout_marginTop="420dp"
             android:text="País"
             android:textSize="12sp"
-            tools:layout_editor_absoluteX="15dp"
-            tools:layout_editor_absoluteY="441dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.044"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgBannner" />
 
         <TextView
             android:id="@+id/lblFechaNacimiento"
             android:layout_width="122dp"
             android:layout_height="18dp"
+            android:layout_marginTop="312dp"
             android:text="Fecha de nacimiento"
             android:textSize="12sp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="314dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.051"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/lblUsuarioEditable"
             android:layout_width="380dp"
             android:layout_height="49dp"
+            android:layout_marginTop="220dp"
             android:ems="10"
             android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="15dp"
-            tools:layout_editor_absoluteY="220dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.516"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgBannner" />
 
         <TextView
             android:id="@+id/lblUsuario"
             android:layout_width="51dp"
             android:layout_height="19dp"
+            android:layout_marginTop="200dp"
             android:text="Usuario"
             android:textSize="12sp"
-            tools:layout_editor_absoluteX="15dp"
-            tools:layout_editor_absoluteY="201dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.041"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/txtFechaNacimientoEditable"
             android:layout_width="380dp"
             android:layout_height="49dp"
+            android:layout_marginTop="328dp"
             android:ems="10"
             android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="15dp"
-            tools:layout_editor_absoluteY="332dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.516"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imgBannner"
-            android:layout_width="589dp"
-            android:layout_height="165dp"
+            android:layout_width="507dp"
+            android:layout_height="157dp"
             android:src="@drawable/fondobanner"
-            tools:layout_editor_absoluteX="-87dp"
-            tools:layout_editor_absoluteY="-2dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imgUsuario"
             android:layout_width="111dp"
             android:layout_height="111dp"
+            android:layout_marginTop="16dp"
             android:src="@drawable/wellplayed"
-            tools:layout_editor_absoluteX="150dp"
-            tools:layout_editor_absoluteY="28dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView29"
             android:layout_width="141dp"
             android:layout_height="26dp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="478dp" />
+            android:layout_marginTop="448dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.055"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
