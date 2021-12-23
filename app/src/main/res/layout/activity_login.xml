@@ -67,9 +67,11 @@
         android:id="@+id/lblOlvidarContrasenia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/lblClickables"
         android:text="@string/has_olvidado_la_contrase_a"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.754"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
 
@@ -77,22 +79,23 @@
         android:id="@+id/btnIniciarSesionGoogle"
         android:layout_width="275dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/iconosapp"
         android:text="@string/iniciar_sesi_n_con_google"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblOlvidarContrasenia" />
+        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesion" />
 
     <Button
         android:id="@+id/btnIniciarSesionFacebook"
         android:layout_width="275dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/iconosapp"
         android:text="@string/iniciar_sesi_n_con_facebook"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesionGoogle" />
 
@@ -100,21 +103,26 @@
         android:id="@+id/btnIniciarSesion"
         android:layout_width="275dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="@string/iniciar_sesi_n"
+        android:layout_marginTop="44dp"
+        android:onClick="onClickIniciarSesion"
         android:backgroundTint="@color/iconosapp"
+        android:text="@string/iniciar_sesi_n"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesionFacebook" />
+        app:layout_constraintTop_toBottomOf="@+id/lblOlvidarContrasenia" />
 
     <TextView
         android:id="@+id/lblRegistrateAqui"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="36dp"
+        android:textColor="@color/lblClickables"
+        android:onClick="onClickRegistro"
         android:text="@string/no_tienes_cuenta_registrate_aqui"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesion" />
+        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesionFacebook" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
