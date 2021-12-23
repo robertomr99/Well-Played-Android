@@ -67,12 +67,11 @@
         android:id="@+id/lblOlvidarContrasenia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/lblClickables"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
         android:text="@string/has_olvidado_la_contrase_a"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.754"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/lblClickables"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxRecuerdame"
         app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
 
     <Button
@@ -80,24 +79,12 @@
         android:layout_width="275dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/iconosapp"
+        android:backgroundTint="@color/Google"
         android:text="@string/iniciar_sesi_n_con_google"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesion" />
-
-    <Button
-        android:id="@+id/btnIniciarSesionFacebook"
-        android:layout_width="275dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/iconosapp"
-        android:text="@string/iniciar_sesi_n_con_facebook"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesionGoogle" />
 
     <Button
         android:id="@+id/btnIniciarSesion"
@@ -116,13 +103,24 @@
         android:id="@+id/lblRegistrateAqui"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:textColor="@color/lblClickables"
+        android:layout_marginTop="68dp"
+        android:minHeight="48dp"
         android:onClick="onClickRegistro"
         android:text="@string/no_tienes_cuenta_registrate_aqui"
+        android:textColor="@color/lblClickables"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesionFacebook" />
+        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesionGoogle" />
+
+    <CheckBox
+        android:id="@+id/checkBoxRecuerdame"
+        android:layout_width="114dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="9dp"
+        android:text="Recuerdame"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
