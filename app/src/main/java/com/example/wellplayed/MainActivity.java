@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Button;
@@ -91,5 +92,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intentDetalle);
         });
 
+    }
+
+    @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK) { return false; } return super.onKeyDown(keyCode, event);
     }
 }
