@@ -1,14 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".perfilFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/fondoapp">
 
+        <TextView
+            android:id="@+id/lblWinRatio"
+            android:layout_width="51dp"
+            android:layout_height="19dp"
+            android:text="WinRatio"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="344dp"
+            tools:layout_editor_absoluteY="542dp" />
+
+        <TextView
+            android:id="@+id/lblVictorias"
+            android:layout_width="51dp"
+            android:layout_height="19dp"
+            android:text="Victorias"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="15dp"
+            tools:layout_editor_absoluteY="542dp" />
+
+        <TextView
+            android:id="@+id/lblNºVictorias"
+            android:layout_width="41dp"
+            android:layout_height="20dp"
+            tools:layout_editor_absoluteX="15dp"
+            tools:layout_editor_absoluteY="583dp" />
+
+        <TextView
+            android:id="@+id/lblDerrotas"
+            android:layout_width="51dp"
+            android:layout_height="19dp"
+            android:text="Derrotas"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="180dp"
+            tools:layout_editor_absoluteY="542dp" />
+
+        <TextView
+            android:id="@+id/lblNºDerrotas"
+            android:layout_width="41dp"
+            android:layout_height="20dp"
+            tools:layout_editor_absoluteX="180dp"
+            tools:layout_editor_absoluteY="583dp" />
+
+        <TextView
+            android:id="@+id/lblWinRatioUsuario"
+            android:layout_width="41dp"
+            android:layout_height="20dp"
+            tools:layout_editor_absoluteX="344dp"
+            tools:layout_editor_absoluteY="583dp" />
+
+        <TextView
+            android:id="@+id/lblPais"
+            android:layout_width="51dp"
+            android:layout_height="19dp"
+            android:text="País"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="15dp"
+            tools:layout_editor_absoluteY="441dp" />
+
+        <TextView
+            android:id="@+id/lblFechaNacimiento"
+            android:layout_width="122dp"
+            android:layout_height="18dp"
+            android:text="Fecha de nacimiento"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="314dp" />
+
+        <EditText
+            android:id="@+id/lblUsuarioEditable"
+            android:layout_width="380dp"
+            android:layout_height="49dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="15dp"
+            tools:layout_editor_absoluteY="220dp" />
+
+        <TextView
+            android:id="@+id/lblUsuario"
+            android:layout_width="51dp"
+            android:layout_height="19dp"
+            android:text="Usuario"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="15dp"
+            tools:layout_editor_absoluteY="201dp" />
+
+        <EditText
+            android:id="@+id/txtFechaNacimientoEditable"
+            android:layout_width="380dp"
+            android:layout_height="49dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="15dp"
+            tools:layout_editor_absoluteY="332dp" />
+
+        <ImageView
+            android:id="@+id/imgBannner"
+            android:layout_width="589dp"
+            android:layout_height="165dp"
+            android:src="@drawable/fondobanner"
+            tools:layout_editor_absoluteX="-87dp"
+            tools:layout_editor_absoluteY="-2dp" />
+
+        <ImageView
+            android:id="@+id/imgUsuario"
+            android:layout_width="111dp"
+            android:layout_height="111dp"
+            android:src="@drawable/wellplayed"
+            tools:layout_editor_absoluteX="150dp"
+            tools:layout_editor_absoluteY="28dp" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="141dp"
+            android:layout_height="26dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="478dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
