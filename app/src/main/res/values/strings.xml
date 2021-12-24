@@ -16,6 +16,15 @@
     <string name="crear_cuenta">Crear cuenta</string>
     <string name="tienes_cuenta_entra_aqui">¿Tienes cuenta? entra aqui</string>
 
+    <!-- String Drawer Menu -->
+    <string name="mnuPerfil">Perfil</string>
+    <string name="mnuMisJuegos">Mis Juegos</string>
+    <string name="mnuMisEquipos">Mis Equipos</string>
+    <string name="mnuMisPartidos">Mis Partidos</string>
+    <string name="mnuSoporte">Soporte</string>
+    <string name="mnuAjustes">Ajustes</string>
+    <string name="mnuCerrarSesion">Cerrar sesión</string>
+
     <string-array name="Países">
         <item>Afganist&#225;n</item>
         <item>Albania</item>
