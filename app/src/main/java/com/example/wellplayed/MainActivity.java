@@ -10,19 +10,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.Button;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-
-
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -38,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
 
         drawerLayout = findViewById(R.id.drawerLayout);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,0,0);
@@ -59,22 +55,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);
 
         switch (item.getItemId()){
-            case R.id.mnuPerfil: openFragment(new perfilFragment());
-                break;
-            case R.id.mnuMisJuegos: openFragment(new misJuegosFragment());
-                break;
-            case R.id.mnuMisEquipos: openFragment(new misEquiposFragment());
-                break;
-            case R.id.mnuMisPartidos: openFragment(new misPartidosFragment());
-                break;
-            case R.id.mnuSoporte: openFragment(new soporteFragment());
-                break;
-            case R.id.mnuAjustes: openFragment(new ajustesFragment());
-                break;
-
+            case R.id.mnuPerfil: openFragment(new perfilFragment());break;
+            case R.id.mnuMisJuegos: openFragment(new misJuegosFragment()); break;
+            case R.id.mnuMisEquipos: openFragment(new misEquiposFragment()); break;
+            case R.id.mnuMisPartidos: openFragment(new misPartidosFragment()); break;
+            case R.id.mnuSoporte: openFragment(new soporteFragment()); break;
+            case R.id.mnuAjustes: openFragment(new ajustesFragment()); break;
+            case R.id.mnuCerrarSesion: salir(); break;
         }
         return false;
     }
+
+    private void salir() {
+        borrarPreferencias();
+        Intent intentLogin = new Intent(this, Login.class);
+        startActivity(intentLogin);
+
+    }
+
+    public  void borrarPreferencias(){
+        Login.preferences = getSharedPreferences("Credenciales", Context.MODE_PRIVATE);
+
+        String sUsuario = "";
+        String sPass = "";
+
+        SharedPreferences.Editor editor = Login.preferences.edit();
+        editor.putString("user", sUsuario);
+        editor.putString("pass", sPass);
+
+        editor.commit();
+    }
+
 
 
     private void mostrarData(){
