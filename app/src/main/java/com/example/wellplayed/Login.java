@@ -30,8 +30,6 @@ public class Login extends AppCompatActivity {
         txtPass = findViewById(R.id.txtPassword);
         checkBoxRecuerdame = findViewById(R.id.checkBoxRecuerdame);
 
-
-
     }
 
 
