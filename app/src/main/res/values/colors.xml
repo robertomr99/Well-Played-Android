@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="fondoapp">#e1e8ec</color>
+    <color name="GrisApp">#e1e8ec</color>
     <color name="iconosapp">#f3ba00</color>
     <color name="menuHamburguesa">#01587a</color>
     <color name="black">#000000</color>

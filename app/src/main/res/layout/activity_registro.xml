@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fondoapp"
     tools:context=".Registro">
 
     <ImageView
@@ -103,6 +104,8 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:entries="@array/Países"
+
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -115,8 +118,8 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="@string/crear_cuenta"
         android:backgroundTint="@color/iconosapp"
+        android:text="@string/crear_cuenta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
@@ -127,6 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:minHeight="48dp"
         android:onClick="onClickLogin"
         android:text="@string/tienes_cuenta_entra_aqui"
         android:textColor="@color/lblClickables"

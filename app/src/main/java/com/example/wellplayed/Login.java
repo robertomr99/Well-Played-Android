@@ -19,6 +19,7 @@ public class Login extends AppCompatActivity {
     CheckBox checkBoxRecuerdame;
     String sUserAdmin = "admin";
     String sPassAdmin = "admin";
+    public static SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,6 @@ public class Login extends AppCompatActivity {
         txtUsuario = findViewById(R.id.txtUsuario);
         txtPass = findViewById(R.id.txtPassword);
         checkBoxRecuerdame = findViewById(R.id.checkBoxRecuerdame);
-
-
 
     }
 
@@ -71,7 +70,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void guardarPreferencias(){
-        SharedPreferences preferences = getSharedPreferences("Credenciales", Context.MODE_PRIVATE);
+        preferences = getSharedPreferences("Credenciales", Context.MODE_PRIVATE);
 
         String sUsuario = txtUsuario.getText().toString();
         String sPass = txtPass.getText().toString();
@@ -84,7 +83,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void cargarPreferencias(){
-        SharedPreferences preferences = getSharedPreferences("Credenciales", Context.MODE_PRIVATE);
+        preferences = getSharedPreferences("Credenciales", Context.MODE_PRIVATE);
 
         String sUsuario = preferences.getString("user","");
         String sPass = preferences.getString("pass","");
@@ -95,6 +94,9 @@ public class Login extends AppCompatActivity {
         }
 
     }
+
+
+
 }
 
 
