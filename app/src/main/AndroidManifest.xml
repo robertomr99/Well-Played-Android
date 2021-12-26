@@ -4,6 +4,7 @@
     package="com.example.wellplayed">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +15,15 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.WellPlayed">
         <activity
-
+            android:name=".crearEquipo"
+            android:exported="false" />
+        <activity
+            android:name=".JuegosAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".JuegosDetalle"
+            android:exported="false" />
+        <activity
             android:name=".perfilFragment"
             android:exported="false"
             tools:ignore="Instantiatable" />
@@ -30,16 +39,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-
             android:name=".EquipoDetalle"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
+            android:exported="true"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

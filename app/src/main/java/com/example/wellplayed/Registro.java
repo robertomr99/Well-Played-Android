@@ -26,22 +26,37 @@ import com.android.volley.toolbox.Volley;
 
 import com.example.wellplayed.model.LAVERDADERA;
 import com.example.wellplayed.model.Usuario;
-import com.loopj.android.http.*;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.SecurityPermission;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import cz.msebera.android.httpclient.Header;
 
 public class Registro extends AppCompatActivity {
 
     EditText txtUsuario,txtEmail,txtContrasenia,txtConfirmarContrasenia,txtFechaNacimiento;
     Spinner spinPaises;
     Button btnCrearCuenta;
+    LAVERDADERA laverdad;
+    List<LAVERDADERA> lstVerdad;
+    String hosting = "http://wellplayed.atwebpages.com/";
     //String sUrl = "http://well-played.infinityfreeapp.com/pruebas_Miguel/ins-coche.php?";
-    public static AsyncHttpClient client = new AsyncHttpClient();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +70,148 @@ public class Registro extends AppCompatActivity {
         txtFechaNacimiento = findViewById(R.id.fchNac);
         spinPaises = findViewById(R.id.spinnerPais);
         findViewById(R.id.btnCrearCuenta).setOnClickListener(view -> {
-
-            ejecutarInsert(agregarLaVerdad());
+           crearInsert();
 
         });
 
 
+    }
+
+    public class consultarDatos extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            // params comes from the execute() call: params[0] is the url.
+            try {
+                return downloadUrl(urls[0]);
+            } catch (IOException e) {
+                return "Unable to download the requested page.";
+            }
+        }
+
+        protected void onPostExecute(String result) {
+
+            JSONArray ja = null;
+            try {
+                ja = new JSONArray(result);
+                txtUsuario.setText(ja.getString(1));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    }
+
+    private void crearInsert() {
+        String sUrl = hosting + "ins-usuario.php?PORFAVOR=DIOSMIO6";
+
+        Toast.makeText(getApplicationContext(), sUrl,Toast.LENGTH_SHORT).show();
+        Log.d("ALACID","a");
+        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
+                s ->{
+                    if(s.equals("null")){
+                        Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_LONG).show();
+                    }else{
+                        Log.d("ALACID", s);
+
+                       //coche = new Gson().fromJson(s,new TypeToken<Coche>(){}.getType());
+                        //mostrarEste();
+                    }
+                }
+
+
+                ,volleyError -> {
+
+            Log.d("ALACID",volleyError.getCause().toString());
+        }
+        ));
+    }
+
+    private void obtenerEste() {
+        String sUrl = hosting + "get-coche.php?txtId=1";
+        Log.d("alacide", sUrl);
+        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
+                s ->{
+                    if(s.equals("null")){
+                        Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Log.d("alacide", sUrl);
+                        Toast.makeText(getApplicationContext(), "hola", Toast.LENGTH_SHORT).show();
+                        laverdad = new Gson().fromJson(s,new TypeToken<LAVERDADERA>(){}.getType());
+                        Toast.makeText(getApplicationContext(), "hola", Toast.LENGTH_SHORT).show();
+                        mostrarEste();
+                    }
+                }
+
+
+                ,volleyError -> {
+
+            Log.d("ALACID",volleyError.getCause().toString());
+        }
+        ));
+    }
+
+    private void mostrarEste() {
+
+        txtUsuario.setText(laverdad.toString());
+    }
+
+    public class cargarDatos extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            // params comes from the execute() call: params[0] is the url.
+            try {
+                return downloadUrl(urls[0]);
+            } catch (IOException e) {
+                return "Unable to download the requested page.";
+            }
+        }
+
+        protected void onPostExecute(String result) {
+           Toast.makeText(getApplicationContext(), "creado correctamente",Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    private String downloadUrl(String myurl)throws IOException {
+        InputStream is = null;
+        myurl = myurl.replace(" ", "%20");
+        int length = 500;
+
+        try{
+            URL url = new URL(myurl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("GET");
+            conn.setDoInput(true);
+
+            conn.connect();
+
+            int iResponse = conn.getResponseCode();
+            Log.d("respuesta", "la respuesta es: " + iResponse);
+            is = conn.getInputStream();
+
+            String contentAsString = readIt(is,length);
+            return contentAsString;
+
+        }finally {
+           if(is != null){
+               is.close();
+           }
+        }
+    }
+
+    public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException{
+        Reader reader = null;
+        reader = new InputStreamReader(stream, "UTF-8");
+        char[] buffer = new char[len];
+        reader.read(buffer);
+        return new String(buffer);
     }
 
     /*private void ejecutarInsert(Usuario oUsuario) {

@@ -15,6 +15,16 @@
     <string name="fecha_nacimiento">Fecha nacimiento</string>
     <string name="crear_cuenta">Crear cuenta</string>
     <string name="tienes_cuenta_entra_aqui">¿Tienes cuenta? entra aqui</string>
+    <string name="crear_equipo_nombre">Nombre equipo:</string>
+    <string name="btn_aceptar">Aceptar</string>
+    <string name="btn_cancelar">Cancelar</string>
+
+
+    <!-- Títulos de los fragments -->
+    <string name="Mis_Equipos">Mis Equipos</string>
+    <string name="Mis_Juegos">Mis Juegos</string>
+    <string name="Mis_Partidos">Mis Partidos</string>
+    <string name="Crear_Equipo">Crear Equipo</string>
 
     <!-- String Drawer Menu -->
     <string name="mnuPerfil">Perfil</string>
@@ -30,6 +40,12 @@
     <string name="lblCuenta">Cuenta</string>
     <string name="lblInformacion">Información</string>
     <string name="swBtnTema">Tema Claro/Oscuro</string>
+
+    <!-- CheckBox CrearEquipo -->
+    <string name="CheckBox_LOL">League of Legends</string>
+    <string name="CheckBox_Valorant">Valorant</string>
+    <string name="CheckBox_FIFA">FIFA</string>
+    <string name="CheckBox_CSGO">Counter Strike</string>
 
     <string-array name="Países">
         <item>Afganist&#225;n</item>

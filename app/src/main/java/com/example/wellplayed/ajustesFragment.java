@@ -15,6 +15,7 @@ import android.widget.TextView;
 public class ajustesFragment extends Fragment {
 
 
+
     public ajustesFragment() {
         // Required empty public constructor
     }
