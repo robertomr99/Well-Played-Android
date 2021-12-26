@@ -1,12 +1,10 @@
 package com.example.wellplayed;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +48,7 @@ public class EquiposAdapter extends RecyclerView.Adapter<EquiposAdapter.ViewHold
         int iFoto = ListadoEquipos.lstEquipos.get(position).getiFoto();
 
         holder.lblNombre.setText(sNombre);
-        holder.imageViewAlumno.setImageResource(iFoto);
+        holder.imageViewEquipo.setImageResource(iFoto);
         holder.cv.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition));
 
     }
@@ -62,15 +60,15 @@ public class EquiposAdapter extends RecyclerView.Adapter<EquiposAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView lblNombre;
-        ImageView imageViewAlumno;
+        ImageView imageViewEquipo;
         CardView cv;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            lblNombre = itemView.findViewById(R.id.lblNombre);
-            imageViewAlumno = itemView.findViewById(R.id.imagenEquipo);
-            cv = itemView.findViewById(R.id.cardViewAlumnos);
+            lblNombre = itemView.findViewById(R.id.lblNombreEquipo);
+            imageViewEquipo = itemView.findViewById(R.id.imagenEquipo);
+            cv = itemView.findViewById(R.id.cardViewEquipos);
         }
     }
 }
