@@ -1,5 +1,6 @@
 package com.example.wellplayed;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,43 +8,46 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 
 public class ajustesFragment extends Fragment {
 
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-
-    private String mParam1;
-    private String mParam2;
-
     public ajustesFragment() {
         // Required empty public constructor
     }
 
-    public static ajustesFragment newInstance(String param1, String param2) {
-        ajustesFragment fragment = new ajustesFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+/*
+    public void onCreate(Bundle savedInstanceState, View view) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+
+        view.findViewById(R.id.lblCuenta).setOnClickListener(v->{
+        Intent ventana = new Intent(ajustesFragment.this,);
+        startActivity(ventana);
+        });
+
+
+
+
+
     }
+    */
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_ajustes, container, false);
     }
+
+
+
+
+
+
+
 }

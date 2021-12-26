@@ -25,6 +25,12 @@
     <string name="mnuAjustes">Ajustes</string>
     <string name="mnuCerrarSesion">Cerrar sesión</string>
 
+
+    <!-- String Fragment Ajustes-->
+    <string name="lblCuenta">Cuenta</string>
+    <string name="lblInformacion">Información</string>
+    <string name="swBtnTema">Tema Claro/Oscuro</string>
+
     <string-array name="Países">
         <item>Afganist&#225;n</item>
         <item>Albania</item>
