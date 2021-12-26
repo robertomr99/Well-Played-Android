@@ -1,44 +1,34 @@
 package com.example.wellplayed;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class misEquiposFragment extends Fragment {
 
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    RecyclerView recyclerView;
+  //  Button btnCrearEquipo;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public misEquiposFragment() {
         // Required empty public constructor
     }
 
-
-    public static misEquiposFragment newInstance(String param1, String param2) {
-        misEquiposFragment fragment = new misEquiposFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(View view, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        // mostrarData(getContext());
+        crearEquipo(view, getContext());
     }
 
     @Override
@@ -46,4 +36,31 @@ public class misEquiposFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_mis_equipos, container, false);
     }
+
+
+    private void mostrarData(Context context) {
+        recyclerView.findViewById(R.id.recyclerViewEquipos);
+
+        Toast.makeText(context, "El recycler view es null", Toast.LENGTH_SHORT).show();
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        EquiposAdapter adaptador = new EquiposAdapter(context);
+
+        recyclerView.setAdapter(adaptador);
+
+        adaptador.setOnClickListener(v -> {
+            ListadoEquipos.iEquipoSelected = recyclerView.getChildAdapterPosition(v);
+
+            Intent intentDetalle = new Intent(context, EquipoDetalle.class);
+            startActivity(intentDetalle);
+        });
+    }
+
+    public void crearEquipo(View view, Context context) {
+        view.findViewById(R.id.btnCrearEquipo).setOnClickListener(v -> {
+            Intent intentLogin = new Intent(context, crearEquipo.class);
+            startActivity(intentLogin);
+        });
+    }
+
+
 }

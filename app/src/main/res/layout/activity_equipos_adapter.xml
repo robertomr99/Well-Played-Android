@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardViewAlumnos"
+    android:id="@+id/cardViewEquipos"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="15dp"
@@ -39,7 +39,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/lblNombre"
+            android:id="@+id/lblNombreEquipo"
             android:layout_width="271dp"
             android:layout_height="28dp"
             android:layout_marginTop="20dp"
@@ -65,7 +65,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toEndOf="@+id/imagenEquipo"
-            app:layout_constraintTop_toBottomOf="@+id/lblNombre" />
+            app:layout_constraintTop_toBottomOf="@+id/lblNombreEquipo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

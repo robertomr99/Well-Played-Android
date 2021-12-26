@@ -14,7 +14,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -73,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+
     public  void borrarPreferencias(){
         Login.preferences = getSharedPreferences("Credenciales", Context.MODE_PRIVATE);
 
@@ -84,25 +84,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editor.putString("pass", sPass);
 
         editor.commit();
-    }
-
-
-
-    private void mostrarData(){
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewEquipos);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        EquiposAdapter adaptador = new EquiposAdapter(this);
-
-        recyclerView.setAdapter(adaptador);
-
-        adaptador.setOnClickListener ( v ->{
-            ListadoEquipos.iEquipoSelected = recyclerView.getChildAdapterPosition(v);
-
-            Intent intentDetalle = new Intent(this, EquipoDetalle.class);
-            startActivity(intentDetalle);
-        });
-
     }
 
     @Override
