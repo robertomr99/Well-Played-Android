@@ -1,5 +1,6 @@
 package com.example.wellplayed;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -21,30 +22,37 @@ public class ajustesFragment extends Fragment {
     }
 
 
-/*
+
     public void onCreate(Bundle savedInstanceState, View view) {
         super.onCreate(savedInstanceState);
-
-
-        view.findViewById(R.id.lblCuenta).setOnClickListener(v->{
-        Intent ventana = new Intent(ajustesFragment.this,);
-        startActivity(ventana);
-        });
-
-
-
-
-
     }
-    */
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_ajustes, container, false);
+        View vista = inflater.inflate(R.layout.fragment_ajustes, container, false);
+        abrirCuenta(vista);
+        abrirInformacion(vista);
+        return vista;
     }
 
+
+    public void abrirCuenta(View view){
+       view.findViewById(R.id.lblCuenta).setOnClickListener(v->{
+            Intent ventana = new Intent(getContext(),Cuenta.class);
+            startActivity(ventana);
+        });
+    }
+
+
+    public void abrirInformacion(View view){
+        view.findViewById(R.id.lblInformacion).setOnClickListener(v->{
+            Intent ventana = new Intent(getContext(),Informacion.class);
+            startActivity(ventana);
+        });
+    }
 
 
 
