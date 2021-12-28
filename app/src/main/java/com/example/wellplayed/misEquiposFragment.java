@@ -16,35 +16,27 @@ import android.widget.Toast;
 
 public class misEquiposFragment extends Fragment {
 
-
     RecyclerView recyclerView;
-  //  Button btnCrearEquipo;
-
 
     public misEquiposFragment() {
-        // Required empty public constructor
     }
 
-    public void onCreate(View view, Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // mostrarData(getContext());
-        crearEquipo(view, getContext());
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_mis_equipos, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+        View view =  inflater.inflate(R.layout.fragment_mis_equipos, container, false);
+        crearEquipo(view);
+        unirseEquipo(view);
+        return view;
     }
-
 
     private void mostrarData(Context context) {
         recyclerView.findViewById(R.id.recyclerViewEquipos);
-
-        Toast.makeText(context, "El recycler view es null", Toast.LENGTH_SHORT).show();
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         EquiposAdapter adaptador = new EquiposAdapter(context);
-
         recyclerView.setAdapter(adaptador);
 
         adaptador.setOnClickListener(v -> {
@@ -55,12 +47,18 @@ public class misEquiposFragment extends Fragment {
         });
     }
 
-    public void crearEquipo(View view, Context context) {
+    public void crearEquipo(View view) {
         view.findViewById(R.id.btnCrearEquipo).setOnClickListener(v -> {
-            Intent intentLogin = new Intent(context, crearEquipo.class);
+            Intent intentLogin = new Intent(getContext(), crearEquipo.class);
             startActivity(intentLogin);
         });
     }
 
-
+    public void unirseEquipo(View view) {
+        view.findViewById(R.id.btnUnirseEquipo).setOnClickListener(v -> {
+            Intent intentLogin = new Intent(getContext(), crearEquipo.class);
+            startActivity(intentLogin);
+        });
+    }
 }
+

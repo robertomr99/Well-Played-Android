@@ -4,13 +4,13 @@ public class Partido_Equipo {
 
     private Integer iIdPartidoEquipo;
     private Equipo_Juego oEquipo1, oEquipo2;
-    private int iVictoria;
+   private boolean boVictoria;
 
-    public Partido_Equipo(Integer iIdPartidoEquipo, Equipo_Juego oEquipo1, Equipo_Juego oEquipo2, int iVictoria) {
+    public Partido_Equipo(Integer iIdPartidoEquipo, Equipo_Juego oEquipo1, Equipo_Juego oEquipo2, boolean boVictoria) {
         this.iIdPartidoEquipo = iIdPartidoEquipo;
         this.oEquipo1 = oEquipo1;
         this.oEquipo2 = oEquipo2;
-        this.iVictoria = iVictoria;
+        this.boVictoria = boVictoria;
     }
 
     public Integer getiIdPartidoEquipo() {
@@ -37,11 +37,11 @@ public class Partido_Equipo {
         this.oEquipo2 = oEquipo2;
     }
 
-    public int getiVictoria() {
-        return iVictoria;
+    public boolean isBoVictoria() {
+        return boVictoria;
     }
 
-    public void setiVictoria(int iVictoria) {
-        this.iVictoria = iVictoria;
+    public void setBoVictoria(boolean boVictoria) {
+        this.boVictoria = boVictoria;
     }
 }

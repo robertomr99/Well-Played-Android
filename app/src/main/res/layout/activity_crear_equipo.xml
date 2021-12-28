@@ -14,7 +14,7 @@
         android:layout_marginTop="76dp"
         android:autoText="false"
         android:fontFamily="@font/cabin"
-        android:text="@string/Crear_Equipo"
+        android:text="@string/mnuCrearEquipo"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24dp"

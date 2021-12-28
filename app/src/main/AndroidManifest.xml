@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.wellplayed">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -12,8 +12,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/wellplayed_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.WellPlayed">
+        android:theme="@style/Theme.WellPlayed"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".UnirseEquipoAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".unirseEquipo"
+            android:exported="false" />
         <activity
             android:name=".crearEquipo"
             android:exported="false" />
@@ -45,7 +51,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-            android:exported="true"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
