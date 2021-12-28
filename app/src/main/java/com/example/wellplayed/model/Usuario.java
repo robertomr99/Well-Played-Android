@@ -10,6 +10,11 @@ public class Usuario {
     public Usuario() {
     }
 
+    public Usuario(String User, String sPassword){
+        this.sUser = sUser;
+        this.sPassword = sPassword;
+    }
+
     public Usuario(Integer iIdUsuario) {
         this.iIdUsuario = iIdUsuario;
     }
@@ -87,5 +92,19 @@ public class Usuario {
 
     public void setBoAdmin(boolean boAdmin) {
         this.boAdmin = boAdmin;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "iIdUsuario=" + iIdUsuario +
+                ", sEmail='" + sEmail + '\'' +
+                ", sUser='" + sUser + '\'' +
+                ", sPassword='" + sPassword + '\'' +
+                ", sFechaNacimiento='" + sFechaNacimiento + '\'' +
+                ", iPais=" + iPais +
+                ", iMonedas=" + iMonedas +
+                ", boAdmin=" + boAdmin +
+                '}';
     }
 }
