@@ -21,12 +21,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/txtPasswordUPD2"
+        android:layout_width="243dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="496dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/lblPassword"
         android:layout_width="243dp"
         android:layout_height="24dp"
         android:layout_marginTop="384dp"
-        android:text="Cambiar contraseña:"
+        android:text="@string/lblPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lblPassword2"
+        android:layout_width="243dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="472dp"
+        android:text="@string/lblPassword2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.095"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +81,7 @@
         android:layout_width="243dp"
         android:layout_height="24dp"
         android:layout_marginTop="308dp"
-        android:text="Cambiar nombre de usuario:"
+        android:text="@string/lblNombreUsuarioUPD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.095"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,18 +99,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/btnEditarBanner"
-        android:layout_width="37dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="144dp"
-        android:background="@null"
-        android:backgroundTint="#0C0C0C"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.93"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/iconocambiobanner" />
+
 
     <ImageButton
         android:id="@+id/btnEditarLogoUsuario"
@@ -100,5 +112,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/editarlogousuario" />
+
+    <ImageButton
+        android:id="@+id/btnCambiobanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="136dp"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/iconofondo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
