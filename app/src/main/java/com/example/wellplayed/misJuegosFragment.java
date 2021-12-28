@@ -22,22 +22,21 @@ public class misJuegosFragment extends Fragment {
     }
 
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(View view, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //mostrarData(getContext());
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mis_juegos, container, false);
+      View vista = inflater.inflate(R.layout.fragment_mis_juegos, container, false);
+      addJuego(vista);
+        return vista;
     }
 
     private void mostrarData(Context context) {
         recyclerView = recyclerView.findViewById(R.id.recyclerViewJuegos);
-
         recyclerView.setLayoutManager(new GridLayoutManager(context,2));
         JuegosAdapter adaptador = new JuegosAdapter(context);
 
@@ -50,4 +49,13 @@ public class misJuegosFragment extends Fragment {
             startActivity(intentDetalle);
         });
     }
+
+    public void addJuego(View view) {
+        view.findViewById(R.id.floatingAddBtnJuegos).setOnClickListener(v -> {
+           // Intent intentLogin = new Intent(getContext(), addJuego.class);
+            //startActivity(intentLogin);
+        });
+    }
+
+
 }

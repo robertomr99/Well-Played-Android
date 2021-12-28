@@ -19,13 +19,6 @@
     <string name="btn_aceptar">Aceptar</string>
     <string name="btn_cancelar">Cancelar</string>
 
-
-    <!-- Títulos de los fragments -->
-    <string name="Mis_Equipos">Mis Equipos</string>
-    <string name="Mis_Juegos">Mis Juegos</string>
-    <string name="Mis_Partidos">Mis Partidos</string>
-    <string name="Crear_Equipo">Crear Equipo</string>
-
     <!-- String Drawer Menu -->
     <string name="mnuPerfil">Perfil</string>
     <string name="mnuMisJuegos">Mis Juegos</string>
@@ -34,6 +27,8 @@
     <string name="mnuSoporte">Soporte</string>
     <string name="mnuAjustes">Ajustes</string>
     <string name="mnuCerrarSesion">Cerrar sesión</string>
+    <string name="mnuUnirseEquipo">Unirse a equipo</string>
+    <string name="mnuCrearEquipo">Crear equipo</string>
 
 
     <!-- String Fragment Ajustes-->
