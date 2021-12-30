@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Informacion">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="538dp"
+        android:layout_height="673dp"
+        android:alpha="0.2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.275"
+        app:srcCompat="@drawable/wellplayed" />
+
+    <TextView
+        android:id="@+id/txtInfo"
+        android:layout_width="259dp"
+        android:layout_height="102dp"
+        android:layout_marginTop="252dp"
+        android:text="Aplicación movil creada para que los usuarios registrados puedan jugar partidas individuales, o por equipos de sus juegos favoritos, pudiendo crear, o unirse a equipos de cualquier videojuego registrado."
+        android:textAlignment="center"
+        android:textColor="#050505"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtOwners"
+        android:layout_width="241dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="384dp"
+        android:text="Creadores de la aplicación: Roberto Muñoz Rodríguez, Miguel Alacid Cepeda y Miguel Ángel Rey Álvarez"
+        android:textAlignment="center"
+        android:textColor="#101010"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

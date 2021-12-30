@@ -29,6 +29,7 @@
         android:layout_height="match_parent"
         app:headerLayout="@layout/drawer_header"
         app:menu="@menu/drawer_menu"
+        android:background="@color/GrisApp"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         android:background="@color/GrisApp"
