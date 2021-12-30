@@ -24,7 +24,7 @@ public class Login extends AppCompatActivity {
     EditText txtUsuario;
     EditText txtPass;
     CheckBox checkBoxRecuerdame;
-    Usuario oUsuarioSalida, oUsuarioEntrada = new Usuario();
+    public static Usuario oUsuarioSalida, oUsuarioEntrada = new Usuario();
     public static SharedPreferences preferences;
 
     @Override
@@ -69,15 +69,6 @@ public class Login extends AppCompatActivity {
         return boCorrecto;
     }
 
-  /*  public boolean loginAdmin(EditText txtUsuario, EditText txtPass){
-        boolean boAdmin = false;
-
-        if(txtUsuario.getText().toString().equals(sUserAdmin) && txtPass.getText().toString().equals(sPassAdmin)){
-            boAdmin = true;
-        }
-
-        return boAdmin;
-    }*/
 
     private void usuarioLogeado() {
         oUsuarioEntrada.setsUser(txtUsuario.getText().toString());
@@ -99,9 +90,8 @@ public class Login extends AppCompatActivity {
                         oUsuarioSalida = new Gson().fromJson(s, new TypeToken<Usuario>() {
                         }.getType());
 
-                        Log.d("objeto",oUsuarioSalida.toString());
                         extraerObjetoUsuario();
-                        //coche = new Gson().fromJson(s,new TypeToken<Coche>(){}.getType());
+
                     }
                 }
 
@@ -113,13 +103,16 @@ public class Login extends AppCompatActivity {
     }
 
     private void extraerObjetoUsuario() {
-            iniciarSesion();
+        iniciarSesion();
     }
 
     private void iniciarSesion() {
-
         if (comprobarUsuario()) {
+            if (checkBoxRecuerdame.isChecked()) {
+                guardarPreferencias();
+            }
             Intent i = new Intent(this, MainActivity.class);
+            i.putExtra("User", oUsuarioSalida);
             startActivity(i);
         } else {
             Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
@@ -144,11 +137,11 @@ public class Login extends AppCompatActivity {
 
         String sUsuario = preferences.getString("user", "");
         String sPass = preferences.getString("pass", "");
-
-        /*if(sUsuario.equals(sUserAdmin) && sPass.equals(sPassAdmin)){
+        if (!sUsuario.equals("") && !sPass.equals("")) {
             Intent i = new Intent(this, MainActivity.class);
+            i.putExtra("Name", sUsuario);
             startActivity(i);
-        }*/
+        }
 
     }
 

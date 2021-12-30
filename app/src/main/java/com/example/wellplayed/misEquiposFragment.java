@@ -56,7 +56,7 @@ public class misEquiposFragment extends Fragment {
 
     public void unirseEquipo(View view) {
         view.findViewById(R.id.btnUnirseEquipo).setOnClickListener(v -> {
-            Intent intentLogin = new Intent(getContext(), crearEquipo.class);
+            Intent intentLogin = new Intent(getContext(), unirseEquipo.class);
             startActivity(intentLogin);
         });
     }
