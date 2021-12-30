@@ -30,6 +30,8 @@
         app:headerLayout="@layout/drawer_header"
         app:menu="@menu/drawer_menu"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"/>
+        android:fitsSystemWindows="true"
+        android:background="@color/GrisApp"
+      />
 
 </androidx.drawerlayout.widget.DrawerLayout>
