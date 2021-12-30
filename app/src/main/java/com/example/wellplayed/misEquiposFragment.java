@@ -22,6 +22,7 @@ public class misEquiposFragment extends Fragment {
     }
 
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
     }
 
@@ -60,5 +61,8 @@ public class misEquiposFragment extends Fragment {
             startActivity(intentLogin);
         });
     }
+
+
+
 }
 
