@@ -1,6 +1,7 @@
 package com.example.wellplayed.model;
+import java.io.Serializable;
 
-public class Usuario {
+public class Usuario implements Serializable {
 
     private Integer iIdUsuario;
     private String sEmail , sUser, sPassword, sFechaNacimiento;

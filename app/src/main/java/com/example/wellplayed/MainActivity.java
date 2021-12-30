@@ -14,22 +14,45 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.wellplayed.model.Usuario;
 import com.google.android.material.navigation.NavigationView;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     DrawerLayout drawerLayout;
+    private Usuario oUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
+        View header = ((NavigationView)findViewById(R.id.navigationView)).getHeaderView(0);
+
+        try{
+            if(getIntent().hasExtra("Name")){
+                Usuario oUser = new Usuario();
+                oUser.setsUser(getIntent().getStringExtra("Name"));
+                ((TextView) header.findViewById(R.id.lblNombreUsuario)).setText(oUser.getsUser());
+            }else{
+                oUsuario = (Usuario) getIntent().getSerializableExtra("User");
+                ((TextView) header.findViewById(R.id.lblNombreUsuario)).setText(Login.oUsuarioEntrada.getsUser());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        setSupportActionBar(toolbar);
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
@@ -40,8 +63,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
         openFragment(new initFragment());
-        
     }
+
+
     private void openFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -69,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         borrarPreferencias();
         Intent intentLogin = new Intent(this, Login.class);
         startActivity(intentLogin);
-
     }
 
 
