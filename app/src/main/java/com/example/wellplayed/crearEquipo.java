@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 public class crearEquipo extends AppCompatActivity {
@@ -17,9 +18,11 @@ public class crearEquipo extends AppCompatActivity {
     }
 
     public void cancelar(){
+
+        // Para volver de una actividad a la ventana anterior.
+
         findViewById(R.id.btnCancelar).setOnClickListener( v ->{
-            Intent intentMisEquipos = new Intent(this, misEquiposFragment.class);
-            startActivity(intentMisEquipos);
+            super.onBackPressed();
         });
     }
 
