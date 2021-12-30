@@ -21,6 +21,12 @@
             android:name=".unirseEquipo"
             android:exported="false" />
         <activity
+            android:name=".Informacion"
+            android:exported="false" />
+        <activity
+            android:name=".Cuenta"
+            android:exported="false" />
+        <activity
             android:name=".crearEquipo"
             android:exported="false" />
         <activity
