@@ -14,7 +14,7 @@
         android:backgroundTint="@color/iconosapp"
         android:text="CREAR EQUIPO"
         android:textAlignment="center"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/btnUnirseEquipo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -27,7 +27,7 @@
         android:backgroundTint="@color/iconosapp"
         android:text="UNIRSE A UN EQUIPO"
         android:textAlignment="center"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"

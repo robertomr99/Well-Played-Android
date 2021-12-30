@@ -38,20 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         View header = ((NavigationView)findViewById(R.id.navigationView)).getHeaderView(0);
-
-        try{
-            if(getIntent().hasExtra("Name")){
-                Usuario oUser = new Usuario();
-                oUser.setsUser(getIntent().getStringExtra("Name"));
-                ((TextView) header.findViewById(R.id.lblNombreUsuario)).setText(oUser.getsUser());
-            }else{
-                oUsuario = (Usuario) getIntent().getSerializableExtra("User");
-                ((TextView) header.findViewById(R.id.lblNombreUsuario)).setText(Login.oUsuarioEntrada.getsUser());
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
+        intentDataUsuario(header);
         setSupportActionBar(toolbar);
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
@@ -107,6 +94,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editor.putString("pass", sPass);
 
         editor.commit();
+    }
+
+    // Setea el nombre del usuario logeado en el menú lateral
+
+    private void intentDataUsuario(View header){
+        try{
+            if(getIntent().hasExtra("Name")){
+                Usuario oUser = new Usuario();
+                oUser.setsUser(getIntent().getStringExtra("Name"));
+                ((TextView) header.findViewById(R.id.lblNombreUsuario)).setText(oUser.getsUser());
+            }else{
+                oUsuario = (Usuario) getIntent().getSerializableExtra("User");
+                ((TextView) header.findViewById(R.id.lblNombreUsuario)).setText(Login.oUsuarioEntrada.getsUser());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

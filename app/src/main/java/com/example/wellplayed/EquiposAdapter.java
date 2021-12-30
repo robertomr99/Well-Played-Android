@@ -23,7 +23,6 @@ public class EquiposAdapter extends RecyclerView.Adapter<EquiposAdapter.ViewHold
         this.context = context;
     }
 
-
     public void onClick(View v) {
         if(listener != null){
             listener.onClick(v);
