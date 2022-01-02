@@ -14,127 +14,54 @@
         tools:layout_editor_absoluteY="-20dp">
 
         <TextView
-            android:id="@+id/lblWinRatio"
-            android:layout_width="61dp"
-            android:layout_height="21dp"
-            android:layout_marginTop="500dp"
-            android:text="WinRatio"
-            android:textColor="#000000"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.954"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/lblWinRatioUsuario"
-            android:layout_width="41dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="528dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.929"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/lblVictorias"
-            android:layout_width="51dp"
-            android:layout_height="19dp"
-            android:layout_marginTop="500dp"
-            android:text="Victorias"
-            android:textColor="#000000"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.044"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/lblNºVictorias"
-            android:layout_width="41dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="528dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.04"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/lblDerrotas"
-            android:layout_width="51dp"
-            android:layout_height="19dp"
-            android:layout_marginTop="500dp"
-            android:text="Derrotas"
-            android:textColor="#000000"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/lblNºDerrotas"
-            android:layout_width="41dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="528dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.486"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/lblPais"
-            android:layout_width="51dp"
-            android:layout_height="19dp"
-            android:layout_marginTop="360dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="24dp"
             android:text="País"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.044"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imgBannner" />
+            app:layout_constraintTop_toBottomOf="@+id/lblRFechaNacimiento" />
 
         <TextView
-            android:id="@+id/textView29"
-            android:layout_width="141dp"
-            android:layout_height="26dp"
-            android:layout_marginTop="420dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.055"
+            android:id="@+id/lblRPais"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/lblPais" />
 
         <TextView
             android:id="@+id/lblFechaNacimiento"
-            android:layout_width="144dp"
-            android:layout_height="17dp"
-            android:layout_marginTop="312dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="24dp"
             android:text="Fecha de nacimiento"
-            android:textColor="#000000"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.051"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/lblREmail" />
 
         <TextView
             android:id="@+id/lblUsuario"
-            android:layout_width="51dp"
-            android:layout_height="19dp"
-            android:layout_marginTop="220dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
             android:text="Usuario"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.041"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imgBannner" />
 
         <ImageView
             android:id="@+id/imgBannner"
             android:layout_width="507dp"
             android:layout_height="157dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="50dp"
             android:src="@drawable/fondobanner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -144,25 +71,49 @@
             android:id="@+id/imgUsuario"
             android:layout_width="111dp"
             android:layout_height="111dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:src="@drawable/wellplayed"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/imgBannner" />
 
         <TextView
-            android:id="@+id/lblUsuario2"
-            android:layout_width="124dp"
-            android:layout_height="22dp"
-            tools:layout_editor_absoluteX="14dp"
-            tools:layout_editor_absoluteY="240dp" />
+            android:id="@+id/lblRUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblUsuario" />
 
         <TextView
-            android:id="@+id/lblFechaNacimiento2"
-            android:layout_width="122dp"
-            android:layout_height="22dp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="330dp" />
+            android:id="@+id/lblRFechaNacimiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblFechaNacimiento" />
+
+        <TextView
+            android:id="@+id/lblEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="24dp"
+            android:text="Email"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblRUsuario" />
+
+        <TextView
+            android:id="@+id/lblREmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblEmail" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -47,12 +47,7 @@ public class Registro extends AppCompatActivity {
     EditText txtUsuario,txtEmail,txtContrasenia,txtConfirmarContrasenia,txtFechaNacimiento;
     Spinner spinPaises;
     Button btnCrearCuenta;
-    //LAVERDADERA laverdad;
     Usuario oUsuario;
-
-    //List<LAVERDADERA> lstVerdad;
-    //String sUrl = "http://well-played.infinityfreeapp.com/pruebas_Miguel/ins-coche.php?";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +61,9 @@ public class Registro extends AppCompatActivity {
         txtFechaNacimiento = findViewById(R.id.fchNac);
         spinPaises = findViewById(R.id.spinnerPais);
         findViewById(R.id.btnCrearCuenta).setOnClickListener(view -> {
-
             insertUsuario(agregarUsuario());
-
+            onClickLogin(view);
         });
-
-
     }
 
 
@@ -83,10 +75,7 @@ public class Registro extends AppCompatActivity {
                     if(s.equals("null")){
                         Toast.makeText(getApplicationContext(), "error al crear el usuario", Toast.LENGTH_LONG).show();
                     }else{
-                        Log.d("ALACID", s);
-
-                        //coche = new Gson().fromJson(s,new TypeToken<Coche>(){}.getType());
-                        //mostrarEste();
+                        Toast.makeText(getApplicationContext(), "Usuario creado con éxito", Toast.LENGTH_LONG).show();
                     }
                 }
                 ,volleyError -> {
@@ -111,10 +100,7 @@ public class Registro extends AppCompatActivity {
                         mostrarEste();
                     }
                 }
-
-
                 ,volleyError -> {
-
             Toast.makeText(this, "E", Toast.LENGTH_SHORT).show();
         }
         ));
@@ -140,7 +126,7 @@ public class Registro extends AppCompatActivity {
     }
 
     public void onClickLogin(View v){
-        Intent i = new Intent(this, Login.class);
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 }

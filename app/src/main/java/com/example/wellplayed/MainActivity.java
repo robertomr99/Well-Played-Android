@@ -29,7 +29,7 @@ import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     DrawerLayout drawerLayout;
-    private Usuario oUsuario;
+    public static Usuario oUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         View header = ((NavigationView)findViewById(R.id.navigationView)).getHeaderView(0);
-        intentDataUsuario(header);
+        oUsuario = intentDataUsuario(header);
         setSupportActionBar(toolbar);
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
@@ -98,19 +98,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     // Setea el nombre del usuario logeado en el menú lateral
 
-    private void intentDataUsuario(View header){
+    private Usuario intentDataUsuario(View header){
+        Usuario oUser = new Usuario();
         try{
             if(getIntent().hasExtra("Name")){
-                Usuario oUser = new Usuario();
                 oUser.setsUser(getIntent().getStringExtra("Name"));
                 ((TextView) header.findViewById(R.id.lblNombreUsuario)).setText(oUser.getsUser());
             }else{
-                oUsuario = (Usuario) getIntent().getSerializableExtra("User");
+                oUser = (Usuario) getIntent().getSerializableExtra("User");
                 ((TextView) header.findViewById(R.id.lblNombreUsuario)).setText(Login.oUsuarioEntrada.getsUser());
             }
         }catch (Exception e){
             e.printStackTrace();
         }
+
+        return oUser;
     }
 
     @Override

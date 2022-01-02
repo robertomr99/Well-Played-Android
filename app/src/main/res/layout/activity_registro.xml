@@ -104,7 +104,7 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:entries="@array/Países"
+        android:entries="@array/paises"
 
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
