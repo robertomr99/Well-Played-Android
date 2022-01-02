@@ -20,9 +20,9 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/txtPassword"
         app:layout_constraintEnd_toStartOf="@+id/txtPassword"
         app:layout_constraintTop_toTopOf="@+id/txtPassword"
@@ -30,9 +30,9 @@
 
     <ImageView
         android:id="@+id/imgUser"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/txtUsuario"
         app:layout_constraintEnd_toStartOf="@+id/txtUsuario"
         app:layout_constraintTop_toTopOf="@+id/txtUsuario"
@@ -67,11 +67,13 @@
         android:id="@+id/lblOlvidarContrasenia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="4dp"
+        android:padding="8dp"
         android:text="@string/has_olvidado_la_contrase_a"
         android:textColor="@color/lblClickables"
-        app:layout_constraintStart_toEndOf="@+id/checkBoxRecuerdame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.377"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
 
     <Button
@@ -90,37 +92,71 @@
         android:id="@+id/btnIniciarSesion"
         android:layout_width="275dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="50dp"
         android:backgroundTint="@color/ic_launcher_background"
         android:onClick="onClickIniciarSesion"
         android:text="@string/iniciar_sesi_n"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblOlvidarContrasenia" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxRecuerdame" />
 
     <TextView
         android:id="@+id/lblRegistrateAqui"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="24dp"
         android:minHeight="48dp"
         android:onClick="onClickRegistro"
         android:text="@string/no_tienes_cuenta_registrate_aqui"
         android:textColor="@color/lblClickables"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesionGoogle" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <CheckBox
         android:id="@+id/checkBoxRecuerdame"
-        android:layout_width="114dp"
+        android:layout_width="200dp"
         android:layout_height="48dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="9dp"
-        android:text="Recuerdame"
+        android:layout_marginTop="8dp"
+        android:text="Mantener sesión iniciada"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.379"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/lblOlvidarContrasenia" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesionGoogle">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:background="#717171"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/GrisApp"
+                android:text=" O " />
+
+        </FrameLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

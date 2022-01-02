@@ -35,7 +35,6 @@
     <string name="lblInformacion">Información</string>
     <string name="swBtnTema">Tema Claro/Oscuro</string>
 
-
     <!-- String Cuenta -->
     <string name="lblNombreUsuarioUPD">Cambiar nombre de usuario</string>
     <string name="lblPassword">Cambiar contraseña</string>
@@ -47,7 +46,7 @@
     <string name="CheckBox_FIFA">FIFA</string>
     <string name="CheckBox_CSGO">Counter Strike</string>
 
-    <string-array name="Países">
+    <string-array name="paises">
         <item>Afganist&#225;n</item>
         <item>Albania</item>
         <item>Alemania</item>
