@@ -92,6 +92,7 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="@string/fecha_nacimiento"
+        android:focusable="false"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"

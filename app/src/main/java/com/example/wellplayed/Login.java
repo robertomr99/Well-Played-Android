@@ -54,8 +54,6 @@ public class Login extends AppCompatActivity {
 
     public void onClickIniciarSesion(View v) {
         loginApp();
-
-
     }
 
     public boolean comprobarUsuario() {
@@ -71,8 +69,8 @@ public class Login extends AppCompatActivity {
 
 
     private void usuarioLogeado() {
-        oUsuarioEntrada.setsUser(txtUsuario.getText().toString());
-        oUsuarioEntrada.setsPassword(txtPass.getText().toString());
+        oUsuarioEntrada.setsUser(txtUsuario.getText().toString().toUpperCase());
+        oUsuarioEntrada.setsPassword(txtPass.getText().toString().toUpperCase());
 
     }
 
