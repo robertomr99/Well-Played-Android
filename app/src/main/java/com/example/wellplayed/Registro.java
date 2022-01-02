@@ -4,12 +4,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -37,6 +39,10 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,11 +53,10 @@ public class Registro extends AppCompatActivity {
     EditText txtUsuario,txtEmail,txtContrasenia,txtConfirmarContrasenia,txtFechaNacimiento;
     Spinner spinPaises;
     Button btnCrearCuenta;
-    //LAVERDADERA laverdad;
     Usuario oUsuario;
-
-    //List<LAVERDADERA> lstVerdad;
-    //String sUrl = "http://well-played.infinityfreeapp.com/pruebas_Miguel/ins-coche.php?";
+    Calendar c = Calendar.getInstance();
+    LocalDate c2 = LocalDate.now();
+    DatePickerDialog dpd;
 
 
     @Override
@@ -59,21 +64,39 @@ public class Registro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
+        final int iDia = c.get(Calendar.DAY_OF_MONTH);
+        final int iMes = c.get(Calendar.MONTH);
+        final int iAnnio = c.get(Calendar.YEAR);
+
         txtUsuario = findViewById(R.id.txtUsuarioRegistro);
         txtEmail = findViewById(R.id.txtEmail);
         txtContrasenia = findViewById(R.id.txtPass);
         txtConfirmarContrasenia = findViewById(R.id.txtConfirmPass);
         txtFechaNacimiento = findViewById(R.id.fchNac);
         spinPaises = findViewById(R.id.spinnerPais);
+
+
         findViewById(R.id.btnCrearCuenta).setOnClickListener(view -> {
 
             insertUsuario(agregarUsuario());
 
         });
 
+        txtFechaNacimiento.setOnClickListener(view -> {
+
+            dpd = new DatePickerDialog(Registro.this, new DatePickerDialog.OnDateSetListener() {
+
+                @Override
+                public void onDateSet(DatePicker datePicker, int iYear, int iMonth, int iDay) {
+                    txtFechaNacimiento.setText(iDay + "/" + (iMonth+1) + "/" + iYear);
+                }
+            },iAnnio, iMes, iDia);
+            dpd.show();
+        });
+
 
     }
-
+    
 
     private void insertUsuario(Usuario oUser) {
         String sUrl = Utils.hosting + "ins-usuario.php?txtEmail="+oUser.getsEmail()+"&txtUsuario="+oUser.getsUser()+"&txtPass="+oUser.getsPassword()+"&txtFechaNacimiento="+oUser.getsFechaNacimiento()+"&txtPais="+oUser.getiPais()+"&txtMonedas="+oUser.getiMonedas()+"&txtAdministrador="+oUser.isBoAdmin();

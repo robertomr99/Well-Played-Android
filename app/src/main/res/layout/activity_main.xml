@@ -32,7 +32,6 @@
         android:background="@color/GrisApp"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:background="@color/GrisApp"
       />
 
 </androidx.drawerlayout.widget.DrawerLayout>
