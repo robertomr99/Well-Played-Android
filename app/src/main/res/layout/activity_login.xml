@@ -58,10 +58,30 @@
         android:layout_marginEnd="56dp"
         android:ems="10"
         android:hint="@string/contrase_a"
+
         android:inputType="textPersonName|textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtUsuario"
         tools:ignore="TextFields" />
+
+   <!-- <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:passwordToggleEnabled="true">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>-->
 
     <TextView
         android:id="@+id/lblOlvidarContrasenia"
@@ -71,9 +91,7 @@
         android:padding="8dp"
         android:text="@string/has_olvidado_la_contrase_a"
         android:textColor="@color/lblClickables"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.377"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
 
     <Button
@@ -119,9 +137,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:text="Mantener sesión iniciada"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.379"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/lblOlvidarContrasenia"
         app:layout_constraintTop_toBottomOf="@+id/lblOlvidarContrasenia" />
 
     <LinearLayout

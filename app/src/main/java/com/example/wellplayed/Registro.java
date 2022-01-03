@@ -24,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.example.wellplayed.model.Data;
 import com.example.wellplayed.model.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -57,6 +58,7 @@ public class Registro extends AppCompatActivity {
     Calendar c = Calendar.getInstance();
     LocalDate c2 = LocalDate.now();
     DatePickerDialog dpd;
+    public static Data oData = new Data();
 
     //List<LAVERDADERA> lstVerdad;
     //String sUrl = "http://well-played.infinityfreeapp.com/pruebas_Miguel/ins-coche.php?";
@@ -80,7 +82,7 @@ public class Registro extends AppCompatActivity {
 
 
         findViewById(R.id.btnCrearCuenta).setOnClickListener(view -> {
-            insertUsuario(agregarUsuario());
+            comprobarUser();
             onClickLogin(view);
         });
 
@@ -100,22 +102,64 @@ public class Registro extends AppCompatActivity {
     }
     
 
-    private void insertUsuario(Usuario oUser) {
-        String sUrl = Utils.hosting + "ins-usuario.php?txtEmail="+oUser.getsEmail()+"&txtUsuario="+oUser.getsUser()+"&txtPass="+oUser.getsPassword()+"&txtFechaNacimiento="+oUser.getsFechaNacimiento()+"&txtPais="+oUser.getiPais()+"&txtMonedas="+oUser.getiMonedas()+"&txtAdministrador="+oUser.isBoAdmin();
+    public void comprobarUser(){
 
-        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
-                s ->{
-                    if(s.equals("null")){
-                        Toast.makeText(getApplicationContext(), "error al crear el usuario", Toast.LENGTH_LONG).show();
-                    }else{
-                        Toast.makeText(getApplicationContext(), "Usuario creado con éxito", Toast.LENGTH_LONG).show();
+        Usuario oUsuario = new Usuario();
+        oUsuario = agregarUsuario();
+        String sUrl = Utils.hosting + "comprobar-user.php?txtUsuario="+oUsuario.getsUser()+"&txtEmail="+oUsuario.getsEmail();
+
+        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        Log.d("alacide", sUrl);
+                        oData = new Gson().fromJson(s, new TypeToken<Data>() {
+                        }.getType());
+                        existeUsuario(oData);
+
                     }
                 }
-                ,volleyError -> {
 
-            Log.d("ALACID",volleyError.getCause().toString());
+                , volleyError -> {
+
+            Log.d("ALACID", volleyError.getCause().toString());
         }
         ));
+    }
+
+    private void existeUsuario(Data oData) {
+        boolean boExito = false;
+        if(oData.getiContador() > 0){
+            boExito = true;
+        }
+        insertUsuario(agregarUsuario(),boExito);
+    }
+
+    private void insertUsuario(Usuario oUser,boolean boExito) {
+
+        if(!boExito){
+            String sUrl = Utils.hosting + "ins-usuario.php?txtEmail="+oUser.getsEmail()+"&txtUsuario="+oUser.getsUser()+"&txtPass="+oUser.getsPassword()+"&txtFechaNacimiento="+oUser.getsFechaNacimiento()+"&txtPais="+oUser.getiPais()+"&txtMonedas="+oUser.getiMonedas()+"&txtAdministrador="+oUser.isBoAdmin();
+
+            Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
+                    s ->{
+                        if(s.equals("null")){
+                            Toast.makeText(getApplicationContext(), "error al crear el usuario", Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Usuario creado con éxito", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    ,volleyError -> {
+
+                Log.d("ALACID",volleyError.getCause().toString());
+            }
+            ));
+        }else{
+            Toast.makeText(this, "El nombre de usuario o email no esta disponible", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void obtenerEste() {
@@ -147,9 +191,9 @@ public class Registro extends AppCompatActivity {
 
     private Usuario agregarUsuario() {
         Usuario oUser = new Usuario();
-        oUser.setsEmail(txtEmail.getText().toString());
-        oUser.setsUser(txtUsuario.getText().toString());
-        oUser.setsPassword(txtContrasenia.getText().toString());
+        oUser.setsEmail(txtEmail.getText().toString().toUpperCase());
+        oUser.setsUser(txtUsuario.getText().toString().toUpperCase());
+        oUser.setsPassword(txtContrasenia.getText().toString().toUpperCase());
         oUser.setsFechaNacimiento(txtFechaNacimiento.getText().toString());
         oUser.setiPais(spinPaises.getSelectedItemPosition());
         oUser.setiMonedas(0);
@@ -159,7 +203,7 @@ public class Registro extends AppCompatActivity {
     }
 
     public void onClickLogin(View v){
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, Login.class);
         startActivity(i);
     }
 }
