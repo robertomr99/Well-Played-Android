@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "68917973768",
+    "project_id": "well-played-d92f7",
+    "storage_bucket": "well-played-d92f7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:68917973768:android:d4147d55f4cc2e191fd2bd",
+        "android_client_info": {
+          "package_name": "com.example.wellplayed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "68917973768-dlq8tm9sufuvuu45d72c35fiqmhki5iv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wellplayed",
+            "certificate_hash": "775569b1eb407602b3e2def7cdf11460c6a01001"
+          }
+        },
+        {
+          "client_id": "68917973768-6f7g2669uo0hdb91hvf6g4940lhmvh58.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdCAhXefEkYoIwbc7KAg8TIRqyF_zmNpY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "68917973768-6f7g2669uo0hdb91hvf6g4940lhmvh58.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
