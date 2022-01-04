@@ -12,6 +12,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.wellplayed.model.Juego;
+
+import java.util.List;
+
 public class JuegosAdapter extends RecyclerView.Adapter<JuegosAdapter.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
@@ -35,7 +40,6 @@ public class JuegosAdapter extends RecyclerView.Adapter<JuegosAdapter.ViewHolder
     }
 
     @NonNull
-
     public JuegosAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.from(parent.getContext()).inflate(R.layout.activity_juegos_adapter, parent, false);
         view.setOnClickListener(this);
@@ -44,13 +48,11 @@ public class JuegosAdapter extends RecyclerView.Adapter<JuegosAdapter.ViewHolder
 
 
     public void onBindViewHolder(@NonNull JuegosAdapter.ViewHolder holder, int position) {
-        String sNombre = ListadoJuegos.lstJuegos.get(position).getsNombre();
-        int iFoto = ListadoJuegos.lstJuegos.get(position).getiFoto();
 
-        holder.lblNombreJuego.setText(sNombre);
-        holder.imgViewJuego.setImageResource(iFoto);
-        //holder.cv.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition));
+        Juego oJuego = ListadoJuegos.lstJuegos.get(position); // Instanciamos el objeto de la lista con la posicion
 
+        holder.lblNombreJuego.setText(oJuego.getsNombre());
+        Glide.with(context).load(oJuego.getsFoto()).into(holder.imgViewJuego);
     }
 
 
