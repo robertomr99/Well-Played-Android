@@ -1,5 +1,11 @@
 package com.example.wellplayed.model;
+import android.widget.Toast;
+
+import com.example.wellplayed.Registro;
+
 import java.io.Serializable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Usuario implements Serializable {
 
@@ -44,7 +50,16 @@ public class Usuario implements Serializable {
     }
 
     public void setsEmail(String sEmail) {
-        this.sEmail = sEmail;
+
+        // El email a validar
+
+       if(Pattern.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+               + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",sEmail)){
+           this.sEmail = sEmail;
+       }else{
+
+       }
+
     }
 
     public String getsUser() {

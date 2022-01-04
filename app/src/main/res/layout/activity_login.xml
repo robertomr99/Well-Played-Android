@@ -101,6 +101,7 @@
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/Google"
         android:text="@string/iniciar_sesi_n_con_google"
+        android:onClick="signIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
