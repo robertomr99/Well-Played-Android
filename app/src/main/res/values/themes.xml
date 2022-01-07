@@ -1,10 +1,20 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
+
     <style name="Theme.WellPlayed" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="colorPrimary">@color/GrisApp</item>
+        <item name="colorPrimaryVariant">@color/GrisOscuroApp</item>
         <item name="colorAccent">@color/lblClickables</item>
-
-        <item name="android:itemBackground">@color/GrisApp</item>
     </style>
+
+    <style name="Navigation">
+        <item name="android:textColorPrimary">@color/AzulApp</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.WellPlayed">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
+
 </resources>
