@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item android:drawable="@color/AzulApp" />
 
-    <item android:drawable="@color/AzulApp"/>
-
-    <item>
-        <bitmap
-            android:scaleType="fitXY"
-            android:gravity="center"
-            android:src="@drawable/wellplayed_splash"/>
-    </item>
-
+    <item
+        android:width="125dp"
+        android:height="125dp"
+        android:drawable="@drawable/wellplayed"
+        android:gravity="center" />
 
 </layer-list>

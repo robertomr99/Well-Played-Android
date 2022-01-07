@@ -30,7 +30,7 @@ public class tiendaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View vista = inflater.inflate(R.layout.fragment_tienda, container, false);
-        addProducto(vista);
+        //addProducto(vista);
         return vista;
     }
 
