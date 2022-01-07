@@ -18,6 +18,7 @@
     <string name="btn_aceptar">Aceptar</string>
     <string name="btn_cancelar">Cancelar</string>
 
+
     <!-- String Drawer Menu -->
     <string name="mnuPerfil">Perfil</string>
     <string name="mnuMisJuegos">Mis Juegos</string>
@@ -28,7 +29,8 @@
     <string name="mnuCerrarSesion">Cerrar sesión</string>
     <string name="mnuUnirseEquipo">Unirse a equipo</string>
     <string name="mnuCrearEquipo">Crear equipo</string>
-
+    <string name="mnuAddJuego">Añadir juego</string>
+    <string name="mnuTienda">Tienda</string>
 
     <!-- String Fragment Ajustes-->
     <string name="lblCuenta">Cuenta</string>
@@ -45,6 +47,11 @@
     <string name="CheckBox_Valorant">Valorant</string>
     <string name="CheckBox_FIFA">FIFA</string>
     <string name="CheckBox_CSGO">Counter Strike</string>
+    <string name="addticket">Añadir un ticket</string>
+
+    <!-- String Fragment Tienda -->
+    <string name="txtTienda">Tienda</string>
+
 
     <string-array name="paises">
         <item>Afganist&#225;n</item>

@@ -41,38 +41,16 @@ public class misJuegosFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
       View vista = inflater.inflate(R.layout.fragment_mis_juegos, container, false);
       Rv = vista.findViewById(R.id.recyclerViewJuegos);
-      extraerJuego();
       addJuego(vista);
+      mostrarJuegos();
         return vista;
     }
 
-    private void mostrarData(Context context) {
-        Rv.setLayoutManager(new GridLayoutManager(context,2));
-        JuegosAdapter adaptador = new JuegosAdapter(context);
-        Rv.setAdapter(adaptador);
-        Rv.setHasFixedSize(true);
-
-       /* adaptador.setOnClickListener(v -> {
-            ListadoJuegos.iJuegoSelected = Rv.getChildAdapterPosition(v);
-            Intent intentDetalle = new Intent(context, JuegosDetalle.class);
-            startActivity(intentDetalle);
-       })*/
-    }
-
-    public void addJuego(View view) {
-        view.findViewById(R.id.floatingAddBtnJuegos).setOnClickListener(v -> {
-           // Intent intentLogin = new Intent(getContext(), addJuego.class);
-            //startActivity(intentLogin);
-        });
-    }
-
-
-    public void extraerJuego() {
-        String sUrl = Utils.hosting + "get-juego.php";
+    public void mostrarJuegos() {
+        String sUrl = Utils.hosting + "JuegoQueSiTieneUser.php?txtUsuario="+MainActivity.oUsuario.getsUser().toUpperCase();
         Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
                     Log.d("vacio", s);
@@ -80,16 +58,38 @@ public class misJuegosFragment extends Fragment {
                         Toast.makeText(getContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
                     } else {
                         Log.d("Rob", sUrl);
-                         ListadoJuegos.lstJuegos = new Gson().fromJson(s, new TypeToken<List<Juego>>() {
+                        ListadoJuegos.lstJuegos = new Gson().fromJson(s, new TypeToken<List<Juego>>() {
                         }.getType());
                         mostrarData(getContext());
                     }
                 }
-
                 , volleyError -> {
             Log.d("Rob", volleyError.getCause().toString());
         }
         ));
     }
 
+
+
+    private void mostrarData(Context context) {
+        Rv.setLayoutManager(new GridLayoutManager(context,2));
+        JuegosAdapter adaptador = new JuegosAdapter(context);
+        Rv.setAdapter(adaptador);
+        Rv.setHasFixedSize(true);
+
+        adaptador.setOnClickListener(v -> {
+            ListadoJuegos.iJuegoSelected = Rv.getChildAdapterPosition(v);
+            Intent intentLogin = new Intent(getContext(), JuegosDetalle.class);
+            startActivity(intentLogin);
+        });
+    }
+
+
+
+    public void addJuego(View view) {
+        view.findViewById(R.id.floatingAddBtnJuegos).setOnClickListener(v -> {
+           Intent intentLogin = new Intent(getContext(), addJuego.class);
+             startActivity(intentLogin);
+        });
+    }
 }
