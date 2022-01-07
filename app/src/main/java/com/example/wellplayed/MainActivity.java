@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.mnuMisJuegos: openFragment(new misJuegosFragment()); break;
             case R.id.mnuMisEquipos: openFragment(new misEquiposFragment()); break;
             case R.id.mnuMisPartidos: openFragment(new misPartidosFragment()); break;
+            case R.id.mnuTienda: openFragment(new tiendaFragment()); break;
             case R.id.mnuSoporte: openFragment(new soporteFragment()); break;
             case R.id.mnuAjustes: openFragment(new ajustesFragment()); break;
             case R.id.mnuCerrarSesion: salir(); break;

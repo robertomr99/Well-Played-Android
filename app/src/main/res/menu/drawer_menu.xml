@@ -29,6 +29,12 @@
         </item>
 
         <item
+            android:id="@+id/mnuTienda"
+            android:icon="@drawable/tienda"
+            android:title="@string/mnuTienda">
+        </item>
+
+        <item
             android:id="@+id/mnuSoporte"
             android:icon="@drawable/soporte"
             android:title="@string/mnuSoporte">
