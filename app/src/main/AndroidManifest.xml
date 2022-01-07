@@ -44,6 +44,7 @@
             android:exported="true" />
         <activity
             android:name=".Login"
+            android:theme="@style/SplashTheme"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,7 +58,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
