@@ -17,7 +17,7 @@ public class JuegosDetalle extends AppCompatActivity {
         TextView lblNombreJuegoDetalle = findViewById(R.id.lblNombreDetalle);
         TextView lblDescripcionDetalle = findViewById(R.id.lblDescripcionDetalle);
 
-        imgViewJuegoDetalle.setImageResource(ListadoJuegos.lstJuegos.get(ListadoJuegos.iJuegoSelected).getiFoto());
+       // imgViewJuegoDetalle.setImageResource(ListadoJuegos.lstJuegos.get(ListadoJuegos.iJuegoSelected).getsFoto());
         lblNombreJuegoDetalle.setText(""+ ListadoJuegos.lstJuegos.get(ListadoJuegos.iJuegoSelected).getsNombre());
         lblDescripcionDetalle.setText(""+ ListadoJuegos.lstJuegos.get(ListadoJuegos.iJuegoSelected).getsDescripcion());
     }

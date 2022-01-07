@@ -32,13 +32,11 @@ public class perfilFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
         getUser(view);
         return view;
     }
-
 
     public void getUser(View view) {
         String sUrl = Utils.hosting + "get-user.php?txtUsuario=" + MainActivity.oUsuario.getsUser();
@@ -67,9 +65,9 @@ public class perfilFragment extends Fragment {
         Resources res = getResources();  // Extrapolamos recursos a una variable para poder acceder a su contenido.
         String[] sPaises = res.getStringArray(R.array.paises);
         lblUsuario = view.findViewById(R.id.lblRUsuario);
-        lblUsuario.setText(oUsuario.getsUser());
+        lblUsuario.setText(oUsuario.getsUser().toLowerCase());
         lblEmail = view.findViewById(R.id.lblREmail);
-        lblEmail.setText(oUsuario.getsEmail());
+        lblEmail.setText(oUsuario.getsEmail().toLowerCase());
         lblFechaNacimiento = view.findViewById(R.id.lblRFechaNacimiento);
         lblFechaNacimiento.setText(oUsuario.getsFechaNacimiento());
         lblPais = view.findViewById(R.id.lblRPais);

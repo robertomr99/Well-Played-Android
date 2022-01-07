@@ -12,6 +12,12 @@
     <color name="Google">#E5462B</color>
     <color name="Facebook">#3b5998</color>
 
+
+    <!-- Colores App Modo Oscuro-->
+
+    <color name="GrisOscuroApp">#212426</color>
+
+
     <!--  Colores Por Defecto  -->
 
     <color name="purple_200">#FFBB86FC</color>
