@@ -9,7 +9,7 @@
     </style>
 
     <style name="Navigation">
-        <item name="android:textColorPrimary">@color/AzulApp</item>
+        <item name="android:textColorPrimary">@color/black</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.WellPlayed">
