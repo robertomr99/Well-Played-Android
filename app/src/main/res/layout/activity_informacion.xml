@@ -26,7 +26,7 @@
         android:layout_marginTop="252dp"
         android:text="Aplicación movil creada para que los usuarios registrados puedan jugar partidas individuales, o por equipos de sus juegos favoritos, pudiendo crear, o unirse a equipos de cualquier videojuego registrado."
         android:textAlignment="center"
-        android:textColor="#050505"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +38,7 @@
         android:layout_marginTop="384dp"
         android:text="Creadores de la aplicación: Roberto Muñoz Rodríguez, Miguel Alacid Cepeda y Miguel Ángel Rey Álvarez"
         android:textAlignment="center"
-        android:textColor="#101010"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
