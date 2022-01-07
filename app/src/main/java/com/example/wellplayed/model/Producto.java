@@ -20,14 +20,14 @@ public class Producto {
     }
 
     public Producto() {
+
     }
 
     public Integer getiIdProducto() {
         return iIdProducto;
     }
 
-    public void setiIdProducto(Integer iIdProducto) {
-        this.iIdProducto = iIdProducto;
+    public void setiIdProducto(Integer iIdProducto) { this.iIdProducto = iIdProducto;
     }
 
     public String getsNombre() {
