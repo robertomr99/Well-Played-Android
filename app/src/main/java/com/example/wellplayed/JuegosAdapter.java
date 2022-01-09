@@ -1,21 +1,17 @@
 package com.example.wellplayed;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.wellplayed.model.Juego;
-
-import java.util.List;
 
 public class JuegosAdapter extends RecyclerView.Adapter<JuegosAdapter.ViewHolder> implements View.OnClickListener {
 
@@ -67,8 +63,8 @@ public class JuegosAdapter extends RecyclerView.Adapter<JuegosAdapter.ViewHolder
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            lblNombreJuego = itemView.findViewById(R.id.lblNombreJuego);
-            imgViewJuego = itemView.findViewById(R.id.imgViewJuego);
+            lblNombreJuego = itemView.findViewById(R.id.lblNombreBanner);
+            imgViewJuego = itemView.findViewById(R.id.imgViewBannerAdapter);
         }
     }
 }

@@ -15,7 +15,7 @@
         android:src="@drawable/usuariologin" />
 
     <TextView
-        android:id="@+id/lblNombreJuego"
+        android:id="@+id/lblNombreBanner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 public class tiendaFragment extends Fragment {
 
-    RecyclerView recyclerView;
+    RecyclerView Rv;
 
     public tiendaFragment() {
 
@@ -29,23 +29,22 @@ public class tiendaFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View vista = inflater.inflate(R.layout.fragment_tienda, container, false);
+        View vista = inflater.inflate(R.layout.fragment_mis_juegos, container, false);
+        Rv = vista.findViewById(R.id.recyclerViewJuegos);
         addProducto(vista);
         return vista;
     }
 
-    private void mostrarData(Context context) {
-        recyclerView = recyclerView.findViewById(R.id.recyclerViewTienda);
-        recyclerView.setLayoutManager(new GridLayoutManager(context,2));
-        JuegosAdapter adaptador = new JuegosAdapter(context);
+    public void addProducto(View view){
+        view.findViewById(R.id.floatingAddBtnJuegos).setOnClickListener(v -> {
 
-        recyclerView.setAdapter(adaptador);
-
-        adaptador.setOnClickListener(v -> {
-            ListadoProductos.iProductoSelected = recyclerView.getChildAdapterPosition(v);
-
-            Intent intentDetalle = new Intent(context, ProductosDetalle.class);
-            startActivity(intentDetalle);
         });
+    }
+
+    private void mostrarData(Context context) {
+        Rv.setLayoutManager(new GridLayoutManager(context, 2));
+        JuegosAdapter adaptador = new JuegosAdapter(context);
+        Rv.setAdapter(adaptador);
+        Rv.setHasFixedSize(true);
     }
 }
