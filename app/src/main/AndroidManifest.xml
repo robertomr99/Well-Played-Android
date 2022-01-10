@@ -15,6 +15,15 @@
         android:theme="@style/Theme.WellPlayed"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".SplashScreen"
+            android:exported="true" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity
             android:name=".addJuego"
             android:exported="false" />
         <activity
@@ -47,14 +56,9 @@
             android:exported="true" />
         <activity
             android:name=".Login"
-            android:exported="true"
-            android:theme="@style/SplashTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="true">
         </activity>
+
         <activity
             android:name=".EquipoDetalle"
             android:exported="false" />
