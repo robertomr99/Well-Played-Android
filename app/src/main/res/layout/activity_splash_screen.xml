@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/pattaya"
-        android:text="de"
+        android:text="@string/from"
         android:textColor="@color/GrisApp"
         android:textSize="36dp"
         app:layout_constraintBottom_toTopOf="@+id/txtTituloApp"
