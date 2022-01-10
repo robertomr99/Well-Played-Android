@@ -52,7 +52,7 @@ public class misJuegosFragment extends Fragment {
 
     public void mostrarJuegos() {
        // Log.d("objetoUsuario", MainActivity.oUsuario.getsUser());
-        String sUrl = Utils.hosting + "JuegoQueSiTieneUser.php?txtUsuario="+sNombreUser.toUpperCase();
+        String sUrl = Utils.hosting + "usuario-juego/JuegoQueSiTieneUser.php?txtUsuario="+sNombreUser.toUpperCase();
 
         Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
