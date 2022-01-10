@@ -33,7 +33,7 @@ public class addJuego extends AppCompatActivity {
     }
 
     public void mostrarJuegosQueNoTieneUser() {
-        String sUrl = Utils.hosting + "JuegoQueNoTieneUser.php?txtUsuario="+MainActivity.oUsuario.getsUser();
+        String sUrl = Utils.hosting + "usuario-juego/JuegoQueNoTieneUser.php?txtUsuario="+MainActivity.oUsuario.getsUser();
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
                     Log.d("vacio", s);
@@ -58,7 +58,7 @@ public class addJuego extends AppCompatActivity {
 
 
     public void mostrarJuegos() {
-        String sUrl = Utils.hosting + "get-juego.php";
+        String sUrl = Utils.hosting + "juego/get-juego.php";
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
                     Log.d("vacio", s);
@@ -100,7 +100,7 @@ public class addJuego extends AppCompatActivity {
 
     private void seleccionarIdJuego(){
 
-        String sUrl = Utils.hosting + "select-idJuego.php?txtJuego="+oJuego.getsNombre();
+        String sUrl = Utils.hosting + "juego/select-idJuego.php?txtJuego="+oJuego.getsNombre();
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
                     Log.d("vacio", s);
@@ -121,7 +121,7 @@ public class addJuego extends AppCompatActivity {
 
     private void seleccionarIdUser() {
 
-        String sUrl = Utils.hosting + "select-idUser.php?txtUsuario="+MainActivity.oUsuario.getsUser();
+        String sUrl = Utils.hosting + "usuario/select-idUser.php?txtUsuario="+MainActivity.oUsuario.getsUser();
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
                     Log.d("vacio", s);
@@ -143,7 +143,7 @@ public class addJuego extends AppCompatActivity {
 
     private void insertUsuarioJuego() {
 
-        String sUrl = Utils.hosting + "insert-equipo-user.php?txtJuego="+oJuego.getiIdJuego()+"&txtUsuario="+MainActivity.oUsuario.getiIdUsuario()+"&txtVictorias="+0+"&txtDerrotas="+0+"&txtWinRate="+0;
+        String sUrl = Utils.hosting + "usuario-juego/insert-usuario-juego.php?txtJuego="+oJuego.getiIdJuego()+"&txtUsuario="+MainActivity.oUsuario.getiIdUsuario()+"&txtVictorias="+0+"&txtDerrotas="+0+"&txtWinRate="+0;
 
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
                 s ->{
