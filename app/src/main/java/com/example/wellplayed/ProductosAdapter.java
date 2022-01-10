@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.wellplayed.model.Juego;
 import com.example.wellplayed.model.Producto;
 
-public class ProductosAdapter extends AppCompatActivity {
+public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
     Context context;
@@ -46,10 +46,10 @@ public class ProductosAdapter extends AppCompatActivity {
 
     public void onBindViewHolder(@NonNull ProductosAdapter.ViewHolder holder, int position) {
 
-        Producto oProducto = ListadoProductos.lstProductos.get(position);
+        Producto oProducto = ListadoProductos.lstProductos.get(position); 
 
         holder.lblNombreBanner.setText(oProducto.getsNombre());
-        Glide.with(context).load(oProducto.getiFoto()).into(holder.imgViewBannerAdapter);
+        Glide.with(context).load(oProducto.getsFoto()).into(holder.imgViewBannerAdapter);
     }
 
     public int getItemCount() {

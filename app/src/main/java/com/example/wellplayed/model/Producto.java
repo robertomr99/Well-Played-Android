@@ -3,15 +3,15 @@ package com.example.wellplayed.model;
 public class Producto {
 
     private Integer iIdProducto;
-    private String sNombre;
-    private int iPrecio, iFoto;
+    private String sNombre, sFoto;
+    private int iPrecio;
     private Categoria oCategoria;
 
-    public Producto(Integer iIdProducto, String sNombre, int iPrecio, int iFoto, Categoria oCategoria) {
+    public Producto(Integer iIdProducto, String sNombre, int iPrecio, String sFoto, Categoria oCategoria) {
         this.iIdProducto = iIdProducto;
         this.sNombre = sNombre;
         this.iPrecio = iPrecio;
-        this.iFoto = iFoto;
+        this.sFoto = sFoto;
         this.oCategoria = oCategoria;
     }
 
@@ -46,12 +46,12 @@ public class Producto {
         this.iPrecio = iPrecio;
     }
 
-    public int getiFoto() {
-        return iFoto;
+    public String getsFoto() {
+        return sFoto;
     }
 
-    public void setiFoto(int iFoto) {
-        this.iFoto = iFoto;
+    public void setsFoto(String sFoto) {
+        this.sFoto = sFoto;
     }
 
     public Categoria getoCategoria() {
