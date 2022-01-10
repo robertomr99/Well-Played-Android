@@ -29,6 +29,7 @@
     <string name="mnuCerrarSesion">Cerrar sesión</string>
     <string name="mnuUnirseEquipo">Unirse a equipo</string>
     <string name="mnuCrearEquipo">Crear equipo</string>
+    <string name="mnuAddJuego">Añadir juego</string>
     <string name="mnuTienda">Tienda</string>
 
     <!-- String Fragment Ajustes-->

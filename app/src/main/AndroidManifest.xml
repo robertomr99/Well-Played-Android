@@ -15,6 +15,18 @@
         android:theme="@style/Theme.WellPlayed"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".SplashScreen"
+            android:exported="true" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity
+            android:name=".addJuego"
+            android:exported="false" />
+        <activity
             android:name=".UnirseEquipoAdapter"
             android:exported="false" />
         <activity
@@ -45,12 +57,8 @@
         <activity
             android:name=".Login"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
         <activity
             android:name=".EquipoDetalle"
             android:exported="false" />
