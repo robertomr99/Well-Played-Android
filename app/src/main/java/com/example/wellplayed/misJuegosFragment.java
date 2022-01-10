@@ -1,5 +1,6 @@
 package com.example.wellplayed;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ import java.util.List;
 public class misJuegosFragment extends Fragment {
 
     RecyclerView Rv;
-
+    public static String sNombreUser = MainActivity.oUsuario.getsUser();
     public misJuegosFragment() {
         // Required empty public constructor
     }
@@ -50,7 +51,9 @@ public class misJuegosFragment extends Fragment {
     }
 
     public void mostrarJuegos() {
-        String sUrl = Utils.hosting + "JuegoQueSiTieneUser.php?txtUsuario="+MainActivity.oUsuario.getsUser().toUpperCase();
+       // Log.d("objetoUsuario", MainActivity.oUsuario.getsUser());
+        String sUrl = Utils.hosting + "JuegoQueSiTieneUser.php?txtUsuario="+sNombreUser.toUpperCase();
+
         Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
                     Log.d("vacio", s);
