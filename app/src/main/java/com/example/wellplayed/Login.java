@@ -48,7 +48,6 @@ public class Login extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setSplashScreen();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         cargarPreferencias();
@@ -70,17 +69,6 @@ public class Login extends AppCompatActivity {
     public void signIn(View view) {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-
-    public void setSplashScreen(){
-        // Hilo para ejecutar el splash screen previo al inicio de la App
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        setTheme(R.style.SplashTheme); // Seteamos ese tema a esta vista
     }
 
     @Override
