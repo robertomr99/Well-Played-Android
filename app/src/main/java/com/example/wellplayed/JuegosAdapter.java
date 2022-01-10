@@ -1,14 +1,14 @@
 package com.example.wellplayed;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.wellplayed.model.Juego;
@@ -47,8 +47,9 @@ public class JuegosAdapter extends RecyclerView.Adapter<JuegosAdapter.ViewHolder
 
         Juego oJuego = ListadoJuegos.lstJuegos.get(position); // Instanciamos el objeto de la lista con la posicion
 
+
         holder.lblNombreJuego.setText(oJuego.getsNombre());
-        Glide.with(context).load(oJuego.getsFoto()).into(holder.imgViewJuego);
+        Glide.with(context).load(oJuego.getsFoto()).circleCrop().into(holder.imgViewJuego);
     }
 
 
@@ -63,8 +64,8 @@ public class JuegosAdapter extends RecyclerView.Adapter<JuegosAdapter.ViewHolder
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            lblNombreJuego = itemView.findViewById(R.id.lblNombreBanner);
-            imgViewJuego = itemView.findViewById(R.id.imgViewBannerAdapter);
+            lblNombreJuego = itemView.findViewById(R.id.lblNombreJuego);
+            imgViewJuego = itemView.findViewById(R.id.imgViewJuego);
         }
     }
 }

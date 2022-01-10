@@ -32,12 +32,9 @@
         android:id="@+id/ImageViewWPCoinDetalle"
         android:layout_width="22dp"
         android:layout_height="24dp"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtMonedasBannerDetalle01"
         app:layout_constraintEnd_toStartOf="@+id/txtMonedasBannerDetalle01"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewBannerDetalle01"
+        app:layout_constraintTop_toTopOf="@+id/txtMonedasBannerDetalle01"
         app:srcCompat="@drawable/moneda" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
