@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductosDetalle">
+    tools:context=".ProductosDetalle"
+    tools:layout_editor_absoluteX="32dp"
+    tools:layout_editor_absoluteY="0dp">
 
     <ImageView
         android:id="@+id/imageViewBannerDetalle01"
@@ -20,18 +22,22 @@
         android:id="@+id/txtMonedasBannerDetalle01"
         android:layout_width="68dp"
         android:layout_height="20dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="172dp"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewBannerDetalle01" />
 
     <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="25dp"
-        android:layout_height="26dp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtMonedasBannerDetalle01"
+        android:id="@+id/ImageViewWPCoinDetalle"
+        android:layout_width="22dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toStartOf="@+id/txtMonedasBannerDetalle01"
-        app:layout_constraintTop_toTopOf="@+id/txtMonedasBannerDetalle01"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewBannerDetalle01"
         app:srcCompat="@drawable/moneda" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
