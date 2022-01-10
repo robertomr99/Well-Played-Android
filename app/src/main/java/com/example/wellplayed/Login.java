@@ -152,7 +152,7 @@ public class Login extends AppCompatActivity {
 
     public void loginApp() {
         usuarioLogeado();
-        String sUrl = Utils.hosting + "login-users.php?txtUsuario=" + oUsuarioEntrada.getsUser() + "&txtPass=" + oUsuarioEntrada.getsPassword();
+        String sUrl = Utils.hosting + "usuario/login-users.php?txtUsuario=" + oUsuarioEntrada.getsUser() + "&txtPass=" + oUsuarioEntrada.getsPassword();
         Log.d("alacide", sUrl);
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {

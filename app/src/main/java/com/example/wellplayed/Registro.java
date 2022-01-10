@@ -106,7 +106,7 @@ public class Registro extends AppCompatActivity {
 
         Usuario oUsuario = new Usuario();
         oUsuario = agregarUsuario();
-        String sUrl = Utils.hosting + "comprobar-user.php?txtUsuario="+oUsuario.getsUser()+"&txtEmail="+oUsuario.getsEmail();
+        String sUrl = Utils.hosting + "usuario/comprobar-user.php?txtUsuario="+oUsuario.getsUser()+"&txtEmail="+oUsuario.getsEmail();
 
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
@@ -141,7 +141,7 @@ public class Registro extends AppCompatActivity {
     private void insertUsuario(Usuario oUser,boolean boExito) {
 
         if(!boExito){
-            String sUrl = Utils.hosting + "ins-usuario.php?txtEmail="+oUser.getsEmail()+"&txtUsuario="+oUser.getsUser()+"&txtPass="+oUser.getsPassword()+"&txtFechaNacimiento="+oUser.getsFechaNacimiento()+"&txtPais="+oUser.getiPais()+"&txtMonedas="+oUser.getiMonedas()+"&txtAdministrador="+oUser.isBoAdmin();
+            String sUrl = Utils.hosting + "usuario/ins-usuario.php?txtEmail="+oUser.getsEmail()+"&txtUsuario="+oUser.getsUser()+"&txtPass="+oUser.getsPassword()+"&txtFechaNacimiento="+oUser.getsFechaNacimiento()+"&txtPais="+oUser.getiPais()+"&txtMonedas="+oUser.getiMonedas()+"&txtAdministrador="+oUser.isBoAdmin();
 
             Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
                     s ->{
@@ -160,32 +160,6 @@ public class Registro extends AppCompatActivity {
             Toast.makeText(this, "El nombre de usuario o email no esta disponible", Toast.LENGTH_SHORT).show();
         }
 
-    }
-
-    private void obtenerEste() {
-        String sUrl = Utils.hosting + "get-coche.php?txtId=1";
-        Log.d("alacide", sUrl);
-        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
-                s ->{
-                    if(s.equals("null")){
-                        Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Log.d("alacide", sUrl);
-                        Toast.makeText(getApplicationContext(), "hola", Toast.LENGTH_SHORT).show();
-                        //laverdad = new Gson().fromJson(s,new TypeToken<LAVERDADERA>(){}.getType());
-                        Toast.makeText(getApplicationContext(), "hola", Toast.LENGTH_SHORT).show();
-                        mostrarEste();
-                    }
-                }
-                ,volleyError -> {
-            Toast.makeText(this, "E", Toast.LENGTH_SHORT).show();
-        }
-        ));
-    }
-
-    private void mostrarEste() {
-
-        //txtUsuario.setText(laverdad.toString());
     }
 
 

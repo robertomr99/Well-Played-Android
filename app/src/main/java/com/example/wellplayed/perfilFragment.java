@@ -39,7 +39,7 @@ public class perfilFragment extends Fragment {
     }
 
     public void getUser(View view) {
-        String sUrl = Utils.hosting + "get-user.php?txtUsuario=" + MainActivity.oUsuario.getsUser();
+        String sUrl = Utils.hosting + "usuario/get-user.php?txtUsuario=" + MainActivity.oUsuario.getsUser();
         Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
                     Log.d("vacio", s);
