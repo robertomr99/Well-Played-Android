@@ -17,6 +17,7 @@
     <string name="crear_equipo_nombre">Nombre equipo:</string>
     <string name="btn_aceptar">Aceptar</string>
     <string name="btn_cancelar">Cancelar</string>
+    <string name="from">from</string>
 
 
     <!-- String Drawer Menu -->
