@@ -26,6 +26,7 @@ import java.util.List;
 
 public class tiendaFragment extends Fragment {
 
+    public static final String sNombreUser = MainActivity.oUsuario.getsUser();
     RecyclerView Rv;
     public tiendaFragment() {
     }
@@ -40,34 +41,30 @@ public class tiendaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.fragment_tienda, container, false);
         Rv = vista.findViewById(R.id.recyclerViewTienda);
+        mostrarProductos();
         return vista;
     }
 
+   private void mostrarProductos(){
+       String sUrl = Utils.hosting + "productos/get-productos.php";
 
-   /*
-    public void mostrarJuegos() {
-        // Log.d("objetoUsuario", MainActivity.oUsuario.getsUser());
-        String sUrl = Utils.hosting + "usuario-juego/JuegoQueSiTieneUser.php?txtUsuario="+sNombreUser.toUpperCase();
-
-        Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
-                s -> {
-                    Log.d("vacio", s);
-                    if (s.equals("")) {
-                        Toast.makeText(getContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Log.d("Rob", sUrl);
-                        ListadoJuegos.lstJuegos = new Gson().fromJson(s, new TypeToken<List<Juego>>() {
-                        }.getType());
-                        mostrarData(getContext());
-                    }
-                }
-                , volleyError ->
-            Log.d("Rob", volleyError.getCause().toString());
-        }
-        ));
-    }
-
-  */
+       Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
+               s -> {
+                   Log.d("vacio", s);
+                   if (s.equals("")) {
+                       Toast.makeText(getContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                   } else {
+                       Log.d("Rob", sUrl);
+                       ListadoProductos.lstProductos = new Gson().fromJson(s, new TypeToken<List<Producto>>() {
+                       }.getType());
+                       mostrarData(getContext());
+                   }
+               }
+               , volleyError -> {
+           Log.d("Rob", volleyError.getCause().toString());
+       }
+       ));
+   }
 
     private void mostrarData(Context context) {
         Rv.setLayoutManager(new GridLayoutManager(context,1));

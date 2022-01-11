@@ -1,7 +1,6 @@
 package com.example.wellplayed;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -46,8 +45,8 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.View
 
         Producto oProducto = ListadoProductos.lstProductos.get(position); 
 
-        holder.lblNombreBanner.setText(oProducto.getsNombre());
-        Glide.with(context).load(oProducto.getsFoto()).into(holder.imgViewBannerAdapter);
+        holder.lblNombreProducto.setText(oProducto.getsNombre());
+        Glide.with(context).load(oProducto.getsFoto()).into(holder.imgViewProductoAdapter);
     }
 
     public int getItemCount() {
@@ -55,14 +54,14 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView lblNombreBanner;
-        ImageView imgViewBannerAdapter;
+        TextView lblNombreProducto;
+        ImageView imgViewProductoAdapter;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            lblNombreBanner = itemView.findViewById(R.id.lblNombreJuego);
-            imgViewBannerAdapter = itemView.findViewById(R.id.imgViewBannerAdapter);
+            lblNombreProducto = itemView.findViewById(R.id.lblNombreProducto); //
+            imgViewProductoAdapter = itemView.findViewById(R.id.imgViewProductoAdapter);
         }
     }
 }
