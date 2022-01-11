@@ -18,7 +18,8 @@
     <string name="btn_aceptar">Aceptar</string>
     <string name="btn_cancelar">Cancelar</string>
     <string name="from">from</string>
-
+    <string name="btn_UnirseEquipo">Unirse a un equipo</string>
+    <string name="btn_CrearEquipo">Crear equipo</string>
 
     <!-- String Drawer Menu -->
     <string name="mnuPerfil">Perfil</string>
