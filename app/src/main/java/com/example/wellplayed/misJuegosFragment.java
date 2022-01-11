@@ -30,7 +30,7 @@ import java.util.List;
 public class misJuegosFragment extends Fragment {
 
     RecyclerView Rv;
-    public static String sNombreUser = MainActivity.oUsuario.getsUser();
+    public static final String sNombreUser = MainActivity.oUsuario.getsUser();
     public misJuegosFragment() {
         // Required empty public constructor
     }

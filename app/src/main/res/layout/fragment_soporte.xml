@@ -42,7 +42,7 @@
             android:layout_marginBottom="68dp"
             android:clickable="true"
             android:src="@android:drawable/ic_input_add"
-            app:backgroundTint="@color/iconosapp"
+            app:backgroundTint="@color/AmarilloApp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.853"

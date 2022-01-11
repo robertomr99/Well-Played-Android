@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.wellplayed.model.Juego;
 import com.example.wellplayed.model.Producto;
 
 public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.ViewHolder> implements View.OnClickListener {
@@ -63,7 +61,7 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.View
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            lblNombreBanner = itemView.findViewById(R.id.lblNombreBanner);
+            lblNombreBanner = itemView.findViewById(R.id.lblNombreJuego);
             imgViewBannerAdapter = itemView.findViewById(R.id.imgViewBannerAdapter);
         }
     }
