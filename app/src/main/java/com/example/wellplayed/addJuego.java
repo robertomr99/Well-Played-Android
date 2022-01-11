@@ -25,6 +25,7 @@ public class addJuego extends AppCompatActivity {
 
     Juego oJuego;
     Usuario oUsuario;
+    public static final String sNombreUser = MainActivity.oUsuario.getsUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +34,7 @@ public class addJuego extends AppCompatActivity {
     }
 
     public void mostrarJuegosQueNoTieneUser() {
-        String sUrl = Utils.hosting + "usuario-juego/JuegoQueNoTieneUser.php?txtUsuario="+MainActivity.oUsuario.getsUser();
+        String sUrl = Utils.hosting + "usuario-juego/JuegoQueNoTieneUser.php?txtUsuario="+sNombreUser;
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
                     Log.d("vacio", s);
@@ -121,17 +122,18 @@ public class addJuego extends AppCompatActivity {
 
     private void seleccionarIdUser() {
 
-        String sUrl = Utils.hosting + "usuario/select-idUser.php?txtUsuario="+MainActivity.oUsuario.getsUser();
+        String sUrl = Utils.hosting + "usuario/select-idUser.php?txtUsuario="+sNombreUser;
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
                     Log.d("vacio", s);
                     if (s.equals("")) {
                         Toast.makeText(this, "no se ha encontrado", Toast.LENGTH_SHORT).show();
                     } else {
+                        Usuario oUsuarioId = new Usuario();
                         Log.d("Rob", sUrl);
-                        MainActivity.oUsuario = new Gson().fromJson(s, new TypeToken<Usuario>() {
+                        oUsuarioId = new Gson().fromJson(s, new TypeToken<Usuario>() {
                         }.getType());
-                        insertUsuarioJuego();
+                        insertUsuarioJuego(oUsuarioId);
                     }
                 }
                 , volleyError -> {
@@ -141,9 +143,9 @@ public class addJuego extends AppCompatActivity {
 
     }
 
-    private void insertUsuarioJuego() {
+    private void insertUsuarioJuego(Usuario oUsuarioId) {
 
-        String sUrl = Utils.hosting + "usuario-juego/insert-usuario-juego.php?txtJuego="+oJuego.getiIdJuego()+"&txtUsuario="+MainActivity.oUsuario.getiIdUsuario()+"&txtVictorias="+0+"&txtDerrotas="+0+"&txtWinRate="+0;
+        String sUrl = Utils.hosting + "usuario-juego/insert-usuario-juego.php?txtJuego="+oJuego.getiIdJuego()+"&txtUsuario="+oUsuarioId.getiIdUsuario()+"&txtVictorias="+0+"&txtDerrotas="+0+"&txtWinRate="+0;
 
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
                 s ->{

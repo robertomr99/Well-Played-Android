@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class perfilFragment extends Fragment {
-
+    public static final String sNombreUser = MainActivity.oUsuario.getsUser();
 
     public perfilFragment() {
         // Required empty public constructor
@@ -29,6 +29,7 @@ public class perfilFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -39,7 +40,9 @@ public class perfilFragment extends Fragment {
     }
 
     public void getUser(View view) {
-        String sUrl = Utils.hosting + "usuario/get-user.php?txtUsuario=" + MainActivity.oUsuario.getsUser();
+        String sUrl = Utils.hosting + "usuario/get-user.php?txtUsuario=" + sNombreUser;
+
+
         Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
                     Log.d("vacio", s);
@@ -65,11 +68,12 @@ public class perfilFragment extends Fragment {
         Resources res = getResources();  // Extrapolamos recursos a una variable para poder acceder a su contenido.
         String[] sPaises = res.getStringArray(R.array.paises);
         lblUsuario = view.findViewById(R.id.lblRUsuario);
-        lblUsuario.setText(oUsuario.getsUser().toLowerCase());
+
         lblEmail = view.findViewById(R.id.lblREmail);
         lblEmail.setText(oUsuario.getsEmail().toLowerCase());
         lblFechaNacimiento = view.findViewById(R.id.lblRFechaNacimiento);
         lblFechaNacimiento.setText(oUsuario.getsFechaNacimiento());
+        lblUsuario.setText(sNombreUser.toLowerCase());
         lblPais = view.findViewById(R.id.lblRPais);
         lblPais.setText(sPaises[oUsuario.getiPais()]);
     }
