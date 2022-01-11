@@ -1,10 +1,12 @@
 package com.example.wellplayed;
 
+import androidx.activity.result.ActivityResult;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -84,19 +86,14 @@ public class addJuego extends AppCompatActivity {
         JuegosAdapter adaptador = new JuegosAdapter(this);
         Rv.setAdapter(adaptador);
         Rv.setHasFixedSize(true);
-
-       adaptador.setOnClickListener(v -> {
+        adaptador.setOnClickListener(v -> {
             ListadoJuegos.iJuegoSelected = Rv.getChildAdapterPosition(v);
             oJuego = ListadoJuegos.lstJuegos.get(ListadoJuegos.iJuegoSelected);
             seleccionarIdJuego();
-           Toast.makeText(this, "El juego se ha añadido correctamente.", Toast.LENGTH_SHORT).show();
-           onBackPressed();
-       });
-    }
+            Toast.makeText(this, "El juego se ha añadido correctamente.", Toast.LENGTH_SHORT).show();
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+        });
+
     }
 
     private void seleccionarIdJuego(){
@@ -151,8 +148,14 @@ public class addJuego extends AppCompatActivity {
                 s ->{
                     if(s.equals("null")){
                         Toast.makeText(getApplicationContext(), "Error al insertar el juego", Toast.LENGTH_LONG).show();
+                        Intent i = new Intent();
+                        setResult(Activity.RESULT_CANCELED,i);
+                        finish();
                     }else{
                         Toast.makeText(getApplicationContext(), "Juego insertado con éxito", Toast.LENGTH_LONG).show();
+                        Intent i = new Intent();
+                        setResult(Activity.RESULT_OK,i);
+                        finish();
                     }
                 }
                 ,volleyError -> {

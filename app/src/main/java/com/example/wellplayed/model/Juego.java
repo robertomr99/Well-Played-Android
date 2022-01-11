@@ -58,4 +58,14 @@ public class Juego {
     public void setsFoto(String sFoto) {
         this.sFoto = sFoto;
     }
+
+    @Override
+    public String toString() {
+        return "Juego{" +
+                "iIdJuego=" + iIdJuego +
+                ", sNombre='" + sNombre + '\'' +
+                ", sDescripcion='" + sDescripcion + '\'' +
+                ", sFoto='" + sFoto + '\'' +
+                '}';
+    }
 }
