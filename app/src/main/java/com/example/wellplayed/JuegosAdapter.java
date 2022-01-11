@@ -50,6 +50,8 @@ public class JuegosAdapter extends RecyclerView.Adapter<JuegosAdapter.ViewHolder
 
         holder.lblNombreJuego.setText(oJuego.getsNombre());
         Glide.with(context).load(oJuego.getsFoto()).circleCrop().into(holder.imgViewJuego);
+
+        //.override es para poner tamaño personalizado.
     }
 
 
