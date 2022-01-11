@@ -26,7 +26,7 @@
         android:layout_marginBottom="30dp"
         android:fontFamily="@font/pattaya"
         android:text="@string/app_name"
-        android:textColor="@color/iconosapp"
+        android:textColor="@color/AmarilloApp"
         android:textSize="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
