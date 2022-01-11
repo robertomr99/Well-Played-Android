@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -30,6 +32,7 @@ import java.util.List;
 public class misJuegosFragment extends Fragment {
 
     RecyclerView Rv;
+    JuegosAdapter adaptador;
     public static final String sNombreUser = MainActivity.oUsuario.getsUser();
     public misJuegosFragment() {
         // Required empty public constructor
@@ -38,16 +41,26 @@ public class misJuegosFragment extends Fragment {
 
     public void onCreate(View view, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mostrarJuegos();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mostrarJuegos();
+        Rv.setAdapter(adaptador);
+        Log.d("ALACID","Entra aqui");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+
       View vista = inflater.inflate(R.layout.fragment_mis_juegos, container, false);
       Rv = vista.findViewById(R.id.recyclerViewJuegos);
-      addJuego(vista);
       mostrarJuegos();
-        return vista;
+      addJuego(vista);
+
+      return vista;
     }
 
     public void mostrarJuegos() {
@@ -63,7 +76,11 @@ public class misJuegosFragment extends Fragment {
                         Log.d("Rob", sUrl);
                         ListadoJuegos.lstJuegos = new Gson().fromJson(s, new TypeToken<List<Juego>>() {
                         }.getType());
+                        for(Juego oJuego: ListadoJuegos.lstJuegos){
+                            Log.d("LISTADOJUEGOUSER",oJuego.toString());
+                        }
                         mostrarData(getContext());
+
                     }
                 }
                 , volleyError -> {
@@ -76,10 +93,9 @@ public class misJuegosFragment extends Fragment {
 
     private void mostrarData(Context context) {
         Rv.setLayoutManager(new GridLayoutManager(context,2));
-        JuegosAdapter adaptador = new JuegosAdapter(context);
+        adaptador = new JuegosAdapter(context);
         Rv.setAdapter(adaptador);
-        Rv.setHasFixedSize(true);
-
+       //Rv.setHasFixedSize(true);
         adaptador.setOnClickListener(v -> {
             ListadoJuegos.iJuegoSelected = Rv.getChildAdapterPosition(v);
             Intent intentLogin = new Intent(getContext(), JuegosDetalle.class);
@@ -92,7 +108,26 @@ public class misJuegosFragment extends Fragment {
     public void addJuego(View view) {
         view.findViewById(R.id.floatingAddBtnJuegos).setOnClickListener(v -> {
            Intent intentLogin = new Intent(getContext(), addJuego.class);
-             startActivity(intentLogin);
+             startActivityForResult(intentLogin,1);
         });
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+
+                mostrarJuegos();
+                adaptador.notifyDataSetChanged();
+
+                // esta pantalla es cuando todo ha salido bien.
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                // esta pantalla es cuando ha salido mal.
+                Toast.makeText(getContext(), "No se ha podido añadir ningun juego", Toast.LENGTH_SHORT).show();
+            }
+        }
+    } //onActivityResult
 }
