@@ -8,13 +8,20 @@
     tools:context=".JuegosAdapter">
 
     <ImageView
-        android:id="@+id/imgViewBannerAdapter"
+        android:id="@+id/imgViewProductoAdapter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <TextView
-        android:id="@+id/lblNombreBanner"
+        android:id="@+id/lblNombreProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:text="NombreBanner"
+        android:textSize="20sp"
+        android:textStyle="bold"></TextView>
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

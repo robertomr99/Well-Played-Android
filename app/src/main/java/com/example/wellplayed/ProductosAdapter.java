@@ -1,7 +1,6 @@
 package com.example.wellplayed;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.wellplayed.model.Producto;
 
-public class ProductosAdapter extends AppCompatActivity {
+public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
     Context context;
@@ -44,10 +43,10 @@ public class ProductosAdapter extends AppCompatActivity {
 
     public void onBindViewHolder(@NonNull ProductosAdapter.ViewHolder holder, int position) {
 
-        Producto oProducto = ListadoProductos.lstProductos.get(position);
+        Producto oProducto = ListadoProductos.lstProductos.get(position); 
 
-        holder.lblNombreBanner.setText(oProducto.getsNombre());
-        Glide.with(context).load(oProducto.getiFoto()).into(holder.imgViewBannerAdapter);
+        holder.lblNombreProducto.setText(oProducto.getsNombre());
+        Glide.with(context).load(oProducto.getsFoto()).into(holder.imgViewProductoAdapter);
     }
 
     public int getItemCount() {
@@ -55,14 +54,14 @@ public class ProductosAdapter extends AppCompatActivity {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView lblNombreBanner;
-        ImageView imgViewBannerAdapter;
+        TextView lblNombreProducto;
+        ImageView imgViewProductoAdapter;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            lblNombreBanner = itemView.findViewById(R.id.lblNombreJuego);
-            imgViewBannerAdapter = itemView.findViewById(R.id.imgViewBannerAdapter);
+            lblNombreProducto = itemView.findViewById(R.id.lblNombreProducto); //
+            imgViewProductoAdapter = itemView.findViewById(R.id.imgViewProductoAdapter);
         }
     }
 }
