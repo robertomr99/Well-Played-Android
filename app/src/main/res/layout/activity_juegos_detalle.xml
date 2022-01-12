@@ -9,34 +9,105 @@
     tools:context=".EquipoDetalle">
 
     <TextView
-        android:id="@+id/lblNombreDetalle"
-        android:layout_width="350dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/carter_one"
-        android:textAlignment="center"
-        android:textSize="30sp"
+        android:id="@+id/lblDescripcionDetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="20dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewJuegoDetalle" />
+        app:layout_constraintTop_toBottomOf="@+id/videoViewJuegoDetalle" />
+
+    <com.pierfrancescosoffritti.androidyoutubeplayer.player.YouTubePlayerView
+        android:id="@+id/videoViewJuegoDetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/lblDescripcionDetalle"
-        android:layout_width="350dp"
-        android:layout_height="266dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblNombreDetalle" />
-
-    <ImageView
-        android:id="@+id/imgViewJuegoDetalle"
+        android:id="@+id/lblWinRateDetalle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/lblWin_rate"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:layout_constraintTop_toBottomOf="@+id/lblDescripcionDetalle" />
+
+    <TextView
+        android:id="@+id/lblVictoriasDetalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/lblVictorias"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/lblWinRateDetalle"
+        app:layout_constraintTop_toBottomOf="@+id/lblDescripcionDetalle" />
+
+    <TextView
+        android:id="@+id/lblDerrotasDetalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="25dp"
+        android:text="@string/lblDerrota"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblDescripcionDetalle" />
+
+    <TextView
+        android:id="@+id/lblRDerrotasDetallle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/lblDerrotasDetalle"
+        app:layout_constraintTop_toBottomOf="@+id/lblDerrotasDetalle" />
+
+    <TextView
+        android:id="@+id/lblRVictoriasDetalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/lblVictoriasDetalle"
+        app:layout_constraintTop_toBottomOf="@+id/lblVictoriasDetalle" />
+
+    <TextView
+        android:id="@+id/lblRWinRateDetalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/lblWinRateDetalle"
+        app:layout_constraintTop_toBottomOf="@+id/lblWinRateDetalle" />
+
+    <Button
+        android:id="@+id/btnEliminarJuegoDetalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/AmarilloApp"
+        android:text="@string/btn_EliminarJuego"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

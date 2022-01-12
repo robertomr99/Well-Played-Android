@@ -3,7 +3,7 @@ package com.example.wellplayed.model;
 public class Juego {
 
     private Integer iIdJuego;
-    private String sNombre, sDescripcion, sFoto;
+    private String sNombre, sDescripcion, sFoto, sVideo;
 
 
 
@@ -14,17 +14,19 @@ public class Juego {
         this.iIdJuego = iIdJuego;
     }
 
-    public Juego(String sNombre, String sDescripcion, String sFoto) {
+    public Juego(String sNombre, String sDescripcion, String sFoto, String sVideo) {
         this.sNombre = sNombre;
         this.sDescripcion = sDescripcion;
         this.sFoto = sFoto;
+        this.sVideo = sVideo;
     }
 
-    public Juego(Integer iIdJuego, String sNombre, String sDescripcion, String sFoto) {
+    public Juego(Integer iIdJuego, String sNombre, String sDescripcion, String sFoto, String sVideo) {
         this.iIdJuego = iIdJuego;
         this.sNombre = sNombre;
         this.sDescripcion = sDescripcion;
         this.sFoto = sFoto;
+        this.sVideo = sVideo;
     }
 
     public Integer getiIdJuego() {
@@ -57,6 +59,14 @@ public class Juego {
 
     public void setsFoto(String sFoto) {
         this.sFoto = sFoto;
+    }
+
+    public String getsVideo() {
+        return sVideo;
+    }
+
+    public void setsVideo(String sVideo) {
+        this.sVideo = sVideo;
     }
 
     @Override
