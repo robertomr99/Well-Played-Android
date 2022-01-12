@@ -57,6 +57,7 @@
 
     <!-- String Fragment Tienda -->
     <string name="txtTienda">Tienda</string>
+    <string name="logos">Logos</string>
 
 
     <string-array name="paises">
