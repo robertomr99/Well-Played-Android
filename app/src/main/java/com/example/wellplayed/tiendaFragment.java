@@ -55,7 +55,7 @@ public class tiendaFragment extends Fragment {
                        Toast.makeText(getContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
                    } else {
                        Log.d("Rob", sUrl);
-                       ListadoProductos.lstProductos = new Gson().fromJson(s, new TypeToken<List<Producto>>() {
+                       ListadoProductos.lstProductosBanner = new Gson().fromJson(s, new TypeToken<List<Producto>>() {
                        }.getType());
                        mostrarData(getContext());
                    }
@@ -73,7 +73,7 @@ public class tiendaFragment extends Fragment {
         Rv.setHasFixedSize(true);
 
         adaptador.setOnClickListener(v -> {
-            ListadoProductos.iProductoSelected = Rv.getChildAdapterPosition(v);
+            ListadoProductos.iProductoBannerSelected = Rv.getChildAdapterPosition(v);
             Intent intentLogin = new Intent(getContext(), ProductosDetalle.class);
             startActivity(intentLogin);
         });
