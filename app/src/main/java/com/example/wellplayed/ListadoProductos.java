@@ -7,6 +7,8 @@ import java.util.List;
 
 public class ListadoProductos {
 
-    public static List<Producto> lstProductos = new ArrayList<Producto>();
-    public static int iProductoSelected;
+    public static List<Producto> lstProductosBanner = new ArrayList<Producto>();
+    public static int iProductoBannerSelected;
+    public static List<Producto> lstProductosAvatar = new ArrayList<Producto>();
+    public static int iProductoAvatarSelected;
 }

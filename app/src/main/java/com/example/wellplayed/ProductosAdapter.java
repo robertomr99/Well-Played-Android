@@ -43,25 +43,33 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.View
 
     public void onBindViewHolder(@NonNull ProductosAdapter.ViewHolder holder, int position) {
 
-        Producto oProducto = ListadoProductos.lstProductos.get(position); 
+
+
+
+        Producto oProducto = ListadoProductos.lstProductosBanner.get(position);
 
         holder.lblNombreProducto.setText(oProducto.getsNombre());
-        Glide.with(context).load(oProducto.getsFoto()).into(holder.imgViewProductoAdapter);
+        holder.lblPrecioProducto.setText(String.valueOf(oProducto.getiPrecio()));
+
+    Glide.with(context).load(oProducto.getsFoto()).circleCrop().into(holder.imgViewProductoAdapter);
     }
 
     public int getItemCount() {
-        return ListadoProductos.lstProductos.size();
+        return ListadoProductos.lstProductosBanner.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView lblNombreProducto;
+        TextView lblPrecioProducto;
         ImageView imgViewProductoAdapter;
+
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            lblNombreProducto = itemView.findViewById(R.id.lblNombreProducto); //
+            lblNombreProducto = itemView.findViewById(R.id.lblNombreProducto);
             imgViewProductoAdapter = itemView.findViewById(R.id.imgViewProductoAdapter);
+            lblPrecioProducto = itemView.findViewById(R.id.lblPrecioProducto);
         }
     }
 }
