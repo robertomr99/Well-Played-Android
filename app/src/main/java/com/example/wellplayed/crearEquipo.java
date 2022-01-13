@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +16,10 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.wellplayed.model.Producto;
+import com.example.wellplayed.model.Usuario;
+import com.example.wellplayed.model.Usuario_Juego;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -31,8 +35,8 @@ public class crearEquipo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_equipo);
         imgViewEquipo = findViewById(R.id.imgViewEquipo);
-        cambiarLogo();
 
+        cambiarLogo();
 
         cancelar();
     }
@@ -46,50 +50,36 @@ public class crearEquipo extends AppCompatActivity {
         });
     }
 
-    public void cambiarLogo(){
+    public void cambiarLogo() {
 
-        imgViewEquipo.setOnClickListener(v->{
-            Intent i = new Intent(this,Logos.class);
-            startActivity(i);
+        imgViewEquipo.setOnClickListener(v -> {
+            Intent intentLogin = new Intent(this, Logos.class);
+            startActivityForResult(intentLogin, 1);
         });
     }
 
-    public void traerLogos() {
-        String sUrl = Utils.hosting + "productos/get-productos.php?txtCategoria="+1;
-        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
-                s -> {
-                    Log.d("vacio", s);
-                    if (s.equals("")) {
-                        Toast.makeText(this, "no se ha encontrado", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Log.d("Rob", sUrl);
-                        ListadoProductos.lstProductos = new Gson().fromJson(s, new TypeToken<List<Producto>>() {
-                        }.getType());
-                        mostrarData();
-                    }
-                }
-                , volleyError -> {
-            Log.d("Rob", volleyError.getCause().toString());
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+
+            if (resultCode == Activity.RESULT_OK) {
+                intentProducto();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                Toast.makeText(this, "No se ha podido añadir el avatar seleccionado", Toast.LENGTH_SHORT).show();
+            }
         }
-        ));
+    } //onActivityResult
+
+    private void intentProducto() {
+        try {
+            if (getIntent().hasExtra("producto")) {
+                oProducto = (Producto) getIntent().getSerializableExtra("producto");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
-
-    private void mostrarData() {
-        RecyclerView Rv = findViewById(R.id.recyclerViewLogos);
-        Rv.setLayoutManager(new GridLayoutManager(this,3));
-        JuegosAdapter adaptador = new JuegosAdapter(this);
-        Rv.setAdapter(adaptador);
-        Rv.setHasFixedSize(true);
-        adaptador.setOnClickListener(v -> {
-            ListadoProductos.iProductoSelected = Rv.getChildAdapterPosition(v);
-            oProducto = ListadoProductos.lstProductos.get(ListadoProductos.iProductoSelected);
-            Toast.makeText(this, "El juego se ha añadido correctamente.", Toast.LENGTH_SHORT).show();
-
-
-
-        });
-
-    }
-
 }

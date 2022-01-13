@@ -43,10 +43,7 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.View
 
     public void onBindViewHolder(@NonNull ProductosAdapter.ViewHolder holder, int position) {
 
-
-
-
-        Producto oProducto = ListadoProductos.lstProductosBanner.get(position);
+        Producto oProducto = ListadoProductos.lstProductos.get(position);
 
         holder.lblNombreProducto.setText(oProducto.getsNombre());
         holder.lblPrecioProducto.setText(String.valueOf(oProducto.getiPrecio()));
@@ -55,7 +52,7 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.View
     }
 
     public int getItemCount() {
-        return ListadoProductos.lstProductosBanner.size();
+        return ListadoProductos.lstProductos.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
