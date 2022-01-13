@@ -20,6 +20,10 @@
     <string name="from">from</string>
     <string name="btn_UnirseEquipo">Unirse a un equipo</string>
     <string name="btn_CrearEquipo">Crear equipo</string>
+    <string name="lblWin_rate">Win rate</string>
+    <string name="lblVictorias">Victoria</string>
+    <string name="lblDerrota">Derrota</string>
+    <string name="btn_EliminarJuego">Eliminar juego</string>
 
     <!-- String Drawer Menu -->
     <string name="mnuPerfil">Perfil</string>
@@ -53,6 +57,13 @@
 
     <!-- String Fragment Tienda -->
     <string name="txtTienda">Tienda</string>
+    <string name="logos">Logos</string>
+
+    <!-- Array spinner tienda -->
+    <string-array name="productos">
+        <item>Avatares</item>
+        <item>Banners</item>
+    </string-array>
 
 
     <string-array name="paises">
