@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -18,6 +19,7 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.View
     LayoutInflater inflater;
     Context context;
     private View.OnClickListener listener;
+
 
     public ProductosAdapter(Context context){
         inflater = LayoutInflater.from(context);
@@ -48,7 +50,11 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.View
         holder.lblNombreProducto.setText(oProducto.getsNombre());
         holder.lblPrecioProducto.setText(String.valueOf(oProducto.getiPrecio()));
 
-    Glide.with(context).load(oProducto.getsFoto()).circleCrop().into(holder.imgViewProductoAdapter);
+    if(tiendaFragment.spinnerCategoriaProducto.getSelectedItemPosition()==0) {
+        Glide.with(context).load(oProducto.getsFoto()).override(350).circleCrop().into(holder.imgViewProductoAdapter);
+    }else{
+        Glide.with(context).load(oProducto.getsFoto()).into(holder.imgViewProductoAdapter);
+    }
     }
 
     public int getItemCount() {

@@ -29,10 +29,13 @@
 
     <Spinner
         android:id="@+id/spinnerCategoriaProducto"
-        android:layout_width="159dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="76dp"
+        android:textColor="@color/black"
+        android:text="@font/cabin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
         android:layout_marginEnd="76dp"
+        android:entries="@array/productos"
         app:layout_constraintEnd_toEndOf="@+id/recyclerViewTienda"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

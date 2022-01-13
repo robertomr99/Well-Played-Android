@@ -59,6 +59,12 @@
     <string name="txtTienda">Tienda</string>
     <string name="logos">Logos</string>
 
+    <!-- Array spinner tienda -->
+    <string-array name="productos">
+        <item>Avatares</item>
+        <item>Banners</item>
+    </string-array>
+
 
     <string-array name="paises">
         <item>Afganist&#225;n</item>
