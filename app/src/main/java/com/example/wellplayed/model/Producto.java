@@ -1,6 +1,8 @@
 package com.example.wellplayed.model;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Producto implements Serializable {
 
     private Integer iIdProducto;
     private String sNombre, sFoto;
@@ -13,6 +15,11 @@ public class Producto {
         this.iPrecio = iPrecio;
         this.sFoto = sFoto;
         this.oCategoria = oCategoria;
+    }
+
+    public Producto (String sNombre,String sFoto){
+        this.sNombre = sNombre;
+        this.sFoto = sFoto;
     }
 
     public Producto(Integer iIdProducto) {
@@ -60,5 +67,16 @@ public class Producto {
 
     public void setoCategoria(Categoria oCategoria) {
         this.oCategoria = oCategoria;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "iIdProducto=" + iIdProducto +
+                ", sNombre='" + sNombre + '\'' +
+                ", sFoto='" + sFoto + '\'' +
+                ", iPrecio=" + iPrecio +
+                ", oCategoria=" + oCategoria +
+                '}';
     }
 }
