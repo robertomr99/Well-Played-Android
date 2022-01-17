@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -18,18 +20,21 @@ import com.example.wellplayed.model.Producto;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 
 public class Logos extends AppCompatActivity {
 
     Producto oProducto = new Producto();
-
+    Button btnAceptarLogo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logos);
         traerLogos();
+
+
     }
 
     public void traerLogos() {
@@ -64,14 +69,22 @@ public class Logos extends AppCompatActivity {
             ListadoProductos.iProductoSelected = Rv.getChildAdapterPosition(v);
             oProducto = ListadoProductos.lstProductos.get(ListadoProductos.iProductoSelected);
             Intent i = new Intent();
-            i.putExtra("producto",oProducto);
+            i.putExtra("producto", oProducto);
             setResult(Activity.RESULT_OK,i);
-            Toast.makeText(this, "El avatar se ha añadido correctamente.", Toast.LENGTH_SHORT).show();
             finish();
-
-
         });
 
+
+
+
+    }
+
+    private void sendBackData() {
+        Intent i = new Intent();
+        i.putExtra("producto", oProducto);
+        setResult(Activity.RESULT_OK,i);
+        Toast.makeText(this, "El avatar se ha añadido correctamente.", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
 

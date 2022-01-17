@@ -67,4 +67,5 @@ public class LogosAdapter extends RecyclerView.Adapter<LogosAdapter.ViewHolder> 
             imgViewLogo = itemView.findViewById(R.id.imgViewLogo);
         }
     }
+
 }
