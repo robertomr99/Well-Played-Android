@@ -2,9 +2,11 @@ package com.example.wellplayed;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,17 +34,17 @@ public class JuegosDetalle extends AppCompatActivity {
         YouTubePlayerView videoViewJuegoDetalle = findViewById(R.id.videoViewJuegoDetalle);
         getLifecycle().addObserver(videoViewJuegoDetalle);
 
-        videoViewJuegoDetalle.initialize (new YouTubePlayerInitListener(){
+        videoViewJuegoDetalle.initialize(new YouTubePlayerInitListener() {
             @Override
             public void onInitSuccess(@NonNull final YouTubePlayer inicializedyouTubePlayer) {
                 inicializedyouTubePlayer.addListener(new AbstractYouTubePlayerListener() {
                     @Override
                     public void onReady() {
-                        inicializedyouTubePlayer.loadVideo(ListadoJuegos.lstJuegos.get(ListadoJuegos.iJuegoSelected).getsVideo(),0);
+                        inicializedyouTubePlayer.loadVideo(ListadoJuegos.lstJuegos.get(ListadoJuegos.iJuegoSelected).getsVideo(), 0);
                     }
                 });
             }
-        },true);
+        }, true);
 
 
         TextView lblDescripcionDetalle = findViewById(R.id.lblDescripcionDetalle);
@@ -52,6 +54,7 @@ public class JuegosDetalle extends AppCompatActivity {
         Button btnEliminarJuego = findViewById(R.id.btnEliminarJuegoDetalle);
         lblDescripcionDetalle.setText("" + ListadoJuegos.lstJuegos.get(ListadoJuegos.iJuegoSelected).getsDescripcion());
 
+        setearColoresWinRate();
         lblWinRateDetalle.setText(String.valueOf(oUsuario_Juego.getfWinRate()));
         lblVictoriaDetalle.setText(String.valueOf(oUsuario_Juego.getiVictorias()));
         lblDerrotaDetalle.setText(String.valueOf(oUsuario_Juego.getiDerrotas()));
@@ -69,6 +72,16 @@ public class JuegosDetalle extends AppCompatActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void setearColoresWinRate(){
+        if (oUsuario_Juego.getfWinRate() >= 50 && oUsuario_Juego.getfWinRate() <= 60) {
+            lblWinRateDetalle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.AmarrilloWinRate));
+        } else if(oUsuario_Juego.getfWinRate() > 60 ) {
+            lblWinRateDetalle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.VerdeWinRate));
+        }else{
+            lblWinRateDetalle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.RojoWinRate));
         }
     }
 }

@@ -35,25 +35,28 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    //Dependencia imagenes circulares
-    implementation 'de.hdodenhof:circleimageview:2.2.0'
-
-    //Dependecias phpMysql
+    // phpMysql
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'com.google.code.gson:gson:2.8.6'
 
-    //Dependecias Firebase
+    // Firebase
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.android.gms:play-services-auth:20.0.0'
 
-    // Dependencia para mostrar imagen
+    // Tratamiento de Imagenes
 
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
-    // Dependencia de YouTube
+    // YouTube
 
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:8.0.1'
+
+    // Justificar texto
+
+    implementation 'com.codesgood:justifiedtextview:1.1.0'
+
 }

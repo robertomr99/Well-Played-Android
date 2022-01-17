@@ -16,12 +16,15 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".LogosAdpater"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".Logos"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".SplashScreen"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,43 +34,56 @@
         </activity>
         <activity
             android:name=".addJuego"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".UnirseEquipoAdapter"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".unirseEquipo"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Informacion"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Cuenta"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".crearEquipo"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".JuegosAdapter"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".JuegosDetalle"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".perfilFragment"
+            android:screenOrientation="portrait"
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity
             android:name=".Registro"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".Login"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".EquipoDetalle"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
 
         <meta-data
