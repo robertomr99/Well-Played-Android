@@ -19,6 +19,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.example.wellplayed.model.Equipo;
 import com.example.wellplayed.model.Producto;
 import com.example.wellplayed.model.Usuario;
 import com.example.wellplayed.model.Usuario_Juego;
@@ -31,8 +32,9 @@ public class crearEquipo extends AppCompatActivity {
 
     Producto oProducto;
     TextView lblNombreEquipoCrear;
-    CheckBox chechBoxLOL;
+    CheckBox checkBoxLOL , checkBoxValorant,checkBoxCSGO,checkBoxFIFA;
     public static ImageView imgViewEquipo;
+    public static final String sNombreUser = MainActivity.oUsuario.getsUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,10 @@ public class crearEquipo extends AppCompatActivity {
         setContentView(R.layout.activity_crear_equipo);
         imgViewEquipo = findViewById(R.id.imgViewEquipo);
         lblNombreEquipoCrear = findViewById(R.id.lblNombreEquipoCrear);
-        chechBoxLOL = findViewById(R.id.checkBoxLOL);
+        checkBoxLOL = findViewById(R.id.checkBoxLOL);
+        checkBoxValorant = findViewById(R.id.checkBoxValorant);
+        checkBoxCSGO = findViewById(R.id.checkBoxCSGO);
+        checkBoxFIFA = findViewById(R.id.checkBoxFIFA);
 
         cancelar();
     }
@@ -76,7 +81,7 @@ public class crearEquipo extends AppCompatActivity {
         }
     } //onActivityResult
 
-    private void insertEquipo() {
+    public void insertEquipo(View view) {
 
             String sUrl = Utils.hosting + "equipo/ins-equipo.php?txtNombre="+lblNombreEquipoCrear.getText().toString()+"&txtFoto="+oProducto.getsFoto();
 
@@ -85,9 +90,11 @@ public class crearEquipo extends AppCompatActivity {
                         if(s.equals("null")){
                             Toast.makeText(getApplicationContext(), "error al crear el equipo", Toast.LENGTH_LONG).show();
                         }else{
+
                             Toast.makeText(getApplicationContext(), "Equipo creado con éxito", Toast.LENGTH_LONG).show();
-                            selectiIdEquipo();
-                            insertEquipoJuego();
+                            seleccionarIdUser();
+
+
                         }
                     }
                     ,volleyError -> {
@@ -98,21 +105,39 @@ public class crearEquipo extends AppCompatActivity {
 
     }
 
-    private void insertEquipoJuego() {
-        int iIdJuego;
+    private void seleccionarIdUser() {
 
-        if(chechBoxLOL.isChecked()){
-            iIdJuego = 1;
+        String sUrl = Utils.hosting + "usuario/select-idUser.php?txtUsuario="+sNombreUser;
+        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(this, "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Usuario oUsuarioId = new Usuario();
+                        Log.d("Rob", sUrl);
+                        oUsuarioId = new Gson().fromJson(s, new TypeToken<Usuario>() {
+                        }.getType());
+
+                        selectiIdEquipo(lblNombreEquipoCrear.getText().toString(), oUsuarioId.getiIdUsuario());
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
         }
-        String sUrl = Utils.hosting + "equipo-juego/ins-equipoJuego.php?txtEquipo="+oEquipo.getiIdEquipo.toString()+"&txtFoto="+oProducto.getsFoto();
+        ));
+    }
+
+    private void insertEquipoUsuario(int iIdEquipo, int iIdUsuario) {
+
+        String sUrl = Utils.hosting + "equipo/ins-equipo-usuario.php?txtEquipo="+iIdEquipo+"&txtUsuario="+iIdUsuario+"&txtCreador="+true;
 
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
                 s ->{
                     if(s.equals("null")){
-                        Toast.makeText(getApplicationContext(), "error al crear el equipo", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Error al crear el equipo", Toast.LENGTH_LONG).show();
                     }else{
                         Toast.makeText(getApplicationContext(), "Equipo creado con éxito", Toast.LENGTH_LONG).show();
-                        insertEquipoJuego();
                     }
                 }
                 ,volleyError -> {
@@ -120,6 +145,64 @@ public class crearEquipo extends AppCompatActivity {
             Log.d("ALACID",volleyError.getCause().toString());
         }
         ));
+
+    }
+
+    private void selectiIdEquipo(String sNombreEquipo, int iIdUsuario) {
+
+        String sUrl = Utils.hosting + "equipo/select-idEquipo.php?txtEquipo="+sNombreEquipo;
+
+        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
+                s ->{
+                    if(s.equals("null")){
+                        Toast.makeText(getApplicationContext(), "error al crear el equipo", Toast.LENGTH_LONG).show();
+                    }else{
+                        Equipo oEquipo;
+                        Toast.makeText(getApplicationContext(), "Equipo creado con éxito", Toast.LENGTH_LONG).show();
+                        oEquipo = new Gson().fromJson(s, new TypeToken<Equipo>() {
+                        }.getType());
+
+                        contadorJuegos(oEquipo.getiIdEquipo());
+                        insertEquipoUsuario(oEquipo.getiIdEquipo(), iIdUsuario);
+                    }
+                }
+                ,volleyError -> {
+
+            Log.d("ALACID",volleyError.getCause().toString());
+        }
+        ));
+    }
+
+    private void insertEquipoJuego(Integer iIdEquipo, Integer iIdJuego) {
+
+        String sUrl = Utils.hosting + "equipo-juego/ins-equipo-juego.php?txtEquipo="+iIdEquipo+"&txtJuego="+iIdJuego+"&txtVictorias="+0+"&txtDerrotas="+0+"&txtWinRate="+0;
+
+        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
+                s ->{
+                }
+                ,volleyError -> {
+
+            Log.d("ALACID",volleyError.getCause().toString());
+        }
+        ));
+
+    }
+
+    private void contadorJuegos(int iIdEquipo){
+
+        if(checkBoxLOL.isChecked()){
+            insertEquipoJuego(iIdEquipo,1);
+        }
+
+        if(checkBoxValorant.isChecked()) {
+            insertEquipoJuego(iIdEquipo, 2);
+        }
+        if(checkBoxCSGO.isChecked()){
+            insertEquipoJuego(iIdEquipo,3);
+        }
+        if(checkBoxFIFA.isChecked()){
+            insertEquipoJuego(iIdEquipo,4);
+        }
 
     }
 

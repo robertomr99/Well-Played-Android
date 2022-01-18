@@ -163,7 +163,6 @@ public class Login extends AppCompatActivity {
                         Log.d("alacide", sUrl);
                         oUsuarioSalida = new Gson().fromJson(s, new TypeToken<Usuario>() {
                         }.getType());
-
                         extraerObjetoUsuario();
 
                     }
