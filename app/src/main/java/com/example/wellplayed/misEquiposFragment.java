@@ -51,28 +51,6 @@ public class misEquiposFragment extends Fragment {
         return view;
     }
 
-    public void mostrarEquipos() {
-        String sUrl = Utils.hosting + "equipo-usuario/EquipoQueSiTieneUser.php?txtUsuario="+sNombreUser;
-
-        Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
-                s -> {
-                    Log.d("vacio", s);
-                    if (s.equals("")) {
-                        Toast.makeText(getContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Log.d("Rob", sUrl);
-                        ListadoEquipos.lstEquipos = new Gson().fromJson(s, new TypeToken<List<Equipo>>() {
-                        }.getType());
-                        mostrarData(getContext());
-
-
-                    }
-                }
-                , volleyError -> {
-            Log.d("Rob", volleyError.getCause().toString());
-        }
-        ));
-    }
 
     private void mostrarData(Context context) {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -133,7 +111,6 @@ public class misEquiposFragment extends Fragment {
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // esta pantalla es cuando ha salido mal.
-                Toast.makeText(getContext(), "No se ha podido añadir ningun juego", Toast.LENGTH_SHORT).show();
             }
         }
     }
