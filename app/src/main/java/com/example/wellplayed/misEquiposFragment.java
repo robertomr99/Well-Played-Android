@@ -29,13 +29,14 @@ public class misEquiposFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_mis_equipos, container, false);
+        recyclerView = view.findViewById(R.id.recyclerViewEquipos);
+        mostrarData(getContext());
         crearEquipo(view);
         unirseEquipo(view);
         return view;
     }
 
     private void mostrarData(Context context) {
-        recyclerView.findViewById(R.id.recyclerViewEquipos);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         EquiposAdapter adaptador = new EquiposAdapter(context);
         recyclerView.setAdapter(adaptador);
