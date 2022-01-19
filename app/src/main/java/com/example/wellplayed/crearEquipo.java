@@ -31,7 +31,7 @@ import java.util.List;
 public class crearEquipo extends AppCompatActivity {
 
     Producto oProducto;
-    TextView lblNombreEquipoCrear;
+    TextView lblNombreEquipo;
     CheckBox checkBoxLOL , checkBoxValorant,checkBoxCSGO,checkBoxFIFA;
     public static ImageView imgViewEquipo;
     public static final String sNombreUser = MainActivity.oUsuario.getsUser();
@@ -41,7 +41,7 @@ public class crearEquipo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_equipo);
         imgViewEquipo = findViewById(R.id.imgViewEquipo);
-        lblNombreEquipoCrear = findViewById(R.id.lblNombreEquipoCrear);
+        lblNombreEquipo = findViewById(R.id.txtNombreEquipo);
         checkBoxLOL = findViewById(R.id.checkBoxLOL);
         checkBoxValorant = findViewById(R.id.checkBoxValorant);
         checkBoxCSGO = findViewById(R.id.checkBoxCSGO);
@@ -83,18 +83,13 @@ public class crearEquipo extends AppCompatActivity {
 
     public void insertEquipo(View view) {
 
-            String sUrl = Utils.hosting + "equipo/ins-equipo.php?txtNombre="+lblNombreEquipoCrear.getText().toString()+"&txtFoto="+oProducto.getsFoto();
+            String sUrl = Utils.hosting + "equipo/ins-equipo.php?txtNombre="+lblNombreEquipo.getText().toString()+"&txtFoto="+oProducto.getsFoto();
 
             Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
                     s ->{
                         if(s.equals("null")){
-                            Toast.makeText(getApplicationContext(), "error al crear el equipo", Toast.LENGTH_LONG).show();
                         }else{
-
-                            Toast.makeText(getApplicationContext(), "Equipo creado con éxito", Toast.LENGTH_LONG).show();
                             seleccionarIdUser();
-
-
                         }
                     }
                     ,volleyError -> {
@@ -110,16 +105,14 @@ public class crearEquipo extends AppCompatActivity {
         String sUrl = Utils.hosting + "usuario/select-idUser.php?txtUsuario="+sNombreUser;
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
-                    Log.d("vacio", s);
                     if (s.equals("")) {
                         Toast.makeText(this, "no se ha encontrado", Toast.LENGTH_SHORT).show();
                     } else {
                         Usuario oUsuarioId = new Usuario();
-                        Log.d("Rob", sUrl);
                         oUsuarioId = new Gson().fromJson(s, new TypeToken<Usuario>() {
                         }.getType());
 
-                        selectiIdEquipo(lblNombreEquipoCrear.getText().toString(), oUsuarioId.getiIdUsuario());
+                        selectiIdEquipo(lblNombreEquipo.getText().toString(), oUsuarioId.getiIdUsuario());
                     }
                 }
                 , volleyError -> {
@@ -138,6 +131,7 @@ public class crearEquipo extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Error al crear el equipo", Toast.LENGTH_LONG).show();
                     }else{
                         Toast.makeText(getApplicationContext(), "Equipo creado con éxito", Toast.LENGTH_LONG).show();
+                        finish();
                     }
                 }
                 ,volleyError -> {
@@ -151,7 +145,7 @@ public class crearEquipo extends AppCompatActivity {
     private void selectiIdEquipo(String sNombreEquipo, int iIdUsuario) {
 
         String sUrl = Utils.hosting + "equipo/select-idEquipo.php?txtEquipo="+sNombreEquipo;
-
+        Log.d("selectIdEquipo",sUrl);
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
                 s ->{
                     if(s.equals("null")){
@@ -193,7 +187,6 @@ public class crearEquipo extends AppCompatActivity {
         if(checkBoxLOL.isChecked()){
             insertEquipoJuego(iIdEquipo,1);
         }
-
         if(checkBoxValorant.isChecked()) {
             insertEquipoJuego(iIdEquipo, 2);
         }
