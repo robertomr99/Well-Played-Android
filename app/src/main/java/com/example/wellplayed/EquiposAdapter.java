@@ -76,7 +76,7 @@ public class EquiposAdapter extends RecyclerView.Adapter<EquiposAdapter.ViewHold
             super(itemView);
             lblNombre = itemView.findViewById(R.id.lblNombreEquipo);
             //lblMiembros = itemView.findViewById(R.id.lblMiembros);
-            imageViewEquipo = itemView.findViewById(R.id.imagenEquipo);
+            imageViewEquipo = itemView.findViewById(R.id.imgViewEquipo);
             cv = itemView.findViewById(R.id.cardViewEquipos);
         }
     }
