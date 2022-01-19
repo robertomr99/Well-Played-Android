@@ -8,6 +8,6 @@ import java.util.List;
 
 public class ListadoEquipos {
 
-    public static List<Equipo_Usuario> lstEquipos = new ArrayList<Equipo_Usuario>();
+    public static List<Equipo> lstEquipos = new ArrayList<Equipo>();
     public static int iEquipoSelected;
 }

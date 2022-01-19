@@ -2,25 +2,21 @@ package com.example.wellplayed.model;
 
 public class Equipo {
 
-    private Integer iIdEquipo, iVictorias, iDerrotas, iFoto;
-    private String sNombre;
-    private Float fWinRate;
+    private Integer iIdEquipo;
+    private String sNombre, sFoto;
 
-    public Equipo(Integer iIdEquipo, String sNombre, Integer iVictorias, Integer iDerrotas,  Float fWinRate, Integer iFoto) {
-        this.iIdEquipo = iIdEquipo;
-        this.sNombre = sNombre;
-        this.iVictorias = iVictorias;
-        this.iDerrotas = iDerrotas;
-        this.fWinRate = fWinRate;
-        this.iFoto = iFoto;
+    public Equipo() {
     }
 
     public Equipo(Integer iIdEquipo) {
         this.iIdEquipo = iIdEquipo;
     }
 
-    public Equipo() {
 
+    public Equipo(Integer iIdEquipo, String sNombre, String sFoto) {
+        this.iIdEquipo = iIdEquipo;
+        this.sNombre = sNombre;
+        this.sFoto = sFoto;
     }
 
     public Integer getiIdEquipo() {
@@ -31,22 +27,6 @@ public class Equipo {
         this.iIdEquipo = iIdEquipo;
     }
 
-    public Integer getiVictorias() {
-        return iVictorias;
-    }
-
-    public void setiVictorias(Integer iVictorias) {
-        this.iVictorias = iVictorias;
-    }
-
-    public Integer getiDerrotas() {
-        return iDerrotas;
-    }
-
-    public void setiDerrotas(Integer iDerrotas) {
-        this.iDerrotas = iDerrotas;
-    }
-
     public String getsNombre() {
         return sNombre;
     }
@@ -55,19 +35,11 @@ public class Equipo {
         this.sNombre = sNombre;
     }
 
-    public Float getfWinRate() {
-        return fWinRate;
+    public String getsFoto() {
+        return sFoto;
     }
 
-    public void setfWinRate(Float fWinRate) {
-        this.fWinRate = fWinRate;
-    }
-
-    public Integer getiFoto() {
-        return iFoto;
-    }
-
-    public void setiFoto(Integer iFoto) {
-        this.iFoto = iFoto;
+    public void setsFoto(String sFoto) {
+        this.sFoto = sFoto;
     }
 }
