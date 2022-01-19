@@ -59,4 +59,8 @@ dependencies {
 
     implementation 'com.codesgood:justifiedtextview:1.1.0'
 
+    // SWIPE REFRESH
+
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
 }
