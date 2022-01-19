@@ -22,13 +22,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewAddJuego"
-        android:layout_width="342dp"
-        android:layout_height="595dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="36dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="345dp"
+        android:layout_height="600dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblAddJuego"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/lblAddJuego" />
 </androidx.constraintlayout.widget.ConstraintLayout>
