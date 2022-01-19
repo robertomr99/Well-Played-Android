@@ -14,6 +14,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.wellplayed.model.Equipo;
+
 public class UnirseEquipoAdapter extends RecyclerView.Adapter<UnirseEquipoAdapter.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
@@ -46,12 +49,14 @@ public class UnirseEquipoAdapter extends RecyclerView.Adapter<UnirseEquipoAdapte
 
 
     public void onBindViewHolder(@NonNull UnirseEquipoAdapter.ViewHolder holder, int position) {
-        String sNombre = ListadoEquipos.lstEquipos.get(position).getoEquipo().getsNombre();
+        Equipo oEquipo = ListadoEquipos.lstEquipos.get(position); // Instanciamos el objeto de la lista con la posicion
+
+        Glide.with(context).load(oEquipo.getsFoto()).circleCrop().into(holder.imageViewEquipo);
+        String sNombre = oEquipo.getsNombre();
         //String sMiembros = ListadoEquipos.lstEquipos.get(position).get
-        int iFoto = ListadoEquipos.lstEquipos.get(position).getoEquipo().getiFoto();
 
         holder.lblNombre.setText(sNombre);
-        holder.imageViewEquipo.setImageResource(iFoto);
+        //holder.lblMiembros.setText(sMiembros);
         holder.cv.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition));
 
     }
@@ -63,16 +68,17 @@ public class UnirseEquipoAdapter extends RecyclerView.Adapter<UnirseEquipoAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView lblNombre;
-        //TextView lblMiembros;
+        TextView lblMiembros;
         ImageView imageViewEquipo;
         CardView cv;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            lblNombre = itemView.findViewById(R.id.lblNombreEquipo);
-            imageViewEquipo = itemView.findViewById(R.id.imagenEquipo);
-            cv = itemView.findViewById(R.id.cardViewEquipos);
+            lblMiembros = itemView.findViewById(R.id.lblUMiembros);
+            lblNombre = itemView.findViewById(R.id.lblUNombreEquipo);
+            imageViewEquipo = itemView.findViewById(R.id.imgViewUEquipo);
+            cv = itemView.findViewById(R.id.cardViewUEquipos);
         }
     }
 }

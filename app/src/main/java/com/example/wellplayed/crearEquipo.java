@@ -131,6 +131,8 @@ public class crearEquipo extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Error al crear el equipo", Toast.LENGTH_LONG).show();
                     }else{
                         Toast.makeText(getApplicationContext(), "Equipo creado con éxito", Toast.LENGTH_LONG).show();
+                        Intent i = new Intent();
+                        setResult(Activity.RESULT_OK,i);
                         finish();
                     }
                 }
@@ -149,10 +151,9 @@ public class crearEquipo extends AppCompatActivity {
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
                 s ->{
                     if(s.equals("null")){
-                        Toast.makeText(getApplicationContext(), "error al crear el equipo", Toast.LENGTH_LONG).show();
+
                     }else{
                         Equipo oEquipo;
-                        Toast.makeText(getApplicationContext(), "Equipo creado con éxito", Toast.LENGTH_LONG).show();
                         oEquipo = new Gson().fromJson(s, new TypeToken<Equipo>() {
                         }.getType());
 
