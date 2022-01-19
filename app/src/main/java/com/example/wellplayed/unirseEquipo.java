@@ -8,6 +8,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -35,12 +36,12 @@ public class unirseEquipo extends AppCompatActivity {
         setContentView(R.layout.activity_unirse_equipo);
         swipeRefreshLayout = findViewById(R.id.swipe);
         mostrarEquiposQueNoTieneUser();
-
+        swipeRefreshLayout.setColorSchemeResources(R.color.AzulApp,R.color.black);
+        swipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.AmarilloApp);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mostrarEquiposQueNoTieneUser();
-                    swipeRefreshLayout.setRefreshing(false);
+                new waitReload().execute();
 
             }
 
@@ -48,7 +49,23 @@ public class unirseEquipo extends AppCompatActivity {
 
     }
 
-    public void mostrarEquiposQueNoTieneUser() {
+    private class waitReload extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                Thread.sleep(500);
+                mostrarEquiposQueNoTieneUser();
+                swipeRefreshLayout.setRefreshing(false);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+
+        public void mostrarEquiposQueNoTieneUser() {
         String sUrl = Utils.hosting + "equipo-usuario/EquipoQueNoTieneUser.php?txtUsuario="+sNombreUser;
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
