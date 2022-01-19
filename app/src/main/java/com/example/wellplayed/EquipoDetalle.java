@@ -18,11 +18,11 @@ public class EquipoDetalle extends AppCompatActivity {
         TextView lblDerrotasDetalle = findViewById(R.id.lblDerrotasEquipo);
         TextView lblWinRateDetalle = findViewById(R.id.lblWinRateEquipo);
 
-        imgViewEquipoDetalle.setImageResource(ListadoEquipos.lstEquipos.get(ListadoEquipos.iEquipoSelected).getoEquipo().getiFoto());
+       /* imgViewEquipoDetalle.setImageResource(ListadoEquipos.lstEquipos.get(ListadoEquipos.iEquipoSelected).getoEquipo().getiFoto());
         lblNombreDetalle.setText(""+ ListadoEquipos.lstEquipos.get(ListadoEquipos.iEquipoSelected).getoEquipo().getsNombre());
         lblVictoriasDetalle.setText(""+ ListadoEquipos.lstEquipos.get(ListadoEquipos.iEquipoSelected).getoEquipo().getsNombre());
         lblDerrotasDetalle.setText(""+ ListadoEquipos.lstEquipos.get(ListadoEquipos.iEquipoSelected).getoEquipo().getsNombre());
         lblWinRateDetalle.setText(""+ ListadoEquipos.lstEquipos.get(ListadoEquipos.iEquipoSelected).getoEquipo().getsNombre());
-
+*/
     }
 }
