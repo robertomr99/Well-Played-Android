@@ -78,13 +78,32 @@ public class misEquiposFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         adaptador = new EquiposAdapter(context);
         recyclerView.setAdapter(adaptador);
-
         adaptador.setOnClickListener(v -> {
             ListadoEquipos.iEquipoSelected = recyclerView.getChildAdapterPosition(v);
-
             Intent intentDetalle = new Intent(context, EquipoDetalle.class);
             startActivity(intentDetalle);
         });
+    }
+
+    public void mostrarEquipos() {
+        String sUrl = Utils.hosting + "equipo-usuario/EquipoQueSiTieneUser.php?txtUsuario="+sNombreUser;
+
+        Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(getContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.d("Rob", sUrl);
+                        ListadoEquipos.lstEquipos = new Gson().fromJson(s, new TypeToken<List<Equipo>>() {
+                        }.getType());
+                        mostrarData(getContext());
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
     }
 
     public void crearEquipo(View view) {
