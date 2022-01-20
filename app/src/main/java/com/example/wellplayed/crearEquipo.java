@@ -83,7 +83,7 @@ public class crearEquipo extends AppCompatActivity {
 
     public void insertEquipo(View view) {
 
-            String sUrl = Utils.hosting + "equipo/ins-equipo.php?txtNombre="+lblNombreEquipo.getText().toString()+"&txtFoto="+oProducto.getsFoto();
+            String sUrl = Utils.hosting + "equipo/ins-equipo.php?txtNombre="+lblNombreEquipo.getText().toString()+"&txtFoto="+oProducto.getsFoto()+"&txtMiembros="+1;
 
             Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
                     s ->{

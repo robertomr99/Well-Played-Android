@@ -53,10 +53,10 @@ public class UnirseEquipoAdapter extends RecyclerView.Adapter<UnirseEquipoAdapte
 
         Glide.with(context).load(oEquipo.getsFoto()).circleCrop().into(holder.imageViewEquipo);
         String sNombre = oEquipo.getsNombre();
-        //String sMiembros = ListadoEquipos.lstEquipos.get(position).get
+        String sMiembros = String.valueOf(oEquipo.getiMiembros());
 
         holder.lblNombre.setText(sNombre);
-        //holder.lblMiembros.setText(sMiembros);
+        holder.lblMiembros.setText(sMiembros);
         holder.cv.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition));
 
     }
