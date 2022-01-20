@@ -64,8 +64,28 @@ public class misEquiposFragment extends Fragment {
                         ListadoEquipos.lstEquipos = new Gson().fromJson(s, new TypeToken<List<Equipo>>() {
                         }.getType());
                         mostrarData(getContext());
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
+    }
 
+    public void contarMiembros() {
+        String sUrl = Utils.hosting + "equipo-usuario/count-miembros.php?txtNombre="+sNombreUser;
 
+        Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(getContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.d("Rob", sUrl);
+                        Integer iMiembros = 0;
+                        iMiembros = new Gson().fromJson(s, new TypeToken<Integer>() {
+                        }.getType());
+                        mostrarData(getContext());
                     }
                 }
                 , volleyError -> {
@@ -85,27 +105,6 @@ public class misEquiposFragment extends Fragment {
         });
     }
 
-    public void mostrarEquipos() {
-        String sUrl = Utils.hosting + "equipo-usuario/EquipoQueSiTieneUser.php?txtUsuario="+sNombreUser;
-
-        Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
-                s -> {
-                    Log.d("vacio", s);
-                    if (s.equals("")) {
-                        Toast.makeText(getContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Log.d("Rob", sUrl);
-                        ListadoEquipos.lstEquipos = new Gson().fromJson(s, new TypeToken<List<Equipo>>() {
-                        }.getType());
-                        mostrarData(getContext());
-                    }
-                }
-                , volleyError -> {
-            Log.d("Rob", volleyError.getCause().toString());
-        }
-        ));
-    }
-
     public void crearEquipo(View view) {
         view.findViewById(R.id.btnCrearEquipo).setOnClickListener(v -> {
             Intent intentCrearEquipo = new Intent(getContext(), crearEquipo.class);
@@ -120,7 +119,6 @@ public class misEquiposFragment extends Fragment {
         });
     }
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -131,9 +129,9 @@ public class misEquiposFragment extends Fragment {
                 adaptador.notifyDataSetChanged();
                 // esta pantalla es cuando todo ha salido bien.
             }
+
             if (resultCode == Activity.RESULT_CANCELED) {
                 // esta pantalla es cuando ha salido mal.
-                Toast.makeText(getContext(), "No se ha podido añadir ningun juego", Toast.LENGTH_SHORT).show();
             }
         }
     }
