@@ -51,6 +51,8 @@ public class misEquiposFragment extends Fragment {
         return view;
     }
 
+    public void mostrarEquipos() {
+        String sUrl = Utils.hosting + "equipo-usuario/EquipoQueSiTieneUser.php?txtUsuario="+sNombreUser;
 
         Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
@@ -72,16 +74,6 @@ public class misEquiposFragment extends Fragment {
 
     public void contarMiembros() {
         String sUrl = Utils.hosting + "equipo-usuario/count-miembros.php?txtNombre="+sNombreUser;
-    private void mostrarData(Context context) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        adaptador = new EquiposAdapter(context);
-        recyclerView.setAdapter(adaptador);
-        adaptador.setOnClickListener(v -> {
-            ListadoEquipos.iEquipoSelected = recyclerView.getChildAdapterPosition(v);
-            Intent intentDetalle = new Intent(context, EquipoDetalle.class);
-            startActivity(intentDetalle);
-        });
-    }
 
         Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
@@ -133,7 +125,6 @@ public class misEquiposFragment extends Fragment {
 
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
-
                 mostrarEquipos();
                 adaptador.notifyDataSetChanged();
                 // esta pantalla es cuando todo ha salido bien.

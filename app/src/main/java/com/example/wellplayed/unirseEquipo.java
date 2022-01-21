@@ -63,23 +63,7 @@ public class unirseEquipo extends AppCompatActivity {
         }
     }
 
-    private class waitReload extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-                Thread.sleep(500);
-                mostrarEquiposQueNoTieneUser();
-                swipeRefreshLayout.setRefreshing(false);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
-
-
-        public void mostrarEquiposQueNoTieneUser() {
+    public void mostrarEquiposQueNoTieneUser() {
         String sUrl = Utils.hosting + "equipo-usuario/EquipoQueNoTieneUser.php?txtUsuario="+sNombreUser;
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
