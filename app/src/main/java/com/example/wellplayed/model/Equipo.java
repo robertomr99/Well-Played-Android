@@ -2,8 +2,9 @@ package com.example.wellplayed.model;
 
 public class Equipo {
 
-    private Integer iIdEquipo;
+    private Integer iIdEquipo, iMiembros;
     private String sNombre, sFoto;
+
 
     public Equipo() {
     }
@@ -12,9 +13,9 @@ public class Equipo {
         this.iIdEquipo = iIdEquipo;
     }
 
-
-    public Equipo(Integer iIdEquipo, String sNombre, String sFoto) {
+    public Equipo(Integer iIdEquipo, Integer iMiembros, String sNombre, String sFoto) {
         this.iIdEquipo = iIdEquipo;
+        this.iMiembros = iMiembros;
         this.sNombre = sNombre;
         this.sFoto = sFoto;
     }
@@ -41,5 +42,13 @@ public class Equipo {
 
     public void setsFoto(String sFoto) {
         this.sFoto = sFoto;
+    }
+
+    public Integer getiMiembros() {
+        return iMiembros;
+    }
+
+    public void setiMiembros(Integer iMiembros) {
+        this.iMiembros = iMiembros;
     }
 }

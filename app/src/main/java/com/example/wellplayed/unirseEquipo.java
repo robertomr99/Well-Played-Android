@@ -8,6 +8,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,17 +38,29 @@ public class unirseEquipo extends AppCompatActivity {
         setContentView(R.layout.activity_unirse_equipo);
         swipeRefreshLayout = findViewById(R.id.swipe);
         mostrarEquiposQueNoTieneUser();
-        swipeRefreshLayout.setColorSchemeResources(R.color.AzulApp,R.color.black);
-        swipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.AmarilloApp);
+        swipeRefreshLayout.setColorSchemeResources(R.color.GrisApp);
+        swipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.AzulApp);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new waitReload().execute();
-
             }
 
         });
 
+    }
+    private class waitReload extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                Thread.sleep(500);
+                mostrarEquiposQueNoTieneUser();
+                swipeRefreshLayout.setRefreshing(false);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 
     private class waitReload extends AsyncTask<Void, Void, Void> {

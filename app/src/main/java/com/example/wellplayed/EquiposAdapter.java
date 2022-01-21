@@ -52,10 +52,10 @@ public class EquiposAdapter extends RecyclerView.Adapter<EquiposAdapter.ViewHold
 
         Glide.with(context).load(oEquipo.getsFoto()).circleCrop().into(holder.imageViewEquipo);
         String sNombre = oEquipo.getsNombre();
-        //String sMiembros = ListadoEquipos.lstEquipos.get(position).get
+        String sMiembros = String.valueOf(oEquipo.getiMiembros());
 
         holder.lblNombre.setText(sNombre);
-        //holder.lblMiembros.setText(sMiembros);
+        holder.lblMiembros.setText(sMiembros);
         holder.cv.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition));
 
     }
@@ -67,7 +67,7 @@ public class EquiposAdapter extends RecyclerView.Adapter<EquiposAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView lblNombre;
-        //TextView lblMiembros;
+        TextView lblMiembros;
         ImageView imageViewEquipo;
         CardView cv;
 
@@ -75,7 +75,7 @@ public class EquiposAdapter extends RecyclerView.Adapter<EquiposAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             lblNombre = itemView.findViewById(R.id.lblNombreEquipo);
-            //lblMiembros = itemView.findViewById(R.id.lblMiembros);
+            lblMiembros = itemView.findViewById(R.id.lblMiembros);
             imageViewEquipo = itemView.findViewById(R.id.imgViewEquipo);
             cv = itemView.findViewById(R.id.cardViewEquipos);
         }
