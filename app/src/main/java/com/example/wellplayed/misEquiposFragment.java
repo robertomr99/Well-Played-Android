@@ -22,7 +22,9 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.wellplayed.model.Equipo;
+import com.example.wellplayed.model.Equipo_Usuario;
 import com.example.wellplayed.model.Juego;
+import com.example.wellplayed.model.Usuario_Juego;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -33,6 +35,9 @@ public class misEquiposFragment extends Fragment {
     RecyclerView recyclerView;
     EquiposAdapter adaptador;
     public static final String sNombreUser = MainActivity.oUsuario.getsUser();
+    public static Equipo_Usuario oEquipo_Usuario;
+    public static Equipo oEquipo;
+
     public misEquiposFragment() {
     }
 
@@ -42,8 +47,8 @@ public class misEquiposFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_mis_equipos, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_mis_equipos, container, false);
         recyclerView = view.findViewById(R.id.recyclerViewEquipos);
         mostrarEquipos();
         crearEquipo(view);
@@ -52,7 +57,7 @@ public class misEquiposFragment extends Fragment {
     }
 
     public void mostrarEquipos() {
-        String sUrl = Utils.hosting + "equipo-usuario/EquipoQueSiTieneUser.php?txtUsuario="+sNombreUser;
+        String sUrl = Utils.hosting + "equipo-usuario/EquipoQueSiTieneUser.php?txtUsuario=" + sNombreUser;
 
         Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
@@ -73,7 +78,7 @@ public class misEquiposFragment extends Fragment {
     }
 
     public void contarMiembros() {
-        String sUrl = Utils.hosting + "equipo-usuario/count-miembros.php?txtNombre="+sNombreUser;
+        String sUrl = Utils.hosting + "equipo-usuario/count-miembros.php?txtNombre=" + sNombreUser;
 
         Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
@@ -100,15 +105,15 @@ public class misEquiposFragment extends Fragment {
         recyclerView.setAdapter(adaptador);
         adaptador.setOnClickListener(v -> {
             ListadoEquipos.iEquipoSelected = recyclerView.getChildAdapterPosition(v);
-            Intent intentDetalle = new Intent(context, EquipoDetalle.class);
-            startActivity(intentDetalle);
+            oEquipo = ListadoEquipos.lstEquipos.get(ListadoEquipos.iEquipoSelected);
+            pasarEquipo(context, oEquipo);
         });
     }
 
     public void crearEquipo(View view) {
         view.findViewById(R.id.btnCrearEquipo).setOnClickListener(v -> {
             Intent intentCrearEquipo = new Intent(getContext(), crearEquipo.class);
-            startActivityForResult(intentCrearEquipo,1);
+            startActivityForResult(intentCrearEquipo, 1);
         });
     }
 
@@ -118,6 +123,13 @@ public class misEquiposFragment extends Fragment {
             startActivity(intentLogin);
         });
     }
+
+    public void pasarEquipo(Context context, Equipo oEquipo) {
+        Intent iDetalleEquipo = new Intent(context, EquipoDetalle.class);
+        iDetalleEquipo.putExtra("Equipo", oEquipo);
+        startActivity(iDetalleEquipo);
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

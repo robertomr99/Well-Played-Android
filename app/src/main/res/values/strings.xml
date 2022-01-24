@@ -24,6 +24,7 @@
     <string name="lblVictorias">Victoria</string>
     <string name="lblDerrota">Derrota</string>
     <string name="btn_EliminarJuego">Eliminar juego</string>
+    <string name="SpinnerJuego">Juegos</string>
 
     <!-- String Drawer Menu -->
     <string name="mnuPerfil">Perfil</string>
@@ -69,6 +70,13 @@
         <item>Banners</item>
     </string-array>
 
+    <!-- Array spinner juegos -->
+    <string-array name="juegos">
+        <item>LOL</item>
+        <item>Valorant</item>
+        <item>CSGO</item>
+        <item>FIFA</item>
+    </string-array>
 
     <string-array name="paises">
         <item>Afganist&#225;n</item>

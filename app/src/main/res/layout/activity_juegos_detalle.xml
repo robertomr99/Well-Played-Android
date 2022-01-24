@@ -54,30 +54,30 @@
         android:id="@+id/lblVictoriasDetalle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:background="@drawable/design_descripcion"
         android:padding="5dp"
         android:text="@string/lblVictorias"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/lblWinRateDetalle"
         app:layout_constraintEnd_toStartOf="@+id/lblDerrotasDetalle"
         app:layout_constraintStart_toEndOf="@+id/lblWinRateDetalle"
-        app:layout_constraintTop_toBottomOf="@+id/lblDescripcionDetalle" />
+        app:layout_constraintTop_toTopOf="@+id/lblWinRateDetalle" />
 
     <TextView
         android:id="@+id/lblDerrotasDetalle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:background="@drawable/design_descripcion"
         android:padding="5dp"
         android:text="@string/lblDerrota"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/lblVictoriasDetalle"
         app:layout_constraintEnd_toEndOf="@+id/lblDescripcionDetalle"
-        app:layout_constraintTop_toBottomOf="@+id/lblDescripcionDetalle" />
+        app:layout_constraintTop_toTopOf="@+id/lblVictoriasDetalle" />
 
     <TextView
         android:id="@+id/lblRDerrotasDetallle"

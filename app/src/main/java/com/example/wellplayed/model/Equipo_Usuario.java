@@ -1,6 +1,8 @@
 package com.example.wellplayed.model;
 
-public class Equipo_Usuario {
+import java.io.Serializable;
+
+public class Equipo_Usuario implements Serializable {
 
    private Equipo oEquipo;
    private Usuario oUsuario;

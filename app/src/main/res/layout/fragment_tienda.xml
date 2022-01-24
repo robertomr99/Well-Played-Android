@@ -23,19 +23,17 @@
         android:text="@string/txtTienda"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/spinnerCategoriaProducto"
         app:layout_constraintStart_toStartOf="@+id/recyclerViewTienda"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinnerCategoriaProducto"
-        android:textColor="@color/black"
-        android:text="@font/cabin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="76dp"
         android:entries="@array/productos"
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/txtTienda"
         app:layout_constraintEnd_toEndOf="@+id/recyclerViewTienda"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/txtTienda" />
 </androidx.constraintlayout.widget.ConstraintLayout>
