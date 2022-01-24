@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.example.wellplayed.model.Usuario_Juego;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EquipoDetalle extends AppCompatActivity {
@@ -30,6 +32,7 @@ public class EquipoDetalle extends AppCompatActivity {
     Equipo oEquipo;
     Spinner spinnerJuegos;
     Integer iIdEquipoJuego, iIdJuego;
+    ArrayList<String> lstJuegos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,8 @@ public class EquipoDetalle extends AppCompatActivity {
         lblWinRateDetalle = findViewById(R.id.lblWinRateEquipo);
 
         spinnerJuegos = findViewById(R.id.spinnerJuego);
-       // devolverProducto();
+        lstEquipoJuego();
+        devolverProducto();
         getEquipoJuego();
 
         oEquipo = ListadoEquipos.lstEquipos.get(ListadoEquipos.iEquipoSelected);
@@ -55,17 +59,17 @@ public class EquipoDetalle extends AppCompatActivity {
     }
 
     private void devolverProducto() {
-        switch (spinnerJuegos.getSelectedItemPosition()) {
-            case 0:
+        switch (String.valueOf(spinnerJuegos.getItemAtPosition(spinnerJuegos.getSelectedItemPosition()))){
+            case "LOL":
                 iIdJuego = 1;
                 break;
-            case 1:
+            case "VALORANT":
                 iIdJuego = 2;
                 break;
-            case 2:
+            case "CSGO":
                 iIdJuego = 3;
                 break;
-            case 3:
+            case "FIFA":
                 iIdJuego = 4;
                 break;
         }
@@ -101,6 +105,32 @@ public class EquipoDetalle extends AppCompatActivity {
             Log.d("Rob", volleyError.getCause().toString());
         }
         ));
+    }
+
+    public void lstEquipoJuego() {
+        String sUrl = Utils.hosting + "equipo-juego/lst-equipos-juegos.php?txtEquipo=" + iIdEquipoJuego;
+
+        Volley.newRequestQueue(getApplicationContext()).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.d("Rob", sUrl);
+                       lstJuegos = new Gson().fromJson(s, new TypeToken<List<String>>() {
+                        }.getType());
+                        rellenarSpinnerJuegos(lstJuegos);
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
+    }
+
+    private void rellenarSpinnerJuegos(List<String> lstJuegos) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(EquipoDetalle.this, android.R.layout.simple_spinner_dropdown_item, lstJuegos);
+        spinnerJuegos.setAdapter(adapter);
     }
 
 
