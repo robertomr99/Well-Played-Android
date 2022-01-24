@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/spinnerJuego" />
 
     <TextView
-        android:id="@+id/lblWinRateEquipo2"
+        android:id="@+id/lblRWinRateEquipo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/lblWinRateEquipo" />
 
     <TextView
-        android:id="@+id/lblWinRateEquipo3"
+        android:id="@+id/lblRVictoriasEquipo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@+id/lblVictoriasEquipo" />
 
     <TextView
-        android:id="@+id/lblWinRateEquipo4"
+        android:id="@+id/lblRDerrotasEquipo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -81,8 +81,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/lblWinRateEquipo"
         app:layout_constraintEnd_toStartOf="@+id/lblDerrotasEquipo"
         app:layout_constraintStart_toEndOf="@+id/lblWinRateEquipo"
-        app:layout_constraintTop_toTopOf="@+id/lblWinRateEquipo"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/lblWinRateEquipo" />
 
     <TextView
         android:id="@+id/lblDerrotasEquipo"
@@ -97,26 +96,27 @@
         app:layout_constraintEnd_toEndOf="@+id/lblNombreDetalle"
         app:layout_constraintTop_toTopOf="@+id/lblVictoriasEquipo" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgViewEquipoDetalle"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="60dp"
+        android:src="@android:mipmap/sym_def_app_icon"
+        app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:mipmap/sym_def_app_icon" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinnerJuego"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="110dp"
         android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lblJuegos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblNombreDetalle"
+        app:layout_constraintTop_toTopOf="@+id/lblJuegos"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -125,8 +125,20 @@
         android:layout_height="300dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblWinRateEquipo3" />
+        app:layout_constraintTop_toBottomOf="@+id/lblRVictoriasEquipo" />
+
+    <TextView
+        android:id="@+id/lblJuegos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/SpinnerJuego"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerJuego"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblNombreDetalle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

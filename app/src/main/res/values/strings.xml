@@ -24,6 +24,7 @@
     <string name="lblVictorias">Victoria</string>
     <string name="lblDerrota">Derrota</string>
     <string name="btn_EliminarJuego">Eliminar juego</string>
+    <string name="SpinnerJuego">Juegos</string>
 
     <!-- String Drawer Menu -->
     <string name="mnuPerfil">Perfil</string>

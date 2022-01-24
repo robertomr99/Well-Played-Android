@@ -47,8 +47,8 @@ public class misEquiposFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_mis_equipos, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_mis_equipos, container, false);
         recyclerView = view.findViewById(R.id.recyclerViewEquipos);
         mostrarEquipos();
         crearEquipo(view);
@@ -57,7 +57,7 @@ public class misEquiposFragment extends Fragment {
     }
 
     public void mostrarEquipos() {
-        String sUrl = Utils.hosting + "equipo-usuario/EquipoQueSiTieneUser.php?txtUsuario="+sNombreUser;
+        String sUrl = Utils.hosting + "equipo-usuario/EquipoQueSiTieneUser.php?txtUsuario=" + sNombreUser;
 
         Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
@@ -68,7 +68,6 @@ public class misEquiposFragment extends Fragment {
                         Log.d("Rob", sUrl);
                         ListadoEquipos.lstEquipos = new Gson().fromJson(s, new TypeToken<List<Equipo>>() {
                         }.getType());
-                        oEquipo = ListadoEquipos.lstEquipos.get(ListadoEquipos.iEquipoSelected);
                         mostrarData(getContext());
                     }
                 }
@@ -79,7 +78,7 @@ public class misEquiposFragment extends Fragment {
     }
 
     public void contarMiembros() {
-        String sUrl = Utils.hosting + "equipo-usuario/count-miembros.php?txtNombre="+sNombreUser;
+        String sUrl = Utils.hosting + "equipo-usuario/count-miembros.php?txtNombre=" + sNombreUser;
 
         Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
@@ -106,14 +105,15 @@ public class misEquiposFragment extends Fragment {
         recyclerView.setAdapter(adaptador);
         adaptador.setOnClickListener(v -> {
             ListadoEquipos.iEquipoSelected = recyclerView.getChildAdapterPosition(v);
-           pasarEquipo(context,oEquipo);
+            oEquipo = ListadoEquipos.lstEquipos.get(ListadoEquipos.iEquipoSelected);
+            pasarEquipo(context, oEquipo);
         });
     }
 
     public void crearEquipo(View view) {
         view.findViewById(R.id.btnCrearEquipo).setOnClickListener(v -> {
             Intent intentCrearEquipo = new Intent(getContext(), crearEquipo.class);
-            startActivityForResult(intentCrearEquipo,1);
+            startActivityForResult(intentCrearEquipo, 1);
         });
     }
 
@@ -124,7 +124,7 @@ public class misEquiposFragment extends Fragment {
         });
     }
 
-    public void pasarEquipo(Context context,Equipo oEquipo){
+    public void pasarEquipo(Context context, Equipo oEquipo) {
         Intent iDetalleEquipo = new Intent(context, EquipoDetalle.class);
         iDetalleEquipo.putExtra("Equipo", oEquipo);
         startActivity(iDetalleEquipo);

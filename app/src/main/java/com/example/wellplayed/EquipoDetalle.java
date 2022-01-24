@@ -3,8 +3,11 @@ package com.example.wellplayed;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -18,12 +21,14 @@ import com.bumptech.glide.Glide;
 import com.example.wellplayed.model.Equipo;
 import com.example.wellplayed.model.Equipo_Juego;
 import com.example.wellplayed.model.Equipo_Usuario;
+import com.example.wellplayed.model.Juego;
 import com.example.wellplayed.model.Usuario_Juego;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.Inflater;
 
 public class EquipoDetalle extends AppCompatActivity {
 
@@ -32,7 +37,8 @@ public class EquipoDetalle extends AppCompatActivity {
     Equipo oEquipo;
     Spinner spinnerJuegos;
     Integer iIdEquipoJuego, iIdJuego;
-    ArrayList<String> lstJuegos;
+    ArrayList<Juego> lstJuegos;
+    ArrayList<String> lstNombreJuegos = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +49,26 @@ public class EquipoDetalle extends AppCompatActivity {
         imgViewEquipoDetalle = findViewById(R.id.imgViewEquipoDetalle);
         lblNombreDetalle = findViewById(R.id.lblNombreDetalle);
 
-        lblVictoriasDetalle = findViewById(R.id.lblVictoriasEquipo);
-        lblDerrotasDetalle = findViewById(R.id.lblDerrotasEquipo);
-        lblWinRateDetalle = findViewById(R.id.lblWinRateEquipo);
+        lblVictoriasDetalle = findViewById(R.id.lblRVictoriasEquipo);
+        lblDerrotasDetalle = findViewById(R.id.lblRDerrotasEquipo);
+        lblWinRateDetalle = findViewById(R.id.lblRWinRateEquipo);
 
         spinnerJuegos = findViewById(R.id.spinnerJuego);
         lstEquipoJuego();
-        devolverProducto();
-        getEquipoJuego();
+        spinnerJuegos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                devolverProducto();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
 
         oEquipo = ListadoEquipos.lstEquipos.get(ListadoEquipos.iEquipoSelected);
         Glide.with(getApplicationContext()).load(oEquipo.getsFoto()).circleCrop().into(imgViewEquipoDetalle);
@@ -58,8 +76,11 @@ public class EquipoDetalle extends AppCompatActivity {
 
     }
 
+
+
     private void devolverProducto() {
-        switch (String.valueOf(spinnerJuegos.getItemAtPosition(spinnerJuegos.getSelectedItemPosition()))){
+        Log.d("Flipa", String.valueOf(spinnerJuegos.getItemAtPosition(spinnerJuegos.getSelectedItemPosition())));
+        switch (String.valueOf(spinnerJuegos.getItemAtPosition(spinnerJuegos.getSelectedItemPosition()))) {
             case "LOL":
                 iIdJuego = 1;
                 break;
@@ -73,6 +94,7 @@ public class EquipoDetalle extends AppCompatActivity {
                 iIdJuego = 4;
                 break;
         }
+        getEquipoJuego();
     }
 
     public void setearDatos(Equipo_Juego oEquipoJuego) {
@@ -117,7 +139,7 @@ public class EquipoDetalle extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
                     } else {
                         Log.d("Rob", sUrl);
-                       lstJuegos = new Gson().fromJson(s, new TypeToken<List<String>>() {
+                        lstJuegos = new Gson().fromJson(s, new TypeToken<List<Juego>>() {
                         }.getType());
                         rellenarSpinnerJuegos(lstJuegos);
                     }
@@ -128,9 +150,15 @@ public class EquipoDetalle extends AppCompatActivity {
         ));
     }
 
-    private void rellenarSpinnerJuegos(List<String> lstJuegos) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(EquipoDetalle.this, android.R.layout.simple_spinner_dropdown_item, lstJuegos);
+    private void rellenarSpinnerJuegos(List<Juego> lstJuegos) {
+        for (int i = 0 ; i < lstJuegos.size(); i++) {
+            lstNombreJuegos.add(lstJuegos.get(i).getsNombre());
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(EquipoDetalle.this, android.R.layout.simple_spinner_dropdown_item, lstNombreJuegos);
         spinnerJuegos.setAdapter(adapter);
+        adapter.setNotifyOnChange(true);
+        devolverProducto();
+
     }
 
 
@@ -140,7 +168,6 @@ public class EquipoDetalle extends AppCompatActivity {
                 Equipo oEquipo;
                 oEquipo = (Equipo) getIntent().getSerializableExtra("Equipo");
                 iIdEquipoJuego = oEquipo.getiIdEquipo();
-                Log.d("PruebaEQUIPO", String.valueOf(iIdJuego));
             }
         } catch (Exception e) {
             e.printStackTrace();
