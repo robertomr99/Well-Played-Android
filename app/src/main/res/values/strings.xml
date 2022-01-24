@@ -65,6 +65,13 @@
         <item>Banners</item>
     </string-array>
 
+    <!-- Array spinner juegos -->
+    <string-array name="juegos">
+        <item>LOL</item>
+        <item>Valorant</item>
+        <item>CSGO</item>
+        <item>FIFA</item>
+    </string-array>
 
     <string-array name="paises">
         <item>Afganist&#225;n</item>

@@ -22,7 +22,9 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.wellplayed.model.Equipo;
+import com.example.wellplayed.model.Equipo_Usuario;
 import com.example.wellplayed.model.Juego;
+import com.example.wellplayed.model.Usuario_Juego;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -33,6 +35,9 @@ public class misEquiposFragment extends Fragment {
     RecyclerView recyclerView;
     EquiposAdapter adaptador;
     public static final String sNombreUser = MainActivity.oUsuario.getsUser();
+    public static Equipo_Usuario oEquipo_Usuario;
+    public static Equipo oEquipo;
+
     public misEquiposFragment() {
     }
 
@@ -63,6 +68,7 @@ public class misEquiposFragment extends Fragment {
                         Log.d("Rob", sUrl);
                         ListadoEquipos.lstEquipos = new Gson().fromJson(s, new TypeToken<List<Equipo>>() {
                         }.getType());
+                        oEquipo = ListadoEquipos.lstEquipos.get(ListadoEquipos.iEquipoSelected);
                         mostrarData(getContext());
                     }
                 }
@@ -100,8 +106,7 @@ public class misEquiposFragment extends Fragment {
         recyclerView.setAdapter(adaptador);
         adaptador.setOnClickListener(v -> {
             ListadoEquipos.iEquipoSelected = recyclerView.getChildAdapterPosition(v);
-            Intent intentDetalle = new Intent(context, EquipoDetalle.class);
-            startActivity(intentDetalle);
+           pasarEquipo(context,oEquipo);
         });
     }
 
@@ -118,6 +123,13 @@ public class misEquiposFragment extends Fragment {
             startActivity(intentLogin);
         });
     }
+
+    public void pasarEquipo(Context context,Equipo oEquipo){
+        Intent iDetalleEquipo = new Intent(context, EquipoDetalle.class);
+        iDetalleEquipo.putExtra("Equipo", oEquipo);
+        startActivity(iDetalleEquipo);
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

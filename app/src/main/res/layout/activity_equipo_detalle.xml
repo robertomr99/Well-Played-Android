@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:backgroundTint="@color/GrisApp"
+    android:background="@color/GrisApp"
     tools:context=".EquipoDetalle">
 
     <TextView
@@ -15,51 +14,88 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/carter_one"
         android:textAlignment="center"
+        android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewEquipoDetalle" />
-
-    <TextView
-        android:id="@+id/lblDerrotasEquipo"
-        android:layout_width="114dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="10dp"
-        android:fontFamily="@font/carter_one"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.776"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewEquipoDetalle" />
-
-    <TextView
-        android:id="@+id/lblVictoriasEquipo"
-        android:layout_width="114dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="80dp"
-        android:fontFamily="@font/carter_one"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.168"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgViewEquipoDetalle" />
 
     <TextView
         android:id="@+id/lblWinRateEquipo"
-        android:layout_width="114dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="124dp"
-        android:fontFamily="@font/carter_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/cabin"
+        android:text="@string/lblWin_rate"
         android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewEquipoDetalle" />
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/lblNombreDetalle"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerJuego" />
+
+    <TextView
+        android:id="@+id/lblWinRateEquipo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/cabin"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/lblWinRateEquipo"
+        app:layout_constraintStart_toStartOf="@+id/lblWinRateEquipo"
+        app:layout_constraintTop_toBottomOf="@+id/lblWinRateEquipo" />
+
+    <TextView
+        android:id="@+id/lblWinRateEquipo3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/cabin"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/lblVictoriasEquipo"
+        app:layout_constraintStart_toStartOf="@+id/lblVictoriasEquipo"
+        app:layout_constraintTop_toBottomOf="@+id/lblVictoriasEquipo" />
+
+    <TextView
+        android:id="@+id/lblWinRateEquipo4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/cabin"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/lblDerrotasEquipo"
+        app:layout_constraintStart_toStartOf="@+id/lblDerrotasEquipo"
+        app:layout_constraintTop_toBottomOf="@+id/lblDerrotasEquipo" />
+
+    <TextView
+        android:id="@+id/lblVictoriasEquipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cabin"
+        android:text="@string/lblVictorias"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/lblWinRateEquipo"
+        app:layout_constraintEnd_toStartOf="@+id/lblDerrotasEquipo"
+        app:layout_constraintStart_toEndOf="@+id/lblWinRateEquipo"
+        app:layout_constraintTop_toTopOf="@+id/lblWinRateEquipo"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/lblDerrotasEquipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cabin"
+        android:text="@string/lblDerrota"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/lblVictoriasEquipo"
+        app:layout_constraintEnd_toEndOf="@+id/lblNombreDetalle"
+        app:layout_constraintTop_toTopOf="@+id/lblVictoriasEquipo" />
 
     <ImageView
         android:id="@+id/imgViewEquipoDetalle"
@@ -71,5 +107,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:mipmap/sym_def_app_icon" />
+
+    <Spinner
+        android:id="@+id/spinnerJuego"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:entries="@array/juegos"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblNombreDetalle"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewUserEquipo"
+        android:layout_width="386dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblWinRateEquipo3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
