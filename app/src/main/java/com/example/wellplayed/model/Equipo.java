@@ -1,6 +1,8 @@
 package com.example.wellplayed.model;
 
-public class Equipo {
+import java.io.Serializable;
+
+public class Equipo implements Serializable {
 
     private Integer iIdEquipo, iMiembros;
     private String sNombre, sFoto;
@@ -50,5 +52,15 @@ public class Equipo {
 
     public void setiMiembros(Integer iMiembros) {
         this.iMiembros = iMiembros;
+    }
+
+    @Override
+    public String toString() {
+        return "Equipo{" +
+                "iIdEquipo=" + iIdEquipo +
+                ", iMiembros=" + iMiembros +
+                ", sNombre='" + sNombre + '\'' +
+                ", sFoto='" + sFoto + '\'' +
+                '}';
     }
 }

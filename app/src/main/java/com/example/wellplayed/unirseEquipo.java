@@ -13,6 +13,9 @@ import android.os.AsyncTask;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -46,9 +49,12 @@ public class unirseEquipo extends AppCompatActivity {
                 new waitReload().execute();
             }
 
-        });
 
+        });
     }
+
+
+
     private class waitReload extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
@@ -63,6 +69,7 @@ public class unirseEquipo extends AppCompatActivity {
         }
     }
 
+
     public void mostrarEquiposQueNoTieneUser() {
         String sUrl = Utils.hosting + "equipo-usuario/EquipoQueNoTieneUser.php?txtUsuario="+sNombreUser;
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
@@ -74,7 +81,25 @@ public class unirseEquipo extends AppCompatActivity {
                         Log.d("Rob", sUrl);
                         ListadoEquipos.lstEquipos = new Gson().fromJson(s, new TypeToken<List<Equipo>>() {
                         }.getType());
-                            mostrarData();
+                        mostrarData();
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
+    }
+
+
+    public static void unirseEquipo(Context context, int iIdEquipo, int iIdUsuario) {
+        String sUrl = Utils.hosting + "equipo/ins-equipo-usuario.php?txtEquipo="+iIdEquipo+"&txtUsuario="+iIdUsuario+"&txtCreador="+false;
+        Volley.newRequestQueue(context).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(context, "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context,"Equipo creado con exito", Toast.LENGTH_SHORT).show();
                     }
                 }
                 , volleyError -> {
@@ -91,7 +116,6 @@ public class unirseEquipo extends AppCompatActivity {
         adaptador.setOnClickListener(v -> {
             ListadoEquipos.iEquipoSelected = Rv.getChildAdapterPosition(v);
             oEquipo = ListadoEquipos.lstEquipos.get(ListadoEquipos.iEquipoSelected);
-
         });
 
     }
