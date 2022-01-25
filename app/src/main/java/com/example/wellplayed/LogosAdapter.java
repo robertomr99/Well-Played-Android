@@ -46,7 +46,7 @@ public class LogosAdapter extends RecyclerView.Adapter<LogosAdapter.ViewHolder> 
 
     public void onBindViewHolder(@NonNull LogosAdapter.ViewHolder holder, int position) {
 
-        Producto oProducto  = ListadoLogos.lstProducto.get(position); // Instanciamos el objeto de la lista con la posicion
+        Producto oProducto = ListadoProductos.lstProductos.get(position); // Instanciamos el objeto de la lista con la posicion
 
         Glide.with(context).load(oProducto.getsFoto()).circleCrop().into(holder.imgViewLogo);
 
@@ -55,7 +55,7 @@ public class LogosAdapter extends RecyclerView.Adapter<LogosAdapter.ViewHolder> 
 
 
     public int getItemCount() {
-        return ListadoJuegos.lstJuegos.size();
+        return ListadoProductos.lstProductos.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -67,4 +67,5 @@ public class LogosAdapter extends RecyclerView.Adapter<LogosAdapter.ViewHolder> 
             imgViewLogo = itemView.findViewById(R.id.imgViewLogo);
         }
     }
+
 }

@@ -71,6 +71,11 @@ public class Login extends AppCompatActivity {
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
+    public void restartPass(View view) {
+        Intent restartPass = new Intent(this, restartPass.class);
+        startActivity(restartPass);
+    }
+
     @Override
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -163,7 +168,6 @@ public class Login extends AppCompatActivity {
                         Log.d("alacide", sUrl);
                         oUsuarioSalida = new Gson().fromJson(s, new TypeToken<Usuario>() {
                         }.getType());
-
                         extraerObjetoUsuario();
 
                     }

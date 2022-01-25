@@ -5,16 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:backgroundTint="@color/GrisApp"
+    android:backgroundTint="@color/GrisClaroApp"
     tools:context=".EquipoDetalle">
 
-    <TextView
+    <com.codesgood.views.JustifiedTextView
         android:id="@+id/lblDescripcionDetalle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
+        android:background="@drawable/design_descripcion"
+        android:padding="5dp"
+        android:paddingStart="10dp"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +28,10 @@
         android:id="@+id/videoViewJuegoDetalle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/design_descripcion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,40 +40,44 @@
         android:id="@+id/lblWinRateDetalle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="30dp"
+        android:background="@drawable/design_descripcion"
+        android:padding="5dp"
         android:text="@string/lblWin_rate"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/lblDescripcionDetalle"
         app:layout_constraintTop_toBottomOf="@+id/lblDescripcionDetalle" />
 
     <TextView
         android:id="@+id/lblVictoriasDetalle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="30dp"
+        android:background="@drawable/design_descripcion"
+        android:padding="5dp"
         android:text="@string/lblVictorias"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/lblWinRateDetalle"
+        app:layout_constraintEnd_toStartOf="@+id/lblDerrotasDetalle"
         app:layout_constraintStart_toEndOf="@+id/lblWinRateDetalle"
-        app:layout_constraintTop_toBottomOf="@+id/lblDescripcionDetalle" />
+        app:layout_constraintTop_toTopOf="@+id/lblWinRateDetalle" />
 
     <TextView
         android:id="@+id/lblDerrotasDetalle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="25dp"
+        android:background="@drawable/design_descripcion"
+        android:padding="5dp"
         android:text="@string/lblDerrota"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblDescripcionDetalle" />
+        app:layout_constraintBottom_toBottomOf="@+id/lblVictoriasDetalle"
+        app:layout_constraintEnd_toEndOf="@+id/lblDescripcionDetalle"
+        app:layout_constraintTop_toTopOf="@+id/lblVictoriasDetalle" />
 
     <TextView
         android:id="@+id/lblRDerrotasDetallle"
@@ -75,7 +85,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/lblDerrotasDetalle"
         app:layout_constraintStart_toStartOf="@+id/lblDerrotasDetalle"
         app:layout_constraintTop_toBottomOf="@+id/lblDerrotasDetalle" />
 
@@ -85,7 +97,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/lblVictoriasDetalle"
         app:layout_constraintStart_toStartOf="@+id/lblVictoriasDetalle"
         app:layout_constraintTop_toBottomOf="@+id/lblVictoriasDetalle" />
 
@@ -94,8 +108,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/lblWinRateDetalle"
         app:layout_constraintStart_toStartOf="@+id/lblWinRateDetalle"
         app:layout_constraintTop_toBottomOf="@+id/lblWinRateDetalle" />
 
@@ -109,5 +126,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/lblPorcentaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:text="%"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/lblRWinRateDetalle"
+        app:layout_constraintTop_toBottomOf="@+id/lblWinRateDetalle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imgViewEquipo" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/txtNombreEquipo"
         android:layout_width="211dp"
         android:layout_height="46dp"
         android:layout_marginTop="24dp"
@@ -105,6 +105,7 @@
         android:layout_marginTop="48dp"
         android:backgroundTint="@color/AmarilloApp"
         android:fontFamily="@font/cabin"
+        android:onClick="insertEquipo"
         android:text="@string/btn_aceptar"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -129,6 +130,7 @@
         android:layout_width="125dp"
         android:layout_height="125dp"
         android:layout_marginTop="24dp"
+        android:onClick="cambiarLogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblCrearEquipo"

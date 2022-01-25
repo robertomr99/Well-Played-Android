@@ -155,7 +155,7 @@ public class misJuegosFragment extends Fragment {
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 // esta pantalla es cuando ha salido mal.
-                Toast.makeText(getContext(), "No se ha podido añadir ningun juego", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "No se ha podido añadir ningun juego", Toast.LENGTH_SHORT).show();
             }
         }
     } //onActivityResult
