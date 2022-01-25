@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class Usuario implements Serializable {
 
     private Integer iIdUsuario;
-    private String sEmail , sUser, sPassword, sFechaNacimiento;
+    private String sEmail , sUser, sPassword, sFechaNacimiento, sFoto;
     private int iPais, iMonedas;
     private boolean boAdmin;
 
@@ -26,7 +26,7 @@ public class Usuario implements Serializable {
         this.iIdUsuario = iIdUsuario;
     }
 
-    public Usuario(Integer iIdUsuario, String sEmail, String sUser, String sPassword, String sFechaNacimiento, int iPais, int iMonedas, boolean boAdmin) {
+    public Usuario(Integer iIdUsuario, String sEmail, String sUser, String sPassword, String sFechaNacimiento, int iPais, int iMonedas, boolean boAdmin, String sFoto) {
         this.iIdUsuario = iIdUsuario;
         this.sEmail = sEmail;
         this.sUser = sUser;
@@ -35,6 +35,7 @@ public class Usuario implements Serializable {
         this.iPais = iPais;
         this.iMonedas = iMonedas;
         this.boAdmin = boAdmin;
+        this.sFoto = sFoto;
     }
 
     public Integer getiIdUsuario() {
@@ -108,6 +109,14 @@ public class Usuario implements Serializable {
 
     public void setBoAdmin(boolean boAdmin) {
         this.boAdmin = boAdmin;
+    }
+
+    public String getsFoto() {
+        return sFoto;
+    }
+
+    public void setsFoto(String sFoto) {
+        this.sFoto = sFoto;
     }
 
     @Override

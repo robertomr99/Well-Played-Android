@@ -2,11 +2,15 @@ package com.example.wellplayed;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -22,6 +26,7 @@ import com.example.wellplayed.model.Equipo;
 import com.example.wellplayed.model.Equipo_Juego;
 import com.example.wellplayed.model.Equipo_Usuario;
 import com.example.wellplayed.model.Juego;
+import com.example.wellplayed.model.Usuario;
 import com.example.wellplayed.model.Usuario_Juego;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -39,6 +44,9 @@ public class EquipoDetalle extends AppCompatActivity {
     Integer iIdEquipoJuego, iIdJuego;
     ArrayList<Juego> lstJuegos;
     ArrayList<String> lstNombreJuegos = new ArrayList<String>();
+    RecyclerView rv;
+    UsuariosAdapter usuariosAdapter;
+    ImageView imgBtnAdminUserDetalle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +60,19 @@ public class EquipoDetalle extends AppCompatActivity {
         lblVictoriasDetalle = findViewById(R.id.lblRVictoriasEquipo);
         lblDerrotasDetalle = findViewById(R.id.lblRDerrotasEquipo);
         lblWinRateDetalle = findViewById(R.id.lblRWinRateEquipo);
+        imgBtnAdminUserDetalle = findViewById(R.id.imgBtnAdminUserDetalle);
+        rv = findViewById(R.id.recyclerViewUserEquipo);
+        getUsuariosEquipo();
+
+        imgBtnAdminUserDetalle.setOnClickListener(view -> {
+            view.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.clickanimation));
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            cambiarListaPendiente();
+        });
 
         spinnerJuegos = findViewById(R.id.spinnerJuego);
         lstEquipoJuego();
@@ -59,27 +80,21 @@ public class EquipoDetalle extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 devolverProducto();
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
-
 
 
         oEquipo = ListadoEquipos.lstEquipos.get(ListadoEquipos.iEquipoSelected);
         Glide.with(getApplicationContext()).load(oEquipo.getsFoto()).circleCrop().into(imgViewEquipoDetalle);
         lblNombreDetalle.setText("" + oEquipo.getsNombre());
-
     }
 
 
-
     private void devolverProducto() {
-        Log.d("Flipa", String.valueOf(spinnerJuegos.getItemAtPosition(spinnerJuegos.getSelectedItemPosition())));
         switch (String.valueOf(spinnerJuegos.getItemAtPosition(spinnerJuegos.getSelectedItemPosition()))) {
             case "LOL":
                 iIdJuego = 1;
@@ -104,6 +119,28 @@ public class EquipoDetalle extends AppCompatActivity {
         lblDerrotasDetalle.setText("" + oEquipoJuego.getiDerrotas());
         lblWinRateDetalle.setText("" + oEquipoJuego.getfWinRate());
         setearColoresWinRate(oEquipoJuego);
+    }
+
+    public void getUsuariosEquipo() {
+        String sUrl = Utils.hosting + "equipo-usuario/lst-usuarios-equipo.php?txtEquipo=" + iIdEquipoJuego;
+
+        Volley.newRequestQueue(getApplicationContext()).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.d("Rob", sUrl);
+                        ListadoUsuarios.lstUsuarios = new Gson().fromJson(s, new TypeToken<List<Usuario>>() {
+                        }.getType());
+                        Log.d("ListaUsuarios", ListadoUsuarios.lstUsuarios.toString());
+                        mostrarUsuarios();
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
     }
 
 
@@ -151,14 +188,24 @@ public class EquipoDetalle extends AppCompatActivity {
     }
 
     private void rellenarSpinnerJuegos(List<Juego> lstJuegos) {
-        for (int i = 0 ; i < lstJuegos.size(); i++) {
+
+        for (int i = 0; i < lstJuegos.size(); i++) {
             lstNombreJuegos.add(lstJuegos.get(i).getsNombre());
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(EquipoDetalle.this, android.R.layout.simple_spinner_dropdown_item, lstNombreJuegos);
         spinnerJuegos.setAdapter(adapter);
-        adapter.setNotifyOnChange(true);
         devolverProducto();
+    }
 
+    private void mostrarUsuarios() {
+        rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        usuariosAdapter = new UsuariosAdapter(getApplicationContext());
+        rv.setAdapter(usuariosAdapter);
+    }
+
+    private void cambiarListaPendiente() {
+        Intent iListaPendientes = new Intent(getApplicationContext(),PeticionesEquipo.class);
+        startActivity(iListaPendientes);
     }
 
 
@@ -176,7 +223,7 @@ public class EquipoDetalle extends AppCompatActivity {
 
     private void setearColoresWinRate(Equipo_Juego oEquipoJuego) {
         if (oEquipoJuego.getfWinRate() >= 50 && oEquipoJuego.getfWinRate() <= 60) {
-            lblWinRateDetalle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.AmarrilloWinRate));
+            lblWinRateDetalle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.NaranjaWinRate));
         } else if (oEquipoJuego.getfWinRate() > 60) {
             lblWinRateDetalle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.VerdeWinRate));
         } else {

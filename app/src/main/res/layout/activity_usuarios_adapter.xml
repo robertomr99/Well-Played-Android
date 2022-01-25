@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardViewEquipos"
+    android:id="@+id/cardViewUsuarios"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="15dp"
@@ -20,48 +20,34 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="96dp">
+        android:layout_height="66dp">
 
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imgViewEquipo"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:id="@+id/imgViewUsuario"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_centerInParent="true"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             android:src="@android:mipmap/sym_def_app_icon"
             app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/lblNombreEquipo"
+            android:id="@+id/lblNombreUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:fontFamily="@font/cabin"
             android:textAlignment="center"
             android:textColor="@color/GrisApp"
             android:textSize="20sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imgViewUsuario"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imgViewEquipo"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/lblMiembros"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/cabin"
-            android:textAlignment="center"
-            android:textColor="@color/GrisApp"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/lblNombreEquipo"
-            app:layout_constraintStart_toStartOf="@+id/lblNombreEquipo"
-            app:layout_constraintTop_toBottomOf="@+id/lblNombreEquipo" />
-
+            app:layout_constraintStart_toEndOf="@+id/imgViewUsuario"
+            app:layout_constraintTop_toTopOf="@+id/imgViewUsuario" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
