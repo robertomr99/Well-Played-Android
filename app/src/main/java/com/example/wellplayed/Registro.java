@@ -141,7 +141,7 @@ public class Registro extends AppCompatActivity {
     private void insertUsuario(Usuario oUser,boolean boExito) {
 
         if(!boExito){
-            String sUrl = Utils.hosting + "usuario/ins-usuario.php?txtEmail="+oUser.getsEmail()+"&txtUsuario="+oUser.getsUser()+"&txtPass="+oUser.getsPassword()+"&txtFechaNacimiento="+oUser.getsFechaNacimiento()+"&txtPais="+oUser.getiPais()+"&txtMonedas="+oUser.getiMonedas()+"&txtAdministrador="+oUser.isBoAdmin();
+            String sUrl = Utils.hosting + "usuario/ins-usuario.php?txtEmail="+oUser.getsEmail()+"&txtUsuario="+oUser.getsUser()+"&txtPass="+oUser.getsPassword()+"&txtFechaNacimiento="+oUser.getsFechaNacimiento()+"&txtPais="+oUser.getiPais()+"&txtMonedas="+oUser.getiMonedas()+"&txtAdministrador="+oUser.getiAdmin();
 
             Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
                     s ->{
@@ -171,7 +171,7 @@ public class Registro extends AppCompatActivity {
         oUser.setsFechaNacimiento(txtFechaNacimiento.getText().toString());
         oUser.setiPais(spinPaises.getSelectedItemPosition());
         oUser.setiMonedas(0);
-        oUser.setBoAdmin(false);
+        oUser.setiAdmin(0);
 
         return oUser;
     }

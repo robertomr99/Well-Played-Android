@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -40,18 +42,22 @@ public class EquipoDetalle extends AppCompatActivity {
     TextView lblNombreDetalle, lblVictoriasDetalle, lblDerrotasDetalle, lblWinRateDetalle;
     ImageView imgViewEquipoDetalle;
     Equipo oEquipo;
+    Equipo_Usuario oEquipoUsuario;
     Spinner spinnerJuegos;
     Integer iIdEquipoJuego, iIdJuego;
     ArrayList<Juego> lstJuegos;
     ArrayList<String> lstNombreJuegos = new ArrayList<String>();
     RecyclerView rv;
     UsuariosAdapter usuariosAdapter;
-    ImageView imgBtnAdminUserDetalle;
+    ImageButton imgBtnAdminUserDetalle;
+    Button btnEliminarSalirEquipoDetalle;
+    public static final String sNombreUser = MainActivity.oUsuario.getsUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         intentEquipoJuego();
+        comprobarCradorEquipo();
         setContentView(R.layout.activity_equipo_detalle);
 
         imgViewEquipoDetalle = findViewById(R.id.imgViewEquipoDetalle);
@@ -61,11 +67,23 @@ public class EquipoDetalle extends AppCompatActivity {
         lblDerrotasDetalle = findViewById(R.id.lblRDerrotasEquipo);
         lblWinRateDetalle = findViewById(R.id.lblRWinRateEquipo);
         imgBtnAdminUserDetalle = findViewById(R.id.imgBtnAdminUserDetalle);
+        btnEliminarSalirEquipoDetalle = findViewById(R.id.btnEliminarEquipoDetalle);
+
+        btnEliminarSalirEquipoDetalle.setOnClickListener(view -> {
+            if (oEquipoUsuario.getiCreador() == 1) {
+                Toast.makeText(this, "Es creador", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "No es creador", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         rv = findViewById(R.id.recyclerViewUserEquipo);
         getUsuariosEquipo();
 
+        Log.d("Usuario", MainActivity.oUsuario.toString());
+
         imgBtnAdminUserDetalle.setOnClickListener(view -> {
-            view.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.clickanimation));
+            view.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.clickanimation));
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -119,6 +137,40 @@ public class EquipoDetalle extends AppCompatActivity {
         lblDerrotasDetalle.setText("" + oEquipoJuego.getiDerrotas());
         lblWinRateDetalle.setText("" + oEquipoJuego.getfWinRate());
         setearColoresWinRate(oEquipoJuego);
+    }
+
+    public void comprobarCradorEquipo() {
+        String sUrl = Utils.hosting + "equipo-usuario/comprobar-creador.php?txtUsuario=" + sNombreUser + "&txtEquipo=" + iIdEquipoJuego;
+
+        Volley.newRequestQueue(getApplicationContext()).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        boolean boCreador = false;
+                        Log.d("Rob", sUrl);
+                        oEquipoUsuario = new Gson().fromJson(s, new TypeToken<Equipo_Usuario>() {
+                        }.getType());
+                        Log.d("CREADORDENTRO", oEquipoUsuario.getiCreador().toString());
+                        ocultarElementos();
+
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
+    }
+
+    private void ocultarElementos() {
+        Log.d("CREADOR", oEquipoUsuario.getiCreador().toString());
+        if (oEquipoUsuario.getiCreador() == 0) {
+            imgBtnAdminUserDetalle.setVisibility(View.GONE);
+            btnEliminarSalirEquipoDetalle.setText(R.string.btn_SalirEquipo);
+        } else {
+            btnEliminarSalirEquipoDetalle.setText(R.string.btn_EliminarEquipo);
+        }
     }
 
     public void getUsuariosEquipo() {
@@ -204,7 +256,7 @@ public class EquipoDetalle extends AppCompatActivity {
     }
 
     private void cambiarListaPendiente() {
-        Intent iListaPendientes = new Intent(getApplicationContext(),PeticionesEquipo.class);
+        Intent iListaPendientes = new Intent(getApplicationContext(), PeticionesEquipo.class);
         startActivity(iListaPendientes);
     }
 
