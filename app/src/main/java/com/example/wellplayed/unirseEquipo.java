@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +34,9 @@ public class unirseEquipo extends AppCompatActivity {
     Equipo oEquipo;
     public static final String sNombreUser = MainActivity.oUsuario.getsUser();
     private SwipeRefreshLayout swipeRefreshLayout;
+    final long EXECUTION_TIME = 2000; // 1 minuto
+    private Handler handler = new Handler();
+    private Runnable runnable;
 
 
     @Override
@@ -51,6 +55,17 @@ public class unirseEquipo extends AppCompatActivity {
 
 
         });
+
+        handler.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+
+                mostrarEquiposQueNoTieneUser();
+                handler.postDelayed(this, EXECUTION_TIME);
+            }
+        }, EXECUTION_TIME);
+
     }
 
 
