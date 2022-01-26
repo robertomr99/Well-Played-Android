@@ -1,14 +1,18 @@
 package com.example.wellplayed;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.media.audiofx.DynamicsProcessing;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -39,6 +43,7 @@ import java.util.zip.Inflater;
 
 public class EquipoDetalle extends AppCompatActivity {
 
+
     TextView lblNombreDetalle, lblVictoriasDetalle, lblDerrotasDetalle, lblWinRateDetalle;
     ImageView imgViewEquipoDetalle;
     Equipo oEquipo;
@@ -51,7 +56,22 @@ public class EquipoDetalle extends AppCompatActivity {
     UsuariosAdapter usuariosAdapter;
     ImageButton imgBtnAdminUserDetalle;
     Button btnEliminarSalirEquipoDetalle;
+
+    public static LayoutInflater inflaterDetalle;
+    public static AlertDialog.Builder dialogBuilder;
+    public static AlertDialog dialog;
+    public static Button btnSI, btnNO;
+
+    public static EquipoDetalle context;
     public static final String sNombreUser = MainActivity.oUsuario.getsUser();
+
+    public EquipoDetalle() {
+        context = this;
+    }
+
+    public static EquipoDetalle getInstance() {
+        return context;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +82,6 @@ public class EquipoDetalle extends AppCompatActivity {
 
         imgViewEquipoDetalle = findViewById(R.id.imgViewEquipoDetalle);
         lblNombreDetalle = findViewById(R.id.lblNombreDetalle);
-
         lblVictoriasDetalle = findViewById(R.id.lblRVictoriasEquipo);
         lblDerrotasDetalle = findViewById(R.id.lblRDerrotasEquipo);
         lblWinRateDetalle = findViewById(R.id.lblRWinRateEquipo);
@@ -111,6 +130,37 @@ public class EquipoDetalle extends AppCompatActivity {
         lblNombreDetalle.setText("" + oEquipo.getsNombre());
     }
 
+
+    public void PopupEliminar(Usuario oUsuario){
+        dialogBuilder = new AlertDialog.Builder(context);
+        final View PopupEliminarUsuario = getLayoutInflater().inflate(R.layout.popupusuario, null);
+        btnSI = (Button) PopupEliminarUsuario.findViewById(R.id.btnSiEliminar);
+        btnNO = (Button) PopupEliminarUsuario.findViewById(R.id.btnNoEliminar);
+
+        dialogBuilder.setView(PopupEliminarUsuario);
+        dialog = dialogBuilder.create();
+        dialog.setCancelable(false); // Para que tenga que pulsar una opcion si o si (btn atras del movil)
+        dialog.setCanceledOnTouchOutside(false); // Para que tenga que pulsar una opcion si o si (en la pantalla)
+        dialog.show();
+
+        btnSI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(EquipoDetalle.this, "Se elimina", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnNO.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(EquipoDetalle.this, "No se elimina", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+
+                // dialog.cancel();
+            }
+        });
+
+    }
 
     private void devolverProducto() {
         switch (String.valueOf(spinnerJuegos.getItemAtPosition(spinnerJuegos.getSelectedItemPosition()))) {
@@ -251,7 +301,15 @@ public class EquipoDetalle extends AppCompatActivity {
 
     private void mostrarUsuarios() {
         rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        usuariosAdapter = new UsuariosAdapter(getApplicationContext());
+        usuariosAdapter = new UsuariosAdapter(getApplicationContext(), new UsuariosAdapter.UsuarioAdapterInterface( // Para implementar la interfaz
+        ) {
+            @Override
+            public void deleteUser(Usuario oUsuario) {
+                Toast.makeText(EquipoDetalle.this, oUsuario.getsUser(), Toast.LENGTH_SHORT).show();
+                // Booleano para hacer cambios de ese objeto en concreto
+                PopupEliminar(oUsuario);
+            }
+        });
         rv.setAdapter(usuariosAdapter);
     }
 

@@ -27,6 +27,9 @@
     <string name="lblDerrota">Derrota</string>
     <string name="btn_EliminarJuego">Eliminar juego</string>
     <string name="SpinnerJuego">Juegos</string>
+    <string name="lblEliminarUsuario">¿Desea eliminar el usuario de este equipo?</string>
+    <string name="lblSi">Si</string>
+    <string name="lblNo">No</string>
 
     <!-- String Drawer Menu -->
     <string name="mnuPerfil">Perfil</string>
