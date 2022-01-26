@@ -34,8 +34,6 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
         void deleteUser(Usuario oUsuario);
     }
 
-    ;
-
     UsuarioAdapterInterface uaInterface;
     LayoutInflater inflater;
     Context context;
@@ -106,29 +104,4 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
 
         }
     }
-
-
-    private void eliminarUsuarioEquipo(String sNombreEquipo, int iIdUsuario) {
-
-        String sUrl = Utils.hosting + "equipo/select-idEquipo.php?txtEquipo=" + sNombreEquipo;
-        Log.d("selectIdEquipo", sUrl);
-        Volley.newRequestQueue(context.getApplicationContext()).add(new StringRequest(Request.Method.GET, sUrl,
-                s -> {
-                    if (s.equals("null")) {
-
-                    } else {
-                        Equipo oEquipo;
-                        oEquipo = new Gson().fromJson(s, new TypeToken<Equipo>() {
-                        }.getType());
-                        // prueba(oEquipo, iIdUsuario);
-                    }
-                }
-                , volleyError -> {
-
-            Log.d("ALACID", volleyError.getCause().toString());
-        }
-        ));
-    }
-
-
 }

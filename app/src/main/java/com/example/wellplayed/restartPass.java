@@ -62,7 +62,7 @@ public class restartPass extends AppCompatActivity {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(txtEmailRestart.getText().toString()));
             message.setSubject("Cambio de contraseña de usuario en wellplayed");
             message.setContent("Has socilitado un cambio de contraseña, haga click en el siguiente enlace para restablecerla/n" +
-                    "Token necesario para restablecer contraseña: " +,"text/html;charset=utf-8");
+                    "Token necesario para restablecer contraseña: " ,"text/html;charset=utf-8");
             Transport.send(message);
 
 
