@@ -27,11 +27,12 @@ public class addJuego extends AppCompatActivity {
 
     Juego oJuego;
     Usuario oUsuario;
-    public static final String sNombreUser = MainActivity.oUsuario.getsUser();
+    public static String sNombreUser = MainActivity.oUsuario.getsUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_juego);
+        sNombreUser = MainActivity.oUsuario.getsUser();
         mostrarJuegosQueNoTieneUser();
     }
 

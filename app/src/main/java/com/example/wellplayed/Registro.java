@@ -26,6 +26,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import com.example.wellplayed.model.Data;
+import com.example.wellplayed.model.PassGenerator;
 import com.example.wellplayed.model.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -150,7 +151,7 @@ public class Registro extends AppCompatActivity {
     public static void insertUsuario(Usuario oUser, boolean boExito) {
 
         if(!boExito){
-            String sUrl = Utils.hosting + "usuario/ins-usuario.php?txtEmail="+oUser.getsEmail()+"&txtUsuario="+oUser.getsUser()+"&txtPass="+oUser.getsPassword()+"&txtFechaNacimiento="+oUser.getsFechaNacimiento()+"&txtPais="+oUser.getiPais()+"&txtMonedas="+oUser.getiMonedas()+"&txtAdministrador="+oUser.getiAdmin();
+            String sUrl = Utils.hosting + "usuario/ins-usuario.php?txtEmail="+oUser.getsEmail()+"&txtUsuario="+oUser.getsUser()+"&txtPass="+oUser.getsPassword()+"&txtFechaNacimiento="+oUser.getsFechaNacimiento()+"&txtPais="+oUser.getiPais()+"&txtMonedas="+oUser.getiMonedas()+"&txtAdministrador="+oUser.getiAdmin()+"&txtFoto="+oUser.getsFoto()+"&txtCodigo="+oUser.getsCodigo();
 
             Volley.newRequestQueue(Login.getInstance().getApplicationContext()).add(new StringRequest(Request.Method.GET,sUrl,
                     s ->{
@@ -181,6 +182,8 @@ public class Registro extends AppCompatActivity {
         oUser.setiPais(spinPaises.getSelectedItemPosition());
         oUser.setiMonedas(0);
         oUser.setiAdmin(0);
+        oUser.setsFoto("");
+        oUser.setsCodigo(PassGenerator.getPassword());
 
         return oUser;
     }

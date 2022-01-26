@@ -102,11 +102,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void salir() {
+        lstAllClear();
         borrarPreferencias();
         Intent intentLogin = new Intent(this, Login.class);
         startActivity(intentLogin);
     }
 
+    public void lstAllClear(){
+        ListadoEquipos.lstEquipos.clear();
+        ListadoUsuarios.lstUsuarios.clear();
+        ListadoProductos.lstProductos.clear();
+        ListadoJuegos.lstJuegos.clear();
+        oUsuario.setsUser("");
+        misEquiposFragment.sNombreUser = "";
+        misJuegosFragment.sNombreUser = "";
+        addJuego.sNombreUser = "";
+    }
 
     public void borrarPreferencias() {
         Login.preferences = getSharedPreferences("Credenciales", Context.MODE_PRIVATE);

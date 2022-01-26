@@ -99,7 +99,7 @@ public class unirseEquipo extends AppCompatActivity {
 
 
     public static void unirseEquipo(Context context, int iIdEquipo, int iIdUsuario) {
-        String sUrl = Utils.hosting + "equipo/ins-equipo-usuario.php?txtEquipo="+iIdEquipo+"&txtUsuario="+iIdUsuario+"&txtCreador="+false;
+        String sUrl = Utils.hosting + "equipo/ins-equipo-usuario.php?txtEquipo="+iIdEquipo+"&txtUsuario="+iIdUsuario+"&txtCreador="+0;
         Volley.newRequestQueue(context).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
                     Log.d("vacio", s);

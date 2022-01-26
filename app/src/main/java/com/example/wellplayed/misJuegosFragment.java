@@ -37,7 +37,7 @@ public class misJuegosFragment extends Fragment {
     RecyclerView Rv;
     JuegosAdapter adaptador;
     public static Usuario_Juego oUsuario_Juego;
-    public static final String sNombreUser = MainActivity.oUsuario.getsUser();
+    public static String sNombreUser = MainActivity.oUsuario.getsUser();
 
     public misJuegosFragment() {
         // Required empty public constructor
@@ -45,7 +45,9 @@ public class misJuegosFragment extends Fragment {
 
     public void onCreate(View view, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sNombreUser = MainActivity.oUsuario.getsUser();
         mostrarJuegos();
+
     }
 
     @Override
@@ -61,6 +63,7 @@ public class misJuegosFragment extends Fragment {
 
         View vista = inflater.inflate(R.layout.fragment_mis_juegos, container, false);
         Rv = vista.findViewById(R.id.recyclerViewJuegos);
+        sNombreUser = MainActivity.oUsuario.getsUser();
         mostrarJuegos();
         addJuego(vista);
 
