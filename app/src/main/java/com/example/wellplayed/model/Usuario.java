@@ -12,7 +12,7 @@ public class Usuario implements Serializable {
     private Integer iIdUsuario;
     private String sEmail , sUser, sPassword, sFechaNacimiento, sFoto, sCodigo;
     private int iPais, iMonedas;
-    private  Integer iAdmin;
+    private Integer iAdmin;
 
     public Usuario() {
     }
@@ -26,7 +26,7 @@ public class Usuario implements Serializable {
         this.iIdUsuario = iIdUsuario;
     }
 
-    public Usuario(Integer iIdUsuario, String sEmail, String sUser, String sPassword, String sFechaNacimiento, int iPais, int iMonedas, Integer iAdmin, String sFoto, String sCodigo) {
+    public Usuario(Integer iIdUsuario, String sEmail, String sUser, String sPassword, String sFechaNacimiento, int iPais, int iMonedas, Integer iAdmin, String sFoto,String sCodigo) {
         this.iIdUsuario = iIdUsuario;
         this.sEmail = sEmail;
         this.sUser = sUser;
@@ -38,7 +38,6 @@ public class Usuario implements Serializable {
         this.sFoto = sFoto;
         this.sCodigo = sCodigo;
     }
-
 
     public String getsCodigo() {
         return sCodigo;

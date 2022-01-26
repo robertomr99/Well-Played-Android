@@ -171,7 +171,7 @@ public class Login extends AppCompatActivity {
 
     private void usuarioLogeado() {
         oUsuarioEntrada.setsUser(txtUsuario.getText().toString().toUpperCase());
-        oUsuarioEntrada.setsPassword(txtPass.getText().toString().toUpperCase());
+        oUsuarioEntrada.setsPassword(txtPass.getText().toString());
     }
 
     public void comprobarUserGoogle() {
