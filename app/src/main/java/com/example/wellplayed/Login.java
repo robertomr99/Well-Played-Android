@@ -272,6 +272,11 @@ public class Login extends AppCompatActivity {
 
     }
 
+    public void restartPassIntent(View v){
+        Intent i = new Intent(this, restartPass.class);
+        startActivity(i);
+    }
+
 }
 
 

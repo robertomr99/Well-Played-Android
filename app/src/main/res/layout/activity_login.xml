@@ -94,7 +94,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
         android:padding="8dp"
-        android:onClick="restartPass"
+        android:onClick="restartPassIntent"
         android:text="@string/has_olvidado_la_contrase_a"
         android:textColor="@color/lblClickables"
         app:layout_constraintStart_toEndOf="@+id/imageView2"

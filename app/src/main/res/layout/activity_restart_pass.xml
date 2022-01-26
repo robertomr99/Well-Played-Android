@@ -11,6 +11,7 @@
         android:id="@+id/btnRestartPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="restartPass"
         android:text="@string/restablecer_contrase_a"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

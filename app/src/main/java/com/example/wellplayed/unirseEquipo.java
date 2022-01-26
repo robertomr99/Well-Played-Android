@@ -56,15 +56,7 @@ public class unirseEquipo extends AppCompatActivity {
 
         });
 
-        handler.postDelayed(new Runnable() {
 
-            @Override
-            public void run() {
-
-                mostrarEquiposQueNoTieneUser();
-                handler.postDelayed(this, EXECUTION_TIME);
-            }
-        }, EXECUTION_TIME);
 
     }
 
