@@ -34,7 +34,7 @@ public class misEquiposFragment extends Fragment {
 
     RecyclerView recyclerView;
     EquiposAdapter adaptador;
-    public static final String sNombreUser = MainActivity.oUsuario.getsUser();
+    public static String sNombreUser = MainActivity.oUsuario.getsUser();
     public static Equipo_Usuario oEquipo_Usuario;
     public static Equipo oEquipo;
 
@@ -50,6 +50,7 @@ public class misEquiposFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mis_equipos, container, false);
         recyclerView = view.findViewById(R.id.recyclerViewEquipos);
+        sNombreUser = MainActivity.oUsuario.getsUser();
         mostrarEquipos();
         crearEquipo(view);
         unirseEquipo(view);
@@ -68,6 +69,7 @@ public class misEquiposFragment extends Fragment {
                         Log.d("Rob", sUrl);
                         ListadoEquipos.lstEquipos = new Gson().fromJson(s, new TypeToken<List<Equipo>>() {
                         }.getType());
+                        Log.d("pruebabawjebajwe",ListadoEquipos.lstEquipos.toString());
                         mostrarData(getContext());
                     }
                 }
