@@ -10,9 +10,9 @@ import java.util.regex.Pattern;
 public class Usuario implements Serializable {
 
     private Integer iIdUsuario;
-    private String sEmail , sUser, sPassword, sFechaNacimiento;
+    private String sEmail , sUser, sPassword, sFechaNacimiento, sFoto;
     private int iPais, iMonedas;
-    private boolean boAdmin;
+    private  Integer iAdmin;
 
     public Usuario() {
     }
@@ -26,7 +26,7 @@ public class Usuario implements Serializable {
         this.iIdUsuario = iIdUsuario;
     }
 
-    public Usuario(Integer iIdUsuario, String sEmail, String sUser, String sPassword, String sFechaNacimiento, int iPais, int iMonedas, boolean boAdmin) {
+    public Usuario(Integer iIdUsuario, String sEmail, String sUser, String sPassword, String sFechaNacimiento, int iPais, int iMonedas, Integer iAdmin, String sFoto) {
         this.iIdUsuario = iIdUsuario;
         this.sEmail = sEmail;
         this.sUser = sUser;
@@ -34,7 +34,8 @@ public class Usuario implements Serializable {
         this.sFechaNacimiento = sFechaNacimiento;
         this.iPais = iPais;
         this.iMonedas = iMonedas;
-        this.boAdmin = boAdmin;
+        this.iAdmin = iAdmin;
+        this.sFoto = sFoto;
     }
 
     public Integer getiIdUsuario() {
@@ -102,12 +103,20 @@ public class Usuario implements Serializable {
         this.iMonedas = iMonedas;
     }
 
-    public boolean isBoAdmin() {
-        return boAdmin;
+    public Integer getiAdmin() {
+        return iAdmin;
     }
 
-    public void setBoAdmin(boolean boAdmin) {
-        this.boAdmin = boAdmin;
+    public void setiAdmin(Integer iAdmin) {
+        this.iAdmin = iAdmin;
+    }
+
+    public String getsFoto() {
+        return sFoto;
+    }
+
+    public void setsFoto(String sFoto) {
+        this.sFoto = sFoto;
     }
 
     @Override
@@ -118,9 +127,10 @@ public class Usuario implements Serializable {
                 ", sUser='" + sUser + '\'' +
                 ", sPassword='" + sPassword + '\'' +
                 ", sFechaNacimiento='" + sFechaNacimiento + '\'' +
+                ", sFoto='" + sFoto + '\'' +
                 ", iPais=" + iPais +
                 ", iMonedas=" + iMonedas +
-                ", boAdmin=" + boAdmin +
+                ", iAdmin=" + iAdmin +
                 '}';
     }
 }

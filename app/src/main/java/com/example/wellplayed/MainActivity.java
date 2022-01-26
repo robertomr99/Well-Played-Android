@@ -35,7 +35,7 @@ import org.w3c.dom.Text;
 
 import java.io.File;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
     public static Usuario oUsuario;
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
 
-        View header = ((NavigationView)findViewById(R.id.navigationView)).getHeaderView(0);
+        View header = ((NavigationView) findViewById(R.id.navigationView)).getHeaderView(0);
         oUsuario = intentDataUsuario(header);
         setSupportActionBar(toolbar);
         NavigationView navigationView = findViewById(R.id.navigationView);
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setItemIconTintList(null);
 
         drawerLayout = findViewById(R.id.drawerLayout);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,0,0);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    private void openFragment(Fragment fragment){
+    private void openFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, fragment);
@@ -72,15 +72,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         drawerLayout.closeDrawer(GravityCompat.START);
 
-        switch (item.getItemId()){
-            case R.id.mnuPerfil: openFragment(new perfilFragment());break;
-            case R.id.mnuMisJuegos: openFragment(new misJuegosFragment()); break;
-            case R.id.mnuMisEquipos: openFragment(new misEquiposFragment()); break;
-            case R.id.mnuMisPartidos: openFragment(new misPartidosFragment()); break;
-            case R.id.mnuTienda: openFragment(new tiendaFragment()); break;
-            case R.id.mnuSoporte: openFragment(new soporteFragment()); break;
-            case R.id.mnuAjustes: openFragment(new ajustesFragment()); break;
-            case R.id.mnuCerrarSesion: salir(); break;
+        switch (item.getItemId()) {
+            case R.id.mnuPerfil:
+                openFragment(new perfilFragment());
+                break;
+            case R.id.mnuMisJuegos:
+                openFragment(new misJuegosFragment());
+                break;
+            case R.id.mnuMisEquipos:
+                openFragment(new misEquiposFragment());
+                break;
+            case R.id.mnuMisPartidos:
+                openFragment(new misPartidosFragment());
+                break;
+            case R.id.mnuTienda:
+                openFragment(new tiendaFragment());
+                break;
+            case R.id.mnuSoporte:
+                openFragment(new soporteFragment());
+                break;
+            case R.id.mnuAjustes:
+                openFragment(new ajustesFragment());
+                break;
+            case R.id.mnuCerrarSesion:
+                salir();
+                break;
         }
         return false;
     }
@@ -92,18 +108,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    public  void borrarPreferencias(){
+    public void borrarPreferencias() {
         Login.preferences = getSharedPreferences("Credenciales", Context.MODE_PRIVATE);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.
                 Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).
                 build();
 
-        GoogleSignInClient googleSignInClient= GoogleSignIn.getClient(this,gso);
+        GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(this, gso);
         googleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
                     FirebaseAuth.getInstance().signOut(); // importante si estamos usando firebase
                 }
             }
@@ -120,17 +136,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     // Setea el nombre del usuario logeado en el menú lateral
 
-    private Usuario intentDataUsuario(View header){
+    private Usuario intentDataUsuario(View header) {
         Usuario oUser = new Usuario();
-        try{
-            if(getIntent().hasExtra("Name")){
+        try {
+            if (getIntent().hasExtra("Name")) {
                 oUser.setsUser(getIntent().getStringExtra("Name"));
                 ((TextView) header.findViewById(R.id.lblNombreUsuario)).setText(oUser.getsUser());
-            }else{
+            } else {
                 oUser = (Usuario) getIntent().getSerializableExtra("User");
                 ((TextView) header.findViewById(R.id.lblNombreUsuario)).setText(Login.oUsuarioEntrada.getsUser());
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

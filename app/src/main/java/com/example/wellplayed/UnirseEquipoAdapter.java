@@ -67,6 +67,7 @@ public class UnirseEquipoAdapter extends RecyclerView.Adapter<UnirseEquipoAdapte
 
         holder.lblNombre.setText(sNombre);
         holder.imgBtnUnirseEquipo.setOnClickListener(v ->{
+            v.startAnimation(AnimationUtils.loadAnimation(context,R.anim.clickanimation));
             seleccionarIdUser(sNombre);
 
         });

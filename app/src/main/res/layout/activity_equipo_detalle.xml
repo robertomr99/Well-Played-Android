@@ -121,9 +121,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewUserEquipo"
-        android:layout_width="386dp"
+        android:layout_width="345dp"
         android:layout_height="300dp"
         android:layout_marginTop="20dp"
+        android:background="@drawable/borderecycler"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblRVictoriasEquipo" />
@@ -140,5 +143,33 @@
         app:layout_constraintEnd_toStartOf="@+id/spinnerJuego"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblNombreDetalle" />
+
+    <Button
+        android:id="@+id/btnEliminarEquipoDetalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/AmarilloApp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewUserEquipo"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+
+    <ImageButton
+        android:id="@+id/imgBtnAdminUserDetalle"
+        style="@style/btnUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/joinequipo"
+        app:layout_constraintBottom_toBottomOf="@+id/imgViewEquipoDetalle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgViewEquipoDetalle"
+        app:layout_constraintTop_toTopOf="@+id/imgViewEquipoDetalle"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

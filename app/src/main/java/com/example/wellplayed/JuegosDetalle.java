@@ -77,7 +77,7 @@ public class JuegosDetalle extends AppCompatActivity {
 
     private void setearColoresWinRate(){
         if (oUsuario_Juego.getfWinRate() >= 50 && oUsuario_Juego.getfWinRate() <= 60) {
-            lblWinRateDetalle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.AmarrilloWinRate));
+            lblWinRateDetalle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.NaranjaWinRate));
         } else if(oUsuario_Juego.getfWinRate() > 60 ) {
             lblWinRateDetalle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.VerdeWinRate));
         }else{
