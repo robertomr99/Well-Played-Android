@@ -131,7 +131,9 @@ public class EquipoDetalle extends AppCompatActivity {
     }
 
 
-    public void PopupEliminar(Usuario oUsuario){
+    public void PopupEliminar(Usuario oUsuario) {
+
+
         dialogBuilder = new AlertDialog.Builder(context);
         final View PopupEliminarUsuario = getLayoutInflater().inflate(R.layout.popupusuario, null);
         btnSI = (Button) PopupEliminarUsuario.findViewById(R.id.btnSiEliminar);
@@ -146,7 +148,9 @@ public class EquipoDetalle extends AppCompatActivity {
         btnSI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(EquipoDetalle.this, "Se elimina", Toast.LENGTH_SHORT).show();
+                eliminarEquipoUsuario(oUsuario);
+                Toast.makeText(EquipoDetalle.this, "Usuario eliminado con éxito", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         });
 
@@ -155,8 +159,6 @@ public class EquipoDetalle extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(EquipoDetalle.this, "No se elimina", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
-
-                // dialog.cancel();
             }
         });
 
@@ -188,6 +190,27 @@ public class EquipoDetalle extends AppCompatActivity {
         lblWinRateDetalle.setText("" + oEquipoJuego.getfWinRate());
         setearColoresWinRate(oEquipoJuego);
     }
+
+    public void eliminarEquipoUsuario(Usuario oUsuario) {
+        String sUrl = Utils.hosting + "equipo-usuario/eliminar-equipo-usuario.php?txtUsuario=" + oUsuario.getiIdUsuario() + "&txtEquipo=" + iIdEquipoJuego;
+
+        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("Rob", s);
+                    if (s.equals("null")) {
+                        Toast.makeText(getApplicationContext(), "Error al eliminar el usuario", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Usuario eliminado con éxito", Toast.LENGTH_LONG).show();
+                        getUsuariosEquipo();
+                    }
+                }
+                , volleyError -> {
+
+            Log.d("ALACID", volleyError.getCause().toString());
+        }
+        ));
+    }
+
 
     public void comprobarCradorEquipo() {
         String sUrl = Utils.hosting + "equipo-usuario/comprobar-creador.php?txtUsuario=" + sNombreUser + "&txtEquipo=" + iIdEquipoJuego;
@@ -242,7 +265,9 @@ public class EquipoDetalle extends AppCompatActivity {
                 , volleyError -> {
             Log.d("Rob", volleyError.getCause().toString());
         }
+
         ));
+
     }
 
 
