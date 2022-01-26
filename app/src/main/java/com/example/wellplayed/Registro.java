@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -59,6 +60,14 @@ public class Registro extends AppCompatActivity {
     LocalDate c2 = LocalDate.now();
     DatePickerDialog dpd;
     public static Data oData = new Data();
+    public static Registro context;
+
+    public Registro(){
+        context = this;
+    }
+    public static Registro getInstance(){
+        return context;
+    }
 
     //List<LAVERDADERA> lstVerdad;
     //String sUrl = "http://well-played.infinityfreeapp.com/pruebas_Miguel/ins-coche.php?";
@@ -100,7 +109,7 @@ public class Registro extends AppCompatActivity {
 
 
     }
-    
+
 
     public void comprobarUser(){
 
@@ -138,17 +147,17 @@ public class Registro extends AppCompatActivity {
         insertUsuario(agregarUsuario(),boExito);
     }
 
-    private void insertUsuario(Usuario oUser,boolean boExito) {
+    public static void insertUsuario(Usuario oUser, boolean boExito) {
 
         if(!boExito){
             String sUrl = Utils.hosting + "usuario/ins-usuario.php?txtEmail="+oUser.getsEmail()+"&txtUsuario="+oUser.getsUser()+"&txtPass="+oUser.getsPassword()+"&txtFechaNacimiento="+oUser.getsFechaNacimiento()+"&txtPais="+oUser.getiPais()+"&txtMonedas="+oUser.getiMonedas()+"&txtAdministrador="+oUser.getiAdmin();
 
-            Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
+            Volley.newRequestQueue(Login.getInstance().getApplicationContext()).add(new StringRequest(Request.Method.GET,sUrl,
                     s ->{
                         if(s.equals("null")){
-                            Toast.makeText(getApplicationContext(), "error al crear el usuario", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Login.getInstance().getApplicationContext(), "error al crear el usuario", Toast.LENGTH_LONG).show();
                         }else{
-                            Toast.makeText(getApplicationContext(), "Usuario creado con éxito", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Login.getInstance().getApplicationContext(), "Usuario creado con éxito", Toast.LENGTH_LONG).show();
                         }
                     }
                     ,volleyError -> {
@@ -157,7 +166,7 @@ public class Registro extends AppCompatActivity {
             }
             ));
         }else{
-            Toast.makeText(this, "El nombre de usuario o email no esta disponible", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Login.getInstance().getApplicationContext(), "El nombre de usuario o email no esta disponible", Toast.LENGTH_SHORT).show();
         }
 
     }
