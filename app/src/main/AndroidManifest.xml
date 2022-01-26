@@ -15,11 +15,17 @@
         android:theme="@style/Theme.WellPlayed"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".restartPass"
+            android:exported="true" />
             android:name=".PeticionesEquipo"
             android:exported="false" />
         <activity
             android:name=".UsuariosAdapter"
             android:exported="false" />
+        <activity
+            android:name=".LogosAdpater"
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LogosAdpater"
             android:exported="true"

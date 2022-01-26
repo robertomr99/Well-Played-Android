@@ -17,7 +17,9 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.wellplayed.model.Equipo;
 import com.example.wellplayed.model.Usuario;
+import com.example.wellplayed.model.PassGenerator;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -38,12 +40,23 @@ public class Login extends AppCompatActivity {
     EditText txtUsuario;
     EditText txtPass;
     CheckBox checkBoxRecuerdame;
+    public static String SCORREOGOOGLE = "";
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
     public static Usuario oUsuarioSalida, oUsuarioEntrada = new Usuario();
     public static SharedPreferences preferences;
     private GoogleSignInClient mGoogleSignInClient;
+    private static Usuario oUsuarioGoogle = new Usuario();
+    private static Usuario oUsuarioGoogle2;
     private FirebaseAuth mAuth;
+    public static Login context;
+
+    public Login(){
+        context = this;
+    }
+    public static Login getInstance(){
+        return context;
+    }
 
 
     @Override
@@ -98,12 +111,24 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
 
+                            SCORREOGOOGLE = user.getEmail();
+
+                            Log.d("holaholahola", SCORREOGOOGLE);
+                            oUsuarioGoogle.setsEmail(SCORREOGOOGLE);
                             // Sign in success, update UI with the signed-in user's information
+
+
+                            String[] parts = SCORREOGOOGLE.split("@");
+                            String sPart1 = parts[0];
+
+                            oUsuarioGoogle.setsUser(sPart1);
+                            comprobarUserGoogle();
+                            oUsuarioGoogle.setsPassword(PassGenerator.getPassword());
+
                             Intent i = new Intent(Login.this,MainActivity.class);
                             startActivity(i);
-
-                            FirebaseUser user = mAuth.getCurrentUser();
 
 
                         } else {
@@ -147,7 +172,35 @@ public class Login extends AppCompatActivity {
     private void usuarioLogeado() {
         oUsuarioEntrada.setsUser(txtUsuario.getText().toString().toUpperCase());
         oUsuarioEntrada.setsPassword(txtPass.getText().toString().toUpperCase());
+    }
 
+    public void comprobarUserGoogle() {
+
+        String sUrl = Utils.hosting + "usuario/get-user.php?txtUsuario=" + oUsuarioGoogle.getsUser();
+        Log.d("alacide", sUrl);
+        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.d("alacide", sUrl);
+                        oUsuarioGoogle2 = new Gson().fromJson(s, new TypeToken<Usuario>() {
+                        }.getType());
+
+                        if(oUsuarioGoogle2 == null){
+                            Registro.insertUsuario(oUsuarioGoogle,false);
+                        }
+
+
+                    }
+                }
+
+                , volleyError -> {
+
+            Log.d("ALACID", volleyError.getCause().toString());
+        }
+        ));
     }
 
     public void loginApp() {
@@ -163,6 +216,7 @@ public class Login extends AppCompatActivity {
                         Log.d("alacide", sUrl);
                         oUsuarioSalida = new Gson().fromJson(s, new TypeToken<Usuario>() {
                         }.getType());
+
                         extraerObjetoUsuario();
 
                     }
@@ -218,11 +272,12 @@ public class Login extends AppCompatActivity {
 
     }
 
+    public void restartPassIntent(View v){
+        Intent i = new Intent(this, restartPass.class);
+        startActivity(i);
+    }
+
 }
-
-
-
-
 
 
 
