@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class Equipo_Usuario implements Serializable {
 
-   private Equipo oEquipo;
-   private Usuario oUsuario;
-   private boolean boCreador;
+    private Equipo oEquipo;
+    private Usuario oUsuario;
+    private Integer iCreador;
 
-    public Equipo_Usuario(Equipo oEquipo, Usuario oUsuario, boolean boCreador) {
+    public Equipo_Usuario(Equipo oEquipo, Usuario oUsuario, Integer iCreador) {
         this.oEquipo = oEquipo;
         this.oUsuario = oUsuario;
-        this.boCreador = boCreador;
+        this.iCreador = iCreador;
     }
 
     public Equipo getoEquipo() {
@@ -30,11 +30,20 @@ public class Equipo_Usuario implements Serializable {
         this.oUsuario = oUsuario;
     }
 
-    public boolean isBoCreador() {
-        return boCreador;
+    public Integer getiCreador() {
+        return iCreador;
     }
 
-    public void setBoCreador(boolean boCreador) {
-        this.boCreador = boCreador;
+    public void setiCreador(Integer iCreador) {
+        this.iCreador = iCreador;
+    }
+
+    @Override
+    public String toString() {
+        return "Equipo_Usuario{" +
+                "oEquipo=" + oEquipo +
+                ", oUsuario=" + oUsuario +
+                ", iCreador=" + iCreador +
+                '}';
     }
 }
