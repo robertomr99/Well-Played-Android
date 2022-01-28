@@ -28,6 +28,7 @@ import com.example.wellplayed.model.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class unirseEquipo extends AppCompatActivity {
@@ -38,13 +39,14 @@ public class unirseEquipo extends AppCompatActivity {
     final long EXECUTION_TIME = 2000; // 1 minuto
     private Handler handler = new Handler();
     private Runnable runnable;
-
+    public static List<Equipo> lstUnisrseEquipoComparativa = new ArrayList<Equipo>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_unirse_equipo);
         swipeRefreshLayout = findViewById(R.id.swipe);
+        lstUnisrseEquipoComparativa.clear();
         mostrarEquiposQueNoTieneUser();
         swipeRefreshLayout.setColorSchemeResources(R.color.GrisApp);
         swipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.AzulApp);
@@ -54,6 +56,21 @@ public class unirseEquipo extends AppCompatActivity {
                 new waitReload().execute();
             }
         });
+
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    while(true){
+                        mostrarEquiposQueNoTieneUser();
+                        Thread.sleep(60000);
+                    }
+
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
     }
 
@@ -83,7 +100,8 @@ public class unirseEquipo extends AppCompatActivity {
                         Log.d("Rob", sUrl);
                         ListadoEquipos.lstEquipos = new Gson().fromJson(s, new TypeToken<List<Equipo>>() {
                         }.getType());
-                        mostrarData();
+                        compararArrays();
+
                     }
                 }
                 , volleyError -> {
@@ -91,8 +109,16 @@ public class unirseEquipo extends AppCompatActivity {
         }
         ));
     }
+    private void compararArrays() {
+        if(lstUnisrseEquipoComparativa.size() != ListadoEquipos.lstEquipos.size()){
+            mostrarData();
+            lstUnisrseEquipoComparativa.clear();
+            lstUnisrseEquipoComparativa.addAll(ListadoEquipos.lstEquipos);
+        }
 
+    }
     private void seleccionarIdUser(Equipo oEquipo) {
+    
 
         String sUrl = Utils.hosting + "usuario/select-idUser.php?txtUsuario=" + sNombreUser;
         Volley.newRequestQueue(getApplicationContext()).add(new StringRequest(Request.Method.GET, sUrl,
@@ -112,7 +138,22 @@ public class unirseEquipo extends AppCompatActivity {
         ));
     }
 
-
+public static void unirseEquipo(Context context, int iIdEquipo, int iIdUsuario) {
+        String sUrl = Utils.hosting + "equipo/ins-equipo-usuario.php?txtEquipo="+iIdEquipo+"&txtUsuario="+iIdUsuario+"&txtCreador="+0;
+        Volley.newRequestQueue(context).add(new StringRequest(Request.Method.GET, sUrl,
+                   s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(context, "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context,"Equipo creado con exito", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
+    }
     public void insPeticion(int iIdEquipo, int iIdUsuario) {
         String sUrl = Utils.hosting + "peticiones/ins-peticion.php?txtEquipo=" + iIdEquipo + "&txtUsuario=" + iIdUsuario;
 
