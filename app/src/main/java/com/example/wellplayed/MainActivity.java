@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         View header = ((NavigationView) findViewById(R.id.navigationView)).getHeaderView(0);
         oUsuario = intentDataUsuario(header);
+        Log.d("hola", oUsuario.getsUser());
         setSupportActionBar(toolbar);
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);

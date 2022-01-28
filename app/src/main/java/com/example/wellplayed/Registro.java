@@ -27,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 
 import com.example.wellplayed.model.Data;
 import com.example.wellplayed.model.PassGenerator;
+import com.example.wellplayed.model.Producto;
 import com.example.wellplayed.model.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -44,6 +45,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -62,6 +64,7 @@ public class Registro extends AppCompatActivity {
     DatePickerDialog dpd;
     public static Data oData = new Data();
     public static Registro context;
+    public static ArrayList<Producto> oProducto = new ArrayList<Producto>();
 
     public Registro(){
         context = this;
@@ -159,6 +162,7 @@ public class Registro extends AppCompatActivity {
                             Toast.makeText(Login.getInstance().getApplicationContext(), "error al crear el usuario", Toast.LENGTH_LONG).show();
                         }else{
                             Toast.makeText(Login.getInstance().getApplicationContext(), "Usuario creado con éxito", Toast.LENGTH_LONG).show();
+                            selectIdUser(oUser.getsUser());
                         }
                     }
                     ,volleyError -> {
@@ -170,6 +174,74 @@ public class Registro extends AppCompatActivity {
             Toast.makeText(Login.getInstance().getApplicationContext(), "El nombre de usuario o email no esta disponible", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private static void selectIdUser(String sNombreUser) {
+
+        String sUrl = Utils.hosting + "usuario/select-idUser.php?txtUsuario="+sNombreUser;
+        Volley.newRequestQueue(context).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    if (s.equals("")) {
+                        Toast.makeText(context, "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Usuario oUsuarioId = new Usuario();
+                        oUsuarioId = new Gson().fromJson(s, new TypeToken<Usuario>() {
+                        }.getType());
+
+                        selectProductosGratuitos(oUsuarioId);
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
+    }
+
+    private static void selectProductosGratuitos(Usuario oUser) {
+        String sUrl = Utils.hosting + "productos/select-producto-gratis.php?txtPrecio="+0;
+
+
+        Volley.newRequestQueue(context).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(context, "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        Log.d("alacide", sUrl);
+                        oProducto = new Gson().fromJson(s, new TypeToken<List<Producto>>() {
+                        }.getType());
+
+                        for(int iContador = 0; iContador < oProducto.size();iContador++){
+                            insertProductoUsuario(oUser, iContador);
+                        }
+
+                    }
+                }
+
+                , volleyError -> {
+
+            Log.d("ALACID", volleyError.getCause().toString());
+        }
+        ));
+    }
+
+    private static void insertProductoUsuario(Usuario oUser, int iContador) {
+            String sUrl = Utils.hosting + "usuario-producto/ins-usuario-producto.php?txtiIdUser="+oUser.getiIdUsuario()+"&txtiIdProducto="+oProducto.get(iContador).getiIdProducto();
+            Log.d("ALACID",sUrl);
+            Volley.newRequestQueue(Login.getInstance().getApplicationContext()).add(new StringRequest(Request.Method.GET,sUrl,
+                    s ->{
+                        if(s.equals("null")){
+
+                        }else{
+
+                        }
+                    }
+                    ,volleyError -> {
+
+                Log.d("ALACID",volleyError.getCause().toString());
+            }
+            ));
     }
 
 

@@ -13,17 +13,23 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.wellplayed.model.Producto;
+import com.example.wellplayed.model.Usuario;
 
 public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.ViewHolder> implements View.OnClickListener {
+
+    public interface productosAdapterInterface {
+        void insProducto(Producto oProducto);
+    }
 
     LayoutInflater inflater;
     Context context;
     private View.OnClickListener listener;
+    productosAdapterInterface paInterfaces;
 
-
-    public ProductosAdapter(Context context){
+    public ProductosAdapter(Context context, productosAdapterInterface paInterfaces){
         inflater = LayoutInflater.from(context);
         this.context = context;
+        this.paInterfaces = paInterfaces;
     }
 
     public void onClick(View v) {
@@ -55,6 +61,12 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.View
     }else{
         Glide.with(context).load(oProducto.getsFoto()).into(holder.imgViewProductoAdapter);
     }
+    holder.imgViewProductoAdapter.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            paInterfaces.insProducto(oProducto);
+        }
+    });
     }
 
     public int getItemCount() {

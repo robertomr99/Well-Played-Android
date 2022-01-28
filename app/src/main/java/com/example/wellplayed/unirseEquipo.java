@@ -27,6 +27,7 @@ import com.example.wellplayed.model.Juego;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class unirseEquipo extends AppCompatActivity {
@@ -37,13 +38,14 @@ public class unirseEquipo extends AppCompatActivity {
     final long EXECUTION_TIME = 2000; // 1 minuto
     private Handler handler = new Handler();
     private Runnable runnable;
-
+    public static List<Equipo> lstUnisrseEquipoComparativa = new ArrayList<Equipo>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_unirse_equipo);
         swipeRefreshLayout = findViewById(R.id.swipe);
+        lstUnisrseEquipoComparativa.clear();
         mostrarEquiposQueNoTieneUser();
         swipeRefreshLayout.setColorSchemeResources(R.color.GrisApp);
         swipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.AzulApp);
@@ -56,7 +58,20 @@ public class unirseEquipo extends AppCompatActivity {
 
         });
 
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    while(true){
+                        mostrarEquiposQueNoTieneUser();
+                        Thread.sleep(60000);
+                    }
 
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
     }
 
@@ -88,13 +103,24 @@ public class unirseEquipo extends AppCompatActivity {
                         Log.d("Rob", sUrl);
                         ListadoEquipos.lstEquipos = new Gson().fromJson(s, new TypeToken<List<Equipo>>() {
                         }.getType());
-                        mostrarData();
+                        compararArrays();
+
                     }
                 }
                 , volleyError -> {
             Log.d("Rob", volleyError.getCause().toString());
         }
         ));
+    }
+
+    private void compararArrays() {
+
+        if(lstUnisrseEquipoComparativa.size() != ListadoEquipos.lstEquipos.size()){
+            mostrarData();
+            lstUnisrseEquipoComparativa.clear();
+            lstUnisrseEquipoComparativa.addAll(ListadoEquipos.lstEquipos);
+        }
+
     }
 
 
