@@ -17,11 +17,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.wellplayed.model.Usuario;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -30,10 +36,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.w3c.dom.Text;
 
 import java.io.File;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
@@ -46,12 +56,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         View header = ((NavigationView) findViewById(R.id.navigationView)).getHeaderView(0);
-        oUsuario = intentDataUsuario(header);
+        oUsuario = intentDataUsuario();
+        seleccionarFotoMonedas(header, oUsuario.getsUser());
         setSupportActionBar(toolbar);
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
-
         drawerLayout = findViewById(R.id.drawerLayout);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -108,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intentLogin);
     }
 
-    public void lstAllClear(){
+    public void lstAllClear() {
         ListadoEquipos.lstEquipos.clear();
         ListadoUsuarios.lstUsuarios.clear();
         ListadoProductos.lstProductos.clear();
@@ -117,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         misEquiposFragment.sNombreUser = "";
         misJuegosFragment.sNombreUser = "";
         addJuego.sNombreUser = "";
+        EquipoDetalle.sNombreUser = "";
     }
 
     public void borrarPreferencias() {
@@ -147,21 +158,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     // Setea el nombre del usuario logeado en el menú lateral
 
-    private Usuario intentDataUsuario(View header) {
+    private Usuario intentDataUsuario() {
         Usuario oUser = new Usuario();
         try {
             if (getIntent().hasExtra("Name")) {
                 oUser.setsUser(getIntent().getStringExtra("Name"));
-                ((TextView) header.findViewById(R.id.lblNombreUsuario)).setText(oUser.getsUser());
             } else {
                 oUser = (Usuario) getIntent().getSerializableExtra("User");
-                ((TextView) header.findViewById(R.id.lblNombreUsuario)).setText(Login.oUsuarioEntrada.getsUser());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return oUser;
+    }
+
+    private void seleccionarFotoMonedas(View header,String sUsuario) {
+
+        String sUrl = Utils.hosting + "usuario/get-user.php?txtUsuario=" + sUsuario;
+        Volley.newRequestQueue(getApplicationContext()).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    if (s.equals("")) {
+                        Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.d("URL", sUrl);
+                        Usuario oUserLleno = new Usuario();
+                        oUserLleno = new Gson().fromJson(s, new TypeToken<Usuario>() {
+                        }.getType());
+
+                        Log.d("Funca ", oUserLleno.toString());
+                        rellenarCabecera(header, oUserLleno);
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
+    }
+
+    public void rellenarCabecera(View header,Usuario oUserLLeno){
+        ((TextView) header.findViewById(R.id.lblNombreUsuario)).setText(oUserLLeno.getsUser());
+        Glide.with(getApplicationContext()).load(oUserLLeno.getsFoto()).into((CircleImageView
+                ) header.findViewById(R.id.imgViewUsuario));
+        ((TextView) header.findViewById(R.id.lblMonedas)).setText(String.valueOf(oUserLLeno.getiMonedas()));
     }
 
     @Override
