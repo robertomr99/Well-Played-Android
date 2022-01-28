@@ -10,42 +10,44 @@
         android:id="@+id/lblNombreUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
         android:textColor="@color/GrisApp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imgViewUsuario"
         app:layout_constraintTop_toTopOf="@+id/imgViewUsuario" />
 
-    <TextView
-        android:id="@+id/lblState"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="14dp"
-        android:text="Online"
-        android:textColor="@color/GrisApp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imgViewState"
-        app:layout_constraintTop_toBottomOf="@+id/lblNombreUsuario" />
-
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgViewUsuario"
-        android:layout_width="118dp"
-        android:layout_height="89dp"
+        style="@style/btnUsuario"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="26dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/profile" />
 
     <ImageView
-        android:id="@+id/imgViewState"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="17dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblNombreUsuario"
-        app:srcCompat="@drawable/circle" />
+        android:id="@+id/imgCoins"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgViewUsuario"
+        app:layout_constraintStart_toStartOf="@+id/lblNombreUsuario"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/moneda" />
+
+    <TextView
+        android:id="@+id/lblMonedas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:textColor="@color/GrisApp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgCoins"
+        app:layout_constraintStart_toEndOf="@+id/imgCoins"
+        app:layout_constraintTop_toTopOf="@+id/imgCoins" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

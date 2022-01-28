@@ -24,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.wellplayed.model.Equipo;
 import com.example.wellplayed.model.Juego;
+import com.example.wellplayed.model.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -52,15 +53,9 @@ public class unirseEquipo extends AppCompatActivity {
             public void onRefresh() {
                 new waitReload().execute();
             }
-
-
         });
 
-
-
     }
-
-
 
     private class waitReload extends AsyncTask<Void, Void, Void> {
         @Override
@@ -97,16 +92,18 @@ public class unirseEquipo extends AppCompatActivity {
         ));
     }
 
+    private void seleccionarIdUser(Equipo oEquipo) {
 
-    public static void unirseEquipo(Context context, int iIdEquipo, int iIdUsuario) {
-        String sUrl = Utils.hosting + "equipo/ins-equipo-usuario.php?txtEquipo="+iIdEquipo+"&txtUsuario="+iIdUsuario+"&txtCreador="+0;
-        Volley.newRequestQueue(context).add(new StringRequest(Request.Method.GET, sUrl,
+        String sUrl = Utils.hosting + "usuario/select-idUser.php?txtUsuario=" + sNombreUser;
+        Volley.newRequestQueue(getApplicationContext()).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
-                    Log.d("vacio", s);
                     if (s.equals("")) {
-                        Toast.makeText(context, "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(context,"Equipo creado con exito", Toast.LENGTH_SHORT).show();
+                        Usuario oUsuarioId = new Usuario();
+                        oUsuarioId = new Gson().fromJson(s, new TypeToken<Usuario>() {
+                        }.getType());
+                       insPeticion(oEquipo.getiIdEquipo(), oUsuarioId.getiIdUsuario());
                     }
                 }
                 , volleyError -> {
@@ -115,10 +112,36 @@ public class unirseEquipo extends AppCompatActivity {
         ));
     }
 
+
+    public void insPeticion(int iIdEquipo, int iIdUsuario) {
+        String sUrl = Utils.hosting + "peticiones/ins-peticion.php?txtEquipo=" + iIdEquipo + "&txtUsuario=" + iIdUsuario;
+
+        Volley.newRequestQueue(getApplicationContext()).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Petición aceptada", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
+    }
+
+
+
     private void mostrarData() {
         RecyclerView Rv = findViewById(R.id.recyclerViewUnirseEquipo);
         Rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        UnirseEquipoAdapter adaptador = new UnirseEquipoAdapter(this);
+        UnirseEquipoAdapter adaptador = new UnirseEquipoAdapter(this, new UnirseEquipoAdapter.UnirseEquipoAdapterInterface() {
+            @Override
+            public void addEquipoUsuario(Equipo oEquipo) {
+                seleccionarIdUser(oEquipo);
+            }
+        });
         Rv.setAdapter(adaptador);
         adaptador.setOnClickListener(v -> {
             ListadoEquipos.iEquipoSelected = Rv.getChildAdapterPosition(v);

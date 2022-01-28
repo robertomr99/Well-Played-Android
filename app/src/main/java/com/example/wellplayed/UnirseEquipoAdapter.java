@@ -22,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.wellplayed.model.Equipo;
+import com.example.wellplayed.model.Equipo_Usuario;
 import com.example.wellplayed.model.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,22 +31,28 @@ public class UnirseEquipoAdapter extends RecyclerView.Adapter<UnirseEquipoAdapte
 
     LayoutInflater inflater;
     Context context;
-    public static final String sNombreUser = MainActivity.oUsuario.getsUser();
+    UnirseEquipoAdapterInterface ueInterface;
     private View.OnClickListener listener;
 
-    public UnirseEquipoAdapter(Context context){
+
+    public interface UnirseEquipoAdapterInterface {
+        void addEquipoUsuario(Equipo oEquipo);
+    }
+
+    public UnirseEquipoAdapter(Context context, UnirseEquipoAdapterInterface ueInterface) {
         inflater = LayoutInflater.from(context);
         this.context = context;
+        this.ueInterface = ueInterface;
     }
 
 
     public void onClick(View v) {
-        if(listener != null){
+        if (listener != null) {
             listener.onClick(v);
         }
     }
 
-    public void setOnClickListener(View.OnClickListener listener){
+    public void setOnClickListener(View.OnClickListener listener) {
         this.listener = listener;
     }
 
@@ -66,11 +73,15 @@ public class UnirseEquipoAdapter extends RecyclerView.Adapter<UnirseEquipoAdapte
         String sMiembros = String.valueOf(oEquipo.getiMiembros());
 
         holder.lblNombre.setText(sNombre);
-        holder.imgBtnUnirseEquipo.setOnClickListener(v ->{
-            v.startAnimation(AnimationUtils.loadAnimation(context,R.anim.clickanimation));
-            seleccionarIdUser(sNombre);
 
-        });
+        holder.imgBtnUnirseEquipo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.clickanimation));
+                ueInterface.addEquipoUsuario(oEquipo);
+            }
+        }
+        );
 
         holder.lblMiembros.setText(sMiembros);
         holder.cv.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition));
@@ -82,7 +93,7 @@ public class UnirseEquipoAdapter extends RecyclerView.Adapter<UnirseEquipoAdapte
         return ListadoEquipos.lstEquipos.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView lblNombre;
         TextView lblMiembros;
         ImageView imageViewEquipo;
@@ -101,49 +112,4 @@ public class UnirseEquipoAdapter extends RecyclerView.Adapter<UnirseEquipoAdapte
 
     }
 
-    private void selectiIdEquipo(String sNombreEquipo, int iIdUsuario) {
-
-        String sUrl = Utils.hosting + "equipo/select-idEquipo.php?txtEquipo="+sNombreEquipo;
-        Log.d("selectIdEquipo",sUrl);
-        Volley.newRequestQueue(context.getApplicationContext()).add(new StringRequest(Request.Method.GET,sUrl,
-                s ->{
-                    if(s.equals("null")){
-
-                    }else{
-                        Equipo oEquipo;
-                        oEquipo = new Gson().fromJson(s, new TypeToken<Equipo>() {
-                        }.getType());
-                        prueba(oEquipo, iIdUsuario);
-                    }
-                }
-                ,volleyError -> {
-
-            Log.d("ALACID",volleyError.getCause().toString());
-        }
-        ));
-    }
-
-    private void seleccionarIdUser(String sNombreEquipo) {
-
-        String sUrl = Utils.hosting + "usuario/select-idUser.php?txtUsuario="+sNombreUser;
-        Volley.newRequestQueue(context).add(new StringRequest(Request.Method.GET, sUrl,
-                s -> {
-                    if (s.equals("")) {
-                        Toast.makeText(context, "no se ha encontrado", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Usuario oUsuarioId = new Usuario();
-                        oUsuarioId = new Gson().fromJson(s, new TypeToken<Usuario>() {
-                        }.getType());
-                        selectiIdEquipo(sNombreEquipo, oUsuarioId.getiIdUsuario());
-                    }
-                }
-                , volleyError -> {
-            Log.d("Rob", volleyError.getCause().toString());
-        }
-        ));
-    }
-
-    public void prueba(Equipo oEquipo, int iIdUsuario){
-        unirseEquipo.unirseEquipo(context.getApplicationContext(), oEquipo.getiIdEquipo(), iIdUsuario );
-    }
 }

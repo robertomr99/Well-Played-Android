@@ -51,10 +51,11 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     public static Login context;
 
-    public Login(){
+    public Login() {
         context = this;
     }
-    public static Login getInstance(){
+
+    public static Login getInstance() {
         return context;
     }
 
@@ -127,9 +128,8 @@ public class Login extends AppCompatActivity {
                             comprobarUserGoogle();
                             oUsuarioGoogle.setsPassword(PassGenerator.getPassword());
 
-                            Intent i = new Intent(Login.this,MainActivity.class);
+                            Intent i = new Intent(Login.this, MainActivity.class);
                             startActivity(i);
-
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -147,10 +147,8 @@ public class Login extends AppCompatActivity {
     }
 
     public void onClickRegistro(View v) {
-
         Intent i = new Intent(this, Registro.class);
         startActivity(i);
-
     }
 
     public void onClickIniciarSesion(View v) {
@@ -188,14 +186,11 @@ public class Login extends AppCompatActivity {
                         oUsuarioGoogle2 = new Gson().fromJson(s, new TypeToken<Usuario>() {
                         }.getType());
 
-                        if(oUsuarioGoogle2 == null){
-                            Registro.insertUsuario(oUsuarioGoogle,false);
+                        if (oUsuarioGoogle2 == null) {
+                            Registro.insertUsuario(oUsuarioGoogle, false);
                         }
-
-
                     }
                 }
-
                 , volleyError -> {
 
             Log.d("ALACID", volleyError.getCause().toString());
@@ -218,10 +213,8 @@ public class Login extends AppCompatActivity {
                         }.getType());
 
                         extraerObjetoUsuario();
-
                     }
                 }
-
                 , volleyError -> {
 
             Log.d("ALACID", volleyError.getCause().toString());
@@ -264,18 +257,19 @@ public class Login extends AppCompatActivity {
 
         String sUsuario = preferences.getString("user", "");
         String sPass = preferences.getString("pass", "");
+
         if (!sUsuario.equals("") && !sPass.equals("")) {
             Intent i = new Intent(this, MainActivity.class);
             i.putExtra("Name", sUsuario);
             startActivity(i);
         }
-
     }
 
-    public void restartPassIntent(View v){
+    public void restartPassIntent(View v) {
         Intent i = new Intent(this, restartPass.class);
         startActivity(i);
     }
+
 
 }
 
