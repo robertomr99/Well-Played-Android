@@ -69,6 +69,7 @@
     <string name="restablecer_contrase_a">Restablecer contraseña</string>
     <string name="le_enviaremos_un_correo_para_restablecer_la_contrase_a_de_su_cuenta">Le enviaremos un correo para restablecer la contraseña de su cuenta</string>
     <string name="mantener_sesi_n_iniciada">Mantener sesión iniciada</string>
+    <string name="lblComprarProductos">¿Estas seguro de que quieres comprar este producto?</string>
 
     <!-- Array spinner tienda -->
     <string-array name="productos">

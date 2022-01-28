@@ -3,6 +3,7 @@ package com.example.wellplayed;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -28,6 +29,7 @@ import com.example.wellplayed.model.Usuario_Juego;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class misEquiposFragment extends Fragment {
@@ -37,7 +39,7 @@ public class misEquiposFragment extends Fragment {
     public static String sNombreUser;
     public static Equipo_Usuario oEquipo_Usuario;
     public static Equipo oEquipo;
-
+    public static List<Equipo> lstEquiposComparativa = new ArrayList<Equipo>();
     public misEquiposFragment() {
     }
 
@@ -50,11 +52,29 @@ public class misEquiposFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mis_equipos, container, false);
         rv = view.findViewById(R.id.recyclerViewEquipos);
+        lstEquiposComparativa.clear();
         sNombreUser = MainActivity.oUsuario.getsUser();
         //mostrarEquipos();
         crearEquipo(view);
         unirseEquipo(view);
+
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    while(true){
+                        mostrarEquipos();
+                        Thread.sleep(60000);
+                    }
+
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }).start();
         return view;
+
+
     }
 
     @Override
@@ -75,13 +95,23 @@ public class misEquiposFragment extends Fragment {
                         Log.d("Rob", sUrl);
                         ListadoEquipos.lstEquipos = new Gson().fromJson(s, new TypeToken<List<Equipo>>() {
                         }.getType());
-                        mostrarData(getContext());
+                        compararArrays();
                     }
                 }
                 , volleyError -> {
             Log.d("Rob", volleyError.getCause().toString());
         }
         ));
+    }
+
+    private void compararArrays() {
+
+        if(lstEquiposComparativa.size() != ListadoEquipos.lstEquipos.size()){
+            mostrarData(getContext());
+            lstEquiposComparativa.clear();
+            lstEquiposComparativa.addAll(ListadoEquipos.lstEquipos);
+        }
+
     }
 
     public void contarMiembros() {

@@ -105,9 +105,7 @@ public class misJuegosFragment extends Fragment {
                         Log.d("Rob", sUrl);
                         ListadoJuegos.lstJuegos = new Gson().fromJson(s, new TypeToken<List<Juego>>() {
                         }.getType());
-                        for (Juego oJuego : ListadoJuegos.lstJuegos) {
-                            Log.d("LISTADOJUEGOUSER", oJuego.toString());
-                        }
+
                         mostrarData(getContext());
 
 
