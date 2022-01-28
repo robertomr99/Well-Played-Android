@@ -47,7 +47,6 @@ public class JuegosAdapter extends RecyclerView.Adapter<JuegosAdapter.ViewHolder
 
         Juego oJuego = ListadoJuegos.lstJuegos.get(position); // Instanciamos el objeto de la lista con la posicion
 
-
         holder.lblNombreJuego.setText(oJuego.getsNombre());
         Glide.with(context).load(oJuego.getsFoto()).circleCrop().into(holder.imgViewJuego);
 

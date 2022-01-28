@@ -46,10 +46,10 @@ public class EquipoDetalle extends AppCompatActivity {
 
     TextView lblNombreDetalle, lblVictoriasDetalle, lblDerrotasDetalle, lblWinRateDetalle;
     ImageView imgViewEquipoDetalle;
-    Equipo oEquipo;
-    Equipo_Usuario oEquipoUsuario;
+    public static Equipo oEquipo;
+    public static Equipo_Usuario oEquipoUsuario;
     Spinner spinnerJuegos;
-    Integer iIdEquipoJuego, iIdJuego;
+    Integer iIdJuego;
     ArrayList<Juego> lstJuegos;
     ArrayList<String> lstNombreJuegos = new ArrayList<String>();
     RecyclerView rv;
@@ -57,13 +57,14 @@ public class EquipoDetalle extends AppCompatActivity {
     ImageButton imgBtnAdminUserDetalle;
     Button btnEliminarSalirEquipoDetalle;
 
+    public static Integer iIdEquipoJuego;
     public static LayoutInflater inflaterDetalle;
     public static AlertDialog.Builder dialogBuilder;
     public static AlertDialog dialog;
     public static Button btnSI, btnNO;
-
     public static EquipoDetalle context;
-    public static final String sNombreUser = MainActivity.oUsuario.getsUser();
+    public static String sNombreUser;
+
 
     public EquipoDetalle() {
         context = this;
@@ -77,9 +78,9 @@ public class EquipoDetalle extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         intentEquipoJuego();
-        comprobarCradorEquipo();
+        sNombreUser = MainActivity.oUsuario.getsUser();
+        comprobarCreadorEquipo();
         setContentView(R.layout.activity_equipo_detalle);
-
         imgViewEquipoDetalle = findViewById(R.id.imgViewEquipoDetalle);
         lblNombreDetalle = findViewById(R.id.lblNombreDetalle);
         lblVictoriasDetalle = findViewById(R.id.lblRVictoriasEquipo);
@@ -131,8 +132,14 @@ public class EquipoDetalle extends AppCompatActivity {
     }
 
 
-    public void PopupEliminar(Usuario oUsuario) {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        comprobarCreadorEquipo();
+        getUsuariosEquipo();
+    }
 
+    public void PopupEliminar(Usuario oUsuario) {
 
         dialogBuilder = new AlertDialog.Builder(context);
         final View PopupEliminarUsuario = getLayoutInflater().inflate(R.layout.popupusuario, null);
@@ -198,7 +205,7 @@ public class EquipoDetalle extends AppCompatActivity {
                 s -> {
                     Log.d("Rob", s);
                     if (s.equals("null")) {
-                        Toast.makeText(getApplicationContext(), "Error al eliminar el usuario", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Error al eliminar el usuario", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "Usuario eliminado con éxito", Toast.LENGTH_LONG).show();
                         getUsuariosEquipo();
@@ -212,22 +219,21 @@ public class EquipoDetalle extends AppCompatActivity {
     }
 
 
-    public void comprobarCradorEquipo() {
+    public  void comprobarCreadorEquipo() {
         String sUrl = Utils.hosting + "equipo-usuario/comprobar-creador.php?txtUsuario=" + sNombreUser + "&txtEquipo=" + iIdEquipoJuego;
 
-        Volley.newRequestQueue(getApplicationContext()).add(new StringRequest(Request.Method.GET, sUrl,
+        Volley.newRequestQueue(context).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
                     Log.d("vacio", s);
                     if (s.equals("")) {
-                        Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "no se ha encontrado", Toast.LENGTH_SHORT).show();
                     } else {
                         boolean boCreador = false;
                         Log.d("Rob", sUrl);
                         oEquipoUsuario = new Gson().fromJson(s, new TypeToken<Equipo_Usuario>() {
                         }.getType());
-                        Log.d("CREADORDENTRO", oEquipoUsuario.getiCreador().toString());
+                        Log.d("CREADORDENTRO", oEquipoUsuario.toString());
                         ocultarElementos();
-
                     }
                 }
                 , volleyError -> {
@@ -236,7 +242,7 @@ public class EquipoDetalle extends AppCompatActivity {
         ));
     }
 
-    private void ocultarElementos() {
+    public void ocultarElementos() {
         Log.d("CREADOR", oEquipoUsuario.getiCreador().toString());
         if (oEquipoUsuario.getiCreador() == 0) {
             imgBtnAdminUserDetalle.setVisibility(View.GONE);
@@ -248,7 +254,6 @@ public class EquipoDetalle extends AppCompatActivity {
 
     public void getUsuariosEquipo() {
         String sUrl = Utils.hosting + "equipo-usuario/lst-usuarios-equipo.php?txtEquipo=" + iIdEquipoJuego;
-
         Volley.newRequestQueue(getApplicationContext()).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
                     Log.d("vacio", s);
@@ -258,7 +263,6 @@ public class EquipoDetalle extends AppCompatActivity {
                         Log.d("Rob", sUrl);
                         ListadoUsuarios.lstUsuarios = new Gson().fromJson(s, new TypeToken<List<Usuario>>() {
                         }.getType());
-                        Log.d("ListaUsuarios", ListadoUsuarios.lstUsuarios.toString());
                         mostrarUsuarios();
                     }
                 }
@@ -330,7 +334,6 @@ public class EquipoDetalle extends AppCompatActivity {
         ) {
             @Override
             public void deleteUser(Usuario oUsuario) {
-                Toast.makeText(EquipoDetalle.this, oUsuario.getsUser(), Toast.LENGTH_SHORT).show();
                 // Booleano para hacer cambios de ese objeto en concreto
                 PopupEliminar(oUsuario);
             }
@@ -338,8 +341,10 @@ public class EquipoDetalle extends AppCompatActivity {
         rv.setAdapter(usuariosAdapter);
     }
 
+
     private void cambiarListaPendiente() {
         Intent iListaPendientes = new Intent(getApplicationContext(), PeticionesEquipo.class);
+        iListaPendientes.putExtra("Equipo", iIdEquipoJuego);
         startActivity(iListaPendientes);
     }
 
@@ -350,6 +355,7 @@ public class EquipoDetalle extends AppCompatActivity {
                 Equipo oEquipo;
                 oEquipo = (Equipo) getIntent().getSerializableExtra("Equipo");
                 iIdEquipoJuego = oEquipo.getiIdEquipo();
+                Log.d("IDEQUIPO", iIdEquipoJuego.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();

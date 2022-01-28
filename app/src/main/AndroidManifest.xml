@@ -23,7 +23,7 @@
             android:name=".UsuariosAdapter"
             android:exported="false" />
         <activity
-            android:name=".LogosAdpater"
+            android:name=".PeticionesEquipo"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity

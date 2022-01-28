@@ -34,9 +34,9 @@ import java.util.List;
 
 public class misEquiposFragment extends Fragment {
 
-    RecyclerView recyclerView;
+    RecyclerView rv;
     EquiposAdapter adaptador;
-    public static String sNombreUser = MainActivity.oUsuario.getsUser();
+    public static String sNombreUser;
     public static Equipo_Usuario oEquipo_Usuario;
     public static Equipo oEquipo;
     public static List<Equipo> lstEquiposComparativa = new ArrayList<Equipo>();
@@ -51,10 +51,10 @@ public class misEquiposFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mis_equipos, container, false);
-        recyclerView = view.findViewById(R.id.recyclerViewEquipos);
+        rv = view.findViewById(R.id.recyclerViewEquipos);
         lstEquiposComparativa.clear();
         sNombreUser = MainActivity.oUsuario.getsUser();
-        mostrarEquipos();
+        //mostrarEquipos();
         crearEquipo(view);
         unirseEquipo(view);
 
@@ -77,6 +77,11 @@ public class misEquiposFragment extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mostrarEquipos();
+    }
 
     public void mostrarEquipos() {
         String sUrl = Utils.hosting + "equipo-usuario/EquipoQueSiTieneUser.php?txtUsuario=" + sNombreUser;
@@ -90,7 +95,6 @@ public class misEquiposFragment extends Fragment {
                         Log.d("Rob", sUrl);
                         ListadoEquipos.lstEquipos = new Gson().fromJson(s, new TypeToken<List<Equipo>>() {
                         }.getType());
-
                         compararArrays();
                     }
                 }
@@ -133,11 +137,11 @@ public class misEquiposFragment extends Fragment {
     }
 
     private void mostrarData(Context context) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        rv.setLayoutManager(new LinearLayoutManager(context));
         adaptador = new EquiposAdapter(context);
-        recyclerView.setAdapter(adaptador);
+        rv.setAdapter(adaptador);
         adaptador.setOnClickListener(v -> {
-            ListadoEquipos.iEquipoSelected = recyclerView.getChildAdapterPosition(v);
+            ListadoEquipos.iEquipoSelected = rv.getChildAdapterPosition(v);
             oEquipo = ListadoEquipos.lstEquipos.get(ListadoEquipos.iEquipoSelected);
             pasarEquipo(context, oEquipo);
         });
