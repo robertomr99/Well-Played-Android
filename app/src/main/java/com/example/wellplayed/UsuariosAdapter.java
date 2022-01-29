@@ -36,7 +36,7 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
     LayoutInflater inflater;
     Context context;
     public static String sNombreUser = MainActivity.oUsuario.getsUser();
-    public static int iIdEquipoJuego = EquipoDetalle.iIdEquipoJuego;
+    public static int iIdEquipoJuego;
     private View.OnClickListener listener;
 
     // A las interfaces siempre se las pasa el objeto , no la vista
@@ -64,6 +64,7 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
 
     public UsuariosAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.from(parent.getContext()).inflate(R.layout.activity_usuarios_adapter, parent, false);
+
         view.setOnClickListener(this);
         return new ViewHolder(view);
     }
@@ -71,11 +72,13 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
 
     public void onBindViewHolder(@NonNull UsuariosAdapter.ViewHolder holder, int position) {
 
-        comprobarCreadorEquipo(holder);
         Usuario oUsuario = ListadoUsuarios.lstUsuarios.get(position); // Instanciamos el objeto de la lista con la posicion
 
         Glide.with(context).load(oUsuario.getsFoto()).circleCrop().into(holder.imageViewUsuario);
         String sNombre = oUsuario.getsUser();
+        if (EquipoDetalle.iCreador == 0) {
+            holder.imgBtnEliminarUsuario.setVisibility(View.GONE);
+        }
         holder.imgBtnEliminarUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,30 +112,5 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
         }
     }
 
-    public void comprobarCreadorEquipo(UsuariosAdapter.ViewHolder holder) {
-        String sUrl = Utils.hosting + "equipo-usuario/comprobar-creador.php?txtUsuario=" + sNombreUser + "&txtEquipo=" + iIdEquipoJuego;
 
-        Volley.newRequestQueue(context).add(new StringRequest(Request.Method.GET, sUrl,
-                s -> {
-                    Log.d("vacio", s);
-                    if (s.equals("")) {
-                        Toast.makeText(context, "no se ha encontrado", Toast.LENGTH_SHORT).show();
-                    } else {
-                        boolean boCreador = false;
-                        Log.d("Rob", sUrl);
-                        Equipo_Usuario oEquipoUsuario;
-                        oEquipoUsuario = new Gson().fromJson(s, new TypeToken<Equipo_Usuario>() {
-                        }.getType());
-
-                        Log.d("Hola",oEquipoUsuario.getiCreador().toString());
-                        if (oEquipoUsuario.getiCreador() == 0) {
-                            holder.imgBtnEliminarUsuario.setVisibility(View.GONE);
-                        }
-                    }
-                }
-                , volleyError -> {
-            Log.d("Rob", volleyError.getCause().toString());
-        }
-        ));
-    }
 }
