@@ -143,7 +143,8 @@ public class misEquiposFragment extends Fragment {
         adaptador.setOnClickListener(v -> {
             ListadoEquipos.iEquipoSelected = rv.getChildAdapterPosition(v);
             oEquipo = ListadoEquipos.lstEquipos.get(ListadoEquipos.iEquipoSelected);
-            pasarEquipo(context, oEquipo);
+            comprobarCreadorEquipo(oEquipo);
+           // pasarEquipo(context, oEquipo);
         });
     }
 
@@ -161,9 +162,10 @@ public class misEquiposFragment extends Fragment {
         });
     }
 
-    public void pasarEquipo(Context context, Equipo oEquipo) {
+    public void pasarEquipo(Context context, Equipo oEquipo, int iCreador) {
         Intent iDetalleEquipo = new Intent(context, EquipoDetalle.class);
         iDetalleEquipo.putExtra("Equipo", oEquipo);
+        iDetalleEquipo.putExtra("iCreador", iCreador);
         startActivity(iDetalleEquipo);
     }
 
@@ -183,6 +185,31 @@ public class misEquiposFragment extends Fragment {
                 // esta pantalla es cuando ha salido mal.
             }
         }
+    }
+
+    public void comprobarCreadorEquipo(Equipo oEquipo) {
+        String sUrl = Utils.hosting + "equipo-usuario/comprobar-creador.php?txtUsuario=" + sNombreUser + "&txtEquipo=" + oEquipo.getiIdEquipo();
+
+        Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(getContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        boolean boCreador = false;
+                        Log.d("Rob", sUrl);
+                        Equipo_Usuario oEquipoUsuario;
+                        oEquipoUsuario = new Gson().fromJson(s, new TypeToken<Equipo_Usuario>() {
+                        }.getType());
+                        pasarEquipo(getContext(),oEquipo,oEquipoUsuario.getiCreador());
+                        Log.d("Hola",oEquipoUsuario.getiCreador().toString());
+
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
     }
 
 }

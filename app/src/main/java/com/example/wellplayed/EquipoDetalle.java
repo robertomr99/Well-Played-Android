@@ -64,6 +64,7 @@ public class EquipoDetalle extends AppCompatActivity {
     public static Button btnSI, btnNO;
     public static EquipoDetalle context;
     public static String sNombreUser;
+    public static int iCreador;
 
 
     public EquipoDetalle() {
@@ -353,7 +354,9 @@ public class EquipoDetalle extends AppCompatActivity {
         try {
             if (getIntent().hasExtra("Equipo")) {
                 Equipo oEquipo;
+
                 oEquipo = (Equipo) getIntent().getSerializableExtra("Equipo");
+                iCreador = getIntent().getIntExtra("iCreador",0);
                 iIdEquipoJuego = oEquipo.getiIdEquipo();
                 Log.d("IDEQUIPO", iIdEquipoJuego.toString());
             }
