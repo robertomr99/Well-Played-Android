@@ -14,8 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,6 +29,7 @@ import com.example.wellplayed.model.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -39,6 +42,8 @@ public class tiendaFragment extends Fragment {
     public static AlertDialog.Builder dialogBuilder;
     public static AlertDialog dialog;
     public static Button btnSI, btnNO;
+    TextView lblMonedasUser;
+    ArrayList<String> lstCategorias = new ArrayList<String>();
 
     public tiendaFragment() {
     }
@@ -50,16 +55,28 @@ public class tiendaFragment extends Fragment {
 
     }
 
+    private void rellenarCategorias() {
+        lstCategorias.add("Avatares");
+        lstCategorias.add("Banners");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),R.layout.item_spinner, lstCategorias);
+        spinnerCategoriaProducto.setAdapter(adapter);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.fragment_tienda, container, false);
         Rv = vista.findViewById(R.id.recyclerViewTienda);
+        lstCategorias.clear();
         spinnerCategoriaProducto = vista.findViewById(R.id.spinnerCategoriaProducto);
+        rellenarCategorias();
+        lblMonedasUser = vista.findViewById(R.id.lblMonedasUser);
         cambiarCategoriaProducto();
         return vista;
     }
 
-    private void mostrarProductos(Usuario oUsuario) {
+
+
+    public void mostrarProductos(Usuario oUsuario) {
         int iSeleccionado = devolverProducto();
         String sUrl = Utils.hosting + "usuario-producto/productoQueNoTieneUser.php?txtiIdUsuario="+oUsuario.getiIdUsuario()+"&txtCategoria=" + iSeleccionado;
 
@@ -73,6 +90,8 @@ public class tiendaFragment extends Fragment {
                         ListadoProductos.lstProductos = new Gson().fromJson(s, new TypeToken<List<Producto>>() {
                         }.getType());
                         mostrarData(getContext(),iSeleccionado);
+                        Log.d("ajhwgdajhgdahjgdahjgdjhawgdajhwd",String.valueOf(oUsuario.getiMonedas()));
+                        lblMonedasUser.setText(String.valueOf(oUsuario.getiMonedas()));
                     }
                 }
                 , volleyError -> {
@@ -112,7 +131,14 @@ public class tiendaFragment extends Fragment {
                         Usuario oUsuarioId = new Usuario();
                         oUsuarioId = new Gson().fromJson(s, new TypeToken<Usuario>() {
                         }.getType());
-                        insertProductoUsuario(oUsuarioId,oProducto);
+                        Log.d("ajhdgajhdhgahjgdjawdanbvwnbevanwevb", String.valueOf(oUsuarioId.getiMonedas()));
+                        if(oUsuarioId.getiMonedas() > oProducto.getiPrecio()){
+                            insertProductoUsuario(oUsuarioId,oProducto);
+                            Toast.makeText(getContext(), "Objeto comprado con exito", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getContext(), "No tienes monedas suficientes", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 }
                 , volleyError -> {
@@ -131,15 +157,15 @@ public class tiendaFragment extends Fragment {
         return iResultado;
     }
 
-    private static void insertProductoUsuario(Usuario oUser, Producto oProducto) {
-        String sUrl = Utils.hosting + "usuario-producto/ins-usuario-producto.php?txtiIdUser="+oUser.getiIdUsuario()+"&txtiIdProducto="+oProducto.getiIdProducto();
+    public void insertProductoUsuario(Usuario oUser, Producto oProducto) {
+        String sUrl = Utils.hosting + "usuario-producto/ins-usuario-producto.php?txtiIdUser="+oUser.getiIdUsuario()+"&txtiIdProducto="+oProducto.getiIdProducto()+"&txtMonedas="+oUser.getiMonedas()+"&txtPrecioProducto="+oProducto.getiPrecio();
         Log.d("ALACID",sUrl);
         Volley.newRequestQueue(Login.getInstance().getApplicationContext()).add(new StringRequest(Request.Method.GET,sUrl,
                 s ->{
                     if(s.equals("null")){
 
                     }else{
-
+                        selectIdUser(sNombreUser);
                     }
                 }
                 ,volleyError -> {
@@ -148,7 +174,6 @@ public class tiendaFragment extends Fragment {
         }
         ));
     }
-
 
     public void popupComprarProducto(Producto oProducto) {
 
@@ -168,7 +193,6 @@ public class tiendaFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 selectIdUser2(sNombreUser,oProducto);
-                Toast.makeText(getContext(), "Usuario eliminado con éxito", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -207,6 +231,7 @@ public class tiendaFragment extends Fragment {
         }else{
             iGridSize=1;
         }
+
         Log.d("Size", String.valueOf(iGridSize));
         Rv.setLayoutManager(new GridLayoutManager(context, iGridSize));
         ProductosAdapter adaptador = new ProductosAdapter(context, new ProductosAdapter.productosAdapterInterface() {
