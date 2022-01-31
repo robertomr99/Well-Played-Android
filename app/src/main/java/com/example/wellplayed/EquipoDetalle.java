@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.media.audiofx.DynamicsProcessing;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.zip.Inflater;
 
 public class EquipoDetalle extends AppCompatActivity {
@@ -63,8 +65,9 @@ public class EquipoDetalle extends AppCompatActivity {
     public static AlertDialog dialog;
     public static Button btnSI, btnNO;
     public static EquipoDetalle context;
-    public static String sNombreUser;
-    public static int iCreador;
+    public static String sNombreUser, sNombreCreador;
+
+    Usuario oUsuario;
 
 
     public EquipoDetalle() {
@@ -157,6 +160,7 @@ public class EquipoDetalle extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 eliminarEquipoUsuario(oUsuario);
+                restarMiembros(context,iIdEquipoJuego);
                 Toast.makeText(EquipoDetalle.this, "Usuario eliminado con éxito", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
@@ -171,6 +175,7 @@ public class EquipoDetalle extends AppCompatActivity {
         });
 
     }
+
 
     private void devolverProducto() {
         switch (String.valueOf(spinnerJuegos.getItemAtPosition(spinnerJuegos.getSelectedItemPosition()))) {
@@ -197,6 +202,21 @@ public class EquipoDetalle extends AppCompatActivity {
         lblDerrotasDetalle.setText("" + oEquipoJuego.getiDerrotas());
         lblWinRateDetalle.setText("" + oEquipoJuego.getfWinRate());
         setearColoresWinRate(oEquipoJuego);
+    }
+
+    public static void restarMiembros(Context context, int iIdEquipo) {
+        String sUrl = Utils.hosting + "equipo/restar-miembros.php?txtEquipo="+iIdEquipo;
+        Volley.newRequestQueue(context).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                    } else {
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
     }
 
     public void eliminarEquipoUsuario(Usuario oUsuario) {
@@ -356,7 +376,7 @@ public class EquipoDetalle extends AppCompatActivity {
                 Equipo oEquipo;
 
                 oEquipo = (Equipo) getIntent().getSerializableExtra("Equipo");
-                iCreador = getIntent().getIntExtra("iCreador",0);
+                sNombreCreador = getIntent().getStringExtra("sNombreCreador");
                 iIdEquipoJuego = oEquipo.getiIdEquipo();
                 Log.d("IDEQUIPO", iIdEquipoJuego.toString());
             }

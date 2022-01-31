@@ -29,6 +29,9 @@ import com.example.wellplayed.model.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.List;
+import java.util.Locale;
+
 public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHolder> implements View.OnClickListener {
 
 
@@ -75,10 +78,33 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
         Usuario oUsuario = ListadoUsuarios.lstUsuarios.get(position); // Instanciamos el objeto de la lista con la posicion
 
         Glide.with(context).load(oUsuario.getsFoto()).circleCrop().into(holder.imageViewUsuario);
-        String sNombre = oUsuario.getsUser();
-        if (EquipoDetalle.iCreador == 0) {
-            holder.imgBtnEliminarUsuario.setVisibility(View.GONE);
+        holder.imageViewLider.setVisibility(View.GONE);
+
+
+        if (EquipoDetalle.sNombreCreador.equals(sNombreUser.toUpperCase())) {
+
+            // CASO -> CREADOR
+
+            if (EquipoDetalle.sNombreCreador.equals(oUsuario.getsUser())) {
+                holder.imageViewLider.setVisibility(View.VISIBLE);
+                holder.imgBtnEliminarUsuario.setVisibility(View.GONE);
+            } else {
+                holder.imgBtnEliminarUsuario.setVisibility(View.VISIBLE);
+            }
+
+        } else {
+
+            // CASO -> USUARIO NORMAL
+
+            if (EquipoDetalle.sNombreCreador.equals(oUsuario.getsUser())) {
+                holder.imageViewLider.setVisibility(View.VISIBLE);
+                holder.imgBtnEliminarUsuario.setVisibility(View.GONE);
+            } else {
+                holder.imgBtnEliminarUsuario.setVisibility(View.GONE);
+            }
         }
+
+
         holder.imgBtnEliminarUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,8 +112,10 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
             }
         });
 
-        holder.lblNombre.setText(sNombre);
+        holder.lblNombre.setText(oUsuario.getsUser());
         holder.cv.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition));
+
+
     }
 
 
@@ -97,7 +125,7 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView lblNombre;
-        ImageView imageViewUsuario;
+        ImageView imageViewUsuario, imageViewLider;
         ImageButton imgBtnEliminarUsuario;
         CardView cv;
 
@@ -106,11 +134,11 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.ViewHo
             super(itemView);
             lblNombre = itemView.findViewById(R.id.lblNombreUsuario);
             imageViewUsuario = itemView.findViewById(R.id.imgViewUsuario);
+            imageViewLider = itemView.findViewById(R.id.imgVIewLider);
             imgBtnEliminarUsuario = itemView.findViewById(R.id.imgBtnEliminarUsuario);
             cv = itemView.findViewById(R.id.cardViewUsuarios);
 
         }
     }
-
 
 }

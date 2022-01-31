@@ -39,13 +39,13 @@
             android:id="@+id/lblNombreUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:fontFamily="@font/cabin"
             android:textAlignment="center"
             android:textColor="@color/GrisApp"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imgViewUsuario"
-            app:layout_constraintEnd_toStartOf="@+id/imgBtnEliminarUsuario"
             app:layout_constraintStart_toEndOf="@+id/imgViewUsuario"
             app:layout_constraintTop_toTopOf="@+id/imgViewUsuario" />
 
@@ -60,6 +60,17 @@
             app:layout_constraintTop_toTopOf="@+id/imgViewUsuario"
             app:srcCompat="@drawable/iconoborrar"
             tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+        <ImageView
+            android:id="@+id/imgVIewLider"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/lblNombreUsuario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/lblNombreUsuario"
+            app:srcCompat="@drawable/lider" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

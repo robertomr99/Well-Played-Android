@@ -100,12 +100,31 @@ PeticionesEquipo extends AppCompatActivity {
         ));
     }
 
+
+    public static void sumarMiembros(Context context, int iIdEquipo) {
+        String sUrl = Utils.hosting + "equipo/sumar-miembros.php?txtEquipo="+iIdEquipo;
+        Volley.newRequestQueue(context).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                    } else {
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
+    }
+
+
+
     private void mostrarUsuarios() {
         rv.setLayoutManager(new LinearLayoutManager(this));
         peticionesAdapter = new PeticionesAdapter(this, new PeticionesAdapter.PeticionesInterface() {
             @Override
             public void insertPeticion(Usuario oUsuario) {
                 unirseEquipo(PeticionesEquipo.this, iIdEquipo, oUsuario.getiIdUsuario());
+                sumarMiembros(getApplicationContext(), iIdEquipo);
                 delPeticion(iIdEquipo, oUsuario.getiIdUsuario());
             }
 
