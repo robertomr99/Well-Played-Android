@@ -25,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.wellplayed.model.Equipo;
 import com.example.wellplayed.model.Equipo_Usuario;
 import com.example.wellplayed.model.Juego;
+import com.example.wellplayed.model.Usuario;
 import com.example.wellplayed.model.Usuario_Juego;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -40,6 +41,7 @@ public class misEquiposFragment extends Fragment {
     public static Equipo_Usuario oEquipo_Usuario;
     public static Equipo oEquipo;
     public static List<Equipo> lstEquiposComparativa = new ArrayList<Equipo>();
+
     public misEquiposFragment() {
     }
 
@@ -53,15 +55,15 @@ public class misEquiposFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_mis_equipos, container, false);
         rv = view.findViewById(R.id.recyclerViewEquipos);
         lstEquiposComparativa.clear();
+
         sNombreUser = MainActivity.oUsuario.getsUser();
-        //mostrarEquipos();
         crearEquipo(view);
         unirseEquipo(view);
 
         new Thread(new Runnable() {
             public void run() {
                 try {
-                    while(true){
+                    while (true) {
                         mostrarEquipos();
                         Thread.sleep(60000);
                     }
@@ -73,8 +75,6 @@ public class misEquiposFragment extends Fragment {
             }
         }).start();
         return view;
-
-
     }
 
     @Override
@@ -96,6 +96,8 @@ public class misEquiposFragment extends Fragment {
                         ListadoEquipos.lstEquipos = new Gson().fromJson(s, new TypeToken<List<Equipo>>() {
                         }.getType());
                         compararArrays();
+
+
                     }
                 }
                 , volleyError -> {
@@ -104,36 +106,15 @@ public class misEquiposFragment extends Fragment {
         ));
     }
 
+
     private void compararArrays() {
 
-        if(lstEquiposComparativa.size() != ListadoEquipos.lstEquipos.size()){
+        if (lstEquiposComparativa.size() != ListadoEquipos.lstEquipos.size()) {
             mostrarData(getContext());
             lstEquiposComparativa.clear();
             lstEquiposComparativa.addAll(ListadoEquipos.lstEquipos);
         }
 
-    }
-
-    public void contarMiembros() {
-        String sUrl = Utils.hosting + "equipo-usuario/count-miembros.php?txtNombre=" + sNombreUser;
-
-        Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
-                s -> {
-                    Log.d("vacio", s);
-                    if (s.equals("")) {
-                        Toast.makeText(getContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Log.d("Rob", sUrl);
-                        Integer iMiembros = 0;
-                        iMiembros = new Gson().fromJson(s, new TypeToken<Integer>() {
-                        }.getType());
-                        mostrarData(getContext());
-                    }
-                }
-                , volleyError -> {
-            Log.d("Rob", volleyError.getCause().toString());
-        }
-        ));
     }
 
     private void mostrarData(Context context) {
@@ -143,8 +124,7 @@ public class misEquiposFragment extends Fragment {
         adaptador.setOnClickListener(v -> {
             ListadoEquipos.iEquipoSelected = rv.getChildAdapterPosition(v);
             oEquipo = ListadoEquipos.lstEquipos.get(ListadoEquipos.iEquipoSelected);
-            comprobarCreadorEquipo(oEquipo);
-           // pasarEquipo(context, oEquipo);
+            comprobarLider(oEquipo);
         });
     }
 
@@ -162,10 +142,10 @@ public class misEquiposFragment extends Fragment {
         });
     }
 
-    public void pasarEquipo(Context context, Equipo oEquipo, int iCreador) {
+    public void pasarEquipo(Context context, Equipo oEquipo, String sNombreCreado) {
         Intent iDetalleEquipo = new Intent(context, EquipoDetalle.class);
         iDetalleEquipo.putExtra("Equipo", oEquipo);
-        iDetalleEquipo.putExtra("iCreador", iCreador);
+        iDetalleEquipo.putExtra("sNombreCreador", sNombreCreado);
         startActivity(iDetalleEquipo);
     }
 
@@ -187,8 +167,8 @@ public class misEquiposFragment extends Fragment {
         }
     }
 
-    public void comprobarCreadorEquipo(Equipo oEquipo) {
-        String sUrl = Utils.hosting + "equipo-usuario/comprobar-creador.php?txtUsuario=" + sNombreUser + "&txtEquipo=" + oEquipo.getiIdEquipo();
+    public void comprobarLider(Equipo oEquipo) {
+        String sUrl = Utils.hosting + "equipo-usuario/comprobar-lider.php?txtEquipo=" + oEquipo.getiIdEquipo();
 
         Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
@@ -198,11 +178,11 @@ public class misEquiposFragment extends Fragment {
                     } else {
                         boolean boCreador = false;
                         Log.d("Rob", sUrl);
-                        Equipo_Usuario oEquipoUsuario;
-                        oEquipoUsuario = new Gson().fromJson(s, new TypeToken<Equipo_Usuario>() {
+                        Usuario oUsuario;
+                        oUsuario = new Gson().fromJson(s, new TypeToken<Usuario>() {
                         }.getType());
-                        pasarEquipo(getContext(),oEquipo,oEquipoUsuario.getiCreador());
-                        Log.d("Hola",oEquipoUsuario.getiCreador().toString());
+                        pasarEquipo(getContext(), oEquipo, oUsuario.getsUser());
+                        Log.d("Hola", oUsuario.getsUser().toString());
 
                     }
                 }
