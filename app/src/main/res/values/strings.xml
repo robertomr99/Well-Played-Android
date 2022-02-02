@@ -19,6 +19,10 @@
     <string name="btn_cancelar">Cancelar</string>
     <string name="from">from</string>
     <string name="btn_UnirseEquipo">Unirse a un equipo</string>
+    <string name="btn_UnirsePartido">Unirse a un partido</string>
+    <string name="lblNoTienesEquipo">Hemos visto que aun no tienes equipo </string>
+    <string name="lblDeseasUnirteEquipo">¿Deseas unirte a un equipo?</string>
+
     <string name="btn_CrearEquipo">Crear equipo</string>
     <string name="btn_EliminarEquipo">Eliminar equipo</string>
     <string name="btn_SalirEquipo">Salir del equipo</string>
@@ -30,6 +34,9 @@
     <string name="lblEliminarUsuario">¿Desea eliminar el usuario de este equipo?</string>
     <string name="lblSi">Si</string>
     <string name="lblNo">No</string>
+    <string name="lblMiembros">Miembros</string>
+    <string name="lblMaxMiembros">/ 7</string>
+
 
     <!-- String Drawer Menu -->
     <string name="mnuPerfil">Perfil</string>
@@ -40,6 +47,7 @@
     <string name="mnuAjustes">Ajustes</string>
     <string name="mnuCerrarSesion">Cerrar sesión</string>
     <string name="mnuUnirseEquipo">Unirse a equipo</string>
+    <string name="mnuUnirsePartidos">Unirse a partido</string>
     <string name="mnuCrearEquipo">Crear equipo</string>
     <string name="mnuAddJuego">Añadir juego</string>
     <string name="mnuTienda">Tienda</string>

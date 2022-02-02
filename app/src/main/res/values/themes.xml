@@ -7,9 +7,10 @@
         <item name="colorPrimaryVariant">@color/GrisOscuroApp</item>
         <item name="colorAccent">@color/AmarilloApp</item>
     </style>
-
+    
     <style name="Navigation">
-        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorPrimary">@color/AzulApp</item>
+        <item name="android:fontFamily">@font/pattaya</item>
     </style>
 
     <style name="btnUsuario">

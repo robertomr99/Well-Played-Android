@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
+        
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600|Open+Sans" rel="stylesheet"> 
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+	<link rel="stylesheet" href="estilos.css">
+	<title>Ventana Emergente Animada</title>
+        <script src="popup.js"></script>
+</head>
+<body onLoad="popUp()">
+	
+
+	<div class="overlay" id="overlay">
+		<div class="popup" id="popup">
+			<a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                        <h3 style="color: #e1e8ec">from</h3>
+			<h3>WellPlayed</h3>
+                        <h4>Cambia tu contraseña aquí.</h4>
+			<form action="upd-pass.php" method="GET">
+				<div class="contenedor-inputs">
+					<input type="text" placeholder="Token" name = "txtCodigo">
+					<input type="text" placeholder="Nueva contraseña" name = "txtPassword">
+				</div>
+				<input type="submit" class="btn-submit" value="ENVIAR">
+			</form>
+		</div>
+	</div>
+	<script src="popup.js"></script>
+	
+</body>
+</html>

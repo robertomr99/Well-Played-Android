@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardViewUEquipos"
+    android:id="@+id/cardViewUPartidos"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="15dp"
@@ -21,61 +21,71 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="96dp">
+        android:layout_height="128dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imgViewUEquipo"
+            android:id="@+id/imgViewUC1"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_centerInParent="true"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
             android:src="@android:mipmap/sym_def_app_icon"
             app:civ_border_width="2dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgViewUC2"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            android:src="@android:mipmap/sym_def_app_icon"
+            app:civ_border_width="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/lblUNombreC1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/cabin"
             android:textAlignment="center"
             android:textColor="@color/GrisApp"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/imgBtnUnirseEquipo"
-            app:layout_constraintStart_toEndOf="@+id/imgViewUEquipo"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintEnd_toEndOf="@+id/imgViewUC1"
+            app:layout_constraintStart_toStartOf="@+id/imgViewUC1"
+            app:layout_constraintTop_toBottomOf="@+id/imgViewUC1" />
 
         <TextView
-            android:id="@+id/lblUMiembros"
+            android:id="@+id/lblUNombreC2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/cabin"
             android:textAlignment="center"
             android:textColor="@color/GrisApp"
-            android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="@+id/lblUNombreC1"
-            app:layout_constraintStart_toStartOf="@+id/lblUNombreC1"
-            app:layout_constraintTop_toBottomOf="@+id/lblUNombreC1" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/imgViewUC2"
+            app:layout_constraintStart_toStartOf="@+id/imgViewUC2"
+            app:layout_constraintTop_toBottomOf="@+id/imgViewUC2" />
 
+        <ImageView
+            android:id="@+id/imgViewVersus"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imgViewUC2"
+            app:layout_constraintStart_toEndOf="@+id/imgViewUC1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/versus" />
 
-        <ImageButton
-            android:id="@+id/imgBtnUnirseEquipo"
-            style="@style/btnUsuario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/joinequipo"
-            app:layout_constraintBottom_toBottomOf="@+id/imgViewUEquipo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imgViewUEquipo"
-            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
