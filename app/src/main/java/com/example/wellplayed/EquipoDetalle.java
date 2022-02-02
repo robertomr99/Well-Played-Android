@@ -94,10 +94,10 @@ public class EquipoDetalle extends AppCompatActivity {
         btnEliminarSalirEquipoDetalle = findViewById(R.id.btnEliminarEquipoDetalle);
 
         btnEliminarSalirEquipoDetalle.setOnClickListener(view -> {
-            if (oEquipoUsuario.getiCreador() == 1) {
-                Toast.makeText(this, "Es creador", Toast.LENGTH_SHORT).show();
+            if (sNombreUser.equals(sNombreCreador)) {
+                delEquipo();
             } else {
-                Toast.makeText(this, "No es creador", Toast.LENGTH_SHORT).show();
+                salirEquipo();
             }
         });
 
@@ -159,7 +159,7 @@ public class EquipoDetalle extends AppCompatActivity {
         btnSI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                eliminarEquipoUsuario(oUsuario);
+                eliminarEquipoUsuario();
                 restarMiembros(context,iIdEquipoJuego);
                 Toast.makeText(EquipoDetalle.this, "Usuario eliminado con éxito", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
@@ -204,13 +204,14 @@ public class EquipoDetalle extends AppCompatActivity {
         setearColoresWinRate(oEquipoJuego);
     }
 
-    public static void restarMiembros(Context context, int iIdEquipo) {
+    public void restarMiembros(Context context, int iIdEquipo) {
         String sUrl = Utils.hosting + "equipo/restar-miembros.php?txtEquipo="+iIdEquipo;
         Volley.newRequestQueue(context).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
                     Log.d("vacio", s);
                     if (s.equals("")) {
                     } else {
+                        finish();
                     }
                 }
                 , volleyError -> {
@@ -219,8 +220,8 @@ public class EquipoDetalle extends AppCompatActivity {
         ));
     }
 
-    public void eliminarEquipoUsuario(Usuario oUsuario) {
-        String sUrl = Utils.hosting + "equipo-usuario/eliminar-equipo-usuario.php?txtUsuario=" + oUsuario.getiIdUsuario() + "&txtEquipo=" + iIdEquipoJuego;
+    public void eliminarEquipoUsuario() {
+        String sUrl = Utils.hosting + "equipo-usuario/eliminar-equipo-usuario.php?txtUsuario=" + sNombreUser + "&txtEquipo=" + iIdEquipoJuego;
 
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
@@ -239,13 +240,51 @@ public class EquipoDetalle extends AppCompatActivity {
         ));
     }
 
+    public void salirEquipo() {
+        String sUrl = Utils.hosting + "equipo-usuario/eliminar-equipo-usuario.php?txtUsuario=" + sNombreUser + "&txtEquipo=" + iIdEquipoJuego;
+
+        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("Rob", s);
+                    if (s.equals("null")) {
+                        Toast.makeText(this, "no te has podido salir del equipo", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "te has salido del equipo", Toast.LENGTH_LONG).show();
+                        restarMiembros(this,iIdEquipoJuego);
+                    }
+                }
+                , volleyError -> {
+
+            Log.d("ALACID", volleyError.getCause().toString());
+        }
+        ));
+    }
+
+    public void delEquipo(){
+        String sUrl = Utils.hosting + "equipo/del-equipo.php?txtEquipo=" + iIdEquipoJuego;
+
+        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    if (s.equals("null")) {
+                        Toast.makeText(this, "Error al eliminar el equipo", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Equipo eliminado con éxito", Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                }
+                , volleyError -> {
+
+            Log.d("ALACID", volleyError.getCause().toString());
+        }
+        ));
+    }
+
 
     public  void comprobarCreadorEquipo() {
         String sUrl = Utils.hosting + "equipo-usuario/comprobar-creador.php?txtUsuario=" + sNombreUser + "&txtEquipo=" + iIdEquipoJuego;
 
         Volley.newRequestQueue(context).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
-                    Log.d("vacio", s);
                     if (s.equals("")) {
                         Toast.makeText(context, "no se ha encontrado", Toast.LENGTH_SHORT).show();
                     } else {
@@ -253,7 +292,6 @@ public class EquipoDetalle extends AppCompatActivity {
                         Log.d("Rob", sUrl);
                         oEquipoUsuario = new Gson().fromJson(s, new TypeToken<Equipo_Usuario>() {
                         }.getType());
-                        Log.d("CREADORDENTRO", oEquipoUsuario.toString());
                         ocultarElementos();
                     }
                 }
@@ -264,7 +302,6 @@ public class EquipoDetalle extends AppCompatActivity {
     }
 
     public void ocultarElementos() {
-        Log.d("CREADOR", oEquipoUsuario.getiCreador().toString());
         if (oEquipoUsuario.getiCreador() == 0) {
             imgBtnAdminUserDetalle.setVisibility(View.GONE);
             btnEliminarSalirEquipoDetalle.setText(R.string.btn_SalirEquipo);

@@ -2,14 +2,17 @@ package com.example.wellplayed.model;
 
 public class Partido_Equipo {
 
-    private Integer iIdPartidoEquipo;
-    private Equipo_Juego oEquipo1, oEquipo2;
-   private boolean boVictoria;
+    private Integer iIdPartidoEquipo,iIdEquipo1,iIdEquipo2,iIdJuego;
+    private boolean boVictoria;
 
-    public Partido_Equipo(Integer iIdPartidoEquipo, Equipo_Juego oEquipo1, Equipo_Juego oEquipo2, boolean boVictoria) {
+    public Partido_Equipo() {
+    }
+
+    public Partido_Equipo(Integer iIdPartidoEquipo, Integer iIdEquipo1, Integer iIdEquipo2, Integer iIdJuego, boolean boVictoria) {
         this.iIdPartidoEquipo = iIdPartidoEquipo;
-        this.oEquipo1 = oEquipo1;
-        this.oEquipo2 = oEquipo2;
+        this.iIdEquipo1 = iIdEquipo1;
+        this.iIdEquipo2 = iIdEquipo2;
+        this.iIdJuego = iIdJuego;
         this.boVictoria = boVictoria;
     }
 
@@ -21,20 +24,28 @@ public class Partido_Equipo {
         this.iIdPartidoEquipo = iIdPartidoEquipo;
     }
 
-    public Equipo_Juego getoEquipo1() {
-        return oEquipo1;
+    public Integer getiIdEquipo1() {
+        return iIdEquipo1;
     }
 
-    public void setoEquipo1(Equipo_Juego oEquipo1) {
-        this.oEquipo1 = oEquipo1;
+    public void setiIdEquipo1(Integer iIdEquipo1) {
+        this.iIdEquipo1 = iIdEquipo1;
     }
 
-    public Equipo_Juego getoEquipo2() {
-        return oEquipo2;
+    public Integer getiIdEquipo2() {
+        return iIdEquipo2;
     }
 
-    public void setoEquipo2(Equipo_Juego oEquipo2) {
-        this.oEquipo2 = oEquipo2;
+    public void setiIdEquipo2(Integer iIdEquipo2) {
+        this.iIdEquipo2 = iIdEquipo2;
+    }
+
+    public Integer getiIdJuego() {
+        return iIdJuego;
+    }
+
+    public void setiIdJuego(Integer iIdJuego) {
+        this.iIdJuego = iIdJuego;
     }
 
     public boolean isBoVictoria() {
