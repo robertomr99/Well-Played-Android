@@ -1,18 +1,25 @@
 package com.example.wellplayed.model;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Producto implements Serializable {
 
     private Integer iIdProducto;
-    private String sNombre;
-    private int iPrecio, iFoto;
+    private String sNombre, sFoto;
+    private int iPrecio;
     private Categoria oCategoria;
 
-    public Producto(Integer iIdProducto, String sNombre, int iPrecio, int iFoto, Categoria oCategoria) {
+    public Producto(Integer iIdProducto, String sNombre, int iPrecio, String sFoto, Categoria oCategoria) {
         this.iIdProducto = iIdProducto;
         this.sNombre = sNombre;
         this.iPrecio = iPrecio;
-        this.iFoto = iFoto;
+        this.sFoto = sFoto;
         this.oCategoria = oCategoria;
+    }
+
+    public Producto (String sNombre,String sFoto){
+        this.sNombre = sNombre;
+        this.sFoto = sFoto;
     }
 
     public Producto(Integer iIdProducto) {
@@ -20,14 +27,14 @@ public class Producto {
     }
 
     public Producto() {
+
     }
 
     public Integer getiIdProducto() {
         return iIdProducto;
     }
 
-    public void setiIdProducto(Integer iIdProducto) {
-        this.iIdProducto = iIdProducto;
+    public void setiIdProducto(Integer iIdProducto) { this.iIdProducto = iIdProducto;
     }
 
     public String getsNombre() {
@@ -46,12 +53,12 @@ public class Producto {
         this.iPrecio = iPrecio;
     }
 
-    public int getiFoto() {
-        return iFoto;
+    public String getsFoto() {
+        return sFoto;
     }
 
-    public void setiFoto(int iFoto) {
-        this.iFoto = iFoto;
+    public void setsFoto(String sFoto) {
+        this.sFoto = sFoto;
     }
 
     public Categoria getoCategoria() {
@@ -60,5 +67,16 @@ public class Producto {
 
     public void setoCategoria(Categoria oCategoria) {
         this.oCategoria = oCategoria;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "iIdProducto=" + iIdProducto +
+                ", sNombre='" + sNombre + '\'' +
+                ", sFoto='" + sFoto + '\'' +
+                ", iPrecio=" + iPrecio +
+                ", oCategoria=" + oCategoria +
+                '}';
     }
 }

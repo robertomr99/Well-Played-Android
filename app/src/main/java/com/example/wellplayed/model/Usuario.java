@@ -1,12 +1,18 @@
 package com.example.wellplayed.model;
+import android.widget.Toast;
+
+import com.example.wellplayed.Registro;
+
 import java.io.Serializable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Usuario implements Serializable {
 
     private Integer iIdUsuario;
-    private String sEmail , sUser, sPassword, sFechaNacimiento;
+    private String sEmail , sUser, sPassword, sFechaNacimiento, sFoto, sCodigo;
     private int iPais, iMonedas;
-    private boolean boAdmin;
+    private Integer iAdmin;
 
     public Usuario() {
     }
@@ -20,7 +26,7 @@ public class Usuario implements Serializable {
         this.iIdUsuario = iIdUsuario;
     }
 
-    public Usuario(Integer iIdUsuario, String sEmail, String sUser, String sPassword, String sFechaNacimiento, int iPais, int iMonedas, boolean boAdmin) {
+    public Usuario(Integer iIdUsuario, String sEmail, String sUser, String sPassword, String sFechaNacimiento, int iPais, int iMonedas, Integer iAdmin, String sFoto,String sCodigo) {
         this.iIdUsuario = iIdUsuario;
         this.sEmail = sEmail;
         this.sUser = sUser;
@@ -28,7 +34,17 @@ public class Usuario implements Serializable {
         this.sFechaNacimiento = sFechaNacimiento;
         this.iPais = iPais;
         this.iMonedas = iMonedas;
-        this.boAdmin = boAdmin;
+        this.iAdmin = iAdmin;
+        this.sFoto = sFoto;
+        this.sCodigo = sCodigo;
+    }
+
+    public String getsCodigo() {
+        return sCodigo;
+    }
+
+    public void setsCodigo(String sCodigo) {
+        this.sCodigo = sCodigo;
     }
 
     public Integer getiIdUsuario() {
@@ -44,7 +60,16 @@ public class Usuario implements Serializable {
     }
 
     public void setsEmail(String sEmail) {
-        this.sEmail = sEmail;
+
+        // El email a validar
+
+       if(Pattern.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+               + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",sEmail)){
+           this.sEmail = sEmail;
+       }else{
+
+       }
+
     }
 
     public String getsUser() {
@@ -87,12 +112,20 @@ public class Usuario implements Serializable {
         this.iMonedas = iMonedas;
     }
 
-    public boolean isBoAdmin() {
-        return boAdmin;
+    public Integer getiAdmin() {
+        return iAdmin;
     }
 
-    public void setBoAdmin(boolean boAdmin) {
-        this.boAdmin = boAdmin;
+    public void setiAdmin(Integer iAdmin) {
+        this.iAdmin = iAdmin;
+    }
+
+    public String getsFoto() {
+        return sFoto;
+    }
+
+    public void setsFoto(String sFoto) {
+        this.sFoto = sFoto;
     }
 
     @Override
@@ -103,9 +136,11 @@ public class Usuario implements Serializable {
                 ", sUser='" + sUser + '\'' +
                 ", sPassword='" + sPassword + '\'' +
                 ", sFechaNacimiento='" + sFechaNacimiento + '\'' +
+                ", sFoto='" + sFoto + '\'' +
+                ", sCodigo='" + sCodigo + '\'' +
                 ", iPais=" + iPais +
                 ", iMonedas=" + iMonedas +
-                ", boAdmin=" + boAdmin +
+                ", iAdmin=" + iAdmin +
                 '}';
     }
 }

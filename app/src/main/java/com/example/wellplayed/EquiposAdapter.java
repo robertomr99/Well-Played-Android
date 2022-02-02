@@ -12,24 +12,28 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.wellplayed.model.Equipo;
+import com.example.wellplayed.model.Producto;
+
 public class EquiposAdapter extends RecyclerView.Adapter<EquiposAdapter.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
     Context context;
     private View.OnClickListener listener;
 
-    public EquiposAdapter(Context context){
+    public EquiposAdapter(Context context) {
         inflater = LayoutInflater.from(context);
         this.context = context;
     }
 
     public void onClick(View v) {
-        if(listener != null){
+        if (listener != null) {
             listener.onClick(v);
         }
     }
 
-    public void setOnClickListener(View.OnClickListener listener){
+    public void setOnClickListener(View.OnClickListener listener) {
         this.listener = listener;
     }
 
@@ -43,12 +47,15 @@ public class EquiposAdapter extends RecyclerView.Adapter<EquiposAdapter.ViewHold
 
 
     public void onBindViewHolder(@NonNull EquiposAdapter.ViewHolder holder, int position) {
-        String sNombre = ListadoEquipos.lstEquipos.get(position).getoEquipo().getsNombre();
-        //String sMiembros = ListadoEquipos.lstEquipos.get(position).get
-        int iFoto = ListadoEquipos.lstEquipos.get(position).getoEquipo().getiFoto();
+
+        Equipo oEquipo = ListadoEquipos.lstEquipos.get(position); // Instanciamos el objeto de la lista con la posicion
+
+        Glide.with(context).load(oEquipo.getsFoto()).circleCrop().into(holder.imageViewEquipo);
+        String sNombre = oEquipo.getsNombre();
+        String sMiembros = String.valueOf(oEquipo.getiMiembros());
 
         holder.lblNombre.setText(sNombre);
-        holder.imageViewEquipo.setImageResource(iFoto);
+        holder.lblMiembros.setText(sMiembros);
         holder.cv.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition));
 
     }
@@ -58,9 +65,9 @@ public class EquiposAdapter extends RecyclerView.Adapter<EquiposAdapter.ViewHold
         return ListadoEquipos.lstEquipos.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView lblNombre;
-        //TextView lblMiembros;
+        TextView lblMiembros;
         ImageView imageViewEquipo;
         CardView cv;
 
@@ -68,8 +75,8 @@ public class EquiposAdapter extends RecyclerView.Adapter<EquiposAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             lblNombre = itemView.findViewById(R.id.lblNombreEquipo);
-            //lblMiembros = itemView.findViewById(R.id.lblMiembros);
-            imageViewEquipo = itemView.findViewById(R.id.imagenEquipo);
+            lblMiembros = itemView.findViewById(R.id.lblMiembros);
+            imageViewEquipo = itemView.findViewById(R.id.imgViewEquipo);
             cv = itemView.findViewById(R.id.cardViewEquipos);
         }
     }

@@ -119,7 +119,7 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:backgroundTint="@color/iconosapp"
+        android:backgroundTint="@color/AmarilloApp"
         android:text="@string/crear_cuenta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"

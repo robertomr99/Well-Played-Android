@@ -3,15 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:background="@color/GrisApp"
-    android:backgroundTint="@color/GrisApp"
+    android:theme="@style/Theme.WellPlayed"
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewJuegos"
-        android:layout_width="372dp"
-        android:layout_height="221dp"
+        android:layout_width="353dp"
+        android:layout_height="572dp"
         android:layout_marginTop="24dp"
         android:background="@color/GrisApp"
         android:backgroundTint="@color/GrisApp"
@@ -41,7 +40,7 @@
         android:layout_marginBottom="40dp"
         android:clickable="true"
         android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="@color/iconosapp"
+        app:backgroundTint="@color/AmarilloApp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.878"

@@ -3,21 +3,30 @@ package com.example.wellplayed.model;
 public class Juego {
 
     private Integer iIdJuego;
-    private String sNombre, sDescripcion;
-    private int iFoto;
+    private String sNombre, sDescripcion, sFoto, sVideo;
 
-    public Juego(Integer iIdJuego, String sNombre, String sDescripcion, int iFoto) {
-        this.iIdJuego = iIdJuego;
-        this.sNombre = sNombre;
-        this.sDescripcion = sDescripcion;
-        this.iFoto = iFoto;
+
+
+    public Juego() {
     }
 
     public Juego(Integer iIdJuego) {
         this.iIdJuego = iIdJuego;
     }
 
-    public Juego() {
+    public Juego(String sNombre, String sDescripcion, String sFoto, String sVideo) {
+        this.sNombre = sNombre;
+        this.sDescripcion = sDescripcion;
+        this.sFoto = sFoto;
+        this.sVideo = sVideo;
+    }
+
+    public Juego(Integer iIdJuego, String sNombre, String sDescripcion, String sFoto, String sVideo) {
+        this.iIdJuego = iIdJuego;
+        this.sNombre = sNombre;
+        this.sDescripcion = sDescripcion;
+        this.sFoto = sFoto;
+        this.sVideo = sVideo;
     }
 
     public Integer getiIdJuego() {
@@ -44,11 +53,29 @@ public class Juego {
         this.sDescripcion = sDescripcion;
     }
 
-    public int getiFoto() {
-        return iFoto;
+    public String getsFoto() {
+        return sFoto;
     }
 
-    public void setiFoto(int iFoto) {
-        this.iFoto = iFoto;
+    public void setsFoto(String sFoto) {
+        this.sFoto = sFoto;
+    }
+
+    public String getsVideo() {
+        return sVideo;
+    }
+
+    public void setsVideo(String sVideo) {
+        this.sVideo = sVideo;
+    }
+
+    @Override
+    public String toString() {
+        return "Juego{" +
+                "iIdJuego=" + iIdJuego +
+                ", sNombre='" + sNombre + '\'' +
+                ", sDescripcion='" + sDescripcion + '\'' +
+                ", sFoto='" + sFoto + '\'' +
+                '}';
     }
 }

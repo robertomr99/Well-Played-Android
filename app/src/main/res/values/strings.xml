@@ -9,7 +9,7 @@
     <string name="iniciar_sesi_n">Iniciar sesión</string>
     <string name="no_tienes_cuenta_registrate_aqui">¿No tienes cuenta? Registrate aqui</string>
     <string name="registrate_para_jugar_a_los_mejores_torneos_competitivos_de_tus_juegos_favoritos">Registrate para jugar a los mejores torneos competitivos de tus juegos favoritos!</string>
-    <string name="email">Email</string>
+    <string name="emailRestart">Email</string>
     <string name="confirmar_contrase_a">Confirmar contraseña</string>
     <string name="fecha_nacimiento">Fecha nacimiento</string>
     <string name="crear_cuenta">Crear cuenta</string>
@@ -17,6 +17,26 @@
     <string name="crear_equipo_nombre">Nombre equipo:</string>
     <string name="btn_aceptar">Aceptar</string>
     <string name="btn_cancelar">Cancelar</string>
+    <string name="from">from</string>
+    <string name="btn_UnirseEquipo">Unirse a un equipo</string>
+    <string name="btn_UnirsePartido">Unirse a un partido</string>
+    <string name="lblNoTienesEquipo">Hemos visto que aun no tienes equipo </string>
+    <string name="lblDeseasUnirteEquipo">¿Deseas unirte a un equipo?</string>
+
+    <string name="btn_CrearEquipo">Crear equipo</string>
+    <string name="btn_EliminarEquipo">Eliminar equipo</string>
+    <string name="btn_SalirEquipo">Salir del equipo</string>
+    <string name="lblWin_rate">Win rate</string>
+    <string name="lblVictorias">Victoria</string>
+    <string name="lblDerrota">Derrota</string>
+    <string name="btn_EliminarJuego">Eliminar juego</string>
+    <string name="SpinnerJuego">Juegos</string>
+    <string name="lblEliminarUsuario">¿Desea eliminar el usuario de este equipo?</string>
+    <string name="lblSi">Si</string>
+    <string name="lblNo">No</string>
+    <string name="lblMiembros">Miembros</string>
+    <string name="lblMaxMiembros">/ 7</string>
+
 
     <!-- String Drawer Menu -->
     <string name="mnuPerfil">Perfil</string>
@@ -27,8 +47,11 @@
     <string name="mnuAjustes">Ajustes</string>
     <string name="mnuCerrarSesion">Cerrar sesión</string>
     <string name="mnuUnirseEquipo">Unirse a equipo</string>
+    <string name="mnuUnirsePartidos">Unirse a partido</string>
     <string name="mnuCrearEquipo">Crear equipo</string>
-
+    <string name="mnuAddJuego">Añadir juego</string>
+    <string name="mnuTienda">Tienda</string>
+    <string name="mnuPeticiones">Peticiones</string>
 
     <!-- String Fragment Ajustes-->
     <string name="lblCuenta">Cuenta</string>
@@ -45,6 +68,30 @@
     <string name="CheckBox_Valorant">Valorant</string>
     <string name="CheckBox_FIFA">FIFA</string>
     <string name="CheckBox_CSGO">Counter Strike</string>
+    <string name="addticket">Añadir un ticket</string>
+
+    <!-- String Fragment Tienda -->
+    <string name="txtTienda">Tienda</string>
+    <string name="logos">Logos</string>
+    <string name="email">Email</string>
+    <string name="restablecer_contrase_a">Restablecer contraseña</string>
+    <string name="le_enviaremos_un_correo_para_restablecer_la_contrase_a_de_su_cuenta">Le enviaremos un correo para restablecer la contraseña de su cuenta</string>
+    <string name="mantener_sesi_n_iniciada">Mantener sesión iniciada</string>
+    <string name="lblComprarProductos">¿Estas seguro de que quieres comprar este producto?</string>
+
+    <!-- Array spinner tienda -->
+    <string-array name="productos">
+        <item>Avatares</item>
+        <item>Banners</item>
+    </string-array>
+
+    <!-- Array spinner juegos -->
+    <string-array name="juegos">
+        <item>LOL</item>
+        <item>Valorant</item>
+        <item>CSGO</item>
+        <item>FIFA</item>
+    </string-array>
 
     <string-array name="paises">
         <item>Afganist&#225;n</item>

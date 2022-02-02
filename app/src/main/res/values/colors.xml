@@ -4,13 +4,26 @@
     <!-- Colores App -->
 
     <color name="GrisApp">#e1e8ec</color>
-    <color name="iconosapp">#f3ba00</color>
-    <color name="menuHamburguesa">#01587a</color>
+    <color name="AmarilloApp">#f3ba00</color>
+    <color name="AzulApp">#01587a</color>
+    <color name= "CelesteApp">#5cb3c1</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF </color>
+    <color name="GrisClaroApp">#C0C0C0</color>
     <color name="lblClickables">#0090FF</color>
     <color name="Google">#E5462B</color>
     <color name="Facebook">#3b5998</color>
+
+
+    <!-- Colores WinRate -->
+    <color name="RojoWinRate">#FF0000</color>
+    <color name="VerdeWinRate">#00FF00</color>
+    <color name="NaranjaWinRate">#FF8000</color>
+
+    <!-- Colores App Modo Oscuro-->
+
+    <color name="GrisOscuroApp">#212426</color>
+
 
     <!--  Colores Por Defecto  -->
 

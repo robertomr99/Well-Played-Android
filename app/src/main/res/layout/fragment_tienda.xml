@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewTienda"
+        android:layout_width="353dp"
+        android:layout_height="572dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTienda" />
+
+    <TextView
+        android:id="@+id/txtTienda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cabin"
+        android:text="@string/txtTienda"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:layout_marginTop="84dp"
+        app:layout_constraintStart_toStartOf="@+id/recyclerViewTienda"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerCategoriaProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/lblMonedasUser"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerViewTienda"
+        app:layout_constraintTop_toTopOf="@+id/lblMonedasUser" />
+
+    <ImageView
+        android:id="@+id/imgCoinTienda"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="92dp"
+        app:layout_constraintStart_toEndOf="@+id/txtTienda"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/moneda" />
+
+    <TextView
+        android:id="@+id/lblMonedasUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgCoinTienda"
+        app:layout_constraintStart_toEndOf="@+id/imgCoinTienda"
+        app:layout_constraintTop_toTopOf="@+id/imgCoinTienda" />
+</androidx.constraintlayout.widget.ConstraintLayout>

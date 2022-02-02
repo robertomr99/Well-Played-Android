@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardViewUPartidos"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="25dp"
+    android:layout_marginRight="15dp"
+    android:background="#FFFFFF"
+    android:backgroundTint="@color/AzulApp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="30dp"
+    app:cardElevation="10dp"
+    app:cardMaxElevation="10dp"
+    tools:ignore="SpeakableTextPresentCheck">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="128dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgViewUC1"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:src="@android:mipmap/sym_def_app_icon"
+            app:civ_border_width="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgViewUC2"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            android:src="@android:mipmap/sym_def_app_icon"
+            app:civ_border_width="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/lblUNombreC1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/cabin"
+            android:textAlignment="center"
+            android:textColor="@color/GrisApp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/imgViewUC1"
+            app:layout_constraintStart_toStartOf="@+id/imgViewUC1"
+            app:layout_constraintTop_toBottomOf="@+id/imgViewUC1" />
+
+        <TextView
+            android:id="@+id/lblUNombreC2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/cabin"
+            android:textAlignment="center"
+            android:textColor="@color/GrisApp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/imgViewUC2"
+            app:layout_constraintStart_toStartOf="@+id/imgViewUC2"
+            app:layout_constraintTop_toBottomOf="@+id/imgViewUC2" />
+
+        <ImageView
+            android:id="@+id/imgViewVersus"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imgViewUC2"
+            app:layout_constraintStart_toEndOf="@+id/imgViewUC1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/versus" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

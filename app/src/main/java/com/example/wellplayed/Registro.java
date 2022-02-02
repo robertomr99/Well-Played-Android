@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,6 +26,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import com.example.wellplayed.model.Data;
+import com.example.wellplayed.model.PassGenerator;
+import com.example.wellplayed.model.Producto;
 import com.example.wellplayed.model.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -42,6 +45,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -59,6 +63,15 @@ public class Registro extends AppCompatActivity {
     LocalDate c2 = LocalDate.now();
     DatePickerDialog dpd;
     public static Data oData = new Data();
+    public static Registro context;
+    public static ArrayList<Producto> oProducto = new ArrayList<Producto>();
+
+    public Registro(){
+        context = this;
+    }
+    public static Registro getInstance(){
+        return context;
+    }
 
     //List<LAVERDADERA> lstVerdad;
     //String sUrl = "http://well-played.infinityfreeapp.com/pruebas_Miguel/ins-coche.php?";
@@ -100,13 +113,13 @@ public class Registro extends AppCompatActivity {
 
 
     }
-    
+
 
     public void comprobarUser(){
 
         Usuario oUsuario = new Usuario();
         oUsuario = agregarUsuario();
-        String sUrl = Utils.hosting + "comprobar-user.php?txtUsuario="+oUsuario.getsUser()+"&txtEmail="+oUsuario.getsEmail();
+        String sUrl = Utils.hosting + "usuario/comprobar-user.php?txtUsuario="+oUsuario.getsUser()+"&txtEmail="+oUsuario.getsEmail();
 
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
@@ -138,17 +151,18 @@ public class Registro extends AppCompatActivity {
         insertUsuario(agregarUsuario(),boExito);
     }
 
-    private void insertUsuario(Usuario oUser,boolean boExito) {
+    public static void insertUsuario(Usuario oUser, boolean boExito) {
 
         if(!boExito){
-            String sUrl = Utils.hosting + "ins-usuario.php?txtEmail="+oUser.getsEmail()+"&txtUsuario="+oUser.getsUser()+"&txtPass="+oUser.getsPassword()+"&txtFechaNacimiento="+oUser.getsFechaNacimiento()+"&txtPais="+oUser.getiPais()+"&txtMonedas="+oUser.getiMonedas()+"&txtAdministrador="+oUser.isBoAdmin();
+            String sUrl = Utils.hosting + "usuario/ins-usuario.php?txtEmail="+oUser.getsEmail()+"&txtUsuario="+oUser.getsUser()+"&txtPass="+oUser.getsPassword()+"&txtFechaNacimiento="+oUser.getsFechaNacimiento()+"&txtPais="+oUser.getiPais()+"&txtMonedas="+oUser.getiMonedas()+"&txtAdministrador="+oUser.getiAdmin()+"&txtFoto="+oUser.getsFoto()+"&txtCodigo="+oUser.getsCodigo();
 
-            Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
+            Volley.newRequestQueue(Login.getInstance().getApplicationContext()).add(new StringRequest(Request.Method.GET,sUrl,
                     s ->{
                         if(s.equals("null")){
-                            Toast.makeText(getApplicationContext(), "error al crear el usuario", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Login.getInstance().getApplicationContext(), "error al crear el usuario", Toast.LENGTH_LONG).show();
                         }else{
-                            Toast.makeText(getApplicationContext(), "Usuario creado con éxito", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Login.getInstance().getApplicationContext(), "Usuario creado con éxito", Toast.LENGTH_LONG).show();
+                            selectIdUser(oUser.getsUser());
                         }
                     }
                     ,volleyError -> {
@@ -157,35 +171,77 @@ public class Registro extends AppCompatActivity {
             }
             ));
         }else{
-            Toast.makeText(this, "El nombre de usuario o email no esta disponible", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Login.getInstance().getApplicationContext(), "El nombre de usuario o email no esta disponible", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    private void obtenerEste() {
-        String sUrl = Utils.hosting + "get-coche.php?txtId=1";
-        Log.d("alacide", sUrl);
-        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET,sUrl,
-                s ->{
-                    if(s.equals("null")){
-                        Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Log.d("alacide", sUrl);
-                        Toast.makeText(getApplicationContext(), "hola", Toast.LENGTH_SHORT).show();
-                        //laverdad = new Gson().fromJson(s,new TypeToken<LAVERDADERA>(){}.getType());
-                        Toast.makeText(getApplicationContext(), "hola", Toast.LENGTH_SHORT).show();
-                        mostrarEste();
+    private static void selectIdUser(String sNombreUser) {
+
+        String sUrl = Utils.hosting + "usuario/select-idUser.php?txtUsuario="+sNombreUser;
+        Volley.newRequestQueue(context).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    if (s.equals("")) {
+                        Toast.makeText(context, "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Usuario oUsuarioId = new Usuario();
+                        oUsuarioId = new Gson().fromJson(s, new TypeToken<Usuario>() {
+                        }.getType());
+
+                        selectProductosGratuitos(oUsuarioId);
                     }
                 }
-                ,volleyError -> {
-            Toast.makeText(this, "E", Toast.LENGTH_SHORT).show();
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
         }
         ));
     }
 
-    private void mostrarEste() {
+    private static void selectProductosGratuitos(Usuario oUser) {
+        String sUrl = Utils.hosting + "productos/select-producto-gratis.php?txtPrecio="+0;
 
-        //txtUsuario.setText(laverdad.toString());
+
+        Volley.newRequestQueue(context).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(context, "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        Log.d("alacide", sUrl);
+                        oProducto = new Gson().fromJson(s, new TypeToken<List<Producto>>() {
+                        }.getType());
+
+                        for(int iContador = 0; iContador < oProducto.size();iContador++){
+                            insertProductoUsuario(oUser, iContador);
+                        }
+
+                    }
+                }
+
+                , volleyError -> {
+
+            Log.d("ALACID", volleyError.getCause().toString());
+        }
+        ));
+    }
+
+    private static void insertProductoUsuario(Usuario oUser, int iContador) {
+            String sUrl = Utils.hosting + "usuario-producto/ins-usuario-producto.php?txtiIdUser="+oUser.getiIdUsuario()+"&txtiIdProducto="+oProducto.get(iContador).getiIdProducto();
+            Log.d("ALACID",sUrl);
+            Volley.newRequestQueue(Login.getInstance().getApplicationContext()).add(new StringRequest(Request.Method.GET,sUrl,
+                    s ->{
+                        if(s.equals("null")){
+
+                        }else{
+
+                        }
+                    }
+                    ,volleyError -> {
+
+                Log.d("ALACID",volleyError.getCause().toString());
+            }
+            ));
     }
 
 
@@ -197,7 +253,9 @@ public class Registro extends AppCompatActivity {
         oUser.setsFechaNacimiento(txtFechaNacimiento.getText().toString());
         oUser.setiPais(spinPaises.getSelectedItemPosition());
         oUser.setiMonedas(0);
-        oUser.setBoAdmin(false);
+        oUser.setiAdmin(0);
+        oUser.setsFoto("");
+        oUser.setsCodigo(PassGenerator.getPassword());
 
         return oUser;
     }

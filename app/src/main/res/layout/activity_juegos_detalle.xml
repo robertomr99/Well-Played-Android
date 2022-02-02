@@ -5,38 +5,138 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:backgroundTint="@color/GrisApp"
+    android:backgroundTint="@color/GrisClaroApp"
     tools:context=".EquipoDetalle">
 
-    <TextView
-        android:id="@+id/lblNombreDetalle"
-        android:layout_width="350dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/carter_one"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewJuegoDetalle" />
-
-    <TextView
+    <com.codesgood.views.JustifiedTextView
         android:id="@+id/lblDescripcionDetalle"
-        android:layout_width="350dp"
-        android:layout_height="266dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/design_descripcion"
+        android:padding="5dp"
+        android:paddingStart="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblNombreDetalle" />
+        app:layout_constraintTop_toBottomOf="@+id/videoViewJuegoDetalle" />
 
-    <ImageView
-        android:id="@+id/imgViewJuegoDetalle"
+    <com.pierfrancescosoffritti.androidyoutubeplayer.player.YouTubePlayerView
+        android:id="@+id/videoViewJuegoDetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/design_descripcion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lblWinRateDetalle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/design_descripcion"
+        android:padding="5dp"
+        android:text="@string/lblWin_rate"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/lblDescripcionDetalle"
+        app:layout_constraintTop_toBottomOf="@+id/lblDescripcionDetalle" />
+
+    <TextView
+        android:id="@+id/lblVictoriasDetalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/design_descripcion"
+        android:padding="5dp"
+        android:text="@string/lblVictorias"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/lblWinRateDetalle"
+        app:layout_constraintEnd_toStartOf="@+id/lblDerrotasDetalle"
+        app:layout_constraintStart_toEndOf="@+id/lblWinRateDetalle"
+        app:layout_constraintTop_toTopOf="@+id/lblWinRateDetalle" />
+
+    <TextView
+        android:id="@+id/lblDerrotasDetalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/design_descripcion"
+        android:padding="5dp"
+        android:text="@string/lblDerrota"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/lblVictoriasDetalle"
+        app:layout_constraintEnd_toEndOf="@+id/lblDescripcionDetalle"
+        app:layout_constraintTop_toTopOf="@+id/lblVictoriasDetalle" />
+
+    <TextView
+        android:id="@+id/lblRDerrotasDetallle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/lblDerrotasDetalle"
+        app:layout_constraintStart_toStartOf="@+id/lblDerrotasDetalle"
+        app:layout_constraintTop_toBottomOf="@+id/lblDerrotasDetalle" />
+
+    <TextView
+        android:id="@+id/lblRVictoriasDetalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/lblVictoriasDetalle"
+        app:layout_constraintStart_toStartOf="@+id/lblVictoriasDetalle"
+        app:layout_constraintTop_toBottomOf="@+id/lblVictoriasDetalle" />
+
+    <TextView
+        android:id="@+id/lblRWinRateDetalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/lblWinRateDetalle"
+        app:layout_constraintStart_toStartOf="@+id/lblWinRateDetalle"
+        app:layout_constraintTop_toBottomOf="@+id/lblWinRateDetalle" />
+
+    <Button
+        android:id="@+id/btnEliminarJuegoDetalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/AmarilloApp"
+        android:text="@string/btn_EliminarJuego"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/lblPorcentaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:text="%"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/lblRWinRateDetalle"
+        app:layout_constraintTop_toBottomOf="@+id/lblWinRateDetalle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

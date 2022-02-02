@@ -1,10 +1,33 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
+
     <style name="Theme.WellPlayed" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="colorPrimary">@color/GrisApp</item>
-        <item name="colorAccent">@color/lblClickables</item>
+        <item name="colorPrimaryVariant">@color/GrisOscuroApp</item>
+        <item name="colorAccent">@color/AmarilloApp</item>
+    </style>
+    
+    <style name="Navigation">
+        <item name="android:textColorPrimary">@color/AzulApp</item>
+        <item name="android:fontFamily">@font/pattaya</item>
+    </style>
 
-        <item name="android:itemBackground">@color/GrisApp</item>
+    <style name="btnUsuario">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginBottom">25dp</item>
+        <item name="android:layout_marginRight">25dp</item>
+        <item name="android:background">@drawable/btnusuario</item>
+    </style>
+
+    <style name="btnBorrar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:background">@drawable/btnusuario</item>
     </style>
 </resources>
