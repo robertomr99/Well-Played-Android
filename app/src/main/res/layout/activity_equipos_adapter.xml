@@ -45,22 +45,47 @@
             android:textColor="@color/GrisApp"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imgViewEquipo"
+            app:layout_constraintEnd_toEndOf="@+id/lblMiembrosMax"
+            app:layout_constraintStart_toStartOf="@+id/lblMiembrostxt"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/lblMiembros"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/cabin"
             android:textAlignment="center"
             android:textColor="@color/GrisApp"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/lblNombreEquipo"
-            app:layout_constraintStart_toStartOf="@+id/lblNombreEquipo"
+            app:layout_constraintBottom_toBottomOf="@+id/lblMiembrostxt"
+            app:layout_constraintStart_toEndOf="@+id/lblMiembrostxt"
+            app:layout_constraintTop_toTopOf="@+id/lblMiembrostxt" />
+
+        <TextView
+            android:id="@+id/lblMiembrostxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/lblMiembros"
+            android:textColor="@color/GrisApp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblNombreEquipo" />
+
+        <TextView
+            android:id="@+id/lblMiembrosMax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="2dp"
+            android:text="@string/lblMaxMiembros"
+            android:textColor="@color/GrisApp"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/lblMiembros"
+            app:layout_constraintStart_toEndOf="@+id/lblMiembros"
+            app:layout_constraintTop_toTopOf="@+id/lblMiembros" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
