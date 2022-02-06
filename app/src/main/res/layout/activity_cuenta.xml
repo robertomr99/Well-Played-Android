@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/GrisApp"
     android:foregroundTint="#070707"
     tools:context=".Cuenta"
     tools:layout_editor_absoluteX="0dp"
@@ -11,54 +12,50 @@
 
     <EditText
         android:id="@+id/txtPasswordUPD"
-        android:layout_width="243dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="408dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/lblPassword" />
 
     <EditText
         android:id="@+id/txtPasswordUPD2"
-        android:layout_width="243dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="496dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/lblPassword2" />
 
     <TextView
         android:id="@+id/lblPassword"
-        android:layout_width="243dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="384dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/lblPassword"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNombreUsuarioUPD" />
 
     <TextView
         android:id="@+id/lblPassword2"
-        android:layout_width="243dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="472dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/lblPassword2"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPasswordUPD" />
 
     <ImageView
-        android:id="@+id/imgBannner2"
+        android:id="@+id/imgBannerUser"
         android:layout_width="507dp"
         android:layout_height="157dp"
         android:layout_marginTop="40dp"
@@ -68,64 +65,74 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imgUsuario2"
+        android:id="@+id/imgLogoUser"
         android:layout_width="111dp"
         android:layout_height="111dp"
-        android:layout_marginTop="136dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="94dp"
         android:src="@drawable/wellplayed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.103"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imgBannerUser" />
 
     <TextView
         android:id="@+id/lblNombreUsuarioUPD"
-        android:layout_width="243dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="308dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
         android:text="@string/lblNombreUsuarioUPD"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imgLogoUser" />
 
     <EditText
         android:id="@+id/txtNombreUsuarioUPD"
-        android:layout_width="243dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="332dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/lblNombreUsuarioUPD" />
 
 
     <ImageButton
         android:id="@+id/btnEditarLogoUsuario"
-        android:layout_width="44dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="164dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.179"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="cambiarLogoUser"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgLogoUser"
+        app:layout_constraintEnd_toEndOf="@+id/imgLogoUser"
+        app:layout_constraintStart_toStartOf="@+id/imgLogoUser"
+        app:layout_constraintTop_toTopOf="@+id/imgLogoUser"
         app:srcCompat="@drawable/editarlogousuario" />
 
     <ImageButton
-        android:id="@+id/btnCambiobanner"
+        android:id="@+id/btnEditarBannerUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="86dp"
+        android:layout_marginEnd="16dp"
         android:background="@null"
+        android:onClick="cambiarBannerUser"
+        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.955"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imgBannerUser"
         app:srcCompat="@drawable/iconofondo" />
+
+    <Button
+        android:id="@+id/btnActualizarPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/AmarilloApp"
+        android:onClick="actualizarPerfil"
+        android:text="@string/actualizar_perfil"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,7 +36,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/lblUNombreEquipo"
+            android:id="@+id/lblUNombreC1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -59,9 +59,9 @@
             android:textAlignment="center"
             android:textColor="@color/GrisApp"
             android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="@+id/lblUNombreEquipo"
-            app:layout_constraintStart_toStartOf="@+id/lblUNombreEquipo"
-            app:layout_constraintTop_toBottomOf="@+id/lblUNombreEquipo" />
+            app:layout_constraintEnd_toEndOf="@+id/lblUNombreC1"
+            app:layout_constraintStart_toStartOf="@+id/lblUNombreC1"
+            app:layout_constraintTop_toBottomOf="@+id/lblUNombreC1" />
 
 
         <ImageButton

@@ -62,7 +62,7 @@ public class Logos extends AppCompatActivity {
     private void mostrarData() {
         RecyclerView Rv = findViewById(R.id.recyclerViewLogos);
         Rv.setLayoutManager(new GridLayoutManager(this,3));
-        LogosAdapter adaptador = new LogosAdapter(this);
+        LogosAdapter adaptador = new LogosAdapter(this,"logos");
         Rv.setAdapter(adaptador);
         Rv.setHasFixedSize(true);
         adaptador.setOnClickListener(v -> {
