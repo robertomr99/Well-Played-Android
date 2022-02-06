@@ -3,8 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="130dp"
-    android:background="@color/AzulApp">
+    android:layout_height="130dp">
+
+    <ImageView
+        android:id="@+id/imgBannerUserHeader"
+        android:layout_width="414dp"
+        android:layout_height="143dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/fondobanner"
+        tools:layout_editor_absoluteY="-6dp" />
 
     <TextView
         android:id="@+id/lblNombreUsuario"

@@ -159,7 +159,7 @@ public class EquipoDetalle extends AppCompatActivity {
         btnSI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                eliminarEquipoUsuario();
+                eliminarEquipoUsuario(oUsuario);
                 restarMiembros(context,iIdEquipoJuego);
                 Toast.makeText(EquipoDetalle.this, "Usuario eliminado con éxito", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
@@ -220,8 +220,8 @@ public class EquipoDetalle extends AppCompatActivity {
         ));
     }
 
-    public void eliminarEquipoUsuario() {
-        String sUrl = Utils.hosting + "equipo-usuario/eliminar-equipo-usuario.php?txtUsuario=" + sNombreUser + "&txtEquipo=" + iIdEquipoJuego;
+    public void eliminarEquipoUsuario(Usuario oUsuario) {
+        String sUrl = Utils.hosting + "equipo-usuario/eliminar-equipo-usuario.php?txtUsuario=" + oUsuario.getsUser() + "&txtEquipo=" + iIdEquipoJuego;
 
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {

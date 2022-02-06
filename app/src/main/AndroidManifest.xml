@@ -15,6 +15,9 @@
         android:theme="@style/Theme.WellPlayed"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Banner"
+            android:exported="false" />
+        <activity
             android:name=".UnirsePartido"
             android:exported="true" />
         <activity

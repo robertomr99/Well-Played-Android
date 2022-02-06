@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class perfilFragment extends Fragment {
-    public static final String sNombreUser = MainActivity.oUsuario.getsUser();
+    public static String sNombreUser;
 
     public perfilFragment() {
         // Required empty public constructor
@@ -35,6 +35,7 @@ public class perfilFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+        sNombreUser = MainActivity.oUsuario.getsUser();
         getUser(view);
         return view;
     }

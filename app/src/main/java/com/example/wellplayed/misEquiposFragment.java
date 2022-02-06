@@ -157,7 +157,6 @@ public class misEquiposFragment extends Fragment {
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
                 mostrarEquipos();
-                adaptador.notifyDataSetChanged();
                 // esta pantalla es cuando todo ha salido bien.
             }
 

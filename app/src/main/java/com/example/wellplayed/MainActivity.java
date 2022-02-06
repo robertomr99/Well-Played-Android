@@ -47,7 +47,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
-    public static Usuario oUsuario;
+    ImageView imgBannerUser;
+    public static Usuario oUsuario = new Usuario();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         View header = ((NavigationView) findViewById(R.id.navigationView)).getHeaderView(0);
         oUsuario = intentDataUsuario();
+        recogerDatos();
         seleccionarFotoMonedas(header, oUsuario.getsUser());
         setSupportActionBar(toolbar);
         NavigationView navigationView = findViewById(R.id.navigationView);
@@ -70,6 +72,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         openFragment(new initFragment());
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recogerDatos();
+        View header = ((NavigationView) findViewById(R.id.navigationView)).getHeaderView(0);
+        seleccionarFotoMonedas(header,oUsuario.getsUser());
+    }
+
+    public void recogerDatos(){
+
+        if(getIntent().hasExtra("nombreUser")){
+            oUsuario = new Usuario();
+            String sNombreUser = getIntent().getStringExtra("nombreUser");
+            Log.d("asjdhadhjakhdkahdkjahdkjahdkjhajkdhjaksd",sNombreUser);
+            oUsuario.setsUser(sNombreUser);
+        }
+
+    }
 
     private void openFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -129,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         addJuego.sNombreUser = "";
         EquipoDetalle.sNombreUser = "";
     }
+
 
     public void borrarPreferencias() {
         Login.preferences = getSharedPreferences("Credenciales", Context.MODE_PRIVATE);
@@ -199,6 +221,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ((TextView) header.findViewById(R.id.lblNombreUsuario)).setText(oUserLLeno.getsUser());
         Glide.with(getApplicationContext()).load(oUserLLeno.getsFoto()).into((CircleImageView
                 ) header.findViewById(R.id.imgViewUsuario));
+        Glide.with(getApplicationContext()).load(oUserLLeno.getsBanner()).into((ImageView) header.findViewById(R.id.imgBannerUserHeader));
         ((TextView) header.findViewById(R.id.lblMonedas)).setText(String.valueOf(oUserLLeno.getiMonedas()));
     }
 
