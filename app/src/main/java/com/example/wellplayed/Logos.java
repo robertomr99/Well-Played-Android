@@ -17,6 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.wellplayed.model.Juego;
 import com.example.wellplayed.model.Producto;
+import com.example.wellplayed.model.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -28,17 +29,19 @@ public class Logos extends AppCompatActivity {
 
     Producto oProducto = new Producto();
     Button btnAceptarLogo;
+    String sNombreUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logos);
-        traerLogos();
+        sNombreUser = MainActivity.oUsuario.getsUser();
+        getUser(sNombreUser);
 
 
     }
 
-    public void traerLogos() {
-        String sUrl = Utils.hosting + "usuario-producto/ProductoQueSiTieneUser.php?txtiIdUsuario=" + txtCategoria="+1;
+    public void traerLogos(Usuario oUsuario) {
+        String sUrl = Utils.hosting + "usuario-producto/ProductoQueSiTieneUser.php?txtiIdUsuario="+oUsuario.getiIdUsuario() + "&txtCategoria="+1;
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
                     Log.d("vacio", s);
@@ -87,5 +90,24 @@ public class Logos extends AppCompatActivity {
         finish();
     }
 
+    private void getUser(String sNombreUser) {
+
+        String sUrl = Utils.hosting + "usuario/get-user.php?txtUsuario="+sNombreUser;
+        Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    if (s.equals("")) {
+                        Toast.makeText(this, "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Usuario oUsuario = new Usuario();
+                        oUsuario = new Gson().fromJson(s, new TypeToken<Usuario>() {
+                        }.getType());
+                        traerLogos(oUsuario);
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
+    }
 
 }
