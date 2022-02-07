@@ -129,6 +129,7 @@ public class Cuenta extends AppCompatActivity {
 
     public void cambiarLogoUser(View view) {
         Intent intentLogin = new Intent(this, Logos.class);
+        intentLogin.putExtra("nombreUser", sNombreUser);
         startActivityForResult(intentLogin, 1);
     }
 
