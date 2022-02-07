@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
-
         View header = ((NavigationView) findViewById(R.id.navigationView)).getHeaderView(0);
         oUsuario = intentDataUsuario();
         recogerDatos();
@@ -87,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(getIntent().hasExtra("nombreUser")){
             oUsuario = new Usuario();
             String sNombreUser = getIntent().getStringExtra("nombreUser");
-            Log.d("asjdhadhjakhdkahdkjahdkjahdkjhajkdhjaksd",sNombreUser);
             oUsuario.setsUser(sNombreUser);
         }
 

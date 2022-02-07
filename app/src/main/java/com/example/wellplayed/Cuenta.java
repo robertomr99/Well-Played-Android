@@ -52,8 +52,7 @@ public class Cuenta extends AppCompatActivity {
     }
 
     public void actualizarPerfil(View v){
-        Log.d("producto",oProductoLogo.toString());
-        String sUrl = Utils.hosting + "usuario/upd-user.php?txtUser=" + txtUpdateUser.getText() + "&txtPassword=" + txtUpdatePass.getText() + "&txtUsuario=" + sNombreUser;
+        String sUrl = Utils.hosting + "usuario/upd-user.php?txtUser=" + txtUpdateUser.getText().toString().toUpperCase() + "&txtPassword=" + txtUpdatePass.getText() + "&txtUsuario=" + sNombreUser;
 
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
@@ -63,7 +62,6 @@ public class Cuenta extends AppCompatActivity {
                     } else {
                         Toast.makeText(this, "usuario actualizado correctamente", Toast.LENGTH_SHORT).show();
                         Intent intentMain = new Intent(this, MainActivity.class);
-                        Log.d("Ssssssssssssssssssssssssssssssssssssss",txtUpdateUser.getText().toString());
                         intentMain.putExtra("nombreUser",txtUpdateUser.getText().toString());
                         startActivity(intentMain);
                     }
@@ -97,7 +95,6 @@ public class Cuenta extends AppCompatActivity {
     public void traerDatosUser(){
         String sUrl = Utils.hosting + "usuario/get-user.php?txtUsuario=" + sNombreUser;
 
-
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
                     Log.d("vacio", s);
@@ -124,12 +121,10 @@ public class Cuenta extends AppCompatActivity {
         txtUpdateUser.setHint(oUsuario.getsUser());
         txtUpdatePass.setHint(oUsuario.getsPassword());
         txtUpdateConfirmPass.setHint(oUsuario.getsPassword());
-
     }
 
     public void cambiarLogoUser(View view) {
         Intent intentLogin = new Intent(this, Logos.class);
-        intentLogin.putExtra("nombreUser", sNombreUser);
         startActivityForResult(intentLogin, 1);
     }
 
@@ -152,15 +147,10 @@ public class Cuenta extends AppCompatActivity {
                     updBanner(oProductoBanner);
                 }else{
                     Glide.with(this).load(oProductoLogo.getsFoto()).circleCrop().into(imgLogoUser);
-                    Log.d("adawdkajnwdhakjldhajkdwhadhkajdhwajkhdkjajdkahjkwdakjhwdawd",oProductoLogo.toString());
                     updLogo(oProductoLogo);
                 }
 
-
-
                 // el parametro intent data lo que hace es
-
-
 
             }
         } else {
@@ -200,6 +190,5 @@ public class Cuenta extends AppCompatActivity {
         }
         ));
     }
-
 
 }
