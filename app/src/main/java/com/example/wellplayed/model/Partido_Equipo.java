@@ -2,15 +2,15 @@ package com.example.wellplayed.model;
 
 public class Partido_Equipo {
 
-    private Integer iIdPartidoEquipo,iIdJuego;
+    private Integer iIdPartido,iIdJuego;
     private String sNombreEquipo1, sNombreEquipo2, sFotoEquipo1, sFotoEquipo2;
     private boolean boVictoria;
 
     public Partido_Equipo() {
     }
 
-    public Partido_Equipo(Integer iIdPartidoEquipo, Integer iIdJuego, String sNombreEquipo1, String sNombreEquipo2, String sFotoEquipo1, String sFotoEquipo2, boolean boVictoria) {
-        this.iIdPartidoEquipo = iIdPartidoEquipo;
+    public Partido_Equipo(Integer iIdPartido, Integer iIdJuego, String sNombreEquipo1, String sNombreEquipo2, String sFotoEquipo1, String sFotoEquipo2, boolean boVictoria) {
+        this.iIdPartido = iIdPartido;
         this.iIdJuego = iIdJuego;
         this.sNombreEquipo1 = sNombreEquipo1;
         this.sNombreEquipo2 = sNombreEquipo2;
@@ -19,12 +19,12 @@ public class Partido_Equipo {
         this.boVictoria = boVictoria;
     }
 
-    public Integer getiIdPartidoEquipo() {
-        return iIdPartidoEquipo;
+    public Integer getiIdPartido() {
+        return iIdPartido;
     }
 
-    public void setiIdPartidoEquipo(Integer iIdPartidoEquipo) {
-        this.iIdPartidoEquipo = iIdPartidoEquipo;
+    public void setiIdPartido(Integer iIdPartido) {
+        this.iIdPartido = iIdPartido;
     }
 
     public Integer getiIdJuego() {
@@ -73,5 +73,18 @@ public class Partido_Equipo {
 
     public void setBoVictoria(boolean boVictoria) {
         this.boVictoria = boVictoria;
+    }
+
+    @Override
+    public String toString() {
+        return "Partido_Equipo{" +
+                "iIdPartido=" + iIdPartido +
+                ", iIdJuego=" + iIdJuego +
+                ", sNombreEquipo1='" + sNombreEquipo1 + '\'' +
+                ", sNombreEquipo2='" + sNombreEquipo2 + '\'' +
+                ", sFotoEquipo1='" + sFotoEquipo1 + '\'' +
+                ", sFotoEquipo2='" + sFotoEquipo2 + '\'' +
+                ", boVictoria=" + boVictoria +
+                '}';
     }
 }

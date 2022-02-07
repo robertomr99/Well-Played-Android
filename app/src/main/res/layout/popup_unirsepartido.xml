@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    android:background="@color/GrisApp">
+
+    <TextView
+        android:id="@+id/lblUnisePartidoPop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/cabin"
+        android:text="@string/lblUnirsePartido"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnSiUnirse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/AmarilloApp"
+        android:text="@string/lblSi"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/lblUnisePartidoPop"
+        app:layout_constraintTop_toBottomOf="@+id/lblUnisePartidoPop" />
+
+    <Button
+        android:id="@+id/btnNoUnirse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/AmarilloApp"
+        android:text="@string/lblNo"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSiUnirse"
+        app:layout_constraintEnd_toEndOf="@+id/lblUnisePartidoPop"
+        app:layout_constraintTop_toTopOf="@+id/btnSiUnirse" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
