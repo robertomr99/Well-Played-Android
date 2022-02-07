@@ -74,4 +74,17 @@ public class Partido_Usuario {
     public void setiVictoria(int iVictoria) {
         this.iVictoria = iVictoria;
     }
+
+    @Override
+    public String toString() {
+        return "Partido_Usuario{" +
+                "iIdPartido=" + iIdPartido +
+                ", iIdJuego=" + iIdJuego +
+                ", sNombreJugador1='" + sNombreJugador1 + '\'' +
+                ", sNombreJugador2='" + sNombreJugador2 + '\'' +
+                ", sFotoJugador1='" + sFotoJugador1 + '\'' +
+                ", sFotoJugador2='" + sFotoJugador2 + '\'' +
+                ", iVictoria=" + iVictoria +
+                '}';
+    }
 }

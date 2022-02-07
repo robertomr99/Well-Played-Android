@@ -5,9 +5,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -19,6 +23,7 @@ import com.example.wellplayed.model.Equipo_Usuario;
 import com.example.wellplayed.model.Juego;
 import com.example.wellplayed.model.Partido_Equipo;
 import com.example.wellplayed.model.Partido_Usuario;
+import com.example.wellplayed.model.Usuario;
 import com.example.wellplayed.model.Usuario_Juego;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -28,10 +33,14 @@ import java.util.List;
 
 public class UnirsePartido extends AppCompatActivity {
 
-
     RecyclerView Rv;
     int iTipo;
     public static final String sNombreUser = MainActivity.oUsuario.getsUser();
+
+    public static AlertDialog.Builder dialogBuilder;
+    public static AlertDialog dialog;
+    public static Button btnSI, btnNO;
+    public static UnirsePartido context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +55,6 @@ public class UnirsePartido extends AppCompatActivity {
             JuegosQueTieneUsuario();
         }
     }
-
 
     // --------- EQUIPO -----------
 
@@ -107,6 +115,65 @@ public class UnirsePartido extends AppCompatActivity {
         ));
     }
 
+    public void updatePartidoEquipo(Partido_Equipo oPartidoEquipo) {
+        String sUrl;
+
+        if (oPartidoEquipo.getsNombreEquipo1() == null & oPartidoEquipo.getsFotoEquipo1() == null) {
+            sUrl = Utils.hosting + "partidos/partido_equipo/updatePartidoEquipo1.php?txtNombre=" + sNombreUser + "&txtIdPartido=" + oPartidoEquipo.getiIdPartido();
+        } else {
+            sUrl = Utils.hosting + "partidos/partido_equipo/updatePartidoEquipo2.php?txtNombre=" + sNombreUser + "&txtIdPartido=" + oPartidoEquipo.getiIdPartido();
+        }
+
+        Volley.newRequestQueue(getApplicationContext()).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        mostrarData(getApplicationContext());
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
+    }
+
+
+
+    public void PopupUnirse(Partido_Equipo oPartidoEquipo) {
+
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View PopupUnirsePartido = getLayoutInflater().inflate(R.layout.popup_unirsepartido, null);
+        btnSI = (Button) PopupUnirsePartido.findViewById(R.id.btnSiUnirse);
+        btnNO = (Button) PopupUnirsePartido.findViewById(R.id.btnNoUnirse);
+
+        dialogBuilder.setView(PopupUnirsePartido);
+        dialog = dialogBuilder.create();
+        dialog.setCancelable(false); // Para que tenga que pulsar una opcion si o si (btn atras del movil)
+        dialog.setCanceledOnTouchOutside(false); // Para que tenga que pulsar una opcion si o si (en la pantalla)
+        dialog.show();
+
+        btnSI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updatePartidoEquipo(oPartidoEquipo);
+                Toast.makeText(getApplicationContext(), "Este equipo se ha unido al partido", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+
+        btnNO.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+    }
+
+
+
     // --------- USUARIO -----------
 
 
@@ -123,8 +190,6 @@ public class UnirsePartido extends AppCompatActivity {
                         ArrayList<Integer> aJuegos = new ArrayList<Integer>();
                         List<Juego> lstJuegos = new Gson().fromJson(s, new TypeToken<List<Juego>>() {
                         }.getType());
-
-                        Log.d("ASDASDASDASDASDASDASDASDASDASDASD", lstJuegos.toString());
 
                         for (Juego j : lstJuegos) {
                             aJuegos.add(j.getiIdJuego());
@@ -158,7 +223,7 @@ public class UnirsePartido extends AppCompatActivity {
                     if (s.equals("")) {
                         Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
                     } else {
-                        ListadoPartidosUsuario.lstPartidoUsuario= new Gson().fromJson(s, new TypeToken<List<Partido_Usuario>>() {
+                        ListadoPartidosUsuario.lstPartidoUsuario = new Gson().fromJson(s, new TypeToken<List<Partido_Usuario>>() {
                         }.getType());
                         mostrarData(getApplicationContext());
                     }
@@ -169,14 +234,77 @@ public class UnirsePartido extends AppCompatActivity {
         ));
     }
 
+
+    public void updatePartidoUsuario(Partido_Usuario oPartidoUsuario) {
+        String sUrl;
+
+        if (oPartidoUsuario.getsFotoJugador1() == null & oPartidoUsuario.getsFotoJugador1() == null) {
+            sUrl = Utils.hosting + "partidos/partido_usuario/updatePartidoUsuario1.php?txtNombre=" + sNombreUser + "&txtIdPartido=" + oPartidoUsuario.getiIdPartido();
+        } else {
+            sUrl = Utils.hosting + "partidos/partido_usuario/updatePartidoUsuario2.php?txtNombre=" + sNombreUser + "&txtIdPartido=" + oPartidoUsuario.getiIdPartido();
+        }
+
+        Volley.newRequestQueue(getApplicationContext()).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        mostrarData(getApplicationContext());
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
+    }
+
+
+    public void PopupUnirse(Partido_Usuario oPartidoUsuario) {
+
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View PopupUnirsePartido = getLayoutInflater().inflate(R.layout.popup_unirsepartido, null);
+        btnSI = (Button) PopupUnirsePartido.findViewById(R.id.btnSiUnirse);
+        btnNO = (Button) PopupUnirsePartido.findViewById(R.id.btnNoUnirse);
+
+        dialogBuilder.setView(PopupUnirsePartido);
+        dialog = dialogBuilder.create();
+        dialog.setCancelable(false); // Para que tenga que pulsar una opcion si o si (btn atras del movil)
+        dialog.setCanceledOnTouchOutside(false); // Para que tenga que pulsar una opcion si o si (en la pantalla)
+        dialog.show();
+
+        btnSI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updatePartidoUsuario(oPartidoUsuario);
+                Toast.makeText(getApplicationContext(), "Este usuario se ha unido al partido", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+
+        btnNO.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+    }
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     private void mostrarData(Context context) {
         Rv.setLayoutManager(new LinearLayoutManager(context));
         UnirsePartidosAdapter adaptador = new UnirsePartidosAdapter(context, new UnirsePartidosAdapter.UnirsePartidosAdapterInterface() {
             @Override
-            public void prueba() {
+            public void unirseAlPartidoEquipo(Partido_Equipo oPartidoEquipo) {
+                PopupUnirse(oPartidoEquipo);
+            }
 
+            @Override
+            public void unirseAlPartidoUsuario(Partido_Usuario oPartidoUsuario) {
+                PopupUnirse(oPartidoUsuario);
             }
         }, iTipo);
 
