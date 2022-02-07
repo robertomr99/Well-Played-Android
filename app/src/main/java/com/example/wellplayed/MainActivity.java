@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("");
 
         View header = ((NavigationView) findViewById(R.id.navigationView)).getHeaderView(0);
         oUsuario = intentDataUsuario();
@@ -218,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void rellenarCabecera(View header,Usuario oUserLLeno){
-        ((TextView) header.findViewById(R.id.lblNombreUsuario)).setText(oUserLLeno.getsUser());
+        ((TextView) header.findViewById(R.id.lblNombreUsuario)).setText(oUserLLeno.getsUser().toUpperCase());
         Glide.with(getApplicationContext()).load(oUserLLeno.getsFoto()).into((CircleImageView
                 ) header.findViewById(R.id.imgViewUsuario));
         Glide.with(getApplicationContext()).load(oUserLLeno.getsBanner()).into((ImageView) header.findViewById(R.id.imgBannerUserHeader));
