@@ -17,11 +17,13 @@ import com.example.wellplayed.model.Producto;
 public class LogosAdapter extends RecyclerView.Adapter<LogosAdapter.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
+    public String sClaseGlobal;
     Context context;
     private View.OnClickListener listener;
 
-    public LogosAdapter(Context context){
+    public LogosAdapter(Context context, String sClase){
         inflater = LayoutInflater.from(context);
+        this.sClaseGlobal = sClase;
         this.context = context;
     }
 
@@ -48,9 +50,14 @@ public class LogosAdapter extends RecyclerView.Adapter<LogosAdapter.ViewHolder> 
 
         Producto oProducto = ListadoProductos.lstProductos.get(position); // Instanciamos el objeto de la lista con la posicion
 
-        Glide.with(context).load(oProducto.getsFoto()).circleCrop().into(holder.imgViewLogo);
+       if(sClaseGlobal.equals("logos")){
+           Glide.with(context).load(oProducto.getsFoto()).circleCrop().into(holder.imgViewLogo);
+       }else{
+           Glide.with(context).load(oProducto.getsFoto()).into(holder.imgViewLogo);
+       }
 
-        //.override es para poner tamaño personalizado.
+
+        // override es para poner tamaño personalizado.
     }
 
 

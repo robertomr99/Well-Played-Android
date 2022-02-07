@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class Usuario implements Serializable {
 
     private Integer iIdUsuario;
-    private String sEmail , sUser, sPassword, sFechaNacimiento, sFoto, sCodigo;
+    private String sEmail , sUser, sPassword, sFechaNacimiento, sFoto, sCodigo, sBanner;
     private int iPais, iMonedas;
     private Integer iAdmin;
 
@@ -26,7 +26,7 @@ public class Usuario implements Serializable {
         this.iIdUsuario = iIdUsuario;
     }
 
-    public Usuario(Integer iIdUsuario, String sEmail, String sUser, String sPassword, String sFechaNacimiento, int iPais, int iMonedas, Integer iAdmin, String sFoto,String sCodigo) {
+    public Usuario(Integer iIdUsuario, String sEmail, String sUser, String sPassword, String sFechaNacimiento, int iPais, int iMonedas, Integer iAdmin, String sFoto,String sCodigo, String sBanner) {
         this.iIdUsuario = iIdUsuario;
         this.sEmail = sEmail;
         this.sUser = sUser;
@@ -37,6 +37,15 @@ public class Usuario implements Serializable {
         this.iAdmin = iAdmin;
         this.sFoto = sFoto;
         this.sCodigo = sCodigo;
+        this.sBanner = sBanner;
+    }
+
+    public String getsBanner() {
+        return sBanner;
+    }
+
+    public void setsBanner(String sBanner) {
+        this.sBanner = sBanner;
     }
 
     public String getsCodigo() {
@@ -138,6 +147,7 @@ public class Usuario implements Serializable {
                 ", sFechaNacimiento='" + sFechaNacimiento + '\'' +
                 ", sFoto='" + sFoto + '\'' +
                 ", sCodigo='" + sCodigo + '\'' +
+                ", sBanner='" + sBanner + '\'' +
                 ", iPais=" + iPais +
                 ", iMonedas=" + iMonedas +
                 ", iAdmin=" + iAdmin +
