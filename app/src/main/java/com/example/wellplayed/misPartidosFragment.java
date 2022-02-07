@@ -140,6 +140,7 @@ public class misPartidosFragment extends Fragment {
 
     public void onClickUnirsePartido(View v) {
         Intent i = new Intent(getContext(), UnirsePartido.class);
+        i.putExtra("Tipo" , spinnerCategoriaPartidos.getSelectedItemPosition());
         startActivity(i);
     }
 

@@ -23,6 +23,16 @@
         android:layout_width="match_parent"
         android:layout_height="128dp">
 
+        <ImageView
+            android:id="@+id/imgViewFondo"
+            android:layout_width="534dp"
+            android:layout_height="282dp"
+            android:layout_marginTop="-75dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/design_descripcion" />
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgViewUC1"
             android:layout_width="75dp"
