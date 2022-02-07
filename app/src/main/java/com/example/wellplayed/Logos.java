@@ -38,7 +38,7 @@ public class Logos extends AppCompatActivity {
     }
 
     public void traerLogos() {
-        String sUrl = Utils.hosting + "productos/get-productos.php?txtCategoria="+1;
+        String sUrl = Utils.hosting + "usuario-producto/ProductoQueSiTieneUser.php?txtiIdUsuario=" + txtCategoria="+1;
         Volley.newRequestQueue(this).add(new StringRequest(Request.Method.GET, sUrl,
                 s -> {
                     Log.d("vacio", s);
