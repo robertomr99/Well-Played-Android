@@ -9,19 +9,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.wellplayed.model.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class perfilFragment extends Fragment {
     public static String sNombreUser;
-
+    ImageView imgLogoPerfil, imgBannerPerfil;
     public perfilFragment() {
         // Required empty public constructor
     }
@@ -35,6 +37,8 @@ public class perfilFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+        imgLogoPerfil = view.findViewById(R.id.imgUsuario);
+        imgBannerPerfil = view.findViewById(R.id.imgBannner);
         sNombreUser = MainActivity.oUsuario.getsUser();
         getUser(view);
         return view;
@@ -66,10 +70,12 @@ public class perfilFragment extends Fragment {
 
     private void extraerObjetoUsuario(Usuario oUsuario, View view) {
         TextView lblUsuario,lblEmail, lblFechaNacimiento, lblPais;
-        Resources res = getResources();  // Extrapolamos recursos a una variable para poder acceder a su contenido.
+        Resources res = getResources(); // Extrapolamos recursos a una variable para poder acceder a su contenido.
         String[] sPaises = res.getStringArray(R.array.paises);
         lblUsuario = view.findViewById(R.id.lblRUsuario);
 
+        Glide.with(this).load(oUsuario.getsFoto()).circleCrop().into(imgLogoPerfil);
+        Glide.with(this).load(oUsuario.getsBanner()).into(imgBannerPerfil);
         lblEmail = view.findViewById(R.id.lblREmail);
         lblEmail.setText(oUsuario.getsEmail().toLowerCase());
         lblFechaNacimiento = view.findViewById(R.id.lblRFechaNacimiento);
