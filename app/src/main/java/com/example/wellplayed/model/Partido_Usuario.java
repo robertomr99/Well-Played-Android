@@ -2,39 +2,69 @@ package com.example.wellplayed.model;
 
 public class Partido_Usuario {
 
-    private Integer iIdPartidoUsuario;
-    private Usuario_Juego oJugador1, oJugador2;
+    private Integer iIdPartido, iIdJuego;
+    private String sNombreJugador1, sNombreJugador2, sFotoJugador1, sFotoJugador2;
     private int iVictoria;
 
-    public Partido_Usuario(Integer iIdPartidoUsuario, Usuario_Juego oJugador1, Usuario_Juego oJugador2, int iVictoria) {
-        this.iIdPartidoUsuario = iIdPartidoUsuario;
-        this.oJugador1 = oJugador1;
-        this.oJugador2 = oJugador2;
+    public Partido_Usuario() {
+    }
+
+    public Partido_Usuario(Integer iIdPartido, Integer iIdJuego, String sNombreJugador1, String sNombreJugador2, String sFotoJugador1, String sFotoJugador2, int iVictoria) {
+        this.iIdPartido = iIdPartido;
+        this.iIdJuego = iIdJuego;
+        this.sNombreJugador1 = sNombreJugador1;
+        this.sNombreJugador2 = sNombreJugador2;
+        this.sFotoJugador1 = sFotoJugador1;
+        this.sFotoJugador2 = sFotoJugador2;
         this.iVictoria = iVictoria;
     }
 
-    public Integer getiIdPartidoUsuario() {
-        return iIdPartidoUsuario;
+    public Integer getiIdPartido() {
+        return iIdPartido;
     }
 
-    public void setiIdPartidoUsuario(Integer iIdPartidoUsuario) {
-        this.iIdPartidoUsuario = iIdPartidoUsuario;
+    public void setiIdPartido(Integer iIdPartido) {
+        this.iIdPartido = iIdPartido;
     }
 
-    public Usuario_Juego getJugador1() {
-        return oJugador1;
+    public Integer getiIdJuego() {
+        return iIdJuego;
     }
 
-    public void setJugador1(Usuario_Juego jugador1) {
-        oJugador1 = oJugador1;
+    public void setiIdJuego(Integer iIdJuego) {
+        this.iIdJuego = iIdJuego;
     }
 
-    public Usuario_Juego getJugador2() {
-        return oJugador2;
+    public String getsNombreJugador1() {
+        return sNombreJugador1;
     }
 
-    public void setJugador2(Usuario_Juego jugador2) {
-        oJugador2 = oJugador2;
+    public void setsNombreJugador1(String sNombreJugador1) {
+        this.sNombreJugador1 = sNombreJugador1;
+    }
+
+    public String getsNombreJugador2() {
+        return sNombreJugador2;
+    }
+
+    public void setsNombreJugador2(String sNombreJugador2) {
+        this.sNombreJugador2 = sNombreJugador2;
+    }
+
+    public String getsFotoJugador1() {
+        return sFotoJugador1;
+    }
+
+    public void setsFotoJugador1(String sFotoJugador1) {
+        this.sFotoJugador1 = sFotoJugador1;
+    }
+
+    public String getsFotoJugador2() {
+        return sFotoJugador2;
+    }
+
+    public void setsFotoJugador2(String sFotoJugador2) {
+        this.sFotoJugador2 = sFotoJugador2;
     }
 
     public int getiVictoria() {
