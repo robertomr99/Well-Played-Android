@@ -1,9 +1,11 @@
 package com.example.wellplayed;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -145,7 +147,8 @@ public class misPartidosFragment extends Fragment {
         UnirsePartidosAdapter adaptador = new UnirsePartidosAdapter(context, new UnirsePartidosAdapter.MisPartidosAdapterInterface() {
             @Override
             public void mostrarDetalleEquipo(Partido_Equipo oPartidoEquipo) {
-
+                Intent intentEquipo = new Intent(getContext(), PartidoDetalle.class);
+                startActivityForResult(intentEquipo, 1);
             }
 
             @Override
@@ -157,6 +160,21 @@ public class misPartidosFragment extends Fragment {
         Rv.setAdapter(adaptador);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+
+                // esta pantalla es cuando todo ha salido bien.
+            }
+
+            if (resultCode == Activity.RESULT_CANCELED) {
+                // esta pantalla es cuando ha salido mal.
+            }
+        }
+    }
 
     private void rellenarCategorias() {
         lstCategoriasPartidos.add("Individual");

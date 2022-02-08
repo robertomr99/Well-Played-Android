@@ -36,7 +36,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imgEquipo1" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/rvEquipo2"
         android:layout_width="wrap_content"
         android:layout_height="250dp"
         android:layout_marginTop="24dp"
@@ -45,24 +45,24 @@
         app:layout_constraintTop_toBottomOf="@+id/imgEquipo2" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/imgBtnLose"
         android:layout_width="77dp"
         android:layout_height="86dp"
-        android:backgroundTint=""
+        android:background="@null"
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton4"
-        app:layout_constraintStart_toStartOf="@+id/imageButton4"
+        app:layout_constraintEnd_toEndOf="@+id/imgBtnWin"
+        app:layout_constraintStart_toStartOf="@+id/imgBtnWin"
         app:srcCompat="@drawable/gameover" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/imgBtnWin"
         android:layout_width="77dp"
         android:layout_height="86dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint=""
-        app:layout_constraintBottom_toTopOf="@+id/imageButton3"
-        app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/imgBtnLose"
+        app:layout_constraintEnd_toEndOf="@+id/rvEquipo2"
         app:layout_constraintStart_toStartOf="@+id/rvEquipo1"
         app:srcCompat="@drawable/trofeo" />
 
