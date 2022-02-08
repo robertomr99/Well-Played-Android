@@ -1,9 +1,11 @@
 package com.example.wellplayed;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -20,6 +22,8 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.wellplayed.model.Partido_Equipo;
+import com.example.wellplayed.model.Partido_Usuario;
 import com.example.wellplayed.model.Producto;
 import com.example.wellplayed.model.Usuario;
 import com.google.gson.Gson;
@@ -34,8 +38,9 @@ public class misPartidosFragment extends Fragment {
 
     RecyclerView Rv;
     ArrayList<String> lstCategoriasPartidos = new ArrayList<String>();
-    public static final String sNombreUser = MainActivity.oUsuario.getsUser();
+    public static String sNombreUser;
     public static Spinner spinnerCategoriaPartidos;
+    String sVentana = "MisPartidos";
     TextView lblTieneEquipo, lblDeseaUnirseEquipo;
     Button btnUnirsePartido;
 
@@ -54,6 +59,7 @@ public class misPartidosFragment extends Fragment {
                              Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.fragment_mis_partidos, container, false);
         Rv = vista.findViewById(R.id.recyclerViewPartidos);
+        sNombreUser = MainActivity.oUsuario.getsUser();
         btnUnirsePartido = vista.findViewById(R.id.btnUnirsePartido);
         lblTieneEquipo = vista.findViewById(R.id.lblNoTieneEquipo);
         lblDeseaUnirseEquipo = vista.findViewById(R.id.lblDeseasUnirteEquipo);
@@ -77,11 +83,80 @@ public class misPartidosFragment extends Fragment {
         lstCategoriasPartidos.clear();
         spinnerCategoriaPartidos = vista.findViewById(R.id.spinnerCategoriaPartidos);
         rellenarCategorias();
+        rellenarListas();
         siUsuarioTieneEquipo();
-
 
         return vista;
     }
+
+    private void rellenarListas() {
+        if (spinnerCategoriaPartidos.getSelectedItemPosition() == 1) {
+            listarPartidosEquipo();
+        } else {
+            listarPartidosUsuario();
+        }
+    }
+
+
+    public void listarPartidosEquipo() {
+
+        String sUrl = Utils.hosting + "partidos/partido_equipo/lst-partidos-completos.php?txtNombre=" + sNombreUser;
+
+        Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(getContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        ListadoPartidosEquipo.lstPartidoEquipo = new Gson().fromJson(s, new TypeToken<List<Partido_Equipo>>() {
+                        }.getType());
+                        mostrarData(getContext());
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
+    }
+
+    public void listarPartidosUsuario() {
+        String sUrl = Utils.hosting + "partidos/partido_usuario/lst-partidos-completos.php?txtNombre=" + sNombreUser;
+
+        Volley.newRequestQueue(getContext()).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(getContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        ListadoPartidosUsuario.lstPartidoUsuario = new Gson().fromJson(s, new TypeToken<List<Partido_Usuario>>() {
+                        }.getType());
+                        mostrarData(getContext());
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
+    }
+
+
+    private void mostrarData(Context context) {
+        Rv.setLayoutManager(new LinearLayoutManager(context));
+        UnirsePartidosAdapter adaptador = new UnirsePartidosAdapter(context, new UnirsePartidosAdapter.MisPartidosAdapterInterface() {
+            @Override
+            public void mostrarDetalleEquipo(Partido_Equipo oPartidoEquipo) {
+
+            }
+
+            @Override
+            public void mostrarDetalleUsuario(Partido_Usuario oPartidoUsuario) {
+
+            }
+        }, spinnerCategoriaPartidos.getSelectedItemPosition() , sVentana);
+
+        Rv.setAdapter(adaptador);
+    }
+
 
     private void rellenarCategorias() {
         lstCategoriasPartidos.add("Individual");
@@ -140,7 +215,7 @@ public class misPartidosFragment extends Fragment {
 
     public void onClickUnirsePartido(View v) {
         Intent i = new Intent(getContext(), UnirsePartido.class);
-        i.putExtra("Tipo" , spinnerCategoriaPartidos.getSelectedItemPosition());
+        i.putExtra("Tipo", spinnerCategoriaPartidos.getSelectedItemPosition());
         startActivity(i);
     }
 
