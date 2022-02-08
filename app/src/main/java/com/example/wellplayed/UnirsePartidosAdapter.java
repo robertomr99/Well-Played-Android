@@ -27,8 +27,10 @@ public class UnirsePartidosAdapter extends RecyclerView.Adapter<UnirsePartidosAd
     LayoutInflater inflater;
     Context context;
     UnirsePartidosAdapterInterface upInterface;
+    MisPartidosAdapterInterface mpInterface;
     private View.OnClickListener listener;
     int iTipoGlobal;
+    String sVentanaGlobal;
 
 
     public interface UnirsePartidosAdapterInterface {
@@ -36,11 +38,27 @@ public class UnirsePartidosAdapter extends RecyclerView.Adapter<UnirsePartidosAd
         void unirseAlPartidoUsuario(Partido_Usuario oPartidoUsuario);
     }
 
-    public UnirsePartidosAdapter(Context context, UnirsePartidosAdapterInterface upInterface, int iTipo) {
+    public interface MisPartidosAdapterInterface {
+        void mostrarDetalleEquipo(Partido_Equipo oPartidoEquipo);
+        void mostrarDetalleUsuario(Partido_Usuario oPartidoUsuario);
+    }
+
+
+
+    public UnirsePartidosAdapter(Context context, UnirsePartidosAdapterInterface upInterface, int iTipo, String sVentana) {
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.upInterface = upInterface;
         this.iTipoGlobal = iTipo;
+        this.sVentanaGlobal = sVentana;
+    }
+
+    public UnirsePartidosAdapter(Context context, MisPartidosAdapterInterface mpInterface, int iTipo, String sVentana) {
+        inflater = LayoutInflater.from(context);
+        this.context = context;
+        this.mpInterface = mpInterface;
+        this.iTipoGlobal = iTipo;
+        this.sVentanaGlobal = sVentana;
     }
 
 
@@ -65,13 +83,10 @@ public class UnirsePartidosAdapter extends RecyclerView.Adapter<UnirsePartidosAd
 
     public void onBindViewHolder(@NonNull UnirsePartidosAdapter.ViewHolder holder, int position) {
 
+
         if (iTipoGlobal == 1) {
-
             // EQUIPO
-
             Partido_Equipo oPartidoEquipo = ListadoPartidosEquipo.lstPartidoEquipo.get(position); // Instanciamos el objeto de la lista con
-
-            Log.d("ASDASDASDASDASDASDASDASDASD", oPartidoEquipo.toString());
 
             holder.lblNombreC1.setText(oPartidoEquipo.getsNombreEquipo1());
             holder.lblNombreC2.setText(oPartidoEquipo.getsNombreEquipo2());
@@ -79,7 +94,7 @@ public class UnirsePartidosAdapter extends RecyclerView.Adapter<UnirsePartidosAd
             Glide.with(context).load(oPartidoEquipo.getsFotoEquipo2()).into(holder.imageViewC2);
 
             holder.imageViewC1.setOnClickListener(view -> {
-                if (oPartidoEquipo.getsFotoEquipo1() == null) {
+                if (oPartidoEquipo.getsFotoEquipo1().isEmpty()) {
                     upInterface.unirseAlPartidoEquipo(oPartidoEquipo);
                 } else {
                     Toast.makeText(context, "Ya hay un equipo apuntado a este partido", Toast.LENGTH_SHORT).show();
@@ -105,9 +120,7 @@ public class UnirsePartidosAdapter extends RecyclerView.Adapter<UnirsePartidosAd
             }
 
         } else {
-
             // USUARIO
-
             Partido_Usuario oPartidoUsuario = ListadoPartidosUsuario.lstPartidoUsuario.get(position);
 
             holder.lblNombreC1.setText(oPartidoUsuario.getsNombreJugador1());
@@ -116,7 +129,7 @@ public class UnirsePartidosAdapter extends RecyclerView.Adapter<UnirsePartidosAd
             Glide.with(context).load(oPartidoUsuario.getsFotoJugador2()).into(holder.imageViewC2);
 
             holder.imageViewC1.setOnClickListener(view -> {
-                if (oPartidoUsuario.getsFotoJugador1() == null) {
+                if (oPartidoUsuario.getsFotoJugador1().isEmpty()) {
                     upInterface.unirseAlPartidoUsuario(oPartidoUsuario);
                 } else {
                     Toast.makeText(context, "Ya hay un usuario apuntado como primer jugador", Toast.LENGTH_SHORT).show();
@@ -131,7 +144,6 @@ public class UnirsePartidosAdapter extends RecyclerView.Adapter<UnirsePartidosAd
                 }
             });
 
-
             if (oPartidoUsuario.getiIdJuego() == 1) {
                 Glide.with(context).load(R.drawable.cvbannerlol).into(holder.imageViewFondo);
             } else if (oPartidoUsuario.getiIdJuego() == 2) {
@@ -141,7 +153,6 @@ public class UnirsePartidosAdapter extends RecyclerView.Adapter<UnirsePartidosAd
             } else {
                 Glide.with(context).load(R.drawable.cvbannefifa).into(holder.imageViewFondo);
             }
-
         }
 
         holder.cv.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition));

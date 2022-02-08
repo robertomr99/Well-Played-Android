@@ -35,7 +35,8 @@ public class UnirsePartido extends AppCompatActivity {
 
     RecyclerView Rv;
     int iTipo;
-    public static final String sNombreUser = MainActivity.oUsuario.getsUser();
+    public static String sNombreUser;
+
 
     public static AlertDialog.Builder dialogBuilder;
     public static AlertDialog dialog;
@@ -46,7 +47,9 @@ public class UnirsePartido extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_unirse_partido);
+        sNombreUser = MainActivity.oUsuario.getsUser();
         intentPartidos();
+
         Rv = findViewById(R.id.recyclerViewUnirsePartidos);
 
         if (iTipo == 1) {
@@ -118,7 +121,7 @@ public class UnirsePartido extends AppCompatActivity {
     public void updatePartidoEquipo(Partido_Equipo oPartidoEquipo) {
         String sUrl;
 
-        if (oPartidoEquipo.getsNombreEquipo1() == null & oPartidoEquipo.getsFotoEquipo1() == null) {
+        if (oPartidoEquipo.getsNombreEquipo1().isEmpty() & oPartidoEquipo.getsFotoEquipo1().isEmpty()) {
             sUrl = Utils.hosting + "partidos/partido_equipo/updatePartidoEquipo1.php?txtNombre=" + sNombreUser + "&txtIdPartido=" + oPartidoEquipo.getiIdPartido();
         } else {
             sUrl = Utils.hosting + "partidos/partido_equipo/updatePartidoEquipo2.php?txtNombre=" + sNombreUser + "&txtIdPartido=" + oPartidoEquipo.getiIdPartido();
@@ -238,7 +241,7 @@ public class UnirsePartido extends AppCompatActivity {
     public void updatePartidoUsuario(Partido_Usuario oPartidoUsuario) {
         String sUrl;
 
-        if (oPartidoUsuario.getsFotoJugador1() == null & oPartidoUsuario.getsFotoJugador1() == null) {
+        if (oPartidoUsuario.getsFotoJugador1().isEmpty() & oPartidoUsuario.getsNombreJugador1().isEmpty()) {
             sUrl = Utils.hosting + "partidos/partido_usuario/updatePartidoUsuario1.php?txtNombre=" + sNombreUser + "&txtIdPartido=" + oPartidoUsuario.getiIdPartido();
         } else {
             sUrl = Utils.hosting + "partidos/partido_usuario/updatePartidoUsuario2.php?txtNombre=" + sNombreUser + "&txtIdPartido=" + oPartidoUsuario.getiIdPartido();
@@ -306,7 +309,10 @@ public class UnirsePartido extends AppCompatActivity {
             public void unirseAlPartidoUsuario(Partido_Usuario oPartidoUsuario) {
                 PopupUnirse(oPartidoUsuario);
             }
-        }, iTipo);
+
+
+
+        }, iTipo, "");
 
         Rv.setAdapter(adaptador);
     }
