@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PartidoDetalle">
+
+    <ImageView
+        android:id="@+id/imgEquipo1"
+        android:layout_width="106dp"
+        android:layout_height="94dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/circle" />
+
+    <ImageView
+        android:id="@+id/imgEquipo2"
+        android:layout_width="106dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/circle" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvEquipo1"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgEquipo1"
+        app:layout_constraintStart_toStartOf="@+id/imgEquipo1"
+        app:layout_constraintTop_toBottomOf="@+id/imgEquipo1" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgEquipo2"
+        app:layout_constraintStart_toStartOf="@+id/imgEquipo2"
+        app:layout_constraintTop_toBottomOf="@+id/imgEquipo2" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="77dp"
+        android:layout_height="86dp"
+        android:backgroundTint=""
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton4"
+        app:layout_constraintStart_toStartOf="@+id/imageButton4"
+        app:srcCompat="@drawable/gameover" />
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="77dp"
+        android:layout_height="86dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint=""
+        app:layout_constraintBottom_toTopOf="@+id/imageButton3"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+        app:layout_constraintStart_toStartOf="@+id/rvEquipo1"
+        app:srcCompat="@drawable/trofeo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
