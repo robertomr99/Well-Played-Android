@@ -21,6 +21,7 @@
     <string name="btn_UnirseEquipo">Unirse a un equipo</string>
     <string name="btn_UnirsePartido">Unirse a un partido</string>
     <string name="lblNoTienesEquipo">Hemos visto que aún no tienes equipo </string>
+    <string name="lblNoHayPartidos">Aún no hay ningún partido publicado.</string>
     <string name="lblDeseasUnirteEquipo">¿Deseas unirte a un equipo?</string>
 
     <string name="btn_CrearEquipo">Crear equipo</string>
