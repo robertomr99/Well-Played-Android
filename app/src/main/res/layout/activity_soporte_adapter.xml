@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardViewSoporte"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="25dp"
+    android:layout_marginRight="15dp"
+    android:background="#FFFFFF"
+    android:backgroundTint="@color/AzulApp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="30dp"
+    app:cardElevation="10dp"
+    app:cardMaxElevation="10dp"
+    tools:ignore="SpeakableTextPresentCheck">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="66dp">
+
+
+        <TextView
+            android:id="@+id/lblStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/cabin"
+            android:textAlignment="center"
+            android:textColor="@color/GrisApp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imgStatus"
+            app:layout_constraintStart_toEndOf="@+id/imgStatus"
+            app:layout_constraintTop_toTopOf="@+id/imgStatus" />
+
+        <ImageView
+            android:id="@+id/imgStatus"
+            android:layout_width="23dp"
+            android:layout_marginStart="16dp"
+            android:layout_height="22dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/lblAsunto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/lblStatus"
+            app:layout_constraintStart_toEndOf="@+id/lblStatus"
+            app:layout_constraintTop_toTopOf="@+id/lblStatus" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

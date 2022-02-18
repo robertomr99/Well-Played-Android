@@ -1,6 +1,8 @@
 package com.example.wellplayed.model;
 
-public class Partido_Usuario {
+import java.io.Serializable;
+
+public class Partido_Usuario implements Serializable {
 
     private Integer iIdPartido, iIdJuego;
     private String sNombreJugador1, sNombreJugador2, sFotoJugador1, sFotoJugador2;

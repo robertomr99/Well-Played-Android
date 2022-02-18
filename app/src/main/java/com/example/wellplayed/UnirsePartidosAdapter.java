@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,22 +30,16 @@ public class UnirsePartidosAdapter extends RecyclerView.Adapter<UnirsePartidosAd
     LayoutInflater inflater;
     Context context;
     UnirsePartidosAdapterInterface upInterface;
-    MisPartidosAdapterInterface mpInterface;
     private View.OnClickListener listener;
     int iTipoGlobal;
     String sVentanaGlobal;
 
 
     public interface UnirsePartidosAdapterInterface {
-        void unirseAlPartidoEquipo(Partido_Equipo oPartidoEquipo);
-        void unirseAlPartidoUsuario(Partido_Usuario oPartidoUsuario);
-    }
+        void unirseAlPartidoEquipo(Partido_Equipo oPartidoEquipo, Context context);
 
-    public interface MisPartidosAdapterInterface {
-        void mostrarDetalleEquipo(Partido_Equipo oPartidoEquipo);
-        void mostrarDetalleUsuario(Partido_Usuario oPartidoUsuario);
+        void unirseAlPartidoUsuario(Partido_Usuario oPartidoUsuario, Context context);
     }
-
 
 
     public UnirsePartidosAdapter(Context context, UnirsePartidosAdapterInterface upInterface, int iTipo, String sVentana) {
@@ -53,10 +50,9 @@ public class UnirsePartidosAdapter extends RecyclerView.Adapter<UnirsePartidosAd
         this.sVentanaGlobal = sVentana;
     }
 
-    public UnirsePartidosAdapter(Context context, MisPartidosAdapterInterface mpInterface, int iTipo, String sVentana) {
+    public UnirsePartidosAdapter(Context context, int iTipo, String sVentana) {
         inflater = LayoutInflater.from(context);
         this.context = context;
-        this.mpInterface = mpInterface;
         this.iTipoGlobal = iTipo;
         this.sVentanaGlobal = sVentana;
     }
@@ -83,76 +79,218 @@ public class UnirsePartidosAdapter extends RecyclerView.Adapter<UnirsePartidosAd
 
     public void onBindViewHolder(@NonNull UnirsePartidosAdapter.ViewHolder holder, int position) {
 
+        if (sVentanaGlobal.equals("MisPartidos")) {
 
-        if (iTipoGlobal == 1) {
-            // EQUIPO
-            Partido_Equipo oPartidoEquipo = ListadoPartidosEquipo.lstPartidoEquipo.get(position); // Instanciamos el objeto de la lista con
+            if (iTipoGlobal == 1) {
+                // EQUIPO
+                Partido_Equipo oPartidoEquipo = ListadoPartidosEquipo.lstPartidoEquipo.get(position); // Instanciamos el objeto de la lista con
 
-            holder.lblNombreC1.setText(oPartidoEquipo.getsNombreEquipo1());
-            holder.lblNombreC2.setText(oPartidoEquipo.getsNombreEquipo2());
-            Glide.with(context).load(oPartidoEquipo.getsFotoEquipo1()).into(holder.imageViewC1);
-            Glide.with(context).load(oPartidoEquipo.getsFotoEquipo2()).into(holder.imageViewC2);
-
-            holder.imageViewC1.setOnClickListener(view -> {
-                if (oPartidoEquipo.getsFotoEquipo1().isEmpty()) {
-                    upInterface.unirseAlPartidoEquipo(oPartidoEquipo);
+                if (oPartidoEquipo.getsNombreEquipo1() == null) {
+                    holder.lblNombreC1.setText("");
                 } else {
-                    Toast.makeText(context, "Ya hay un equipo apuntado a este partido", Toast.LENGTH_SHORT).show();
+                    holder.lblNombreC1.setText(oPartidoEquipo.getsNombreEquipo1().toLowerCase());
                 }
-            });
 
-            holder.imageViewC2.setOnClickListener(view -> {
-                if (oPartidoEquipo.getsFotoEquipo1().isEmpty()) {
-                    Toast.makeText(context, "Únete como primer equipo", Toast.LENGTH_SHORT).show();
+                if (holder.lblNombreC1.getText() != null && !holder.lblNombreC1.getText().equals("")) {
+                    holder.lblNombreC1.setBackgroundResource(R.drawable.borderecyclerpartidos);
+                } else if (holder.lblNombreC1.getText().equals("")) {
+                    holder.lblNombreC1.setVisibility(View.GONE);
+                }
+
+
+                if (oPartidoEquipo.getsNombreEquipo2() == null) {
+                    holder.lblNombreC2.setText("");
                 } else {
-                    upInterface.unirseAlPartidoEquipo(oPartidoEquipo);
+                    holder.lblNombreC2.setText(oPartidoEquipo.getsNombreEquipo2().toLowerCase());
                 }
-            });
 
-            if (oPartidoEquipo.getiIdJuego() == 1) {
-                Glide.with(context).load(R.drawable.cvbannerlol).into(holder.imageViewFondo);
-            } else if (oPartidoEquipo.getiIdJuego() == 2) {
-                Glide.with(context).load(R.drawable.cvbannevalorant).into(holder.imageViewFondo);
-            } else if (oPartidoEquipo.getiIdJuego() == 3) {
-                Glide.with(context).load(R.drawable.cvbannercsgo).into(holder.imageViewFondo);
+                if (holder.lblNombreC2.getText() != null && !holder.lblNombreC2.getText().equals("")) {
+                    holder.lblNombreC2.setBackgroundResource(R.drawable.borderecyclerpartidos);
+                } else if (holder.lblNombreC2.getText().equals("")) {
+                    holder.lblNombreC2.setVisibility(View.GONE);
+                }
+
+                Glide.with(context).load(oPartidoEquipo.getsFotoEquipo1()).into(holder.imageViewC1);
+                Glide.with(context).load(oPartidoEquipo.getsFotoEquipo2()).into(holder.imageViewC2);
+
+
+                if (oPartidoEquipo.getiIdJuego() == 1) {
+                    Glide.with(context).load(R.drawable.cvbannerlol).into(holder.imageViewFondo);
+                } else if (oPartidoEquipo.getiIdJuego() == 2) {
+                    Glide.with(context).load(R.drawable.cvbannevalorant).into(holder.imageViewFondo);
+                } else if (oPartidoEquipo.getiIdJuego() == 3) {
+                    Glide.with(context).load(R.drawable.cvbannercsgo).into(holder.imageViewFondo);
+                } else {
+                    Glide.with(context).load(R.drawable.cvbannefifa).into(holder.imageViewFondo);
+                }
+
             } else {
-                Glide.with(context).load(R.drawable.cvbannefifa).into(holder.imageViewFondo);
+                // USUARIO
+                Partido_Usuario oPartidoUsuario = ListadoPartidosUsuario.lstPartidoUsuario.get(position);
+
+                if (oPartidoUsuario.getsNombreJugador1() == null) {
+                    holder.lblNombreC1.setText("");
+                } else {
+                    holder.lblNombreC1.setText(oPartidoUsuario.getsNombreJugador1().toLowerCase());
+                }
+
+
+                if (holder.lblNombreC1.getText() != null && !holder.lblNombreC1.getText().equals("")) {
+                    holder.lblNombreC1.setBackgroundResource(R.drawable.borderecyclerpartidos);
+                } else if (holder.lblNombreC1.getText().equals("")) {
+                    holder.lblNombreC1.setVisibility(View.GONE);
+                }
+
+
+                if (oPartidoUsuario.getsNombreJugador2() == null) {
+                    holder.lblNombreC2.setText("");
+                } else {
+                    holder.lblNombreC2.setText(oPartidoUsuario.getsNombreJugador2().toLowerCase());
+                }
+
+                if (holder.lblNombreC2.getText() != null && !holder.lblNombreC2.getText().equals("")) {
+                    holder.lblNombreC2.setBackgroundResource(R.drawable.borderecyclerpartidos);
+                } else if (holder.lblNombreC2.getText().equals("")) {
+                    holder.lblNombreC2.setVisibility(View.GONE);
+                }
+
+
+                Glide.with(context).load(oPartidoUsuario.getsFotoJugador1()).into(holder.imageViewC1);
+                Glide.with(context).load(oPartidoUsuario.getsFotoJugador2()).into(holder.imageViewC2);
+
+
+                if (oPartidoUsuario.getiIdJuego() == 1) {
+                    Glide.with(context).load(R.drawable.cvbannerlol).into(holder.imageViewFondo);
+                } else if (oPartidoUsuario.getiIdJuego() == 2) {
+                    Glide.with(context).load(R.drawable.cvbannevalorant).into(holder.imageViewFondo);
+                } else if (oPartidoUsuario.getiIdJuego() == 3) {
+                    Glide.with(context).load(R.drawable.cvbannercsgo).into(holder.imageViewFondo);
+                } else {
+                    Glide.with(context).load(R.drawable.cvbannefifa).into(holder.imageViewFondo);
+                }
             }
 
         } else {
-            // USUARIO
-            Partido_Usuario oPartidoUsuario = ListadoPartidosUsuario.lstPartidoUsuario.get(position);
 
-            holder.lblNombreC1.setText(oPartidoUsuario.getsNombreJugador1());
-            holder.lblNombreC2.setText(oPartidoUsuario.getsNombreJugador2());
-            Glide.with(context).load(oPartidoUsuario.getsFotoJugador1()).into(holder.imageViewC1);
-            Glide.with(context).load(oPartidoUsuario.getsFotoJugador2()).into(holder.imageViewC2);
+            if (iTipoGlobal == 1) {
+                // EQUIPO
+                Partido_Equipo oPartidoEquipo = ListadoPartidosEquipo.lstPartidoEquipo.get(position); // Instanciamos el objeto de la lista con
 
-            holder.imageViewC1.setOnClickListener(view -> {
-                if (oPartidoUsuario.getsFotoJugador1().isEmpty()) {
-                    upInterface.unirseAlPartidoUsuario(oPartidoUsuario);
+
+                if (oPartidoEquipo.getsNombreEquipo1() == null) {
+                    holder.lblNombreC1.setText("");
                 } else {
-                    Toast.makeText(context, "Ya hay un usuario apuntado como primer jugador", Toast.LENGTH_SHORT).show();
+                    holder.lblNombreC1.setText(oPartidoEquipo.getsNombreEquipo1().toLowerCase());
                 }
-            });
 
-            holder.imageViewC2.setOnClickListener(view -> {
-                if (oPartidoUsuario.getsFotoJugador1().isEmpty()) {
-                    Toast.makeText(context, "Únete como primer jugador", Toast.LENGTH_SHORT).show();
+                if (holder.lblNombreC1.getText() != null && !holder.lblNombreC1.getText().equals("")) {
+                    holder.lblNombreC1.setBackgroundResource(R.drawable.borderecyclerpartidos);
+                } else if (holder.lblNombreC1.getText().equals("")) {
+                    holder.lblNombreC1.setVisibility(View.GONE);
+                }
+
+
+                if (oPartidoEquipo.getsNombreEquipo2() == null) {
+                    holder.lblNombreC2.setText("");
                 } else {
-                    upInterface.unirseAlPartidoUsuario(oPartidoUsuario);
+                    holder.lblNombreC2.setText(oPartidoEquipo.getsNombreEquipo2().toLowerCase());
                 }
-            });
 
-            if (oPartidoUsuario.getiIdJuego() == 1) {
-                Glide.with(context).load(R.drawable.cvbannerlol).into(holder.imageViewFondo);
-            } else if (oPartidoUsuario.getiIdJuego() == 2) {
-                Glide.with(context).load(R.drawable.cvbannevalorant).into(holder.imageViewFondo);
-            } else if (oPartidoUsuario.getiIdJuego() == 3) {
-                Glide.with(context).load(R.drawable.cvbannercsgo).into(holder.imageViewFondo);
+                if (holder.lblNombreC2.getText() != null && !holder.lblNombreC2.getText().equals("")) {
+                    holder.lblNombreC2.setBackgroundResource(R.drawable.borderecyclerpartidos);
+                } else if (holder.lblNombreC2.getText().equals("")) {
+                    holder.lblNombreC2.setVisibility(View.GONE);
+                }
+
+                Glide.with(context).load(oPartidoEquipo.getsFotoEquipo1()).into(holder.imageViewC1);
+                Glide.with(context).load(oPartidoEquipo.getsFotoEquipo2()).into(holder.imageViewC2);
+
+                holder.imageViewC1.setOnClickListener(view -> {
+                    if (oPartidoEquipo.getsFotoEquipo1().isEmpty()) {
+                        upInterface.unirseAlPartidoEquipo(oPartidoEquipo, context);
+                    } else {
+                        Toast.makeText(context, "Ya hay un equipo apuntado a este partido", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                holder.imageViewC2.setOnClickListener(view -> {
+                    if (oPartidoEquipo.getsFotoEquipo1().isEmpty()) {
+                        Toast.makeText(context, "Únete como primer equipo", Toast.LENGTH_SHORT).show();
+                    } else {
+                        upInterface.unirseAlPartidoEquipo(oPartidoEquipo, context);
+                    }
+                });
+
+                if (oPartidoEquipo.getiIdJuego() == 1) {
+                    Glide.with(context).load(R.drawable.cvbannerlol).into(holder.imageViewFondo);
+                } else if (oPartidoEquipo.getiIdJuego() == 2) {
+                    Glide.with(context).load(R.drawable.cvbannevalorant).into(holder.imageViewFondo);
+                } else if (oPartidoEquipo.getiIdJuego() == 3) {
+                    Glide.with(context).load(R.drawable.cvbannercsgo).into(holder.imageViewFondo);
+                } else {
+                    Glide.with(context).load(R.drawable.cvbannefifa).into(holder.imageViewFondo);
+                }
+
             } else {
-                Glide.with(context).load(R.drawable.cvbannefifa).into(holder.imageViewFondo);
+                // USUARIO
+                Partido_Usuario oPartidoUsuario = ListadoPartidosUsuario.lstPartidoUsuario.get(position);
+
+                if (oPartidoUsuario.getsNombreJugador1() == null) {
+                    holder.lblNombreC1.setText("");
+                } else {
+                    holder.lblNombreC1.setText(oPartidoUsuario.getsNombreJugador1().toLowerCase());
+                }
+
+
+                if (holder.lblNombreC1.getText() != null && !holder.lblNombreC1.getText().equals("")) {
+                    holder.lblNombreC1.setBackgroundResource(R.drawable.borderecyclerpartidos);
+                } else if (holder.lblNombreC1.getText().equals("")) {
+                    holder.lblNombreC1.setVisibility(View.GONE);
+                }
+
+
+                if (oPartidoUsuario.getsNombreJugador2() == null) {
+                    holder.lblNombreC2.setText("");
+                } else {
+                    holder.lblNombreC2.setText(oPartidoUsuario.getsNombreJugador2().toLowerCase());
+                }
+
+                if (holder.lblNombreC2.getText() != null && !holder.lblNombreC2.getText().equals("")) {
+                    holder.lblNombreC2.setBackgroundResource(R.drawable.borderecyclerpartidos);
+                } else if (holder.lblNombreC2.getText().equals("")) {
+                    holder.lblNombreC2.setVisibility(View.GONE);
+                }
+
+                Glide.with(context).load(oPartidoUsuario.getsFotoJugador1()).into(holder.imageViewC1);
+                Glide.with(context).load(oPartidoUsuario.getsFotoJugador2()).into(holder.imageViewC2);
+
+                holder.imageViewC1.setOnClickListener(view -> {
+                    if (oPartidoUsuario.getsFotoJugador1().isEmpty()) {
+                        upInterface.unirseAlPartidoUsuario(oPartidoUsuario, context);
+                    } else {
+                        Toast.makeText(context, "Ya hay un usuario apuntado como primer jugador", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                holder.imageViewC2.setOnClickListener(view -> {
+                    if (oPartidoUsuario.getsFotoJugador1().isEmpty()) {
+                        Toast.makeText(context, "Únete como primer jugador", Toast.LENGTH_SHORT).show();
+                    } else {
+                        upInterface.unirseAlPartidoUsuario(oPartidoUsuario, context);
+                    }
+                });
+
+                if (oPartidoUsuario.getiIdJuego() == 1) {
+                    Glide.with(context).load(R.drawable.cvbannerlol).into(holder.imageViewFondo);
+                } else if (oPartidoUsuario.getiIdJuego() == 2) {
+                    Glide.with(context).load(R.drawable.cvbannevalorant).into(holder.imageViewFondo);
+                } else if (oPartidoUsuario.getiIdJuego() == 3) {
+                    Glide.with(context).load(R.drawable.cvbannercsgo).into(holder.imageViewFondo);
+                } else {
+                    Glide.with(context).load(R.drawable.cvbannefifa).into(holder.imageViewFondo);
+                }
             }
+
         }
 
         holder.cv.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition));

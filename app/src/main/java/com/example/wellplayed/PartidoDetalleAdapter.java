@@ -18,25 +18,31 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.wellplayed.model.Usuario;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class PartidoDetalleAdapter extends RecyclerView.Adapter<PartidoDetalleAdapter.ViewHolder> implements View.OnClickListener {
 
 
-    UsuarioAdapterInterface uaInterface;
+    PartidoDetalleAdapterInterface pdInterface;
     LayoutInflater inflater;
     Context context;
     public static String sNombreUser = MainActivity.oUsuario.getsUser();
-    public static int iIdEquipoJuego;
     private View.OnClickListener listener;
 
     // A las interfaces siempre se las pasa el objeto , no la vista
-    public interface UsuarioAdapterInterface {
-        void deleteUser(Usuario oUsuario);
+    public interface PartidoDetalleAdapterInterface {
+
+    }
+
+    public PartidoDetalleAdapter(Context context, PartidoDetalleAdapterInterface pdInterface) {
+        inflater = LayoutInflater.from(context);
+        this.context = context;
+        this.pdInterface = pdInterface;
     }
 
     public PartidoDetalleAdapter(Context context) {
         inflater = LayoutInflater.from(context);
         this.context = context;
-        this.uaInterface = uaInterface;
     }
 
     public void onClick(View v) {
@@ -52,7 +58,7 @@ public class PartidoDetalleAdapter extends RecyclerView.Adapter<PartidoDetalleAd
     @NonNull
 
     public PartidoDetalleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.from(parent.getContext()).inflate(R.layout.activity_usuarios_adapter, parent, false);
+        View view = inflater.from(parent.getContext()).inflate(R.layout.activity_partido_detalle_adapter, parent, false);
 
         view.setOnClickListener(this);
         return new ViewHolder(view);
@@ -61,36 +67,29 @@ public class PartidoDetalleAdapter extends RecyclerView.Adapter<PartidoDetalleAd
 
     public void onBindViewHolder(@NonNull PartidoDetalleAdapter.ViewHolder holder, int position) {
 
-        Usuario oUsuario = ListadoUsuarios.lstUsuarios.get(position); // Instanciamos el objeto de la lista con la posicion
+        Usuario oUsuario = PartidoDetalle.lstUsuarios.get(position); // Instanciamos el objeto de la lista con la posicion
 
         Glide.with(context).load(oUsuario.getsFoto()).circleCrop().into(holder.imageViewUsuario);
-
         holder.lblNombre.setText(oUsuario.getsUser());
         holder.cv.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition));
-
-
     }
 
 
     public int getItemCount() {
-        return ListadoUsuarios.lstUsuarios.size();
+        return PartidoDetalle.lstUsuarios.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView lblNombre;
-        ImageView imageViewUsuario, imageViewLider;
-        ImageButton imgBtnEliminarUsuario;
+        CircleImageView imageViewUsuario;
         CardView cv;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            lblNombre = itemView.findViewById(R.id.lblNombreUsuario);
-            imageViewUsuario = itemView.findViewById(R.id.imgViewUsuario);
-            imageViewLider = itemView.findViewById(R.id.imgVIewLider);
-            imgBtnEliminarUsuario = itemView.findViewById(R.id.imgBtnEliminarUsuario);
-            cv = itemView.findViewById(R.id.cardViewUsuarios);
-
+            lblNombre = itemView.findViewById(R.id.lblNombreUsuarioPartidoDetalle);
+            imageViewUsuario = itemView.findViewById(R.id.imgViewUsuarioPartidoDetalle);
+            cv = itemView.findViewById(R.id.cardViewPartidoDetalle);
         }
     }
 

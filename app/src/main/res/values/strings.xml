@@ -21,6 +21,7 @@
     <string name="btn_UnirseEquipo">Unirse a un equipo</string>
     <string name="btn_UnirsePartido">Unirse a un partido</string>
     <string name="lblNoTienesEquipo">Hemos visto que aún no tienes equipo </string>
+    <string name="lblNoHayPartidos">Aún no hay ningún partido publicado.</string>
     <string name="lblDeseasUnirteEquipo">¿Deseas unirte a un equipo?</string>
 
     <string name="btn_CrearEquipo">Crear equipo</string>
@@ -80,6 +81,10 @@
     <string name="mantener_sesi_n_iniciada">Mantener sesión iniciada</string>
     <string name="lblComprarProductos">¿Estas seguro de que quieres comprar este producto?</string>
     <string name="actualizar_perfil">Actualizar perfil</string>
+    <string name="textadjuntarimagen">Pulse aquí para añadir una imagen o arrastrala</string>
+    <string name="mandar_ticket">mandar ticket</string>
+    <string name="mensaje">Mensaje</string>
+    <string name="btnMandar_mensaje">Mandar mensaje</string>
 
     <!-- Array spinner tienda -->
     <string-array name="productos">

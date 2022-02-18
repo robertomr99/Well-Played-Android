@@ -33,4 +33,10 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
 
+    <!-- Colores status tickets -->
+
+    <color name="statusRojo">#FF0000</color>
+    <color name="statusVerde">#00FF00</color>
+    <color name="statusNaranja">#FF8000</color>
+
 </resources>
