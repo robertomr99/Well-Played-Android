@@ -5,13 +5,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -37,11 +40,12 @@ public class UnirsePartido extends AppCompatActivity {
     int iTipo;
     public static String sNombreUser;
 
-
     public static AlertDialog.Builder dialogBuilder;
     public static AlertDialog dialog;
     public static Button btnSI, btnNO;
     public static UnirsePartido context;
+    TextView lblNoHayPartidos;
+    ImageView imgViewCaraTriste;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,10 @@ public class UnirsePartido extends AppCompatActivity {
         setContentView(R.layout.activity_unirse_partido);
         sNombreUser = MainActivity.oUsuario.getsUser();
         intentPartidos();
+        lblNoHayPartidos = findViewById(R.id.lblNoHayPartidos);
+        imgViewCaraTriste = findViewById(R.id.imgViewCaraTriste);
+        lblNoHayPartidos.setVisibility(View.GONE);
+        imgViewCaraTriste.setVisibility(View.GONE);
 
         Rv = findViewById(R.id.recyclerViewUnirsePartidos);
 
@@ -107,9 +115,14 @@ public class UnirsePartido extends AppCompatActivity {
                     if (s.equals("")) {
                         Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
                     } else {
-                        ListadoPartidosEquipo.lstPartidoEquipo = new Gson().fromJson(s, new TypeToken<List<Partido_Equipo>>() {
-                        }.getType());
-                        mostrarData(getApplicationContext());
+                        if (s.equals("[\"Vacio\"]")) {
+                            lblNoHayPartidos.setVisibility(View.VISIBLE);
+                            imgViewCaraTriste.setVisibility(View.VISIBLE);
+                        } else {
+                            ListadoPartidosEquipo.lstPartidoEquipo = new Gson().fromJson(s, new TypeToken<List<Partido_Equipo>>() {
+                            }.getType());
+                            mostrarData(getApplicationContext());
+                        }
                     }
                 }
                 , volleyError -> {
@@ -143,7 +156,6 @@ public class UnirsePartido extends AppCompatActivity {
     }
 
 
-
     public void PopupUnirse(Partido_Equipo oPartidoEquipo) {
 
         dialogBuilder = new AlertDialog.Builder(this);
@@ -175,6 +187,32 @@ public class UnirsePartido extends AppCompatActivity {
 
     }
 
+
+    public void comprobarMismo(Partido_Equipo oPartidoEquipo, Context contextAdapter) {
+
+        String sUrl = Utils.hosting + "partidos/partido_equipo/traer-nombre-equipo.php?txtNombre=" + sNombreUser;
+
+        Volley.newRequestQueue(getApplicationContext()).add(new StringRequest(Request.Method.GET, sUrl,
+                s -> {
+                    Log.d("vacio", s);
+                    if (s.equals("")) {
+                        Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Equipo oEquipoComprobar = new Gson().fromJson(s, new TypeToken<Equipo>() {
+                        }.getType());
+
+                        if (oEquipoComprobar.getsNombre().equals(oPartidoEquipo.getsNombreEquipo1())) {
+                            Toast.makeText(contextAdapter, "Ya te has unido como primer equipo", Toast.LENGTH_SHORT).show();
+                        } else {
+                            PopupUnirse(oPartidoEquipo);
+                        }
+                    }
+                }
+                , volleyError -> {
+            Log.d("Rob", volleyError.getCause().toString());
+        }
+        ));
+    }
 
 
     // --------- USUARIO -----------
@@ -226,9 +264,15 @@ public class UnirsePartido extends AppCompatActivity {
                     if (s.equals("")) {
                         Toast.makeText(getApplicationContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
                     } else {
-                        ListadoPartidosUsuario.lstPartidoUsuario = new Gson().fromJson(s, new TypeToken<List<Partido_Usuario>>() {
-                        }.getType());
-                        mostrarData(getApplicationContext());
+
+                        if (s.equals("[\"Vacio\"]")) {
+                            lblNoHayPartidos.setVisibility(View.VISIBLE);
+                            imgViewCaraTriste.setVisibility(View.VISIBLE);
+                        } else {
+                            ListadoPartidosUsuario.lstPartidoUsuario = new Gson().fromJson(s, new TypeToken<List<Partido_Usuario>>() {
+                            }.getType());
+                            mostrarData(getApplicationContext());
+                        }
                     }
                 }
                 , volleyError -> {
@@ -294,6 +338,15 @@ public class UnirsePartido extends AppCompatActivity {
 
     }
 
+    public void comprobarMismo(Partido_Usuario oPartidoUsuario, Context contextAdapter) {
+        if (oPartidoUsuario.getsNombreJugador1().equals(sNombreUser)) {
+            Toast.makeText(contextAdapter, "Ya te has unido como primer jugador", Toast.LENGTH_SHORT).show();
+        } else {
+            PopupUnirse(oPartidoUsuario);
+        }
+    }
+
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -301,18 +354,17 @@ public class UnirsePartido extends AppCompatActivity {
         Rv.setLayoutManager(new LinearLayoutManager(context));
         UnirsePartidosAdapter adaptador = new UnirsePartidosAdapter(context, new UnirsePartidosAdapter.UnirsePartidosAdapterInterface() {
             @Override
-            public void unirseAlPartidoEquipo(Partido_Equipo oPartidoEquipo) {
-                PopupUnirse(oPartidoEquipo);
+            public void unirseAlPartidoEquipo(Partido_Equipo oPartidoEquipo, Context contextAdapter) {
+                comprobarMismo(oPartidoEquipo, contextAdapter);
             }
 
             @Override
-            public void unirseAlPartidoUsuario(Partido_Usuario oPartidoUsuario) {
-                PopupUnirse(oPartidoUsuario);
+            public void unirseAlPartidoUsuario(Partido_Usuario oPartidoUsuario, Context contextAdapter) {
+                comprobarMismo(oPartidoUsuario, contextAdapter);
             }
 
 
-
-        }, iTipo, "");
+        }, iTipo, "Unirse");
 
         Rv.setAdapter(adaptador);
     }
@@ -323,9 +375,20 @@ public class UnirsePartido extends AppCompatActivity {
             if (getIntent().hasExtra("Tipo")) {
                 iTipo = getIntent().getIntExtra("Tipo", 0);
             }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent();
+        i.putExtra("Tipo", iTipo);
+        setResult(Activity.RESULT_OK, i);
+
+        super.onBackPressed();
     }
 
 

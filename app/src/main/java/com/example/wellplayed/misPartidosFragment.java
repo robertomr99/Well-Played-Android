@@ -45,6 +45,8 @@ public class misPartidosFragment extends Fragment {
     String sVentana = "MisPartidos";
     TextView lblTieneEquipo, lblDeseaUnirseEquipo;
     Button btnUnirsePartido;
+    Partido_Usuario oPartidoUsuario;
+    Partido_Equipo oPartidoEquipo;
 
 
     public misPartidosFragment() {
@@ -85,20 +87,29 @@ public class misPartidosFragment extends Fragment {
         lstCategoriasPartidos.clear();
         spinnerCategoriaPartidos = vista.findViewById(R.id.spinnerCategoriaPartidos);
         rellenarCategorias();
-        rellenarListas();
+        listarPartidos();
         siUsuarioTieneEquipo();
-
         return vista;
     }
 
-    private void rellenarListas() {
-        if (spinnerCategoriaPartidos.getSelectedItemPosition() == 1) {
-            listarPartidosEquipo();
-        } else {
-            listarPartidosUsuario();
-        }
-    }
+    private void listarPartidos() {
+        spinnerCategoriaPartidos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int iPosicion, long l) {
+                if (iPosicion == 1) {
+                    listarPartidosEquipo();
+                } else {
+                    listarPartidosUsuario();
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+    }
 
     public void listarPartidosEquipo() {
 
@@ -110,9 +121,14 @@ public class misPartidosFragment extends Fragment {
                     if (s.equals("")) {
                         Toast.makeText(getContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
                     } else {
-                        ListadoPartidosEquipo.lstPartidoEquipo = new Gson().fromJson(s, new TypeToken<List<Partido_Equipo>>() {
-                        }.getType());
-                        mostrarData(getContext());
+                        if (s.equals("[\"Vacio\"]")) {
+                            Toast.makeText(getContext(), "Aún no te has unido a ningún partido", Toast.LENGTH_SHORT).show();
+                        } else {
+                            ListadoPartidosEquipo.lstPartidoEquipo.clear();
+                            ListadoPartidosEquipo.lstPartidoEquipo = new Gson().fromJson(s, new TypeToken<List<Partido_Equipo>>() {
+                            }.getType());
+                            mostrarData(getContext());
+                        }
                     }
                 }
                 , volleyError -> {
@@ -130,6 +146,7 @@ public class misPartidosFragment extends Fragment {
                     if (s.equals("")) {
                         Toast.makeText(getContext(), "no se ha encontrado", Toast.LENGTH_SHORT).show();
                     } else {
+                        ListadoPartidosUsuario.lstPartidoUsuario.clear();
                         ListadoPartidosUsuario.lstPartidoUsuario = new Gson().fromJson(s, new TypeToken<List<Partido_Usuario>>() {
                         }.getType());
                         mostrarData(getContext());
@@ -144,21 +161,25 @@ public class misPartidosFragment extends Fragment {
 
     private void mostrarData(Context context) {
         Rv.setLayoutManager(new LinearLayoutManager(context));
-        UnirsePartidosAdapter adaptador = new UnirsePartidosAdapter(context, new UnirsePartidosAdapter.MisPartidosAdapterInterface() {
-            @Override
-            public void mostrarDetalleEquipo(Partido_Equipo oPartidoEquipo) {
-                Intent intentEquipo = new Intent(getContext(), PartidoDetalle.class);
-                startActivityForResult(intentEquipo, 1);
+        UnirsePartidosAdapter adaptador = new UnirsePartidosAdapter(context, spinnerCategoriaPartidos.getSelectedItemPosition(), sVentana);
+
+        adaptador.setOnClickListener(v -> {
+            Intent intentEquipo = new Intent(getContext(), PartidoDetalle.class);
+
+            if (spinnerCategoriaPartidos.getSelectedItemPosition() == 1) {
+                ListadoPartidosEquipo.iPartidoEquipoSelected = Rv.getChildAdapterPosition(v);
+                oPartidoEquipo = ListadoPartidosEquipo.lstPartidoEquipo.get(ListadoPartidosEquipo.iPartidoEquipoSelected);
+                intentEquipo.putExtra("PartidoEquipo", oPartidoEquipo);
+            } else {
+                ListadoPartidosUsuario.iPartidoUsuarioSelected = Rv.getChildAdapterPosition(v);
+                oPartidoUsuario = ListadoPartidosUsuario.lstPartidoUsuario.get(ListadoPartidosUsuario.iPartidoUsuarioSelected);
+                intentEquipo.putExtra("PartidoUsuario", oPartidoUsuario);
             }
-
-            @Override
-            public void mostrarDetalleUsuario(Partido_Usuario oPartidoUsuario) {
-
-            }
-        }, spinnerCategoriaPartidos.getSelectedItemPosition() , sVentana);
-
+            startActivityForResult(intentEquipo, 1);
+        });
         Rv.setAdapter(adaptador);
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -167,6 +188,22 @@ public class misPartidosFragment extends Fragment {
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
 
+                // esta pantalla es cuando todo ha salido bien.
+            }
+
+            if (resultCode == Activity.RESULT_CANCELED) {
+                // esta pantalla es cuando ha salido mal.
+            }
+        }
+
+        if (requestCode == 2) {
+            if (resultCode == Activity.RESULT_OK) {
+                int iTipo = data.getIntExtra("Tipo", 0);
+                if (iTipo == 1) {
+                    listarPartidosEquipo();
+                } else {
+                    listarPartidosUsuario();
+                }
                 // esta pantalla es cuando todo ha salido bien.
             }
 
@@ -222,6 +259,16 @@ public class misPartidosFragment extends Fragment {
                             lblTieneEquipo.setVisibility(View.GONE);
                             lblDeseaUnirseEquipo.setVisibility(View.GONE);
                         }
+
+
+                        if (posicion == 1) {
+                            Log.d("ENTRA EN EQUIPO", "ENTRA EN EQUIPO");
+                            listarPartidosEquipo();
+                        } else {
+                            Log.d("ENTRA EN JUGADOR", "ENTRA EN JUGADOR");
+                            listarPartidosUsuario();
+                        }
+
                     }
 
                     public void onNothingSelected(AdapterView<?> spn) {
@@ -234,7 +281,7 @@ public class misPartidosFragment extends Fragment {
     public void onClickUnirsePartido(View v) {
         Intent i = new Intent(getContext(), UnirsePartido.class);
         i.putExtra("Tipo", spinnerCategoriaPartidos.getSelectedItemPosition());
-        startActivity(i);
+        startActivityForResult(i, 2);
     }
 
 

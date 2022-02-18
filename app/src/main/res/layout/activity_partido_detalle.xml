@@ -4,52 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/GrisApp"
     tools:context=".PartidoDetalle">
 
-    <ImageView
-        android:id="@+id/imgEquipo1"
-        android:layout_width="106dp"
-        android:layout_height="94dp"
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgViewC1Detalle"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="60dp"
+        app:civ_border_width="2dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/circle" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imgEquipo2"
-        android:layout_width="106dp"
-        android:layout_height="94dp"
-        android:layout_marginTop="64dp"
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgViewC2Detalle"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="60dp"
+        app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/circle" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvEquipo1"
+        android:id="@+id/rvEquipo1Detalle"
         android:layout_width="wrap_content"
         android:layout_height="250dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="@+id/imgEquipo1"
-        app:layout_constraintStart_toStartOf="@+id/imgEquipo1"
-        app:layout_constraintTop_toBottomOf="@+id/imgEquipo1" />
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgViewC1Detalle"
+        app:layout_constraintStart_toStartOf="@+id/imgViewC1Detalle"
+        app:layout_constraintTop_toBottomOf="@+id/lblNombreC1Detalle" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvEquipo2"
+        android:id="@+id/rvEquipo2Detalle"
         android:layout_width="wrap_content"
         android:layout_height="250dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="@+id/imgEquipo2"
-        app:layout_constraintStart_toStartOf="@+id/imgEquipo2"
-        app:layout_constraintTop_toBottomOf="@+id/imgEquipo2" />
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgViewC2Detalle"
+        app:layout_constraintStart_toStartOf="@+id/imgViewC2Detalle"
+        app:layout_constraintTop_toBottomOf="@+id/lblNombreC2Detalle" />
 
     <ImageButton
         android:id="@+id/imgBtnLose"
         android:layout_width="77dp"
         android:layout_height="86dp"
-        android:background="@null"
         android:layout_marginBottom="32dp"
+        android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imgBtnWin"
         app:layout_constraintStart_toStartOf="@+id/imgBtnWin"
@@ -62,8 +65,30 @@
         android:layout_marginBottom="16dp"
         android:background="@null"
         app:layout_constraintBottom_toTopOf="@+id/imgBtnLose"
-        app:layout_constraintEnd_toEndOf="@+id/rvEquipo2"
-        app:layout_constraintStart_toStartOf="@+id/rvEquipo1"
+        app:layout_constraintEnd_toEndOf="@+id/rvEquipo2Detalle"
+        app:layout_constraintStart_toStartOf="@+id/rvEquipo1Detalle"
         app:srcCompat="@drawable/trofeo" />
+
+    <TextView
+        android:id="@+id/lblNombreC1Detalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imgViewC1Detalle"
+        app:layout_constraintStart_toStartOf="@+id/imgViewC1Detalle"
+        app:layout_constraintTop_toBottomOf="@+id/imgViewC1Detalle" />
+
+    <TextView
+        android:id="@+id/lblNombreC2Detalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imgViewC2Detalle"
+        app:layout_constraintStart_toStartOf="@+id/imgViewC2Detalle"
+        app:layout_constraintTop_toBottomOf="@+id/imgViewC2Detalle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,16 @@
 package com.example.wellplayed.model;
 
-public class Partido_Equipo {
+import java.io.Serializable;
+
+public class Partido_Equipo implements Serializable {
 
     private Integer iIdPartido,iIdJuego;
-    private String sNombreEquipo1, sNombreEquipo2, sFotoEquipo1, sFotoEquipo2;
+    private String sNombreEquipo1, sNombreEquipo2, sFotoEquipo1, sFotoEquipo2, sComprobacion;;
     private boolean boVictoria;
+
+    public Partido_Equipo(String sComprobacion) {
+        this.sComprobacion = sComprobacion;
+    }
 
     public Partido_Equipo() {
     }
@@ -17,6 +23,14 @@ public class Partido_Equipo {
         this.sFotoEquipo1 = sFotoEquipo1;
         this.sFotoEquipo2 = sFotoEquipo2;
         this.boVictoria = boVictoria;
+    }
+
+    public String getsComprobacion() {
+        return sComprobacion;
+    }
+
+    public void setsComprobacion(String sComprobacion) {
+        this.sComprobacion = sComprobacion;
     }
 
     public Integer getiIdPartido() {
