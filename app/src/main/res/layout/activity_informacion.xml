@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.275"
         app:srcCompat="@drawable/wellplayed" />
 
-    <TextView
+    <com.codesgood.views.JustifiedTextView
         android:id="@+id/txtInfo"
         android:layout_width="259dp"
         android:layout_height="102dp"
@@ -31,7 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <com.codesgood.views.JustifiedTextView
         android:id="@+id/txtOwners"
         android:layout_width="241dp"
         android:layout_height="73dp"

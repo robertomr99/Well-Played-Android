@@ -60,7 +60,7 @@ public class misJuegosFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        MainActivity.ocultarBienvenida();
         View vista = inflater.inflate(R.layout.fragment_mis_juegos, container, false);
         Rv = vista.findViewById(R.id.recyclerViewJuegos);
         sNombreUser = MainActivity.oUsuario.getsUser();
