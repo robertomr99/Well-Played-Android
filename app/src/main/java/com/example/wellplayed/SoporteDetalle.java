@@ -45,7 +45,7 @@ public class SoporteDetalle extends AppCompatActivity {
                         oSoporte = new Gson().fromJson(s, new TypeToken<List<Soporte>>() {
                         }.getType());
 
-                        mostrarData();
+                      //  mostrarData();
 
                     }
                 }
@@ -55,8 +55,8 @@ public class SoporteDetalle extends AppCompatActivity {
         ));
     }
 
-    private void mostrarUsuarios() {
+ /*   private void mostrarUsuarios() {
       lblSoporte.setText(ListadoSoporte.lstTickets.get());
     }
-
+*/
 }

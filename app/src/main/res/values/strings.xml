@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">WellPlayed</string>
+    <string name="Bienvenido">¡Bienvenido a WellPlayed!</string>
     <string name="hello_blank_fragment" />
     <string name="usuario">Usuario</string>
     <string name="contrase_a">Contraseña</string>
@@ -41,6 +42,7 @@
 
 
     <!-- String Drawer Menu -->
+    <string name="mnuInicio">Inicio</string>
     <string name="mnuPerfil">Perfil</string>
     <string name="mnuMisJuegos">Mis Juegos</string>
     <string name="mnuMisEquipos">Mis Equipos</string>
