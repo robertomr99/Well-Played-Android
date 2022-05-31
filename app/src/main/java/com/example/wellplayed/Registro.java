@@ -155,7 +155,7 @@ public class Registro extends AppCompatActivity {
 
         if(!boExito){
             String sUrl = Utils.hosting + "usuario/ins-usuario.php?txtEmail="+oUser.getsEmail()+"&txtUsuario="+oUser.getsUser()+"&txtPass="+oUser.getsPassword()+"&txtFechaNacimiento="+oUser.getsFechaNacimiento()+"&txtPais="+oUser.getiPais()+"&txtMonedas="+oUser.getiMonedas()+"&txtAdministrador="+oUser.getiAdmin()+"&txtFoto="+oUser.getsFoto()+"&txtCodigo="+oUser.getsCodigo();
-
+            Log.d("ahbdjhadgajhdgajhsgdazghdjzjahdhjagsd",sUrl);
             Volley.newRequestQueue(Login.getInstance().getApplicationContext()).add(new StringRequest(Request.Method.GET,sUrl,
                     s ->{
                         if(s.equals("null")){
@@ -249,7 +249,7 @@ public class Registro extends AppCompatActivity {
         Usuario oUser = new Usuario();
         oUser.setsEmail(txtEmail.getText().toString().toUpperCase());
         oUser.setsUser(txtUsuario.getText().toString().toUpperCase());
-        oUser.setsPassword(txtContrasenia.getText().toString().toUpperCase());
+        oUser.setsPassword(txtContrasenia.getText().toString());
         oUser.setsFechaNacimiento(txtFechaNacimiento.getText().toString());
         oUser.setiPais(spinPaises.getSelectedItemPosition());
         oUser.setiMonedas(0);
