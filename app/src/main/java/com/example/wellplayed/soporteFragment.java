@@ -94,7 +94,7 @@ public class soporteFragment extends Fragment {
             Intent intent = new Intent(getContext(), SoporteDetalle.class);
             ListadoSoporte.iTicketSelected = rvSoporte.getChildAdapterPosition(v);
             oSoporte = ListadoSoporte.lstTickets.get(ListadoSoporte.iTicketSelected);
-            intent.putExtra("","");
+            //intent.putExtra("")
             startActivity(intent);
         });
     }

@@ -1,58 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-        <item
-            android:id="@+id/mnuPerfil"
-            android:icon="@drawable/usuariologin"
-            android:title="@string/mnuPerfil">
 
-        </item>
+    <item
+        android:id="@+id/mnuInicio"
+        android:icon="@drawable/inicio"
+        android:title="@string/mnuInicio">
 
-        <item
-            android:id="@+id/mnuMisJuegos"
-            android:icon="@drawable/misjuegos"
-            android:title="@string/mnuMisJuegos">
+    </item>
 
-        </item>
+    <item
+        android:id="@+id/mnuPerfil"
+        android:icon="@drawable/usuariologin"
+        android:title="@string/mnuPerfil">
 
-        <item
-            android:id="@+id/mnuMisEquipos"
-            android:icon="@drawable/misequipos"
-            android:title="@string/mnuMisEquipos">
+    </item>
 
-        </item>
+    <item
+        android:id="@+id/mnuMisJuegos"
+        android:icon="@drawable/misjuegos"
+        android:title="@string/mnuMisJuegos">
 
-        <item
-            android:id="@+id/mnuMisPartidos"
-            android:icon="@drawable/mispartidos"
-            android:title="@string/mnuMisPartidos">
+    </item>
 
-        </item>
+    <item
+        android:id="@+id/mnuMisEquipos"
+        android:icon="@drawable/misequipos"
+        android:title="@string/mnuMisEquipos">
 
-        <item
-            android:id="@+id/mnuTienda"
-            android:icon="@drawable/tienda"
-            android:title="@string/mnuTienda">
-        </item>
+    </item>
 
-        <item
-            android:id="@+id/mnuSoporte"
-            android:icon="@drawable/soporte"
-            android:title="@string/mnuSoporte">
+    <item
+        android:id="@+id/mnuMisPartidos"
+        android:icon="@drawable/mispartidos"
+        android:title="@string/mnuMisPartidos">
 
-        </item>
+    </item>
+
+    <item
+        android:id="@+id/mnuTienda"
+        android:icon="@drawable/tienda"
+        android:title="@string/mnuTienda"></item>
+
+    <item
+        android:id="@+id/mnuSoporte"
+        android:icon="@drawable/soporte"
+        android:title="@string/mnuSoporte">
+
+    </item>
 
     <group android:id="@+id/grupo1">
 
         <item
             android:id="@+id/mnuAjustes"
             android:icon="@drawable/ajustes"
-            android:title="@string/mnuAjustes">
-        </item>
+            android:title="@string/mnuAjustes"></item>
 
         <item
             android:id="@+id/mnuCerrarSesion"
             android:icon="@drawable/cerrarsesion"
-            android:title="@string/mnuCerrarSesion">
-        </item>
+            android:title="@string/mnuCerrarSesion"></item>
     </group>
 </menu>

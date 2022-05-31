@@ -14,9 +14,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,16 +51,32 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
     ImageView imgBannerUser;
+    public static TextView txtTituloApp;
+    public static ImageView imgApp;
     public static Usuario oUsuario = new Usuario();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Animation ani1 = AnimationUtils.loadAnimation(this, R.anim.desplazamiento_arriba);
+        Animation ani2 = AnimationUtils.loadAnimation(this, R.anim.desplazamiento_abajo);
+
+        txtTituloApp = findViewById(R.id.lblBienvenida);
+        imgApp = findViewById(R.id.imgViewBienvenida);
+
+        txtTituloApp.setAnimation(ani1);
+        imgApp.setAnimation(ani2);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
         View header = ((NavigationView) findViewById(R.id.navigationView)).getHeaderView(0);
         oUsuario = intentDataUsuario();
+
+        if (oUsuario == null) {
+            oUsuario = intentDataMain();
+        }
         recogerDatos();
         seleccionarFotoMonedas(header, oUsuario.getsUser());
         setSupportActionBar(toolbar);
@@ -78,12 +97,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
         recogerDatos();
         View header = ((NavigationView) findViewById(R.id.navigationView)).getHeaderView(0);
-        seleccionarFotoMonedas(header,oUsuario.getsUser());
+        seleccionarFotoMonedas(header, oUsuario.getsUser());
     }
 
-    public void recogerDatos(){
+    public void recogerDatos() {
 
-        if(getIntent().hasExtra("nombreUser")){
+        if (getIntent().hasExtra("nombreUser")) {
             oUsuario = new Usuario();
             String sNombreUser = getIntent().getStringExtra("nombreUser");
             oUsuario.setsUser(sNombreUser);
@@ -103,6 +122,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);
 
         switch (item.getItemId()) {
+            case R.id.mnuInicio:
+                Intent intentMain = new Intent(this, MainActivity.class);
+                intentMain.putExtra("Usuario", oUsuario);
+                startActivity(intentMain);
+                break;
             case R.id.mnuPerfil:
                 openFragment(new perfilFragment());
                 break;
@@ -193,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return oUser;
     }
 
-    private void seleccionarFotoMonedas(View header,String sUsuario) {
+    private void seleccionarFotoMonedas(View header, String sUsuario) {
 
         String sUrl = Utils.hosting + "usuario/get-user.php?txtUsuario=" + sUsuario;
         Volley.newRequestQueue(getApplicationContext()).add(new StringRequest(Request.Method.GET, sUrl,
@@ -216,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ));
     }
 
-    public void rellenarCabecera(View header,Usuario oUserLLeno){
+    public void rellenarCabecera(View header, Usuario oUserLLeno) {
         ((TextView) header.findViewById(R.id.lblNombreUsuario)).setText(oUserLLeno.getsUser().toUpperCase());
         Glide.with(getApplicationContext()).load(oUserLLeno.getsFoto()).into((CircleImageView
                 ) header.findViewById(R.id.imgViewUsuario));
@@ -228,4 +252,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
         finishAffinity();
     }
+
+
+    public static void ocultarBienvenida() {
+        txtTituloApp.setVisibility(View.GONE);
+        imgApp.setVisibility(View.GONE);
+    }
+
+
+    private Usuario intentDataMain() {
+        Usuario oUser = new Usuario();
+        try {
+            if (getIntent().hasExtra("Usuario")) {
+                oUser = (Usuario) getIntent().getSerializableExtra("Usuario");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return oUser;
+    }
+
+
 }

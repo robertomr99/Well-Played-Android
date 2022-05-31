@@ -52,6 +52,7 @@ public class misEquiposFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        MainActivity.ocultarBienvenida();
         View view = inflater.inflate(R.layout.fragment_mis_equipos, container, false);
         rv = view.findViewById(R.id.recyclerViewEquipos);
         lstEquiposComparativa.clear();

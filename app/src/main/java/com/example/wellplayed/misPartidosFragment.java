@@ -61,6 +61,7 @@ public class misPartidosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        MainActivity.ocultarBienvenida();
         View vista = inflater.inflate(R.layout.fragment_mis_partidos, container, false);
         Rv = vista.findViewById(R.id.recyclerViewPartidos);
         sNombreUser = MainActivity.oUsuario.getsUser();
